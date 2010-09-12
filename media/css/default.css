@@ -1,0 +1,145 @@
+/**
+* Tweet Display Back Module for Joomla!
+*
+* @version		1.1.2
+* @copyright	Copyright (C) 2010 Michael Babker. All rights reserved.
+* @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+* 
+* Module forked from TweetXT for Joomla!
+* Original Copyright ((c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
+*/
+
+.tweetheaderleft {
+	background: #fff;
+	border: 1px solid #999999;
+	margin: 0px 0px 20px 10px;
+	padding: 4px;
+}
+
+.tweetheaderright {
+	background: #fff;
+	border: 1px solid #999999;
+	margin: 0px 10px 20px 0px;
+	padding: 4px;
+}
+
+.tweetheaderuser a {
+	font-size: 120%;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.tweetheaderavatar {
+	height: 73px;
+	margin-bottom: 4px;
+}
+
+.tweetheaderavatar img {
+	padding: 2px;
+}
+
+.tweetheaderbio {
+	text-align: left;
+}
+	
+.tweetheaderweb {
+	padding-top: 5px;
+	font-size: 90%;
+}
+
+.tweetavatar {
+}
+
+.tweetavatar img {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+.tweetmain {
+}
+
+.tweetleftarrow {
+	width: 11px;
+	height: 21px;
+	margin: 10px 0px 0px 2px;
+	float: left;
+}
+
+.tweetrightarrow {
+	width: 11px;
+	height: 21px;
+	margin: 10px 0px 0px 2px;
+	float: right;
+}
+
+.tweet-left {
+	background: #fff;
+	border: 1px solid #999999;
+	padding: 4px;
+	word-wrap: break-word;
+	margin: 0px 0px 20px 44px;
+	text-align: left;
+}
+
+.tweet-left .tweettime {
+	font-size: 85%;
+	text-align: right;
+	margin-left: 0px;
+}
+
+.tweet-right {
+	background: #fff;
+	border: 1px solid #999999;
+	padding: 4px;
+	word-wrap: break-word;
+	margin: 20px 42px 0px 0px;
+	text-align: right;
+}
+
+.tweet-right .tweettime {
+	font-size: 85%;
+	text-align: left;
+	margin-left: 0px;
+}
+
+.tweet-left-noavatar {
+	background: #fff;
+	border: 1px solid #999999;
+	padding: 4px;
+	word-wrap: break-word;
+	margin: 0px 0px 20px 10px;
+	text-align: left;
+}
+
+.tweet-left-noavatar .tweettime {
+	font-size: 85%;
+	text-align: right;
+	margin-left: 0px;
+}
+
+.tweet-right-noavatar {
+	background: #fff;
+	border: 1px solid #999999;
+	padding: 4px;
+	word-wrap: break-word;
+	margin: 20px 10px 0px 0px;
+	text-align: right;
+}
+
+.tweet-right-noavatar .tweettime {
+	font-size: 85%;
+	text-align: left;
+	margin-left: 0px;
+}
+
+.clr {
+	clear: both;
+}
+
+.followLink {
+	text-align: right;
+}
+
+.poweredBy {
+	font-size: 85%;
+}

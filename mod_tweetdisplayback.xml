@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension
+	type="module"
+	version="1.6.0"
+	client="site"
+	method="upgrade">
+	<name>Tweet Display Back</name>
+	<creationDate>28 August 2010</creationDate>
+	<author>Michael Babker</author>
+	<copyright>(C) 2010 Michael Babker</copyright>
+	<authorEmail>mbabker@flbab.com</authorEmail>
+	<authorUrl>http://www.flbab.com</authorUrl>
+	<version>1.1.2</version>
+	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
+	<files>
+		<folder>language</folder>
+		<folder>media</folder>
+		<folder>tmpl</folder>
+		<filename module="mod_tweetdisplayback">mod_tweetdisplayback.php</filename>
+		<filename>CHANGELOG.php</filename>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>
+		<filename>mod_tweetdisplayback.xml</filename>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="twitterName"
+					type="text"
+					label="MOD_TWEETDISPLAYBACK_USERNAME_LABEL"
+					description="MOD_TWEETDISPLAYBACK_USERNAME_DESCRIPTION"
+					required="true" />
+				<field
+					name="twitterCount"
+					type="text"
+					default="3"
+					label="MOD_TWEETDISPLAYBACK_COUNT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_COUNT_DESCRIPTION"
+					required="true" />
+				<field 
+					name="layout"
+					type="filelist"
+					default="default"
+					label="MOD_TWEETDISPLAYBACK_LAYOUT_LABEL"
+					directory="modules/mod_tweetdisplayback/tmpl"
+					hide_default="1"
+					hide_none="1"
+					stripext="1"
+					description="MOD_TWEETDISPLAYBACK_LAYOUT_DESCRIPTION" />
+			</fieldset>
+			<fieldset name="display">
+				<field
+					name="showHeader"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_HEADER_LABEL"
+					description="MOD_TWEETDISPLAYBACK_HEADER_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="showHeaderUser"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_HEADER_USER_LABEL"
+					description="MOD_TWEETDISPLAYBACK_HEADER_USER_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="showHeaderAvatar"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_HEADER_AVATAR_LABEL"
+					description="MOD_TWEETDISPLAYBACK_HEADER_AVATAR_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="headerAvatarAlignment"
+					type="list"
+					default="left"
+					label="MOD_TWEETDISPLAYBACK_HEADER_AVATAR_ALIGNMENT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_HEADER_AVATAR_ALIGNMENT_DESCRIPTION" >
+					<option
+						value="left">JGLOBAL_LEFT</option>
+					<option
+						value="right">JGLOBAL_RIGHT</option>
+				</field>
+				<field
+					name="showHeaderBio"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_HEADER_BIO_LABEL"
+					description="MOD_TWEETDISPLAYBACK_HEADER_BIO_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="showHeaderWeb"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_HEADER_URL_LABEL"
+					description="MOD_TWEETDISPLAYBACK_HEADER_URL_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="showTweetImage"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_TWEET_AVATAR_LABEL"
+					description="MOD_TWEETDISPLAYBACK_TWEET_AVATAR_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="tweetDisplayLocation"
+					type="list"
+					default="left"
+					label="MOD_TWEETDISPLAYBACK_TWEET_AVATAR_ALIGNMENT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_TWEET_AVATAR_ALIGNMENT_DESCRIPTION" >
+					<option
+						value="left">JGLOBAL_LEFT</option>
+					<option
+						value="right">JGLOBAL_RIGHT</option>
+				</field>
+				<field
+					name="showTweetName"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_TWEET_USER_LABEL"
+					description="MOD_TWEETDISPLAYBACK_TWEET_USER_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="showTweetCreated"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_CREATEDATE_LABEL"
+					description="MOD_TWEETDISPLAYBACK_CREATEDATE_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="relativeTime"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_RELATIVEDATE_LABEL"
+					description="MOD_TWEETDISPLAYBACK_RELATIVEDATE_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="showSource"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_TWEET_SOURCE_LABEL"
+					description="MOD_TWEETDISPLAYBACK_TWEET_SOURCE_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="showRetweets"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_RETWEET_LABEL"
+					description="MOD_TWEETDISPLAYBACK_RETWEET_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="showLinks"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_SHOWLINK_LABEL"
+					description="MOD_TWEETDISPLAYBACK_SHOWLINK_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="showFollowLink"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_FOLLOW_LINK_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FOLLOW_LINK_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="followText"
+					type="text"
+					default="Follow me on Twitter"
+					label="MOD_TWEETDISPLAYBACK_FOLLOW_TEXT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FOLLOW_TEXT_DESCRIPTION" />
+				<field
+					name="showPoweredBy"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_POWEREDBY_LABEL"
+					description="MOD_TWEETDISPLAYBACK_POWEREDBY_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="advanced">
+				<field
+					name="cache"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_CACHE_LABEL"
+					description="MOD_TWEETDISPLAYBACK_CACHE_DESCRIPTION">
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="cachetime"
+					type="text"
+					default="15"
+					label="MOD_TWEETDISPLAYBACK_CACHE_TIME_LABEL"
+					description="MOD_TWEETDISPLAYBACK_CACHE_TIME_DESCRIPTION" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

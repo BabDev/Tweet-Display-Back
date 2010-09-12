@@ -1,0 +1,81 @@
+/**
+* Tweet Display Back Module for Joomla!
+*
+* @version		1.1.2
+* @copyright	Copyright (C) 2010 Michael Babker. All rights reserved.
+* @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+* 
+* Module forked from TweetXT for Joomla!
+* Original Copyright ((c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
+*/
+
+.tweetheadermain {
+}
+
+.tweetheaderleft {
+}
+
+.tweetheaderright {
+}
+
+.tweetheaderavatar {
+}
+
+.tweetheaderbio {
+}
+	
+.tweetheaderweb {
+}
+
+.tweetavatar {
+}
+
+.tweetavatar img {
+}
+
+.tweetmain {
+}
+
+.tweet-left {
+	word-wrap: break-word;
+	text-align: left;
+}
+
+.tweet-left .tweettime {
+	font-size: 85%;
+}
+
+.tweet-right {
+	word-wrap: break-word;
+	text-align: right;
+}
+
+.tweet-right .tweettime {
+	font-size: 85%;
+}
+
+.tweet-left-noavatar {
+	word-wrap: break-word;
+	text-align: left;
+}
+
+.tweet-left-noavatar .tweettime {
+	font-size: 85%;
+}
+
+.tweet-right-noavatar {
+	word-wrap: break-word;
+	text-align: right;
+}
+
+.tweet-right-noavatar .tweettime {
+	font-size: 85%;
+}
+
+.followLink {
+	text-align: right;
+}
+
+.poweredBy {
+	font-size: 85%;
+}
