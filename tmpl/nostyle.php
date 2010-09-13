@@ -72,5 +72,5 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/nostyle.css', false, f
 
 <?php if ($params->get("showPoweredBy", 1) == 1) : ?>
 	<hr />
-	<div class="poweredBy">powered by <a href="http://www.flbab.com/extensions/13-tweet-display-back">Tweet Display Back</a></div>
+	<div class="poweredBy">Powered by <a href="http://www.flbab.com/extensions/13-tweet-display-back">Tweet Display Back</a></div>
 <?php endif; ?>

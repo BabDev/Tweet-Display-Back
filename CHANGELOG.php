@@ -31,6 +31,7 @@ $ - Language fix or change
 
 
 12-September-2010 Michael Babker
+# [#22397] Consistent case on Powered By link
 ^ Tag symbol not included as part of link anymore
 
 --------------------------------------------------
