@@ -31,6 +31,7 @@ $ - Language fix or change
 
 
 15-September-2010 Michael Babker
++ [#22454] Add support for location
 ^ Change from to via in source text
 # [#22457] Created time & reply to line tied to "showCreated" param
 

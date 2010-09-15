@@ -141,6 +141,7 @@ function renderTwitter($twitter, $params) {
 			$t->created_html .= " via ".$t->source;
 		}
 		$t->reply_html = "in reply to <a href=\"http://twitter.com/".$t->in_reply_to_screen_name."/status/".$t->in_reply_to_status_id."\">".$t->in_reply_to_screen_name."</a>";
+		$t->location_html = "from <a href=\"http://maps.google.com/maps?q=".$t->place->full_name."\" target=\"_blank\">".$t->place->full_name."</a>";
 		$t->tweet_avatar = "<img align=\"".$params->get("tweetDisplayLocation")."\" alt=\"".$twitter->user->screen_name."\" src=\"".$twitter->user->profile_image_url."\" width=\"32px\"/>";
 		$t->text_html = preg_replace("/(http:\/\/[^\s]+)/", "<a href=\"$1\">$1</a>", $t->text);
 		if ($params->get("showLinks", 1) == 1) {

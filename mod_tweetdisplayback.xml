@@ -183,6 +183,17 @@
 						value="1">JYES</option>
 				</field>
 				<field
+					name="showLocation"
+					type="radio"
+					default="0"
+					label="MOD_TWEETDISPLAYBACK_TWEET_LOCATION_LABEL"
+					description="MOD_TWEETDISPLAYBACK_TWEET_LOCATION_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
 					name="showRetweets"
 					type="radio"
 					default="1"
