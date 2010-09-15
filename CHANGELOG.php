@@ -30,6 +30,9 @@ $ - Language fix or change
 ! - Note
 
 
+15-September-2010 Michael Babker
+# [#22457] Created time & reply to line tied to "showCreated" param
+
 12-September-2010 Michael Babker
 ^ [#22398] Change version in header
 # [#22397] Consistent case on Powered By link

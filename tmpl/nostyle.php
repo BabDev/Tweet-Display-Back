@@ -58,15 +58,16 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/nostyle.css', false, f
 			<b><?php echo $twitter->user->tweet_user; ?>:</b>&nbsp;
 		<?php endif; ?>
 			<?php echo $t->text_html; ?><br />
-		<?php if ($params->get("showTweetCreated", 1)==1) : ?>
-			<p class="tweettime"><?php echo $t->created_html; ?><?php if (($t->in_reply_to_screen_name) && ($t->in_reply_to_status_id)) : ?> <?php echo $t->reply_html; ?><?php endif;?></p>
-			<hr/>
-		<?php endif; ?>
+			<p class="tweettime">
+				<?php if ($params->get("showTweetCreated", 1)==1) : ?><?php echo $t->created_html; ?><?php endif; ?>
+				<?php if (($t->in_reply_to_screen_name) && ($t->in_reply_to_status_id)) : ?> <?php echo $t->reply_html; ?><?php endif;?>
+			</p>
 		</div>
 	</div>
 <?php endforeach; ?>
 
 <?php if ($params->get("showFollowLink", 1) == 1) : ?>
+	<hr />
 	<div class="followLink"><b><a href="http://twitter.com/<?php echo $twitter->user->screen_name; ?>" rel="nofollow"><?php echo $params->get('followText', 'Follow me on Twitter'); ?></a></b></div>
 <?php endif; ?>
 

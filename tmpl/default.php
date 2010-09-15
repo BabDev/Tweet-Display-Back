@@ -73,9 +73,10 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, f
 			<b><?php echo $twitter->user->tweet_user; ?>:</b>&nbsp;
 		<?php endif; ?>
 			<?php echo $t->text_html; ?>
-		<?php if ($params->get("showTweetCreated", 1)==1) : ?>
-			<p class="tweettime"><?php echo $t->created_html; ?><?php if (($t->in_reply_to_screen_name) && ($t->in_reply_to_status_id)) : ?> <?php echo $t->reply_html; ?><?php endif;?></p>
-		<?php endif; ?>
+			<p class="tweettime">
+				<?php if ($params->get("showTweetCreated", 1)==1) : ?><?php echo $t->created_html; ?><?php endif; ?>
+				<?php if (($t->in_reply_to_screen_name) && ($t->in_reply_to_status_id)) : ?> <?php echo $t->reply_html; ?><?php endif;?>
+			</p>
 		</div>
 	</div>
 	<div class="clr"></div>
