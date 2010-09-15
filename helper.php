@@ -138,7 +138,7 @@ function renderTwitter($twitter, $params) {
 			$t->created_html = "<a href=\"http://twitter.com/".$twitter->user->screen_name."/status/".$t->id."\">".JHTML::date($t->created_at)."</a>";
 		}
 		if (($params->get("showSource", 1) == 1)) {
-			$t->created_html .= " from ".$t->source;
+			$t->created_html .= " via ".$t->source;
 		}
 		$t->reply_html = "in reply to <a href=\"http://twitter.com/".$t->in_reply_to_screen_name."/status/".$t->in_reply_to_status_id."\">".$t->in_reply_to_screen_name."</a>";
 		$t->tweet_avatar = "<img align=\"".$params->get("tweetDisplayLocation")."\" alt=\"".$twitter->user->screen_name."\" src=\"".$twitter->user->profile_image_url."\" width=\"32px\"/>";
