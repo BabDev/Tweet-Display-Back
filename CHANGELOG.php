@@ -30,6 +30,9 @@ $ - Language fix or change
 ! - Note
 
 
+--------------------------------------------------
+Tweet Display Back 1.0.3 - Released 16-September-2010
+--------------------------------------------------
 16-September-2010 Michael Babker
 # [#22480] Remove (s) from relative time stamps
 
