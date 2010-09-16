@@ -156,29 +156,36 @@ function renderTwitter($twitter, $params) {
 
 function getRelativeTime($date) {
 	$diff = time() - strtotime($date);
-	if ($diff<60)
-	{
-		return $diff . JText::_(" second(s) ago");
+	if ($diff < 60) {
+		return JText::_("Less than a minute ago");
 	}
 	$diff = round($diff/60);
-	if ($diff<60)
-	{
-		return $diff . JText::_(" minute(s) ago");
+	if ($diff < 2) {
+		return $diff . JText::_(" minute ago");
+	}
+	if ($diff < 60) {
+		return $diff . JText::_(" minutes ago");
 	}
 	$diff = round($diff/60);
-	if ($diff<24)
-	{
-		return $diff . JText::_(" hour(s) ago");
+	if ($diff < 2) {
+		return $diff . JText::_(" hour ago");
+	}
+	if ($diff < 24) {
+		return $diff . JText::_(" hours ago");
 	}
 	$diff = round($diff/24);
-	if ($diff<7)
-	{
-		return $diff . JText::_(" day(s) ago");
+	if ($diff < 2) {
+		return $diff . JText::_(" day ago");
+	}
+	if ($diff < 7) {
+		return $diff . JText::_(" days ago");
 	}
 	$diff = round($diff/7);
-	if ($diff<4)
-	{
-		return $diff . JText::_(" week(s) ago");
+	if ($diff < 2) {
+		return $diff . JText::_(" week ago");
+	}
+	if ($diff < 4) {
+		return $diff . JText::_(" weeks ago");
 	}
 	return JHTML::date($date);	
 }

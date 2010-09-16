@@ -30,6 +30,9 @@ $ - Language fix or change
 ! - Note
 
 
+16-September-2010 Michael Babker
+# [#22480] Remove (s) from relative time stamps
+
 15-September-2010 Michael Babker
 + [#22454] Add support for location
 ^ Change from to via in source text
