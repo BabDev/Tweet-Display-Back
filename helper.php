@@ -131,17 +131,23 @@ function renderTwitter($twitter, $params) {
 	$twitter->user->tweet_user = "<a href=\"http://twitter.com/".$twitter->user->screen_name."\">".$twitter->user->screen_name."</a>";
 	// tweets
 	foreach ($twitter->tweets as $t) {
-		if ($params->get("relativeTime", 1) == 1) {
-			$t->created_html = "<a href=\"http://twitter.com/".$twitter->user->screen_name."/status/".$t->id."\">".getRelativeTime($t->created_at)."</a>";
-		}
-		else {
-			$t->created_html = "<a href=\"http://twitter.com/".$twitter->user->screen_name."/status/".$t->id."\">".JHTML::date($t->created_at)."</a>";
+		if ($params->get("showTweetCreated", 1)==1) {
+			if ($params->get("relativeTime", 1) == 1) {
+				$t->created_html = "<a href=\"http://twitter.com/".$twitter->user->screen_name."/status/".$t->id."\">".getRelativeTime($t->created_at)."</a>";
+			}
+			else {
+				$t->created_html = "<a href=\"http://twitter.com/".$twitter->user->screen_name."/status/".$t->id."\">".JHTML::date($t->created_at)."</a>";
+			}
 		}
 		if (($params->get("showSource", 1) == 1)) {
 			$t->created_html .= " via ".$t->source;
 		}
-		$t->reply_html = "in reply to <a href=\"http://twitter.com/".$t->in_reply_to_screen_name."/status/".$t->in_reply_to_status_id."\">".$t->in_reply_to_screen_name."</a>";
-		$t->location_html = "from <a href=\"http://maps.google.com/maps?q=".$t->place->full_name."\" target=\"_blank\">".$t->place->full_name."</a>";
+		if (($params->get("showLocation", 1)==1) && ($t->place->full_name)) {
+			$t->created_html .= " from <a href=\"http://maps.google.com/maps?q=".$t->place->full_name."\" target=\"_blank\">".$t->place->full_name."</a>";
+		}
+		if (($t->in_reply_to_screen_name) && ($t->in_reply_to_status_id)) {
+			$t->created_html .= " in reply to <a href=\"http://twitter.com/".$t->in_reply_to_screen_name."/status/".$t->in_reply_to_status_id."\">".$t->in_reply_to_screen_name."</a>";
+		}
 		$t->tweet_avatar = "<img align=\"".$params->get("tweetDisplayLocation")."\" alt=\"".$twitter->user->screen_name."\" src=\"".$twitter->user->profile_image_url."\" width=\"32px\"/>";
 		$t->text_html = preg_replace("/(http:\/\/[^\s]+)/", "<a href=\"$1\">$1</a>", $t->text);
 		if ($params->get("showLinks", 1) == 1) {

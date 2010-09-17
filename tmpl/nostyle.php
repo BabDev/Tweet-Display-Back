@@ -58,11 +58,7 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/nostyle.css', false, f
 			<b><?php echo $twitter->user->tweet_user; ?>:</b>&nbsp;
 		<?php endif; ?>
 			<?php echo $t->text_html; ?><br />
-			<p class="tweettime">
-				<?php if ($params->get("showTweetCreated", 1)==1) : ?><?php echo $t->created_html; ?><?php endif; ?>
-				<?php if (($t->in_reply_to_screen_name) && ($t->in_reply_to_status_id)) : ?> <?php echo $t->reply_html; ?><?php endif;?>
-				<?php if (($params->get("showLocation", 1)==1) && ($t->place->full_name)) : ?> <?php echo $t->location_html; ?><?php endif; ?>
-			</p>
+			<p class="tweettime"><?php echo $t->created_html; ?></p>
 		</div>
 	</div>
 <?php endforeach; ?>

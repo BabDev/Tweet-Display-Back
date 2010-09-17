@@ -30,6 +30,10 @@ $ - Language fix or change
 ! - Note
 
 
+17-September-2010 Michael Babker
+^ Refactored $t->created_html creation
+# Tweet source required time to be displayed
+
 --------------------------------------------------
 Tweet Display Back 1.0.3 - Released 16-September-2010
 --------------------------------------------------
