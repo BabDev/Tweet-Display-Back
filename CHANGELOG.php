@@ -31,6 +31,8 @@ $ - Language fix or change
 
 
 17-September-2010 Michael Babker
++ Add down arrow image for avatar template
+$ Change description of tweet avatar alignment
 ^ Refactored $t->created_html creation
 # Tweet source required time to be displayed
 
