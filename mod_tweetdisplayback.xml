@@ -131,8 +131,8 @@
 					name="tweetDisplayLocation"
 					type="list"
 					default="left"
-					label="MOD_TWEETDISPLAYBACK_TWEET_AVATAR_ALIGNMENT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_TWEET_AVATAR_ALIGNMENT_DESCRIPTION" >
+					label="MOD_TWEETDISPLAYBACK_TWEET_ALIGNMENT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_TWEET_ALIGNMENT_DESCRIPTION" >
 					<option
 						value="left">JGLOBAL_LEFT</option>
 					<option

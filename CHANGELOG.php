@@ -30,6 +30,13 @@ $ - Language fix or change
 ! - Note
 
 
+20-September-2010 Michael Babker
+^ Corrected Powered By link
+^ Renamed many parameters for better organization
+# [#22522] Move parameter checks out of templates
+$ Language string corrections
+$ Created language strings for relative times
+
 17-September-2010 Michael Babker
 + Add down arrow image for avatar template
 $ Change description of tweet avatar alignment
