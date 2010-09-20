@@ -30,6 +30,9 @@ $ - Language fix or change
 ! - Note
 
 
+--------------------------------------------------
+Tweet Display Back 1.1.4 - Released 20-September-2010
+--------------------------------------------------
 20-September-2010 Michael Babker
 ^ Corrected Powered By link
 ^ Renamed many parameters for better organization
@@ -44,7 +47,7 @@ $ Change description of tweet avatar alignment
 # Tweet source required time to be displayed
 
 --------------------------------------------------
-Tweet Display Back 1.0.3 - Released 16-September-2010
+Tweet Display Back 1.1.3 - Released 16-September-2010
 --------------------------------------------------
 16-September-2010 Michael Babker
 # [#22480] Remove (s) from relative time stamps
