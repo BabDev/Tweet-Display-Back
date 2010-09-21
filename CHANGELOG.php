@@ -30,6 +30,9 @@ $ - Language fix or change
 ! - Note
 
 
+21-September-2010 Michael Babker
+^ Modified preg_replace's for link display
+
 --------------------------------------------------
 Tweet Display Back 1.1.4 - Released 20-September-2010
 --------------------------------------------------
