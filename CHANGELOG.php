@@ -32,6 +32,8 @@ $ - Language fix or change
 
 21-September-2010 Michael Babker
 ^ Modified preg_replace's for link display
+^ Added filter to style field to exclude .html
++ Added index.html to tmpl folder
 
 --------------------------------------------------
 Tweet Display Back 1.1.4 - Released 20-September-2010

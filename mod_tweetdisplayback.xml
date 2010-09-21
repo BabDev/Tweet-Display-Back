@@ -44,6 +44,7 @@
 					default="default"
 					label="MOD_TWEETDISPLAYBACK_LAYOUT_LABEL"
 					directory="modules/mod_tweetdisplayback/tmpl"
+					exclude = "\.html"
 					hide_default="1"
 					hide_none="1"
 					stripext="1"
