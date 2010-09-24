@@ -177,35 +177,35 @@ function renderTwitter($twitter, $params) {
 function getRelativeTime($date) {
 	$diff = time() - strtotime($date);
 	if ($diff < 60) {
-		return JText::_('MOD_TWEETDISPLAYBACK_CREATE_LESSTHANAMINUTE');
+		return JText::_("LESS THAN A MINUTE");
 	}
 	$diff = round($diff/60);
 	if ($diff < 2) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTE');
+		return $diff . JText::_("MINUTE");
 	}
 	if ($diff < 60) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTES');
+		return $diff . JText::_("MINUTES");
 	}
 	$diff = round($diff/60);
 	if ($diff < 2) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOUR');
+		return $diff . JText::_("HOUR");
 	}
 	if ($diff < 24) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOURS');
+		return $diff . JText::_("HOURS");
 	}
 	$diff = round($diff/24);
 	if ($diff < 2) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAY');
+		return $diff . JText::_("DAY");
 	}
 	if ($diff < 7) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAYS');
+		return $diff . JText::_("DAYS");
 	}
 	$diff = round($diff/7);
 	if ($diff < 2) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEK');
+		return $diff . JText::_("WEEK");
 	}
 	if ($diff < 4) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEKS');
+		return $diff . JText::_("WEEKS");
 	}
 	return JHTML::date($date);	
 }
