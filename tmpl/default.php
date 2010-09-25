@@ -32,22 +32,22 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, f
 				<div class="tweetheaderbio">
 					<?php echo $twitter->header->bio; ?>
 				</div>
-				<div class="tweetheaderweb">
-					<?php echo $twitter->header->web; ?>
-				</div>
 				<div class="tweetheaderlocation">
 					<?php echo $twitter->header->location; ?>
+				</div>
+				<div class="tweetheaderweb">
+					<?php echo $twitter->header->web; ?>
 				</div>
 			</div>
 		<?php else : ?>
 			<div class="tweetheaderbio">
 				<?php echo $twitter->header->bio; ?>
 			</div>
-			<div class="tweetheaderweb">
-				<?php echo $twitter->header->web; ?>
-			</div>
 			<div class="tweetheaderlocation">
 				<?php echo $twitter->header->location; ?>
+			</div>
+			<div class="tweetheaderweb">
+				<?php echo $twitter->header->web; ?>
 			</div>
 		<?php endif; ?>
 		</div>

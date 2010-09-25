@@ -130,11 +130,11 @@ function renderTwitter($twitter, $params) {
 	if ($params->get("showHeaderBio", 1)==1) {
 		$twitter->header->bio = $twitter->user->description."<br />";
 	}
-	if ($params->get("showHeaderWeb", 1)==1) {
-		$twitter->header->web = "<a href=\"".$twitter->user->url."\">".$twitter->user->url."</a><br />";
-	}
 	if ($params->get("showHeaderLocation", 1)==1) {
-		$twitter->header->location = $twitter->user->location;
+		$twitter->header->location = $twitter->user->location."<br />";
+	}
+	if ($params->get("showHeaderWeb", 1)==1) {
+		$twitter->header->web = "<a href=\"".$twitter->user->url."\">".$twitter->user->url."</a>";
 	}
 	$twitter->header->avatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$twitter->user->screen_name."&size=bigger\" align=\"".$params->get("headerAvatarAlignment")."\" width=\"73px\" alt=\"".$twitter->user->screen_name."\" />";
 	// footer

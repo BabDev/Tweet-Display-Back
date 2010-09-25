@@ -11,18 +11,24 @@
 */
 
 // no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 $imgpath 		= JURI::root()."modules/mod_tweetdisplayback/media/images";
 $headerAlign	= $params->get("headerAvatarAlignment");
 $tweetDisplay	= $params->get("tweetDisplayLocation");
-JHTML::stylesheet('avatar.css', 'modules/mod_tweetdisplayback/media/css/');
+JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/avatar.css', false, false, false);
 ?>
 
 <div class="tweetheadermain">
-	<div class="tweetheaderavatar<?php echo $headerAlign;?>">
-		<?php echo $twitter->header->avatar; ?>
-	</div>
+	<?php if ($params->get("showHeader", 1)==1) : ?>
+		<div class="tweetheaderavatar<?php echo $headerAlign;?>">
+			<?php echo $twitter->header->avatar; ?>
+		</div>
+	<?php else :?>
+		<div class="tweetheaderavatar<?php echo $headerAlign;?>nohead">
+			<?php echo $twitter->header->avatar; ?>
+		</div>
+	<?php endif; ?>
 	<?php if ($params->get("showHeader", 1)==1) { ?>
 	<div class="tweet-header-<?php echo $headerAlign;?>arrow">
 		<img src="<?php echo $imgpath; ?>/arr_<?php echo $headerAlign;?>.png" alt="" />
@@ -30,8 +36,8 @@ JHTML::stylesheet('avatar.css', 'modules/mod_tweetdisplayback/media/css/');
 	<div class="tweetheader<?php echo $headerAlign;?>">
 		<span class="tweetheaderuser"><?php echo $twitter->header->user; ?></span>
 		<span class="tweetheaderbio"><?php echo $twitter->header->bio; ?></span>
-		<span class="tweetheaderweb"><?php echo $twitter->header->web; ?></span>
 		<span class="tweetheaderlocation"><?php echo $twitter->header->location; ?></span>
+		<span class="tweetheaderweb"><?php echo $twitter->header->web; ?></span>
 	</div>
 	<?php } ?>
 </div>

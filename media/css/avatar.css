@@ -10,10 +10,15 @@
 */
 
 .tweetheaderavatarleft {
-	height: 73px;
 }
 
 .tweetheaderavatarright {
+}
+
+.tweetheaderavatarleftnohead {
+}
+
+.tweetheaderavatarrightnohead {
 	height: 73px;
 	padding-bottom: 12px;
 }
