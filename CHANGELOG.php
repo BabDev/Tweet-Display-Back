@@ -30,6 +30,9 @@ $ - Language fix or change
 ! - Note
 
 
+25-September-2010 Michael Babker
++ Added ability to display the bio location in the user's header info
+
 22-September-2010 Michael Babker
 ^ Changed height to min-height for bio with avatar
 

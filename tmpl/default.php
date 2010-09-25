@@ -35,6 +35,9 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, f
 				<div class="tweetheaderweb">
 					<?php echo $twitter->header->web; ?>
 				</div>
+				<div class="tweetheaderlocation">
+					<?php echo $twitter->header->location; ?>
+				</div>
 			</div>
 		<?php else : ?>
 			<div class="tweetheaderbio">
@@ -42,6 +45,9 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, f
 			</div>
 			<div class="tweetheaderweb">
 				<?php echo $twitter->header->web; ?>
+			</div>
+			<div class="tweetheaderlocation">
+				<?php echo $twitter->header->location; ?>
 			</div>
 		<?php endif; ?>
 		</div>

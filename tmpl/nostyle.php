@@ -33,6 +33,9 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/nostyle.css', false, f
 			<div class="tweetheaderweb">
 				<?php echo $twitter->header->web; ?><br />
 			</div>
+			<div class="tweetheaderlocation">
+				<?php echo $twitter->header->location; ?><br />
+			</div>
 		</div>
 	</div>
 	<hr/>

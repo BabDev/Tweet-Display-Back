@@ -118,6 +118,17 @@
 						value="1">JYES</option>
 				</field>
 				<field
+					name="showHeaderLocation"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_HEADER_LOCATION_LABEL"
+					description="MOD_TWEETDISPLAYBACK_HEADER_LOCATION_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
 					name="showTweetImage"
 					type="radio"
 					default="1"
