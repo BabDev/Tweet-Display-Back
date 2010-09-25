@@ -31,6 +31,7 @@ $ - Language fix or change
 
 
 25-September-2010 Michael Babker
++ Partial completion of [#22494] New Template - Avatar Centered
 + Added ability to display the bio location in the user's header info
 
 22-September-2010 Michael Babker
