@@ -30,6 +30,9 @@ $ - Language fix or change
 ! - Note
 
 
+--------------------------------------------------
+Tweet Display Back 1.1.5 - Released 20-September-2010
+--------------------------------------------------
 25-September-2010 Michael Babker
 + Partial completion of [#22494] New Template - Avatar Centered
 + Added ability to display the bio location in the user's header info
