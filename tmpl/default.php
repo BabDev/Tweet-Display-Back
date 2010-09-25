@@ -30,7 +30,7 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, f
 			<div class="tweetheaderavatar">
 			<?php echo $twitter->header->avatar; ?>
 				<div class="tweetheaderbio">
-					<?php echo $twitter->header->bio; ?><br />
+					<?php echo $twitter->header->bio; ?>
 				</div>
 				<div class="tweetheaderweb">
 					<?php echo $twitter->header->web; ?>
@@ -41,7 +41,7 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, f
 			</div>
 		<?php else : ?>
 			<div class="tweetheaderbio">
-				<?php echo $twitter->header->bio; ?><br />
+				<?php echo $twitter->header->bio; ?>
 			</div>
 			<div class="tweetheaderweb">
 				<?php echo $twitter->header->web; ?>

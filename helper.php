@@ -125,13 +125,13 @@ class tweetDisplayHelper {
 function renderTwitter($twitter, $params) {
 	// header
 	if ($params->get("showHeaderUser", 1)==1) {
-		$twitter->header->user = "<a href=\"http://twitter.com/".$twitter->user->screen_name."\">".$twitter->user->screen_name."</a>";
+		$twitter->header->user = "<a href=\"http://twitter.com/".$twitter->user->screen_name."\">".$twitter->user->screen_name."</a><br />";
 	}
 	if ($params->get("showHeaderBio", 1)==1) {
-		$twitter->header->bio = $twitter->user->description;
+		$twitter->header->bio = $twitter->user->description."<br />";
 	}
 	if ($params->get("showHeaderWeb", 1)==1) {
-		$twitter->header->web = "<a href=\"".$twitter->user->url."\">".$twitter->user->url."</a>";
+		$twitter->header->web = "<a href=\"".$twitter->user->url."\">".$twitter->user->url."</a><br />";
 	}
 	if ($params->get("showHeaderLocation", 1)==1) {
 		$twitter->header->location = $twitter->user->location;
