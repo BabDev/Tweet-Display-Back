@@ -30,6 +30,9 @@ $ - Language fix or change
 ! - Note
 
 
+27-September-2010 Michael Babker
+# Swapped location and web positions in nostyle template
+
 --------------------------------------------------
 Tweet Display Back 1.1.5 - Released 20-September-2010
 --------------------------------------------------

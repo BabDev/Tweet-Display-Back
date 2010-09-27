@@ -31,10 +31,10 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/nostyle.css', false, f
 				<?php echo $twitter->header->bio; ?>
 			</div>
 			<div class="tweetheaderweb">
-				<?php echo $twitter->header->web; ?>
+				<?php echo $twitter->header->location; ?>
 			</div>
 			<div class="tweetheaderlocation">
-				<?php echo $twitter->header->location; ?>
+				<?php echo $twitter->header->web; ?>
 			</div>
 		</div>
 	</div>
