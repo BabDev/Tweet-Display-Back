@@ -30,6 +30,9 @@ $ - Language fix or change
 ! - Note
 
 
+14-October-2010 Michael Babker
+# Fixed [#22875] Follow Me link is broken (Thanks for the report, John!)
+
 27-September-2010 Michael Babker
 # Swapped location and web positions in nostyle template
 
