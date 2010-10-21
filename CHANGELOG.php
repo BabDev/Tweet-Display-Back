@@ -30,6 +30,9 @@ $ - Language fix or change
 ! - Note
 
 
+21-October-2010 Michael Babker
+$ Changed "Unable to load" message to translatable string
+
 14-October-2010 Michael Babker
 # Fixed [#22875] Follow Me link is broken (Thanks for the report, John!)
 

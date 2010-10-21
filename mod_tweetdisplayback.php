@@ -31,7 +31,7 @@ $cache->setCaching($params->get("cache"));
 // do cache call
 $twitter = $cache->call(array('tweetDisplayHelper', 'getTweets'), $params);
 if (!$twitter) {
-	echo "Unable to load tweets.";
+	echo JText::_('MOD_TWEETDISPLAYBACK_UNABLE_TO_LOAD');
 	return;
 }
 $layout = $params->get("layout", "default");
