@@ -15,59 +15,18 @@ defined('_JEXEC') or die;
 
 class tweetDisplayHelper {
 
-	function getLimit($params) {
-		$uname = $params->get("twitterName","");
-		$count = $params->get("twitterCount",3);
-		$url = "api.twitter.com";
-		$req = "1/account/rate_limit_status.json?screen_name=".$uname."";
-		$fp = fsockopen ($url, 80, $errno, $errstr, 30);
-		
-		if (!$fp || $errno) return $errstr;
-        
-		@fputs($fp, "GET ".$req." HTTP/1.1\r\n");
-        @fputs($fp, "HOST: ".$url."\r\n");
-        @fputs($fp, "Connection: close\r\n\r\n");
-		
-        // read the body data
-		$res = '';
-		$headerdone = false;
-		while (!feof($fp))
-		{
-			$line = fgets ($fp, 1024);
-			if (strcmp($line, "\r\n") == 0)
-			{
-				// read the header
-				$headerdone = true;
-			}
-			else if ($headerdone)
-			{
-				// header has been read. now read the contents
-				$res .= $line;
-			}
-		}
-		fclose ($fp);
-		$obj = json_decode($res);
-		if (isset($obj->error)) return false;
-		
-		//TODO: $obj is returning as NULL, why?
-		// get the remaining hits count
-		if (isset ($obj[remaining_hits]))
-		{ 
-		 	$hits = $obj[remaining_hits];
-		}
-		else
-		{
-		 	return false;
-		}
-		return $hits;
-	}
-
 	function getTweets($params) {
+		// check the number of hits available; if 0, proceed no further
+		$hits = self::getLimit($params);
+		if ($hits == '0') {
+			$twitter = JText::_('MOD_TWEETDISPLAYBACK_EXCEEDED');
+			return $twitter;
+		}
+		
 		$uname = $params->get("twitterName","");
 		$count = $params->get("twitterCount",3);
 		$retweet = $params->get("showRetweets",1);
 		$url = "api.twitter.com";
-		$hits = self::getLimit($params);
 		
 		if ($retweet == 1)
 		{
@@ -130,23 +89,65 @@ class tweetDisplayHelper {
 		if ($i == $count) break;
 		}
 		$twitter->tweets = $tweet;
-		if ($hits = 0) {
-			$twitter = "Hourly rate limit reached, unable to load tweets";
-		}
-		else {
-			$twitter = renderTwitter($twitter, $params);
-		}
+		$twitter = renderTwitter($twitter, $params);
 		return $twitter;
+	}
+	
+	function getLimit($params) {
+		$uname = $params->get("twitterName","");
+		$count = $params->get("twitterCount",3);
+		$url = "api.twitter.com";
+		$req = "/1/account/rate_limit_status.json?screen_name=".$uname."";
+		$fp = fsockopen ($url, 80, $errno, $errstr, 30);
+		
+		if (!$fp || $errno) return $errstr;
+		
+		@fputs($fp, "GET ".$req." HTTP/1.1\r\n");
+		@fputs($fp, "HOST: ".$url."\r\n");
+		@fputs($fp, "Connection: close\r\n\r\n");
+		
+		// read the body data
+		$res = '';
+		$headerdone = false;
+		while (!feof($fp))
+		{
+			$line = fgets($fp, 1024);
+			if (strcmp($line, "\r\n") == 0)
+			{
+				// read the header
+				$headerdone = true;
+			}
+			else if ($headerdone)
+			{
+				// header has been read. now read the contents
+				$res .= $line;
+			}
+		}
+		fclose ($fp);
+		$obj = json_decode($res);
+		if (isset($obj->error)) return false;
+		
+		// get the remaining hits count
+		if (isset ($obj->{'remaining_hits'}))
+		{ 
+		 	$hits = print $obj->{'remaining_hits'};
+		}
+		else
+		{
+		 	return false;
+		}
+		return $hits;
 	}
 }
 
 function renderTwitter($twitter, $params) {
+	$hits = tweetDisplayHelper::getLimit($params);
 	// header
 	if ($params->get("showHeaderUser", 1)==1) {
 		$twitter->header->user = "<a href=\"http://twitter.com/".$twitter->user->screen_name."\">".$twitter->user->screen_name."</a><br />";
 	}
 	if ($params->get("showHeaderBio", 1)==1) {
-		$twitter->header->bio = $twitter->user->description."<br />";
+		$twitter->header->bio = $twitter->user->description."<br />Hits variable: ".var_dump($hits)."<br />";
 	}
 	if ($params->get("showHeaderLocation", 1)==1) {
 		$twitter->header->location = $twitter->user->location."<br />";
