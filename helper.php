@@ -47,7 +47,19 @@ class tweetDisplayHelper {
 		}
 		fclose ($fp);
 		$obj = json_decode($res);
-		return $obj;
+		if (isset($obj->error)) return false;
+		
+		//TODO: $obj is returning as NULL, why?
+		// get the remaining hits count
+		if (isset ($obj[remaining_hits]))
+		{ 
+		 	$hits = $obj[remaining_hits];
+		}
+		else
+		{
+		 	return false;
+		}
+		return $hits;
 	}
 
 	function getTweets($params) {
@@ -55,6 +67,7 @@ class tweetDisplayHelper {
 		$count = $params->get("twitterCount",3);
 		$retweet = $params->get("showRetweets",1);
 		$url = "api.twitter.com";
+		$hits = self::getLimit($params);
 		
 		if ($retweet == 1)
 		{
@@ -117,7 +130,12 @@ class tweetDisplayHelper {
 		if ($i == $count) break;
 		}
 		$twitter->tweets = $tweet;
-		$twitter = renderTwitter($twitter, $params);
+		if ($hits = 0) {
+			$twitter = "Hourly rate limit reached, unable to load tweets";
+		}
+		else {
+			$twitter = renderTwitter($twitter, $params);
+		}
 		return $twitter;
 	}
 }

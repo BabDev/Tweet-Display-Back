@@ -31,6 +31,7 @@ $ - Language fix or change
 
 
 21-October-2010 Michael Babker
+# Code added in work on [#22872] getLimit updates
 $ Changed "Unable to load" message to translatable string
 
 14-October-2010 Michael Babker
