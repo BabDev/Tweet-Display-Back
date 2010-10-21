@@ -18,6 +18,7 @@ class tweetDisplayHelper {
 	function getTweets($params) {
 		// check the number of hits available; if 0, proceed no further
 		$hits = self::getLimit($params);
+		
 		if ($hits == '0') {
 			$twitter = JText::_('MOD_TWEETDISPLAYBACK_EXCEEDED');
 			return $twitter;
@@ -26,41 +27,32 @@ class tweetDisplayHelper {
 		$uname = $params->get("twitterName","");
 		$count = $params->get("twitterCount",3);
 		$retweet = $params->get("showRetweets",1);
-		$url = "api.twitter.com";
 		
 		if ($retweet == 1)
 		{
-			$req = "/1/statuses/user_timeline.json?count=".$count."&include_rts=1&screen_name=".$uname."";
+			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&include_rts=1&screen_name=".$uname."";
 		}
 		else
 		{
-			$req = "/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname."";
+			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname."";
 		}
-		$fp = fsockopen ($url, 80, $errno, $errstr, 30);
-		if (!$fp || $errno) return $errstr;
-        @fputs($fp, "GET ".$req." HTTP/1.1\r\n");
-        @fputs($fp, "HOST: ".$url."\r\n");
-        @fputs($fp, "Connection: close\r\n\r\n");
-        
-		// read the body data
-		$res = '';
-		$headerdone = false;
-		while (!feof($fp))
-		{
-			$line = fgets ($fp, 1024);
-			if (strcmp($line, "\r\n") == 0)
-			{
-				// read the header
-				$headerdone = true;
-			}
-			else if ($headerdone)
-			{
-				// header has been read. now read the contents
-				$res .= $line;
-			}
-		}
-		fclose ($fp);
-		$obj = json_decode($res);
+		
+		// create a new cURL resource
+		$ch = curl_init($req);
+		
+		// set cURL options
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		
+		// grab URL and pass it to the browser and store it as $json
+		$json = curl_exec($ch);
+		
+		// close cURL resource
+		curl_close($ch);
+		
+		// decode the fetched JSON
+		$obj = json_decode($json);
+		
 		if (isset($obj->error)) return false;
 		
 		// get user Info from first tweet
@@ -95,42 +87,29 @@ class tweetDisplayHelper {
 	
 	function getLimit($params) {
 		$uname = $params->get("twitterName","");
-		$count = $params->get("twitterCount",3);
-		$url = "api.twitter.com";
-		$req = "/1/account/rate_limit_status.json?screen_name=".$uname."";
-		$fp = fsockopen ($url, 80, $errno, $errstr, 30);
+		$req = "http://api.twitter.com/1/account/rate_limit_status.json?screen_name=".$uname."";
+		// create a new cURL resource
+		$ch = curl_init($req);
 		
-		if (!$fp || $errno) return $errstr;
+		// set cURL options
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		
-		@fputs($fp, "GET ".$req." HTTP/1.1\r\n");
-		@fputs($fp, "HOST: ".$url."\r\n");
-		@fputs($fp, "Connection: close\r\n\r\n");
+		// grab URL and pass it to the browser and store it as $json
+		$json = curl_exec($ch);
 		
-		// read the body data
-		$res = '';
-		$headerdone = false;
-		while (!feof($fp))
-		{
-			$line = fgets($fp, 1024);
-			if (strcmp($line, "\r\n") == 0)
-			{
-				// read the header
-				$headerdone = true;
-			}
-			else if ($headerdone)
-			{
-				// header has been read. now read the contents
-				$res .= $line;
-			}
-		}
-		fclose ($fp);
-		$obj = json_decode($res);
+		// close cURL resource
+		curl_close($ch);
+		
+		// decode the fetched JSON
+		$obj = json_decode($json);
+		
 		if (isset($obj->error)) return false;
 		
 		// get the remaining hits count
 		if (isset ($obj->{'remaining_hits'}))
 		{ 
-		 	$hits = print $obj->{'remaining_hits'};
+		 	$hits = $obj->{'remaining_hits'};
 		}
 		else
 		{
@@ -141,13 +120,12 @@ class tweetDisplayHelper {
 }
 
 function renderTwitter($twitter, $params) {
-	$hits = tweetDisplayHelper::getLimit($params);
 	// header
 	if ($params->get("showHeaderUser", 1)==1) {
 		$twitter->header->user = "<a href=\"http://twitter.com/".$twitter->user->screen_name."\">".$twitter->user->screen_name."</a><br />";
 	}
 	if ($params->get("showHeaderBio", 1)==1) {
-		$twitter->header->bio = $twitter->user->description."<br />Hits variable: ".var_dump($hits)."<br />";
+		$twitter->header->bio = $twitter->user->description."<br />";
 	}
 	if ($params->get("showHeaderLocation", 1)==1) {
 		$twitter->header->location = $twitter->user->location."<br />";
