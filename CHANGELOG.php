@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+24-October-2010 Michael Babker
+# Fixed [#22872] getLimit updates
+^ [#22973] Implement cURL to replace current loading procedure
 
 21-October-2010 Michael Babker
 # Code added in work on [#22872] getLimit updates
