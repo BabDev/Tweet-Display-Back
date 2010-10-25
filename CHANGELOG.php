@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.1.6 - Released 25-October-2010
+--------------------------------------------------
 24-October-2010 Michael Babker
 # Fixed [#22872] getLimit updates
 ^ [#22973] Implement cURL to replace current loading procedure
@@ -44,7 +47,7 @@ $ Changed "Unable to load" message to translatable string
 # Swapped location and web positions in nostyle template
 
 --------------------------------------------------
-Tweet Display Back 1.1.5 - Released 20-September-2010
+Tweet Display Back 1.1.5 - Released 25-September-2010
 --------------------------------------------------
 25-September-2010 Michael Babker
 + Partial completion of [#22494] New Template - Avatar Centered
