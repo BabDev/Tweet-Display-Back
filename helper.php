@@ -138,11 +138,26 @@ function renderTwitter($twitter, $params) {
 	$twitter->header->avatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$twitter->user->screen_name."&size=bigger\" align=\"".$params->get("headerAvatarAlignment")."\" width=\"73px\" alt=\"".$twitter->user->screen_name."\" />";
 	
 	// footer info
+	
+	// If a "Follow me" link is displayed, determine whether to display a button or text
+	// followType 1 is image, 0 is text
 	if ($params->get("showFollowLink", 1)==1) {
-		$twitter->footer->follow_me = "<hr /><div class=\"followLink\"><b><a href=\"http://twitter.com/".$twitter->user->screen_name."\" rel=\"nofollow\">".$params->get('followText', 'Follow me on Twitter')."</a></b></div>";
+		if ($params->get("followType", 1)==1) {
+			$twitter->footer->follow_me = "<div class=\"followImg\"><b><a href=\"http://twitter.com/".$twitter->user->screen_name."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/follow_me-".$params->get('followImg').".png\" alt=\"Follow ".$twitter->user->screen_name." on Twitter\" align=\"center\" /></a></b></div>";
+		}
+		else {
+			$twitter->footer->follow_me = "<hr /><div class=\"followLink\"><b><a href=\"http://twitter.com/".$twitter->user->screen_name."\" rel=\"nofollow\">".$params->get('followText', 'Follow me on Twitter')."</a></b></div>";
+		}
 	}
 	if ($params->get("showPoweredBy", 1)==1) {
-		$twitter->footer->powered_by = "<hr /><div class=\"poweredBy\">Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back/13-info\">Tweet Display Back</a></div>";
+		//Check the type of link to determine the appropriate opening tags
+		if ($params->get("followType", 1)==1) {
+			$twitter->footer->powered_by = "<div class=\"poweredByImg\">";
+		}
+		else {
+			$twitter->footer->powered_by = "<hr /><div class=\"poweredBy\">";
+		}
+		$twitter->footer->powered_by .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back/13-info\">Tweet Display Back</a></div>";
 	}
 	
 	// tweets

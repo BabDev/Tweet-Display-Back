@@ -75,8 +75,17 @@
 	font-size: 85%;
 }
 
+.followImg {
+	text-align: center;
+}
+
 .followLink {
 	text-align: right;
+}
+
+.poweredByImg {
+	font-size: 85%;
+	text-align: center;
 }
 
 .poweredBy {

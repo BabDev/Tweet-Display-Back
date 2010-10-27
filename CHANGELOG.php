@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+28-October-2010 Michael Babker
++ [#23044] Add option to display "Follow me" button versus text
+
 --------------------------------------------------
 Tweet Display Back 1.1.6 - Released 25-October-2010
 --------------------------------------------------

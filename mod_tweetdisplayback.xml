@@ -239,6 +239,30 @@
 						value="1">JYES</option>
 				</field>
 				<field
+					name="followType"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_FOLLOW_TYPE_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FOLLOW_TYPE_DESCRIPTION" >
+					<option
+						value="0">MOD_TWEETDISPLAYBACK_FOLLOW_TYPE_OPTION_TEXT</option>
+					<option
+						value="1">MOD_TWEETDISPLAYBACK_FOLLOW_TYPE_OPTION_IMAGE</option>
+				</field>
+				<field
+					name="followImg"
+					type="radio"
+					default="a"
+					label="MOD_TWEETDISPLAYBACK_FOLLOW_IMAGE_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FOLLOW_IMAGE_DESCRIPTION" >
+					<option
+						value="a">MOD_TWEETDISPLAYBACK_FOLLOW_IMAGE_OPTION_BLUE</option>
+					<option
+						value="b">MOD_TWEETDISPLAYBACK_FOLLOW_IMAGE_OPTION_GREY</option>
+					<option
+						value="c">MOD_TWEETDISPLAYBACK_FOLLOW_IMAGE_OPTION_BLACK</option>
+				</field>
+				<field
 					name="followText"
 					type="text"
 					default="Follow me on Twitter"
