@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+30-October-2010 Michael Babker
+^ Added padding to the "Follow me" button on the avatar template
+
 28-October-2010 Michael Babker
 + [#23044] Add option to display "Follow me" button versus text
 
