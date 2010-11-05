@@ -169,7 +169,7 @@ class tweetDisplayHelper {
 			// created time, set to absolute or relative by option
 			if ($params->get("showTweetCreated", 1)==1) {
 				if ($params->get("relativeTime", 1) == 1) {
-					$t->tweet->created = "<a href=\"http://twitter.com/".$twitter->user->screen_name."/status/".$t->id."\">".getRelativeTime($t->created_at)."</a>";
+					$t->tweet->created = "<a href=\"http://twitter.com/".$twitter->user->screen_name."/status/".$t->id."\">".self::getRelativeTime($t->created_at)."</a>";
 				}
 				else {
 					$t->tweet->created = "<a href=\"http://twitter.com/".$twitter->user->screen_name."/status/".$t->id."\">".JHTML::date($t->created_at)."</a>";
