@@ -81,7 +81,7 @@ class tweetDisplayHelper {
 		if ($i == $count) break;
 		}
 		$twitter->tweets = $tweet;
-		$twitter = renderTwitter($twitter, $params);
+		$twitter = self::renderTwitter($twitter, $params);
 		return $twitter;
 	}
 	
@@ -119,129 +119,129 @@ class tweetDisplayHelper {
 		}
 		return $hits;
 	}
-}
 
-function renderTwitter($twitter, $params) {
-	// header info
-	if ($params->get("showHeaderUser", 1)==1) {
-		$twitter->header->user = "<a href=\"http://twitter.com/".$twitter->user->screen_name."\">".$twitter->user->screen_name."</a><br />";
-	}
-	if ($params->get("showHeaderBio", 1)==1) {
-		$twitter->header->bio = $twitter->user->description."<br />";
-	}
-	if ($params->get("showHeaderLocation", 1)==1) {
-		$twitter->header->location = $twitter->user->location."<br />";
-	}
-	if ($params->get("showHeaderWeb", 1)==1) {
-		$twitter->header->web = "<a href=\"".$twitter->user->url."\">".$twitter->user->url."</a>";
-	}
-	$twitter->header->avatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$twitter->user->screen_name."&size=bigger\" align=\"".$params->get("headerAvatarAlignment")."\" width=\"73px\" alt=\"".$twitter->user->screen_name."\" />";
-	
-	// footer info
-	
-	// If a "Follow me" link is displayed, determine whether to display a button or text
-	// followType 1 is image, 0 is text
-	if ($params->get("showFollowLink", 1)==1) {
-		if ($params->get("followType", 1)==1) {
-			$twitter->footer->follow_me = "<div class=\"followImg\"><b><a href=\"http://twitter.com/".$twitter->user->screen_name."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/follow_me-".$params->get('followImg').".png\" alt=\"Follow ".$twitter->user->screen_name." on Twitter\" align=\"center\" /></a></b></div>";
+	function renderTwitter($twitter, $params) {
+		// header info
+		if ($params->get("showHeaderUser", 1)==1) {
+			$twitter->header->user = "<a href=\"http://twitter.com/".$twitter->user->screen_name."\">".$twitter->user->screen_name."</a><br />";
 		}
-		else {
-			$twitter->footer->follow_me = "<hr /><div class=\"followLink\"><b><a href=\"http://twitter.com/".$twitter->user->screen_name."\" rel=\"nofollow\">".$params->get('followText', 'Follow me on Twitter')."</a></b></div>";
+		if ($params->get("showHeaderBio", 1)==1) {
+			$twitter->header->bio = $twitter->user->description."<br />";
 		}
-	}
-	if ($params->get("showPoweredBy", 1)==1) {
-		//Check the type of link to determine the appropriate opening tags
-		if ($params->get("followType", 1)==1) {
-			$twitter->footer->powered_by = "<div class=\"poweredByImg\">";
+		if ($params->get("showHeaderLocation", 1)==1) {
+			$twitter->header->location = $twitter->user->location."<br />";
 		}
-		else {
-			$twitter->footer->powered_by = "<hr /><div class=\"poweredBy\">";
+		if ($params->get("showHeaderWeb", 1)==1) {
+			$twitter->header->web = "<a href=\"".$twitter->user->url."\">".$twitter->user->url."</a>";
 		}
-		$twitter->footer->powered_by .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back/13-info\">Tweet Display Back</a></div>";
-	}
-	
-	// tweets
-	foreach ($twitter->tweets as $t) {
+		$twitter->header->avatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$twitter->user->screen_name."&size=bigger\" align=\"".$params->get("headerAvatarAlignment")."\" width=\"73px\" alt=\"".$twitter->user->screen_name."\" />";
 		
-		// user
-		if ($params->get("showTweetName", 1)==1) {
-			$t->tweet->user = "<b><a href=\"http://twitter.com/".$twitter->user->screen_name."\">".$twitter->user->screen_name."</a>:</b> ";
-		}
-		// created time, set to absolute or relative by option
-		if ($params->get("showTweetCreated", 1)==1) {
-			if ($params->get("relativeTime", 1) == 1) {
-				$t->tweet->created = "<a href=\"http://twitter.com/".$twitter->user->screen_name."/status/".$t->id."\">".getRelativeTime($t->created_at)."</a>";
+		// footer info
+		
+		// If a "Follow me" link is displayed, determine whether to display a button or text
+		// followType 1 is image, 0 is text
+		if ($params->get("showFollowLink", 1)==1) {
+			if ($params->get("followType", 1)==1) {
+				$twitter->footer->follow_me = "<div class=\"followImg\"><b><a href=\"http://twitter.com/".$twitter->user->screen_name."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/follow_me-".$params->get('followImg').".png\" alt=\"Follow ".$twitter->user->screen_name." on Twitter\" align=\"center\" /></a></b></div>";
 			}
 			else {
-				$t->tweet->created = "<a href=\"http://twitter.com/".$twitter->user->screen_name."/status/".$t->id."\">".JHTML::date($t->created_at)."</a>";
+				$twitter->footer->follow_me = "<hr /><div class=\"followLink\"><b><a href=\"http://twitter.com/".$twitter->user->screen_name."\" rel=\"nofollow\">".$params->get('followText', 'Follow me on Twitter')."</a></b></div>";
 			}
 		}
-		// show the source (via XX)
-		if (($params->get("showSource", 1) == 1)) {
-			$t->tweet->created .= " via ".$t->source;
+		if ($params->get("showPoweredBy", 1)==1) {
+			//Check the type of link to determine the appropriate opening tags
+			if ($params->get("followType", 1)==1) {
+				$twitter->footer->powered_by = "<div class=\"poweredByImg\">";
+			}
+			else {
+				$twitter->footer->powered_by = "<hr /><div class=\"poweredBy\">";
+			}
+			$twitter->footer->powered_by .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back/13-info\">Tweet Display Back</a></div>";
 		}
-		// show the location
-		if (($params->get("showLocation", 1)==1) && ($t->place->full_name)) {
-			$t->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$t->place->full_name."\" target=\"_blank\">".$t->place->full_name."</a>";
+		
+		// tweets
+		foreach ($twitter->tweets as $t) {
+			
+			// user
+			if ($params->get("showTweetName", 1)==1) {
+				$t->tweet->user = "<b><a href=\"http://twitter.com/".$twitter->user->screen_name."\">".$twitter->user->screen_name."</a>:</b> ";
+			}
+			// created time, set to absolute or relative by option
+			if ($params->get("showTweetCreated", 1)==1) {
+				if ($params->get("relativeTime", 1) == 1) {
+					$t->tweet->created = "<a href=\"http://twitter.com/".$twitter->user->screen_name."/status/".$t->id."\">".getRelativeTime($t->created_at)."</a>";
+				}
+				else {
+					$t->tweet->created = "<a href=\"http://twitter.com/".$twitter->user->screen_name."/status/".$t->id."\">".JHTML::date($t->created_at)."</a>";
+				}
+			}
+			// show the source (via XX)
+			if (($params->get("showSource", 1) == 1)) {
+				$t->tweet->created .= " via ".$t->source;
+			}
+			// show the location
+			if (($params->get("showLocation", 1)==1) && ($t->place->full_name)) {
+				$t->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$t->place->full_name."\" target=\"_blank\">".$t->place->full_name."</a>";
+			}
+			// show the name of the replied to user
+			if (($t->in_reply_to_screen_name) && ($t->in_reply_to_status_id)) {
+				$t->tweet->created .= " in reply to <a href=\"http://twitter.com/".$t->in_reply_to_screen_name."/status/".$t->in_reply_to_status_id."\">".$t->in_reply_to_screen_name."</a>";
+			}
+			// avater for the tweet
+			$t->tweet->avatar = "<img align=\"".$params->get("tweetDisplayLocation")."\" alt=\"".$twitter->user->screen_name."\" src=\"".$twitter->user->profile_image_url."\" width=\"32px\"/>";
+			// the content of the tweet with site links
+			$t->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $t->text);
+			// if tags are linked, this converts them to links
+			if ($params->get("showLinks", 1) == 1) {
+				$t->tweet->text = preg_replace("/@(\w+)/", "@<a href=\"http://twitter.com/\\1\" target=\"_blank\">\\1</a>", $t->tweet->text);
+				$t->tweet->text = preg_replace("/#(\w+)/", "#<a href=\"http://twitter.com/search?q=\\1\" target=\"_blank\">\\1</a>", $t->tweet->text);
+			}
 		}
-		// show the name of the replied to user
-		if (($t->in_reply_to_screen_name) && ($t->in_reply_to_status_id)) {
-			$t->tweet->created .= " in reply to <a href=\"http://twitter.com/".$t->in_reply_to_screen_name."/status/".$t->in_reply_to_status_id."\">".$t->in_reply_to_screen_name."</a>";
-		}
-		// avater for the tweet
-		$t->tweet->avatar = "<img align=\"".$params->get("tweetDisplayLocation")."\" alt=\"".$twitter->user->screen_name."\" src=\"".$twitter->user->profile_image_url."\" width=\"32px\"/>";
-		// the content of the tweet with site links
-		$t->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $t->text);
-		// if tags are linked, this converts them to links
-		if ($params->get("showLinks", 1) == 1) {
-			$t->tweet->text = preg_replace("/@(\w+)/", "@<a href=\"http://twitter.com/\\1\" target=\"_blank\">\\1</a>", $t->tweet->text);
-			$t->tweet->text = preg_replace("/#(\w+)/", "#<a href=\"http://twitter.com/search?q=\\1\" target=\"_blank\">\\1</a>", $t->tweet->text);
-		}
+		return $twitter;
 	}
-	return $twitter;
-}
 
-function getRelativeTime($date) {
-	$diff = time() - strtotime($date);
-	// Less than a minute
-	if ($diff < 60) {
-		return JText::_('MOD_TWEETDISPLAYBACK_CREATE_LESSTHANAMINUTE');
+	function getRelativeTime($date) {
+		$diff = time() - strtotime($date);
+		// Less than a minute
+		if ($diff < 60) {
+			return JText::_('MOD_TWEETDISPLAYBACK_CREATE_LESSTHANAMINUTE');
+		}
+		$diff = round($diff/60);
+		// 60 to 119 seconds
+		if ($diff < 2) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTE');
+		}
+		// 2 to 59 minutes
+		if ($diff < 60) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTES');
+		}
+		$diff = round($diff/60);
+		// 1 hour
+		if ($diff < 2) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOUR');
+		}
+		// 2 to 23 hours
+		if ($diff < 24) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOURS');
+		}
+		$diff = round($diff/24);
+		// 1 day
+		if ($diff < 2) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAY');
+		}
+		// 2 to 6 days
+		if ($diff < 7) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAYS');
+		}
+		$diff = round($diff/7);
+		// 1 week
+		if ($diff < 2) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEK');
+		}
+		// 2 or 3 weeks
+		if ($diff < 4) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEKS');
+		}
+		return JHTML::date($date);	
 	}
-	$diff = round($diff/60);
-	// 60 to 119 seconds
-	if ($diff < 2) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTE');
-	}
-	// 2 to 59 minutes
-	if ($diff < 60) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTES');
-	}
-	$diff = round($diff/60);
-	// 1 hour
-	if ($diff < 2) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOUR');
-	}
-	// 2 to 23 hours
-	if ($diff < 24) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOURS');
-	}
-	$diff = round($diff/24);
-	// 1 day
-	if ($diff < 2) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAY');
-	}
-	// 2 to 6 days
-	if ($diff < 7) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAYS');
-	}
-	$diff = round($diff/7);
-	// 1 week
-	if ($diff < 2) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEK');
-	}
-	// 2 or 3 weeks
-	if ($diff < 4) {
-		return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEKS');
-	}
-	return JHTML::date($date);	
 }

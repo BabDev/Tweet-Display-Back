@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+5-November-2010 Michael Babker
+^ Moved renderTwitter and getRelativeTime functions under tweetDisplayHelper
+
 30-October-2010 Michael Babker
 ^ Added padding to the "Follow me" button on the avatar template
 
