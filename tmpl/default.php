@@ -54,10 +54,10 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, f
 	</div>
 <?php endif; ?>
 
-<?php foreach ($twitter->tweets as $t) : ?>
+<?php foreach ($obj as $t) : ?>
 	<div class="tweetmain">
 		<?php if ($params->get("showTweetImage", 1)==1) : ?>
-		<div class="tweetavatar"><?php echo $t->tweet->avatar; ?></div>
+		<div class="tweetavatar"><?php echo $twitter->tweet->avatar; ?></div>
 		<div class="tweet<?php echo $tweetDisplay;?>arrow">
 			<img src="<?php echo $imgpath; ?>/arr_<?php echo $tweetDisplay;?>.png" alt="" />
 		</div>
@@ -65,9 +65,9 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, f
 		<?php else : ?>
 		<div class="tweet-<?php echo $tweetDisplay;?>-noavatar">
 		<?php endif; ?>
-			<?php echo $t->tweet->user; ?>
-			<?php echo $t->tweet->text; ?>
-			<p class="tweettime"><?php echo $t->tweet->created; ?></p>
+			<?php echo $twitter->tweet->user; ?>
+			<?php echo $twitter->tweet->text; ?>
+			<p class="tweettime"><?php echo $twitter->tweet->created; ?></p>
 		</div>
 	</div>
 	<div class="clr"></div>

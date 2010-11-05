@@ -52,12 +52,12 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/avatar.css', false, fa
 </div>
 <?php endif; ?>
 
-<?php foreach ($twitter->tweets as $t) { ?>
+<?php foreach ($obj as $t) { ?>
 <div class="tweetmain">
 	<div class="tweet-<?php echo $tweetDisplay;?>-noavatar">
-		<?php echo $t->tweet->user; ?>
-		<?php echo $t->tweet->text; ?>
-		<p class="tweettime"><?php echo $t->tweet->created; ?></p>
+		<?php echo $twitter->tweet->user; ?>
+		<?php echo $twitter->tweet->text; ?>
+		<p class="tweettime"><?php echo $twitter->tweet->created; ?></p>
 	</div>
 </div>
 <div class="clr"></div>

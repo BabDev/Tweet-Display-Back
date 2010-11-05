@@ -33,6 +33,10 @@ $ - Language fix or change
 + Added getJSON function
 + Added description of all functions
 ^ Moved renderTwitter and getRelativeTime functions under tweetDisplayHelper
+^ Renamed getRelativeTime to renderRelativeTime
+^ Renamed numerous variables in helper
+^ Converted JSON pull to be an array
+^ Further defined getJSON
 
 30-October-2010 Michael Babker
 ^ Added padding to the "Follow me" button on the avatar template
