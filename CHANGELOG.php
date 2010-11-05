@@ -30,6 +30,8 @@ $ - Language fix or change
 ! - Note
 
 5-November-2010 Michael Babker
++ Added getJSON function
++ Added description of all functions
 ^ Moved renderTwitter and getRelativeTime functions under tweetDisplayHelper
 
 30-October-2010 Michael Babker

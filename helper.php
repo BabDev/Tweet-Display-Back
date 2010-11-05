@@ -15,6 +15,13 @@ defined('_JEXEC') or die;
 
 class tweetDisplayHelper {
 
+	/**
+	 * Function to load a user's user_timeline Twitter feed
+	 * 
+	 * @param	string	$params
+	 * @return	object	$twitter	A formatted object with the user's tweets
+	 * @since	1.0.0
+	 */
 	function getTweets($params) {
 		// check the number of hits available; if 0, proceed no further
 		$hits = self::getLimit($params);
@@ -37,19 +44,9 @@ class tweetDisplayHelper {
 			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname."";
 		}
 		
-		// create a new cURL resource
-		$ch = curl_init($req);
-		
-		// set cURL options
-		curl_setopt($ch, CURLOPT_HEADER, false);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		
-		// grab URL and pass it to the browser and store it as $json
-		$json = curl_exec($ch);
-		
-		// close cURL resource
-		curl_close($ch);
-		
+		// fetch the JSON feed
+		$json = self::getJSON($req);
+				
 		// decode the fetched JSON
 		$obj = json_decode($json);
 		
@@ -85,11 +82,14 @@ class tweetDisplayHelper {
 		return $twitter;
 	}
 	
-	function getLimit($params) {
-		// load the parameters
-		$uname = $params->get("twitterName","");
-		$req = "http://api.twitter.com/1/account/rate_limit_status.json?screen_name=".$uname."";
-		
+	/**
+	 * Function to fetch a JSON feed
+	 * 
+	 * @param	string	$req	The URL of the feed to load
+	 * @return	string	$json	The fetched JSON query
+	 * @since	1.0.7
+	 */
+	function getJSON($req) {
 		// create a new cURL resource
 		$ch = curl_init($req);
 		
@@ -103,6 +103,23 @@ class tweetDisplayHelper {
 		// close cURL resource
 		curl_close($ch);
 		
+		return $json;		
+	}
+	
+	/**
+	 * Function to get the rate limit of a Twitter user
+	 * 
+	 * @param	string	$params
+	 * @return	string	$hits	The number of remaining hits on a user's rate limit
+	 * @since	1.0.6
+	 */
+	function getLimit($params) {
+		// load the parameters
+		$uname = $params->get("twitterName","");
+		$req = "http://api.twitter.com/1/account/rate_limit_status.json?screen_name=".$uname."";
+		
+		$json = self::getJSON($req);
+				
 		// decode the fetched JSON
 		$obj = json_decode($json);
 		
@@ -200,6 +217,13 @@ class tweetDisplayHelper {
 		return $twitter;
 	}
 
+	/**
+	 * Function to convert a static time into a relative measurement
+	 * 
+	 * @param	string	$date	The date to convert
+	 * @return	string	$date	A text string of a relative time
+	 * @since	1.0.0
+	 */
 	function getRelativeTime($date) {
 		$diff = time() - strtotime($date);
 		// Less than a minute
