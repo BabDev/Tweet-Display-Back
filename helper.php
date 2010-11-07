@@ -7,7 +7,7 @@
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 * 
 * Module forked from TweetXT for Joomla!
-* Original Copyright ((c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
+* Original Copyright (c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
 */
 
 // no direct access
@@ -60,12 +60,9 @@ class tweetDisplayHelper {
 		$obj = self::getJSON($req);
 				
 		// get the remaining hits count
-		if (isset ($obj['remaining_hits']))
-		{ 
+		if (isset ($obj['remaining_hits'])) { 
 		 	$hits = $obj['remaining_hits'];
-		}
-		else
-		{
+		} else {
 		 	return false;
 		}
 		return $hits;
@@ -91,12 +88,9 @@ class tweetDisplayHelper {
 		$retweet = $params->get("showRetweets",1);
 		
 		// determine whether to pull retweets or not
-		if ($retweet == 1)
-		{
+		if ($retweet == 1) {
 			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&include_rts=1&screen_name=".$uname."";
-		}
-		else
-		{
+		} else {
 			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname."";
 		}
 		
@@ -144,8 +138,7 @@ class tweetDisplayHelper {
 		if ($params->get("showFollowLink", 1)==1) {
 			if ($params->get("followType", 1)==1) {
 				$twitter->footer->follow_me = "<div class=\"followImg\"><b><a href=\"http://twitter.com/".$userInfo->screen_name."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/follow_me-".$params->get('followImg').".png\" alt=\"Follow ".$userInfo->screen_name." on Twitter\" align=\"center\" /></a></b></div>";
-			}
-			else {
+			} else {
 				$twitter->footer->follow_me = "<hr /><div class=\"followLink\"><b><a href=\"http://twitter.com/".$userInfo->screen_name."\" rel=\"nofollow\">".$params->get('followText', 'Follow me on Twitter')."</a></b></div>";
 			}
 		}
@@ -153,8 +146,7 @@ class tweetDisplayHelper {
 			//Check the type of link to determine the appropriate opening tags
 			if ($params->get("followType", 1)==1) {
 				$twitter->footer->powered_by = "<div class=\"poweredByImg\">";
-			}
-			else {
+			} else {
 				$twitter->footer->powered_by = "<hr /><div class=\"poweredBy\">";
 			}
 			$twitter->footer->powered_by .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back/13-info\">Tweet Display Back</a></div>";
@@ -169,8 +161,7 @@ class tweetDisplayHelper {
 			if ($params->get("showTweetCreated", 1)==1) {
 				if ($params->get("relativeTime", 1) == 1) {
 					$twitter->tweet->created = "<a href=\"http://twitter.com/".$t['user']['screen_name']."/status/".$t['id']."\">".self::renderRelativeTime($t['created_at'])."</a>";
-				}
-				else {
+				} else {
 					$twitter->tweet->created = "<a href=\"http://twitter.com/".$t['user']['screen_name']."/status/".$t['id']."\">".JHTML::date($t['created_at'])."</a>";
 				}
 			}
