@@ -19,7 +19,7 @@ class tweetDisplayHelper {
 	 * Function to fetch a JSON feed
 	 * 
 	 * @param	string	$req	The URL of the feed to load
-	 * @return	string	$json	The fetched JSON query
+	 * @return	array	$obj	The fetched JSON query
 	 * @since	1.0.7
 	 */
 	function getJSON($req) {
@@ -60,9 +60,9 @@ class tweetDisplayHelper {
 		$obj = self::getJSON($req);
 				
 		// get the remaining hits count
-		if (isset ($obj->{'remaining_hits'}))
+		if (isset ($obj['remaining_hits']))
 		{ 
-		 	$hits = $obj->{'remaining_hits'};
+		 	$hits = $obj['remaining_hits'];
 		}
 		else
 		{
