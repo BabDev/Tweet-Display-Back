@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.1.7 - Released 7-November-2010
+--------------------------------------------------
 7-November-2010 Michael Babker
 + Partial addition for [#22395] Ability to display retweets as being from original tweeter
 ^ Changed foreach argument in templates
