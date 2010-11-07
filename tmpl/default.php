@@ -7,7 +7,7 @@
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 * 
 * Module forked from TweetXT for Joomla!
-* Original Copyright ((c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
+* Original Copyright (c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
 */
 
 // no direct access
@@ -54,7 +54,7 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, f
 	</div>
 <?php endif; ?>
 
-<?php foreach ($obj as $t) : ?>
+<?php foreach ($twitter as $o) { ?>
 	<div class="tweetmain">
 		<?php if ($params->get("showTweetImage", 1)==1) : ?>
 		<div class="tweetavatar"><?php echo $twitter->tweet->avatar; ?></div>
@@ -71,7 +71,7 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, f
 		</div>
 	</div>
 	<div class="clr"></div>
-<?php endforeach; ?>
+<?php } ?>
 
 <?php echo $twitter->footer->follow_me; ?>
 <?php echo $twitter->footer->powered_by; ?>

@@ -7,7 +7,7 @@
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 * 
 * Module forked from TweetXT for Joomla!
-* Original Copyright ((c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
+* Original Copyright (c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
 */
 
 // no direct access
@@ -28,6 +28,10 @@ $ - Language fix or change
 ^ - Change
 - - Removed
 ! - Note
+
+7-November-2010 Michael Babker
++ Partial addition for [#22395] Ability to display retweets as being from original tweeter
+^ Changed foreach argument in templates
 
 5-November-2010 Michael Babker
 + Added getJSON function
@@ -149,6 +153,9 @@ Tweet Display Back 1.1.1 - Released 3-September-2010
 ^ Fixed tweet avatar size, removed inline style options
 ^ Removed redundant check in the helper
 
+--------------------------------------------------
+Tweet Display Back 1.1.0 - Released 28-August-2010
+--------------------------------------------------
 28-August-2010 Michael Babker
 + Added static text to language pack
 ^ Refactored install manifest for 1.6 Compliance
@@ -163,10 +170,6 @@ Tweet Display Back 1.1.1 - Released 3-September-2010
 ^ Updated install manifest with new media locations
 ^ Reorganized all media into media folder
 - Option to resize header avatar
-
---------------------------------------------------
-Tweet Display Back 1.1.0 - Released 28-August-2010
---------------------------------------------------
 
 --------------------------------------------------
 Copied from Tweet Display Back 1.0.0 - 28-August-2010

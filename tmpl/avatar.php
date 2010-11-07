@@ -7,7 +7,7 @@
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 * 
 * Module forked from TweetXT for Joomla!
-* Original Copyright ((c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
+* Original Copyright (c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
 */
 
 // no direct access
@@ -52,7 +52,7 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/avatar.css', false, fa
 </div>
 <?php endif; ?>
 
-<?php foreach ($obj as $t) { ?>
+<?php foreach ($twitter as $o) { ?>
 <div class="tweetmain">
 	<div class="tweet-<?php echo $tweetDisplay;?>-noavatar">
 		<?php echo $twitter->tweet->user; ?>

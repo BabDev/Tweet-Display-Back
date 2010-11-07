@@ -107,7 +107,7 @@ class tweetDisplayHelper {
 	 * @param	array	$obj		The decoded JSON feed
 	 * @param	string	$params
 	 * @return	object	$twitter	The formatted object for display
-	 * @since	1.0.6
+	 * @since	1.0.0
 	 */
 	function renderTwitter($obj, $params) {
 		// check the first object for user info
@@ -153,29 +153,42 @@ class tweetDisplayHelper {
 		}
 		
 		// tweets
-		foreach ($obj as $t) {
-			// user
-			if ($params->get("showTweetName", 1)==1) {
-				$twitter->tweet->user = "<b><a href=\"http://twitter.com/".$t['user']['screen_name']."\">".$t['user']['screen_name']."</a>:</b> ";
+		foreach ($obj as $o) {
+			// check if the item is a retweet, and if so gather data from the retweeted_status datapoint
+			if(isset($o['retweeted_status'])) {
+				// retweeted user
+				if ($params->get("showTweetName", 1)==1) {
+					$twitter->tweet->user = "<b><a href=\"http://twitter.com/".$o['retweeted_status']['user']['screen_name']."\">".$o['retweeted_status']['user']['screen_name']."</a>:</b> ";
+				}
+				$twitter->tweet->created = "Retweeted ";
+				$twitter->tweet->avatar = "<img align=\"".$params->get("tweetDisplayLocation")."\" alt=\"".$o['retweeted_status']['user']['screen_name']."\" src=\"".$o['retweeted_status']['user']['profile_image_url']."\" width=\"32px\"/>";
+				$twitter->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $o['retweeted_status']['text']);
+			} else {
+				// user
+				if ($params->get("showTweetName", 1)==1) {
+					$twitter->tweet->user = "<b><a href=\"http://twitter.com/".$o['user']['screen_name']."\">".$o['user']['screen_name']."</a>:</b> ";
+				}
+				$twitter->tweet->avatar = "<img align=\"".$params->get("tweetDisplayLocation")."\" alt=\"".$o['user']['screen_name']."\" src=\"".$o['user']['profile_image_url']."\" width=\"32px\"/>";
+				$twitter->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $o['text']);
 			}
+			// info below is specific to the tweet, so it isn't checked against a retweet
 			if ($params->get("showTweetCreated", 1)==1) {
 				if ($params->get("relativeTime", 1) == 1) {
-					$twitter->tweet->created = "<a href=\"http://twitter.com/".$t['user']['screen_name']."/status/".$t['id']."\">".self::renderRelativeTime($t['created_at'])."</a>";
-				} else {
-					$twitter->tweet->created = "<a href=\"http://twitter.com/".$t['user']['screen_name']."/status/".$t['id']."\">".JHTML::date($t['created_at'])."</a>";
+					$twitter->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id']."\">".self::renderRelativeTime($o['created_at'])."</a>";
+				}
+				else {
+					$twitter->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id']."\">".JHTML::date($o['created_at'])."</a>";
 				}
 			}
 			if (($params->get("showSource", 1) == 1)) {
-				$twitter->tweet->created .= " via ".$t['source'];
+				$twitter->tweet->created .= " via ".$o['source'];
 			}
-			if (($params->get("showLocation", 1)==1) && ($t->place->full_name)) {
-				$twitter->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$t['place']['full_name']."\" target=\"_blank\">".$t['place']['full_name']."</a>";
+			if (($params->get("showLocation", 1)==1) && ($o->place->full_name)) {
+				$twitter->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$o['place']['full_name']."\" target=\"_blank\">".$o['place']['full_name']."</a>";
 			}
-			if (($t['in_reply_to_screen_name']) && ($t['in_reply_to_status_id'])) {
-				$twitter->tweet->created .= " in reply to <a href=\"http://twitter.com/".$t['in_reply_to_screen_name']."/status/".$t['in_reply_to_status_id']."\">".$t['in_reply_to_screen_name']."</a>";
+			if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id'])) {
+				$twitter->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id']."\">".$o['in_reply_to_screen_name']."</a>";
 			}
-			$twitter->tweet->avatar = "<img align=\"".$params->get("tweetDisplayLocation")."\" alt=\"".$t['user']['screen_name']."\" src=\"".$t['user']['profile_image_url']."\" width=\"32px\"/>";
-			$twitter->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $t['text']);
 			if ($params->get("showLinks", 1) == 1) {
 				$twitter->tweet->text = preg_replace("/@(\w+)/", "@<a href=\"http://twitter.com/\\1\" target=\"_blank\">\\1</a>", $twitter->tweet->text);
 				$twitter->tweet->text = preg_replace("/#(\w+)/", "#<a href=\"http://twitter.com/search?q=\\1\" target=\"_blank\">\\1</a>", $twitter->tweet->text);

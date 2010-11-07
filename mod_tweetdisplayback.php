@@ -7,7 +7,7 @@
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 * 
 * Module forked from TweetXT for Joomla!
-* Original Copyright ((c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
+* Original Copyright (c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
 */
 
 // no direct access
@@ -25,7 +25,7 @@ $options = array(
 	'lifetime' => $params->get('cachetime') * 60, // minutes to seconds
 	'language' => $conf->get('config.language'),
 	'storage' => 'file' );
-$cache =& JCache::getInstance( "callback", $options );
+$cache =& JCache::getInstance("callback", $options );
 $cache->setCaching($params->get("cache"));
 
 // do cache call
