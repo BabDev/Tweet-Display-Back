@@ -14,7 +14,7 @@
 defined('_JEXEC') or die;
 
 // Include the helper
-require_once (dirname(__FILE__).DS.'helper.php');
+require_once dirname(__FILE__).DS.'helper.php';
 
 // initialize the cache
 jimport('joomla.cache.cache');

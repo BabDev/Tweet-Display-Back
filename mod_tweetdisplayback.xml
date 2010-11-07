@@ -23,7 +23,7 @@
 		<filename>mod_tweetdisplayback.xml</filename>
 	</files>
 	<updateservers>
-		<server type="collection">http://www.flbab.com/updates/TDB.xml</server>
+		<server type="extension">http://www.flbab.com/updates/TDB.xml</server>
 	</updateservers>
 	<config>
 		<fields name="params">

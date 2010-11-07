@@ -33,6 +33,8 @@ $ - Language fix or change
 + Partial addition for [#22395] Ability to display retweets as being from original tweeter
 ^ Changed foreach argument in templates
 + Added updateservers info in XML
+^ Modified template generation (thanks to Amy Stephen for the help!)
+^ Changes to renderTwitter pertaining to generation of elements
 
 5-November-2010 Michael Babker
 + Added getJSON function

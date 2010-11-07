@@ -16,45 +16,57 @@ defined('_JEXEC') or die;
 $headerAlign	= $params->get("headerAvatarAlignment");
 $tweetDisplay	= $params->get("tweetDisplayLocation");
 JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/nostyle.css', false, false, false);
-?>
 
-<?php if ($params->get("showHeader", 1)==1) : ?>
-	<div class="tweetheadermain">
-		<div class="tweetheader<?php echo $headerAlign;?>">
-			<div class="tweetheaderuser">
-				<?php echo $twitter->header->user; ?>
-			</div>
-			<div class="tweetheaderavatar">
-				<?php echo $twitter->header->avatar; ?><br/>
-			</div>
-			<div class="tweetheaderbio">
-				<?php echo $twitter->header->bio; ?>
-			</div>
-			<div class="tweetheaderweb">
-				<?php echo $twitter->header->location; ?>
-			</div>
-			<div class="tweetheaderlocation">
-				<?php echo $twitter->header->web; ?>
+//variables foreach
+$i		= 0;
+$max	= count($twitter) - 1;
+
+foreach ($twitter as $o) {
+	if ($i == 0) { ?>
+	
+	<?php if ($params->get("showHeader", 0)==1) { ?>
+		<div class="tweetheadermain">
+			<div class="tweetheader<?php echo $headerAlign;?>">
+				<div class="tweetheaderuser">
+					<?php echo $o->header->user; ?>
+				</div>
+			<?php if ($params->get("showHeaderAvatar", 0)==1) { ?>
+				<div class="tweetheaderavatar">
+					<?php echo $o->header->avatar; ?><br/>
+				</div>
+			<?php } ?>
+				<div class="tweetheaderbio">
+					<?php echo $o->header->bio; ?>
+				</div>
+				<div class="tweetheaderlocation">
+					<?php echo $o->header->location; ?>
+				</div>
+				<div class="tweetheaderweb">
+					<?php echo $o->header->web; ?>
+				</div>
+			<hr/>
 			</div>
 		</div>
-	</div>
-	<hr/>
-<?php endif; ?>
+	<?php }
+	} ?>
 
-<?php foreach ($twitter as $o) { ?>
-	<div class="tweetmain">
-		<?php if ($params->get("showTweetImage", 1)==1) : ?>
-		<div class="tweetavatar"><?php echo $twitter->tweet->avatar; ?></div>
-		<div class="tweet-<?php echo $tweetDisplay;?>">
-		<?php else : ?>
-		<div class="tweet-<?php echo $tweetDisplay;?>-noavatar">
-		<?php endif; ?>
-			<?php echo $twitter->tweet->user; ?>
-			<?php echo $twitter->tweet->text; ?>
-			<p class="tweettime"><?php echo $twitter->tweet->created; ?></p>
+		<div class="tweetmain">
+			<?php if ($params->get("showTweetImage", 1)==1) { ?>
+			<div class="tweetavatar"><?php echo $o->tweet->avatar; ?></div>
+			<div class="tweet-<?php echo $tweetDisplay;?>">
+			<?php } else { ?>
+			<div class="tweet-<?php echo $tweetDisplay;?>-noavatar">
+			<?php } ?>
+				<?php echo $o->tweet->user; ?>
+				<?php echo $o->tweet->text; ?><br />
+				<p class="tweettime"><?php echo $o->tweet->created; ?></p>
+			</div>
 		</div>
-	</div>
-<?php } ?>
-
-<?php echo $twitter->footer->follow_me; ?>
-<?php echo $twitter->footer->powered_by; ?>
+	
+	<?php if ($i == $max) { ?>
+		<?php echo $o->footer->follow_me; ?>
+		<?php echo $o->footer->powered_by; ?>
+	<?php } else {
+		$i++;
+	}
+} ?>
