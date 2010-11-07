@@ -32,6 +32,7 @@ $ - Language fix or change
 7-November-2010 Michael Babker
 + Partial addition for [#22395] Ability to display retweets as being from original tweeter
 ^ Changed foreach argument in templates
++ Added updateservers info in XML
 
 5-November-2010 Michael Babker
 + Added getJSON function

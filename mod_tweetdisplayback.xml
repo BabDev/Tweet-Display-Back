@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension
 	type="module"
-	version="1.6.0"
+	version="1.6"
 	client="site"
 	method="upgrade">
 	<name>Tweet Display Back</name>
@@ -22,6 +22,9 @@
 		<filename>index.html</filename>
 		<filename>mod_tweetdisplayback.xml</filename>
 	</files>
+	<updateservers>
+		<server type="collection">http://www.flbab.com/updates/TDB.xml</server>
+	</updateservers>
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
