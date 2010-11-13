@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+13-November-2010 Michael Babker
+^ Modified language installation so that language files install in site language folder
+
 --------------------------------------------------
 Tweet Display Back 1.1.7 - Released 7-November-2010
 --------------------------------------------------
