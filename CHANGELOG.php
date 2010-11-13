@@ -31,6 +31,7 @@ $ - Language fix or change
 
 13-November-2010 Michael Babker
 ^ Modified language installation so that language files install in site language folder
+^ Added margin between bottom tweet and "Follow me" image on right aligned default template
 
 --------------------------------------------------
 Tweet Display Back 1.1.7 - Released 7-November-2010
