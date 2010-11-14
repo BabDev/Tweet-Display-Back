@@ -18,7 +18,14 @@
 .tweetheaderright {
 }
 
-.tweetheaderavatar {
+span.tweetheaderavatarleft {
+	float: left;
+	padding: 3px;
+}
+
+span.tweetheaderavatarright {
+	float: right;
+	padding: 3px;
 }
 
 .tweetheaderbio {
@@ -30,13 +37,19 @@
 .tweetheaderlocation {
 }
 	
-.tweetavatar {
-}
-
-.tweetavatar img {
-}
-
 .tweetmain {
+}
+
+.tweetavatar-left {
+	float: left;
+	height: 32px;
+	padding: 2px;
+}
+
+.tweetavatar-right {
+	float: right;
+	height: 32px;
+	padding: 2px;
 }
 
 .tweet-left {
@@ -54,24 +67,6 @@
 }
 
 .tweet-right .tweettime {
-	font-size: 85%;
-}
-
-.tweet-left-noavatar {
-	word-wrap: break-word;
-	text-align: left;
-}
-
-.tweet-left-noavatar .tweettime {
-	font-size: 85%;
-}
-
-.tweet-right-noavatar {
-	word-wrap: break-word;
-	text-align: right;
-}
-
-.tweet-right-noavatar .tweettime {
 	font-size: 85%;
 }
 

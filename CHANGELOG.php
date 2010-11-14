@@ -29,6 +29,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+14-November-2010 Michael Babker
+^ Restructured element calls in templates (removing some redundent code)
+^ Modified CSS with template updates
+
 13-November-2010 Michael Babker
 ^ Modified language installation so that language files install in site language folder
 ^ Added margin between bottom tweet and "Follow me" image on right aligned default template

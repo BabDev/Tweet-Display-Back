@@ -31,9 +31,9 @@ foreach ($twitter as $o) {
 					<?php echo $o->header->user; ?>
 				</div>
 			<?php if ($params->get("showHeaderAvatar", 0)==1) { ?>
-				<div class="tweetheaderavatar">
+				<span class="tweetheaderavatar<?php echo $headerAlign;?>">
 					<?php echo $o->header->avatar; ?><br/>
-				</div>
+				</span>
 			<?php } ?>
 				<div class="tweetheaderbio">
 					<?php echo $o->header->bio; ?>
@@ -51,11 +51,11 @@ foreach ($twitter as $o) {
 	} ?>
 
 		<div class="tweetmain">
-			<?php if ($params->get("showTweetImage", 1)==1) { ?>
-			<div class="tweetavatar"><?php echo $o->tweet->avatar; ?></div>
 			<div class="tweet-<?php echo $tweetDisplay;?>">
-			<?php } else { ?>
-			<div class="tweet-<?php echo $tweetDisplay;?>-noavatar">
+			<?php if ($params->get("showTweetImage", 1)==1) { ?>
+				<span class="tweetavatar-<?php echo $tweetDisplay;?>">
+				<?php echo $o->tweet->avatar; ?>
+				</span>
 			<?php } ?>
 				<?php echo $o->tweet->user; ?>
 				<?php echo $o->tweet->text; ?><br />

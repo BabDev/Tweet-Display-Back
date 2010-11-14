@@ -23,19 +23,26 @@
 	padding: 4px;
 }
 
+.tweetheaderuser {
+	text-align: center;
+}
+
 .tweetheaderuser a {
 	font-size: 120%;
 	font-weight: bold;
 	margin-bottom: 5px;
 }
 
-.tweetheaderavatar {
-	min-height: 73px;
-	margin-bottom: 4px;
+span.tweetheaderavatarleft {
+	height: 73px;
+	float: left;
+	padding: 3px;
 }
 
-.tweetheaderavatar img {
-	padding: 2px;
+span.tweetheaderavatarright {
+	height: 73px;
+	float: right;
+	padding: 3px;
 }
 
 .tweetheaderbio {

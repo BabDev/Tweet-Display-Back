@@ -56,6 +56,10 @@
 	padding: 4px;
 }
 
+.tweetheaderuser {
+	text-align: center;
+}
+
 .tweetheaderuser a {
 	font-size: 120%;
 	font-weight: bold;

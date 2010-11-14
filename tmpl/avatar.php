@@ -26,25 +26,23 @@ foreach ($twitter as $o) {
 	if ($i == 0) { ?>
 
 	<div class="tweetheadermain">
-		<?php if ($params->get("showHeader", 1)==1) : ?>
+		<?php if ($params->get("showHeader", 1)==1) { ?>
 			<div class="tweetheaderavatar<?php echo $headerAlign;?>">
 				<?php echo $o->header->avatar; ?>
 			</div>
-		<?php else :?>
+			<div class="tweet-header-<?php echo $headerAlign;?>arrow">
+				<img src="<?php echo $imgpath; ?>/arr_<?php echo $headerAlign;?>.png" alt="" />
+			</div>
+			<div class="tweetheader<?php echo $headerAlign;?>">
+				<div class="tweetheaderuser"><?php echo $o->header->user; ?></div>
+				<div class="tweetheaderbio"><?php echo $o->header->bio; ?></div>
+				<div class="tweetheaderlocation"><?php echo $o->header->location; ?></div>
+				<div class="tweetheaderweb"><?php echo $o->header->web; ?></div>
+			</div>
+		<?php }else { ?>
 			<div class="tweetheaderavatar<?php echo $headerAlign;?>nohead">
 				<?php echo $o->header->avatar; ?>
 			</div>
-		<?php endif; ?>
-		<?php if ($params->get("showHeader", 1)==1) { ?>
-		<div class="tweet-header-<?php echo $headerAlign;?>arrow">
-			<img src="<?php echo $imgpath; ?>/arr_<?php echo $headerAlign;?>.png" alt="" />
-		</div>
-		<div class="tweetheader<?php echo $headerAlign;?>">
-			<span class="tweetheaderuser"><?php echo $o->header->user; ?></span>
-			<span class="tweetheaderbio"><?php echo $o->header->bio; ?></span>
-			<span class="tweetheaderlocation"><?php echo $o->header->location; ?></span>
-			<span class="tweetheaderweb"><?php echo $o->header->web; ?></span>
-		</div>
 		<?php } ?>
 	</div>
 
