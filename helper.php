@@ -123,7 +123,7 @@ class tweetDisplayHelper {
 		$headerUser = '';
 		if ($params->get("showHeaderUser", 1)==1) {
 			if ($params->get("showHeaderName", 1)==1) {
-				$headerUser = "<a href=\"http://twitter.com/".$userInfo['user']['name']."\">".$userInfo['user']['name']."</a><br />";
+				$headerUser = "<a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\">".$userInfo['user']['name']."</a><br />";
 			}
 			else {
 				$headerUser = "<a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\">".$userInfo['user']['screen_name']."</a><br />";
