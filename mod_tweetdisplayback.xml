@@ -80,6 +80,17 @@
 						value="1">JYES</option>
 				</field>
 				<field
+					name="showHeaderName"
+					type="radio"
+					default="0"
+					label="MOD_TWEETDISPLAYBACK_HEADER_NAME_LABEL"
+					description="MOD_TWEETDISPLAYBACK_HEADER_NAME_DESCRIPTION" >
+					<option
+						value="0">MOD_TWEETDISPLAYBACK_HEADER_NAME_USER</option>
+					<option
+						value="1">MOD_TWEETDISPLAYBACK_HEADER_NAME_NAME</option>
+				</field>
+				<field
 					name="showHeaderAvatar"
 					type="radio"
 					default="1"

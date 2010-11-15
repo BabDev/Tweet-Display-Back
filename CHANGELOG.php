@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+15-November-2010 Michael Babker
++ Added option to display the user's real name in the header
+
 14-November-2010 Michael Babker
 ^ Restructured element calls in templates (removing some redundent code)
 ^ Modified CSS with template updates
