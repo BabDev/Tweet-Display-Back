@@ -11,6 +11,7 @@
 	<authorEmail>mbabker@flbab.com</authorEmail>
 	<authorUrl>http://www.flbab.com</authorUrl>
 	<version>1.1.7</version>
+    <license>GNU/GPL</license>
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
 	<files>
 		<folder>media</folder>
