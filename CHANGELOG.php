@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+18-November-2010 Michael Babker
+# Corrected "Follow Me" link generation
+
 15-November-2010 Michael Babker
 + Added option to display the user's real name in the header
 
