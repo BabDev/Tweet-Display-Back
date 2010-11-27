@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+27-November-2010 Michael Babker
+^ Changed name in XML
+
 18-November-2010 Michael Babker
 # Corrected "Follow Me" link generation
 
