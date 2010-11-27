@@ -31,6 +31,7 @@ $ - Language fix or change
 
 27-November-2010 Michael Babker
 ^ Changed name in XML
+^ Added imgpath variable to nostyle template
 
 18-November-2010 Michael Babker
 # Corrected "Follow Me" link generation

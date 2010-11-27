@@ -13,6 +13,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+$imgpath 		= JURI::root()."modules/mod_tweetdisplayback/media/images";
 $headerAlign	= $params->get("headerAvatarAlignment");
 $tweetDisplay	= $params->get("tweetDisplayLocation");
 JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/nostyle.css', false, false, false);
