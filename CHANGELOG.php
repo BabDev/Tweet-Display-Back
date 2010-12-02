@@ -30,7 +30,7 @@ $ - Language fix or change
 ! - Note
 
 --------------------------------------------------
-Tweet Display Back 1.1.8 - Released 7-November-2010
+Tweet Display Back 1.1.8 - Released 2-December-2010
 --------------------------------------------------
 27-November-2010 Michael Babker
 ^ Changed name in XML
