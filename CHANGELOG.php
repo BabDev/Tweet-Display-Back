@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.1.8 - Released 7-November-2010
+--------------------------------------------------
 27-November-2010 Michael Babker
 ^ Changed name in XML
 ^ Added imgpath variable to nostyle template
