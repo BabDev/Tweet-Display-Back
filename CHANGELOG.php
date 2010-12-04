@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+4-December-2010 Michael Babker
+# Fixed [#23646] Nostyle template avatar overhang
+
 --------------------------------------------------
 Tweet Display Back 1.1.8 - Released 2-December-2010
 --------------------------------------------------
