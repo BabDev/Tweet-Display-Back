@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+5-December-2010 Michael Babker
+# Fixed [#23645] Template Header Margins
+
 4-December-2010 Michael Babker
 # Fixed [#23646] Nostyle template avatar overhang
 

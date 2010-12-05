@@ -27,7 +27,7 @@ foreach ($twitter as $o) {
 	
 	<?php if ($params->get("showHeader", 1)==1) { ?>
 		<div class="tweetheadermain">
-			<div class="tweetheader<?php echo $headerAlign;?>">
+			<div class="tweetheader">
 				<div class="tweetheaderuser">
 					<?php echo $o->header->user; ?>
 				</div>

@@ -9,17 +9,10 @@
 * Original Copyright (c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
 */
 
-.tweetheaderleft {
+.tweetheader {
 	background: #fff;
 	border: 1px solid #999999;
-	margin: 0px 0px 20px 10px;
-	padding: 4px;
-}
-
-.tweetheaderright {
-	background: #fff;
-	border: 1px solid #999999;
-	margin: 0px 10px 20px 0px;
+	margin: 0px 0px 20px 0px;
 	padding: 4px;
 }
 
