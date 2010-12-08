@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+8-December-2010 Michael Babker
+# Fixed [#23688] Permalinks to tweets broken in some environments
+
 5-December-2010 Michael Babker
 # Fixed [#23645] Template Header Margins
 

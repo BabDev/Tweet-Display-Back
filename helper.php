@@ -200,10 +200,10 @@ class tweetDisplayHelper {
 			// info below is specific to the tweet, so it isn't checked against a retweet
 			if ($params->get("showTweetCreated", 1)==1) {
 				if ($params->get("relativeTime", 1) == 1) {
-					$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id']."\">".self::renderRelativeTime($o['created_at'])."</a>";
+					$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\">".self::renderRelativeTime($o['created_at'])."</a>";
 				}
 				else {
-					$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id']."\">".JHTML::date($o['created_at'])."</a>";
+					$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\">".JHTML::date($o['created_at'])."</a>";
 				}
 			}
 			if (($params->get("showSource", 1) == 1)) {
@@ -212,8 +212,8 @@ class tweetDisplayHelper {
 			if (($params->get("showLocation", 1)==1) && ($o->place->full_name)) {
 				$twitter[$i]->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$o['place']['full_name']."\" target=\"_blank\">".$o['place']['full_name']."</a>";
 			}
-			if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id'])) {
-				$twitter[$i]->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id']."\">".$o['in_reply_to_screen_name']."</a>";
+			if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) {
+				$twitter[$i]->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id_str']."\">".$o['in_reply_to_screen_name']."</a>";
 			}
 			if ($params->get("showLinks", 1) == 1) {
 				$twitter[$i]->tweet->text = preg_replace("/@(\w+)/", "@<a href=\"http://twitter.com/\\1\" target=\"_blank\">\\1</a>", $twitter[$i]->tweet->text);
