@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.0.9 - Released 8-December-2010
+--------------------------------------------------
 8-December-2010 Michael Babker
 # Fixed [#23688] Permalinks to tweets broken in some environments
 
