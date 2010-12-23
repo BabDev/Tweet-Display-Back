@@ -209,7 +209,7 @@ class tweetDisplayHelper {
 			if (($params->get("showSource", 1) == 1)) {
 				$twitter[$i]->tweet->created .= " via ".$o['source'];
 			}
-			if (($params->get("showLocation", 1)==1) && ($o->place->full_name)) {
+			if (($params->get("showLocation", 1)==1) && ($o['place']['full_name'])) {
 				$twitter[$i]->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$o['place']['full_name']."\" target=\"_blank\">".$o['place']['full_name']."</a>";
 			}
 			if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) {

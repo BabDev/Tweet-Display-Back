@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+23-December-2010 Michael Babker
+# Fixed check for location in tweets
+
 --------------------------------------------------
 Tweet Display Back 1.0.9 - Released 8-December-2010
 --------------------------------------------------
