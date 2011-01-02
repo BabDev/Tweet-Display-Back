@@ -12,8 +12,10 @@
 .tweetheader {
 	background: #fff;
 	border: 1px solid #999999;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
 	margin: 0px 0px 20px 0px;
-	padding: 4px;
+	padding: 2px 10px;
 }
 
 .tweetheaderuser {
@@ -29,13 +31,13 @@
 span.tweetheaderavatarleft {
 	height: 73px;
 	float: left;
-	padding: 3px;
+	padding-right: 4px;
 }
 
 span.tweetheaderavatarright {
 	height: 73px;
 	float: right;
-	padding: 3px;
+	padding-left: 4px;
 }
 
 .tweetheaderbio {
@@ -79,7 +81,9 @@ span.tweetheaderavatarright {
 .tweet-left {
 	background: #fff;
 	border: 1px solid #999999;
-	padding: 4px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	padding: 2px 10px;
 	word-wrap: break-word;
 	margin: 0px 0px 20px 44px;
 	text-align: left;
@@ -89,12 +93,15 @@ span.tweetheaderavatarright {
 	font-size: 85%;
 	text-align: right;
 	margin-left: 0px;
+	margin-bottom: 0px;
 }
 
 .tweet-right {
 	background: #fff;
 	border: 1px solid #999999;
-	padding: 4px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	padding: 2px 10px;
 	word-wrap: break-word;
 	margin: 20px 42px 0px 0px;
 	text-align: right;
@@ -104,12 +111,15 @@ span.tweetheaderavatarright {
 	font-size: 85%;
 	text-align: left;
 	margin-left: 0px;
+	margin-bottom: 0px;
 }
 
 .tweet-left-noavatar {
 	background: #fff;
 	border: 1px solid #999999;
-	padding: 4px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	padding: 2px 10px;
 	word-wrap: break-word;
 	margin: 0px 0px 20px 0px;
 	text-align: left;
@@ -119,12 +129,15 @@ span.tweetheaderavatarright {
 	font-size: 85%;
 	text-align: right;
 	margin-left: 0px;
+	margin-bottom: 0px;
 }
 
 .tweet-right-noavatar {
 	background: #fff;
 	border: 1px solid #999999;
-	padding: 4px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	padding: 2px 10px;
 	word-wrap: break-word;
 	margin: 20px 0px 0px 0px;
 	text-align: right;
@@ -134,6 +147,7 @@ span.tweetheaderavatarright {
 	font-size: 85%;
 	text-align: left;
 	margin-left: 0px;
+	margin-bottom: 0px;
 }
 
 .clr {
