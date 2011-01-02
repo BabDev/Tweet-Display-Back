@@ -59,7 +59,7 @@
 				<field
 					name="css3Active"
 					type="radio"
-					default="1"
+					default="0"
 					label="MOD_TWEETDISPLAYBACK_CSS3_LABEL"
 					description="MOD_TWEETDISPLAYBACK_CSS3_DESCRIPTION" >
 					<option
