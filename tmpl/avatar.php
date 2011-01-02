@@ -16,7 +16,13 @@ defined('_JEXEC') or die;
 $imgpath 		= JURI::root()."modules/mod_tweetdisplayback/media/images";
 $headerAlign	= $params->get("headerAvatarAlignment");
 $tweetDisplay	= $params->get("tweetDisplayLocation");
-JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/avatar.css', false, false, false);
+
+// load appropriate CSS depending on CSS3 use
+if ($params->get("css3Active", 1)==1) {
+	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/avatar-css3.css', false, false, false);
+} else {
+	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/avatar.css', false, false, false);
+}
 
 //variables foreach
 $i		= 0;

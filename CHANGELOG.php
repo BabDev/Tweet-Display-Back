@@ -29,6 +29,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+2-January-2011 Michael Babker
++ Added CSS3 option
++ CSS3 support integrated into avatar template
+
 23-December-2010 Michael Babker
 # Fixed check for location in tweets
 

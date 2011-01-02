@@ -141,7 +141,7 @@ class tweetDisplayHelper {
 		if ($params->get("showHeaderWeb", 1)==1) {
 			$headerWeb = "<a href=\"".$userInfo['user']['url']."\">".$userInfo['user']['url']."</a>";
 		}
-		$headerAvatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$userInfo['user']['screen_name']."&size=bigger\" align=\"".$params->get("headerAvatarAlignment")."\" width=\"73px\" alt=\"".$userInfo['user']['screen_name']."\" />";
+		$headerAvatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$userInfo['user']['screen_name']."&size=bigger\" width=\"73px\" alt=\"".$userInfo['user']['screen_name']."\" />";
 		
 		// footer info
 		

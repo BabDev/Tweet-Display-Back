@@ -56,6 +56,17 @@
 					hide_none="1"
 					stripext="1"
 					description="MOD_TWEETDISPLAYBACK_LAYOUT_DESCRIPTION" />
+				<field
+					name="css3Active"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_CSS3_LABEL"
+					description="MOD_TWEETDISPLAYBACK_CSS3_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
 			</fieldset>
 			<fieldset name="display">
 				<field
