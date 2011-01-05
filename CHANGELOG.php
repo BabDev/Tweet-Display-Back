@@ -31,7 +31,7 @@ $ - Language fix or change
 
 2-January-2011 Michael Babker
 + Added CSS3 option
-+ CSS3 support integrated into avatar template
++ CSS3 support integrated into avatar & default templates
 
 23-December-2010 Michael Babker
 # Fixed check for location in tweets
