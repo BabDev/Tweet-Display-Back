@@ -21,7 +21,7 @@ $tweetDisplay	= $params->get("tweetDisplayLocation");
 if ($params->get("css3Active", 1)==1) {
 	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default-css3.css', false, false, false);
 } else {
-	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default', false, false, false);
+	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, false, false);
 }
 
 //variables foreach
