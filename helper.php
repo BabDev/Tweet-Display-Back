@@ -22,7 +22,7 @@ class tweetDisplayHelper {
 	 * @return	array	$obj	The fetched JSON query
 	 * @since	1.0.7
 	 */
-	function getJSON($req) {
+	static function getJSON($req) {
 		// create a new cURL resource
 		$ch = curl_init($req);
 		
@@ -51,7 +51,7 @@ class tweetDisplayHelper {
 	 * @return	string	$hits	The number of remaining hits on a user's rate limit
 	 * @since	1.0.6
 	 */
-	function getLimit($params) {
+	static function getLimit($params) {
 		// load the parameters
 		$uname = $params->get("twitterName","");
 		$req = "http://api.twitter.com/1/account/rate_limit_status.json?screen_name=".$uname."";
@@ -75,7 +75,7 @@ class tweetDisplayHelper {
 	 * @return	object	$twitter	A formatted object with the user's tweets
 	 * @since	1.0.0
 	 */
-	function getTweets($params) {
+	static function getTweets($params) {
 		// check the number of hits available; if 0, proceed no further
 		$hits = self::getLimit($params);
 		if ($hits == 0) {
@@ -109,7 +109,7 @@ class tweetDisplayHelper {
 	 * @return	object	$twitter	The formatted object for display
 	 * @since	1.0.0
 	 */
-	function renderTwitter($obj, $params) {
+	static function renderTwitter($obj, $params) {
 		// initialize
 		$twitter = array();
 
@@ -231,7 +231,7 @@ class tweetDisplayHelper {
 	 * @return	string	$date	A text string of a relative time
 	 * @since	1.0.0
 	 */
-	function renderRelativeTime($date) {
+	static function renderRelativeTime($date) {
 		$diff = time() - strtotime($date);
 		// Less than a minute
 		if ($diff < 60) {

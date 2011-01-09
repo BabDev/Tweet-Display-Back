@@ -29,6 +29,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+9-January-2011 Michael Babker
+# [#24242] Static function calls to non-static functions break module on PHP 5.3 (Thanks to Berend for the report)
+# Strict standards: Only variables should be assigned by reference mod_tweetdisplayback.php
+
 2-January-2011 Michael Babker
 + Added CSS3 option
 + CSS3 support integrated into avatar & default templates
