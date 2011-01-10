@@ -27,7 +27,7 @@
 		<language tag="en-GB">language/en-GB/en-GB.mod_tweetdisplayback.sys.ini</language>
 	</languages>
 	<updateservers>
-		<server type="extension">http://www.flbab.com/updates/TDB.xml</server>
+		<server type="extension" name="Tweet Display Back Updates" priority="2">http://www.flbab.com/updates/TDB.xml</server>
 	</updateservers>
 	<config>
 		<fields name="params">
