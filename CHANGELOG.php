@@ -29,6 +29,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.1.10 - Released 11-January-2011
+--------------------------------------------------
 10-January-2011 Michael Babker
 ^ Added name and priority attributes to server tag for updateserver
 
@@ -44,7 +47,7 @@ $ - Language fix or change
 # Fixed check for location in tweets
 
 --------------------------------------------------
-Tweet Display Back 1.0.9 - Released 8-December-2010
+Tweet Display Back 1.1.9 - Released 8-December-2010
 --------------------------------------------------
 8-December-2010 Michael Babker
 # Fixed [#23688] Permalinks to tweets broken in some environments
