@@ -223,7 +223,7 @@ class tweetDisplayHelper {
 				$twitter[$i]->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id_str']."\">".$o['in_reply_to_screen_name']."</a>";
 			}
 			if (($params->get("showTweetReply", 1) == 1) || ($params->get("showRetweetCount", 1) == 1)) {
-				$twitter[$i]->tweet->created .= "<br />";
+				$twitter[$i]->tweet->created .= " &bull; ";
 			}
 			if ($params->get("showTweetReply", 1) == 1) {
 				$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/?status=@".$o['user']['screen_name']." &in_reply_to_status_id=".$o['id_str']."&in_reply_to=".$o['user']['screen_name']."\" target=\"_blank\">".JText::_('MOD_TWEETDISPLAYBACK_REPLY')."</a>";
@@ -257,40 +257,24 @@ class tweetDisplayHelper {
 			return JText::_('MOD_TWEETDISPLAYBACK_CREATE_LESSTHANAMINUTE');
 		}
 		$diff = round($diff/60);
-		// 60 to 119 seconds
-		if ($diff < 2) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTE');
-		}
-		// 2 to 59 minutes
+		// 1 to 59 minutes
 		if ($diff < 60) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTES');
+			return JText::plural('MOD_TWEETDISPLAYBACK_CREATE_MINUTES', $diff);
 		}
 		$diff = round($diff/60);
-		// 1 hour
-		if ($diff < 2) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOUR');
-		}
-		// 2 to 23 hours
+		// 1 to 23 hours
 		if ($diff < 24) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOURS');
+			return JText::plural('MOD_TWEETDISPLAYBACK_CREATE_HOURS', $diff);
 		}
 		$diff = round($diff/24);
-		// 1 day
-		if ($diff < 2) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAY');
-		}
-		// 2 to 6 days
+		// 1 to 6 days
 		if ($diff < 7) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAYS');
+			return JText::plural('MOD_TWEETDISPLAYBACK_CREATE_DAYS', $diff);
 		}
 		$diff = round($diff/7);
-		// 1 week
-		if ($diff < 2) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEK');
-		}
-		// 2 or 3 weeks
+		// 1 to 3 weeks
 		if ($diff < 4) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEKS');
+			return JText::plural('MOD_TWEETDISPLAYBACK_CREATE_WEEKS', $diff);
 		}
 		return JHTML::date($date);	
 	}

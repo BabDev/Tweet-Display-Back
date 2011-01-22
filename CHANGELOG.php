@@ -32,6 +32,7 @@ $ - Language fix or change
 ^ XML tagged 1.2 Alpha
 + Partial solution for [#24190] Better error reporting
 + Implimented [#24551] Modify tweet footer
++ Implimented [#24552] Refactor tweetDisplayHelper::renderRelativeTime
 
 --------------------------------------------------
 Branched from Tweet Display Back 1.1.10 - 22-January-2011
