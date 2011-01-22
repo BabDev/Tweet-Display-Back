@@ -213,6 +213,28 @@
 						value="1">JYES</option>
 				</field>
 				<field
+					name="showTweetReply"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_TWEET_REPLY_LABEL"
+					description="MOD_TWEETDISPLAYBACK_TWEET_REPLY_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="showRetweetCount"
+					type="radio"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_TWEET_RTCOUNT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_TWEET_RTCOUNT_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
 					name="showSource"
 					type="radio"
 					default="1"

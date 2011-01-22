@@ -222,6 +222,18 @@ class tweetDisplayHelper {
 			if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) {
 				$twitter[$i]->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id_str']."\">".$o['in_reply_to_screen_name']."</a>";
 			}
+			if (($params->get("showTweetReply", 1) == 1) || ($params->get("showRetweetCount", 1) == 1)) {
+				$twitter[$i]->tweet->created .= "<br />";
+			}
+			if ($params->get("showTweetReply", 1) == 1) {
+				$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/?status=@".$o['user']['screen_name']." &in_reply_to_status_id=".$o['id_str']."&in_reply_to=".$o['user']['screen_name']."\" target=\"_blank\">".JText::_('MOD_TWEETDISPLAYBACK_REPLY')."</a>";
+			}
+			if (($params->get("showTweetReply", 1) == 1) && ($params->get("showRetweetCount", 1) == 1)) {
+				$twitter[$i]->tweet->created .= " &bull; ";
+			}
+			if (($params->get("showRetweetCount", 1) == 1) && ($o['retweet_count'] >= 1)) {
+				$twitter[$i]->tweet->created .= JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $o['retweet_count']);
+			}
 			if ($params->get("showLinks", 1) == 1) {
 				$twitter[$i]->tweet->text = preg_replace("/@(\w+)/", "@<a href=\"http://twitter.com/\\1\" target=\"_blank\">\\1</a>", $twitter[$i]->tweet->text);
 				$twitter[$i]->tweet->text = preg_replace("/#(\w+)/", "#<a href=\"http://twitter.com/search?q=\\1\" target=\"_blank\">\\1</a>", $twitter[$i]->tweet->text);

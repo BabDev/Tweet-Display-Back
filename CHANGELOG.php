@@ -31,6 +31,7 @@ $ - Language fix or change
 - Removed avatar template
 ^ XML tagged 1.2 Alpha
 + Partial solution for [#24190] Better error reporting
++ Implimented [#24551] Modify tweet footer
 
 --------------------------------------------------
 Branched from Tweet Display Back 1.1.10 - 22-January-2011
