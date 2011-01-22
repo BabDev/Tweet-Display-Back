@@ -6,8 +6,6 @@
 * @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 * 
-* Module forked from TweetXT for Joomla!
-* Original Copyright (c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
 */
 
 // no direct access
@@ -32,6 +30,7 @@ $ - Language fix or change
 22-January-2011 Michael Babker
 - Removed avatar template
 ^ XML tagged 1.2 Alpha
++ Partial solution for [#24190] Better error reporting
 
 --------------------------------------------------
 Branched from Tweet Display Back 1.1.10 - 22-January-2011

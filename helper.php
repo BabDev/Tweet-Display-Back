@@ -6,8 +6,6 @@
 * @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 * 
-* Module forked from TweetXT for Joomla!
-* Original Copyright (c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
 */
 
 // no direct access
@@ -23,6 +21,13 @@ class tweetDisplayHelper {
 	 * @since	1.0.7
 	 */
 	static function getJSON($req) {
+		// check if cURL is loaded
+		// TODO: Suppress MOD_TWEETDISPLAYBACK_UNABLE_TO_LOAD
+		if (!extension_loaded('curl')) {
+			echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL');
+			return;
+		}
+		
 		// create a new cURL resource
 		$ch = curl_init($req);
 		
@@ -77,9 +82,11 @@ class tweetDisplayHelper {
 	 */
 	static function getTweets($params) {
 		// check the number of hits available; if 0, proceed no further
+		// TODO: Suppress MOD_TWEETDISPLAYBACK_UNABLE_TO_LOAD
 		$hits = self::getLimit($params);
 		if ($hits == 0) {
-			return false;
+			echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
+			return;
 		}
 		
 		// load the parameters
