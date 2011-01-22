@@ -33,6 +33,7 @@ $ - Language fix or change
 + Partial solution for [#24190] Better error reporting
 + Implimented [#24551] Modify tweet footer
 + Implimented [#24552] Refactor tweetDisplayHelper::renderRelativeTime
++ Implimented [#24565] Follow Me/Us Option
 
 --------------------------------------------------
 Branched from Tweet Display Back 1.1.10 - 22-January-2011

@@ -314,6 +314,17 @@
 						value="c">MOD_TWEETDISPLAYBACK_FOLLOW_IMAGE_OPTION_BLACK</option>
 				</field>
 				<field
+					name="followImgMeUs"
+					type="radio"
+					default="follow_me"
+					label="MOD_TWEETDISPLAYBACK_FOLLOW_IMAGE_ME_US_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FOLLOW_IMAGE_ME_US_DESCRIPTION" >
+					<option
+						value="follow_me">MOD_TWEETDISPLAYBACK_FOLLOW_IMAGE_ME_US_OPTION_ME</option>
+					<option
+						value="follow_us">MOD_TWEETDISPLAYBACK_FOLLOW_IMAGE_ME_US_OPTION_US</option>
+				</field>
+				<field
 					name="followText"
 					type="text"
 					default="Follow me on Twitter"

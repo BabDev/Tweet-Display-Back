@@ -157,7 +157,7 @@ class tweetDisplayHelper {
 		$footerFollowMe = '';
 		if ($params->get("showFollowLink", 1)==1) {
 			if ($params->get("followType", 1)==1) {
-				$footerFollowMe = "<div class=\"followImg\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/follow_me-".$params->get('followImg').".png\" alt=\"Follow ".$userInfo['user']['screen_name']." on Twitter\" align=\"center\" /></a></b></div>";
+				$footerFollowMe = "<div class=\"followImg\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('followImgMeUs')."-".$params->get('followImg').".png\" alt=\"Follow ".$userInfo['user']['screen_name']." on Twitter\" align=\"center\" /></a></b></div>";
 			} else {
 				$footerFollowMe = "<hr /><div class=\"followLink\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\">".$params->get('followText', 'Follow me on Twitter')."</a></b></div>";
 			}
