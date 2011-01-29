@@ -4,9 +4,6 @@
 * @version		$Id$
 * @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
-* 
-* Module forked from TweetXT for Joomla!
-* Original Copyright (c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
 */
 
 .tweetheader {
@@ -54,6 +51,8 @@ span.tweetheaderavatarright {
 }
 	
 .tweetavatar {
+	float: left;
+	margin: 8px 0 0 -2px;
 }
 
 .tweetavatar img {
@@ -64,28 +63,16 @@ span.tweetheaderavatarright {
 .tweetmain {
 }
 
-.tweetleftarrow {
-	width: 11px;
-	height: 21px;
-	margin: 10px 0px 0px 2px;
-	float: left;
-}
-
-.tweetrightarrow {
-	width: 11px;
-	height: 21px;
-	margin: 10px 0px 0px 2px;
-	float: right;
-}
-
 .tweet-left {
 	background: #fff;
 	border: 1px solid #999999;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	position: relative;
 	padding: 2px 10px;
 	word-wrap: break-word;
-	margin: 0px 0px 20px 44px;
+	margin: 0px 0px 20px 50px;
 	text-align: left;
 }
 
@@ -94,6 +81,38 @@ span.tweetheaderavatarright {
 	text-align: right;
 	margin-left: 0px;
 	margin-bottom: 0px;
+}
+
+.tweet-left:before {
+	content: "";
+	display: block; /* reduce the damage in FF3.0 */
+	position: absolute;
+	bottom: auto;
+	left: -20px; /* value = - border-left-width - border-right-width */
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top-color: #999999;
+	top: 10px; /* controls vertical position */
+	border-width: 10px 20px 10px 0;
+	border-style: solid;
+	border-color: transparent #999999;
+}
+
+.tweet-left:after {
+	content: "";
+	display: block; /* reduce the damage in FF3.0 */
+	position: absolute;
+	bottom: auto;
+	left: -18px; /* value = - border-left-width - border-right-width */
+	width: 0;
+	height: 0;
+	border: 13px solid transparent;
+	border-top-color: #fff;
+	top: 11px; /* value = (:before top) + (:before border-top) - (:after border-top) */
+	border-width: 9px 18px 9px 0;
+	border-style: solid;
+	border-color: transparent #fff;
 }
 
 .tweet-right {

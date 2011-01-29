@@ -5,9 +5,6 @@
 * @version		$Id$
 * @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
-* 
-* Module forked from TweetXT for Joomla!
-* Original Copyright (c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
 */
 
 // no direct access
@@ -29,7 +26,7 @@ $cache = JCache::getInstance("callback", $options );
 $cache->setCaching($params->get("cache"));
 
 // do cache call
-$twitter = $cache->call(array('tweetDisplayHelper', 'getTweets'), $params);
+$twitter = $cache->call(array('modTweetDisplayBackHelper', 'getTweets'), $params);
 if (!$twitter) {
 	echo JText::_('MOD_TWEETDISPLAYBACK_UNABLE_TO_LOAD');
 	return;

@@ -5,9 +5,6 @@
 * @version		$Id$
 * @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
-* 
-* Module forked from TweetXT for Joomla!
-* Original Copyright (c) 2009 joomlaxt.com, All rights reserved - http://www.joomlaxt.com
 */
 
 // no direct access
@@ -23,9 +20,9 @@ $i		= 0;
 $max	= count($twitter) - 1;
 
 foreach ($twitter as $o) {
-	if ($i == 0) { ?>
+	if ($i == 0) {
 	
-	<?php if ($params->get("showHeader", 0)==1) { ?>
+	if ($params->get("showHeader", 0)==1) { ?>
 		<div class="tweetheadermain">
 			<div class="tweetheader<?php echo $headerAlign;?>">
 				<div class="tweetheaderuser">
@@ -57,17 +54,17 @@ foreach ($twitter as $o) {
 				<span class="tweetavatar-<?php echo $tweetDisplay;?>">
 				<?php echo $o->tweet->avatar; ?>
 				</span>
-			<?php } ?>
-				<?php echo $o->tweet->user; ?>
-				<?php echo $o->tweet->text; ?><br />
+			<?php }
+				echo $o->tweet->user;
+				echo $o->tweet->text; ?><br />
 				<p class="tweettime"><?php echo $o->tweet->created; ?></p>
 			</div>
 		</div>
 	
-	<?php if ($i == $max) { ?>
-		<?php echo $o->footer->follow_me; ?>
-		<?php echo $o->footer->powered_by; ?>
-	<?php } else {
+	<?php if ($i == $max) {
+		echo $o->footer->follow_me;
+		echo $o->footer->powered_by;
+	} else {
 		$i++;
 	}
 } ?>

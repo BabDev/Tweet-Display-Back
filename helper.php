@@ -5,13 +5,12 @@
 * @version		$Id$
 * @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
-* 
 */
 
 // no direct access
 defined('_JEXEC') or die;
 
-class tweetDisplayHelper {
+class modTweetDisplayBackHelper {
 
 	/**
 	 * Function to fetch a JSON feed
@@ -216,7 +215,7 @@ class tweetDisplayHelper {
 			if (($params->get("showSource", 1) == 1)) {
 				$twitter[$i]->tweet->created .= " via ".$o['source'];
 			}
-			if (($params->get("showLocation", 1)==1) && ($o['place']['full_name'])) {
+			if (($params->get("showLocation", 1) == 1) && ($o['place']['full_name'])) {
 				$twitter[$i]->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$o['place']['full_name']."\" target=\"_blank\">".$o['place']['full_name']."</a>";
 			}
 			if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) {
@@ -228,7 +227,7 @@ class tweetDisplayHelper {
 			if ($params->get("showTweetReply", 1) == 1) {
 				$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/?status=@".$o['user']['screen_name']." &in_reply_to_status_id=".$o['id_str']."&in_reply_to=".$o['user']['screen_name']."\" target=\"_blank\">".JText::_('MOD_TWEETDISPLAYBACK_REPLY')."</a>";
 			}
-			if (($params->get("showTweetReply", 1) == 1) && ($params->get("showRetweetCount", 1) == 1)) {
+			if (($params->get("showTweetReply", 1) == 1) && (($params->get("showRetweetCount", 1) == 1) && ($o['retweet_count'] >= 1))) {
 				$twitter[$i]->tweet->created .= " &bull; ";
 			}
 			if (($params->get("showRetweetCount", 1) == 1) && ($o['retweet_count'] >= 1)) {
