@@ -49,8 +49,6 @@ span.tweetheaderavatarright {
 }
 	
 .tweetavatar {
-	float: left;
-	margin: 8px 0 0 -2px;
 }
 
 .tweetavatar img {
@@ -113,9 +111,10 @@ span.tweetheaderavatarright {
 .tweet-right {
 	background: #fff;
 	border: 1px solid #999999;
-	padding: 4px;
+	position: relative;
+	padding: 2px 10px;
 	word-wrap: break-word;
-	margin: 20px 42px 0px 0px;
+	margin: 20px 50px 0px 0px;
 	text-align: right;
 }
 
@@ -125,10 +124,42 @@ span.tweetheaderavatarright {
 	margin-left: 0px;
 }
 
+.tweet-right:before {
+	content: "";
+	display: block; /* reduce the damage in FF3.0 */
+	position: absolute;
+	bottom: auto;
+	right: -20px; /* value = - border-left-width - border-right-width */
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top-color: #999999;
+	top: 10px; /* controls vertical position */
+	border-width: 10px 0 10px 20px;
+	border-style: solid;
+	border-color: transparent #999999;
+}
+
+.tweet-right:after {
+	content: "";
+	display: block; /* reduce the damage in FF3.0 */
+	position: absolute;
+	bottom: auto;
+	right: -18px; /* value = - border-left-width - border-right-width */
+	width: 0;
+	height: 0;
+	border: 13px solid transparent;
+	border-top-color: #fff;
+	top: 11px; /* value = (:before top) + (:before border-top) - (:after border-top) */
+	border-width: 9px 0 9px 18px;
+	border-style: solid;
+	border-color: transparent #fff;
+}
+
 .tweet-left-noavatar {
 	background: #fff;
 	border: 1px solid #999999;
-	padding: 4px;
+	padding: 2px 10px;
 	word-wrap: break-word;
 	margin: 0px 0px 20px 0px;
 	text-align: left;
@@ -143,7 +174,7 @@ span.tweetheaderavatarright {
 .tweet-right-noavatar {
 	background: #fff;
 	border: 1px solid #999999;
-	padding: 4px;
+	padding: 2px 10px;
 	word-wrap: break-word;
 	margin: 20px 0px 0px 0px;
 	text-align: right;
