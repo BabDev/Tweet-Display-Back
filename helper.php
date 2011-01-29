@@ -91,7 +91,7 @@ class modTweetDisplayBackHelper {
 		// load the parameters
 		$uname = $params->get("twitterName","");
 		$count = $params->get("twitterCount",3);
-		$retweet = $params->get("showRetweets",1);
+		$retweet = $params->get("tweetRetweets",1);
 		
 		// determine whether to pull retweets or not
 		if ($retweet == 1) {
@@ -118,6 +118,12 @@ class modTweetDisplayBackHelper {
 	static function renderTwitter($obj, $params) {
 		// initialize
 		$twitter = array();
+		
+		// set variables
+		$tweetName		= $params->get("tweetName", 1);
+		$tweetAlignment	= $params->get("tweetAlignment", 'left');
+		$tweetReply		= $params->get("tweetReply", 1);
+		$tweetRTCount	= $params->get("tweetRetweetCount", 1);
 
 		// check the first object for user info
 		if (isset($obj[0])) {
@@ -127,8 +133,8 @@ class modTweetDisplayBackHelper {
 		}
 		// header info
 		$headerUser = '';
-		if ($params->get("showHeaderUser", 1)==1) {
-			if ($params->get("showHeaderName", 1)==1) {
+		if ($params->get("headerUser", 1)==1) {
+			if ($params->get("headerName", 1)==1) {
 				$headerUser = "<a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\">".$userInfo['user']['name']."</a><br />";
 			}
 			else {
@@ -136,15 +142,15 @@ class modTweetDisplayBackHelper {
 			}
 		}
 		$headerBio = '';
-		if ($params->get("showHeaderBio", 1)==1) {
+		if ($params->get("headerBio", 1)==1) {
 			$headerBio = $userInfo['user']['description']."<br />";
 		}
 		$headerLocation = '';
-		if ($params->get("showHeaderLocation", 1)==1) {
+		if ($params->get("headerLocation", 1)==1) {
 			$headerLocation = $userInfo['user']['location']."<br />";
 		}
 		$headerWeb = '';
-		if ($params->get("showHeaderWeb", 1)==1) {
+		if ($params->get("headerWeb", 1)==1) {
 			$headerWeb = "<a href=\"".$userInfo['user']['url']."\">".$userInfo['user']['url']."</a>";
 		}
 		$headerAvatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$userInfo['user']['screen_name']."&size=bigger\" width=\"73px\" alt=\"".$userInfo['user']['screen_name']."\" />";
@@ -154,22 +160,22 @@ class modTweetDisplayBackHelper {
 		// If a "Follow me" link is displayed, determine whether to display a button or text
 		// followType 1 is image, 0 is text
 		$footerFollowMe = '';
-		if ($params->get("showFollowLink", 1)==1) {
-			if ($params->get("followType", 1)==1) {
-				$footerFollowMe = "<div class=\"followImg\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('followImgMeUs')."-".$params->get('followImg').".png\" alt=\"Follow ".$userInfo['user']['screen_name']." on Twitter\" align=\"center\" /></a></b></div>";
+		if ($params->get("footerFollowLink", 1) == 1) {
+			if ($params->get("footerFollowType", 1) == 1) {
+				$footerFollowMe = "<div class=\"followImg\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$userInfo['user']['screen_name']." on Twitter\" align=\"center\" /></a></b></div>";
 			} else {
-				$footerFollowMe = "<hr /><div class=\"followLink\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\">".$params->get('followText', 'Follow me on Twitter')."</a></b></div>";
+				$footerFollowMe = "<hr /><div class=\"followLink\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
 			}
 		}
-		$footerShowPoweredBy = '';
-		if ($params->get("showPoweredBy", 1)==1) {
+		$footerPoweredBy = '';
+		if ($params->get("footerPoweredBy", 1) == 1) {
 			//Check the type of link to determine the appropriate opening tags
-			if ($params->get("followType", 1)==1) {
-				$footerShowPoweredBy = "<div class=\"poweredByImg\">";
+			if ($params->get("footerFollowType", 1) == 1) {
+				$footerPoweredBy = "<div class=\"poweredByImg\">";
 			} else {
-				$footerShowPoweredBy = "<hr /><div class=\"poweredBy\">";
+				$footerPoweredBy = "<hr /><div class=\"poweredBy\">";
 			}
-			$footerShowPoweredBy .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back/13-info\">Tweet Display Back</a></div>";
+			$footerPoweredBy .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back/13-info\">Tweet Display Back</a></div>";
 		}
 		
 		// tweets
@@ -184,56 +190,56 @@ class modTweetDisplayBackHelper {
 			
 			// Footer Information
 			$twitter[$i]->footer->follow_me = $footerFollowMe;
-			$twitter[$i]->footer->powered_by = $footerShowPoweredBy;
+			$twitter[$i]->footer->powered_by = $footerPoweredBy;
 
 			// check if the item is a retweet, and if so gather data from the retweeted_status datapoint
 			if(isset($o['retweeted_status'])) {
 				// retweeted user
-				if ($params->get("showTweetName", 1)==1) {
+				if ($tweetName == 1) {
 					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/".$o['retweeted_status']['user']['screen_name']."\">".$o['retweeted_status']['user']['screen_name']."</a>:</b> ";
 				}
 				$twitter[$i]->tweet->created = "Retweeted ";
-				$twitter[$i]->tweet->avatar = "<img align=\"".$params->get("tweetDisplayLocation")."\" alt=\"".$o['retweeted_status']['user']['screen_name']."\" src=\"".$o['retweeted_status']['user']['profile_image_url']."\" width=\"32px\"/>";
+				$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['retweeted_status']['user']['screen_name']."\" src=\"".$o['retweeted_status']['user']['profile_image_url']."\" width=\"32px\"/>";
 				$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $o['retweeted_status']['text']);
 			} else {
 				// user
-				if ($params->get("showTweetName", 1)==1) {
+				if ($tweetName == 1) {
 					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/".$o['user']['screen_name']."\">".$o['user']['screen_name']."</a>:</b> ";
 				}
-				$twitter[$i]->tweet->avatar = "<img align=\"".$params->get("tweetDisplayLocation")."\" alt=\"".$o['user']['screen_name']."\" src=\"".$o['user']['profile_image_url']."\" width=\"32px\"/>";
+				$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['user']['screen_name']."\" src=\"".$o['user']['profile_image_url']."\" width=\"32px\"/>";
 				$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $o['text']);
 			}
 			// info below is specific to the tweet, so it isn't checked against a retweet
-			if ($params->get("showTweetCreated", 1)==1) {
-				if ($params->get("relativeTime", 1) == 1) {
+			if ($params->get("tweetCreated", 1)==1) {
+				if ($params->get("tweetRelativeTime", 1) == 1) {
 					$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\">".self::renderRelativeTime($o['created_at'])."</a>";
 				}
 				else {
 					$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\">".JHTML::date($o['created_at'])."</a>";
 				}
 			}
-			if (($params->get("showSource", 1) == 1)) {
+			if (($params->get("tweetSource", 1) == 1)) {
 				$twitter[$i]->tweet->created .= " via ".$o['source'];
 			}
-			if (($params->get("showLocation", 1) == 1) && ($o['place']['full_name'])) {
+			if (($params->get("tweetLocation", 1) == 1) && ($o['place']['full_name'])) {
 				$twitter[$i]->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$o['place']['full_name']."\" target=\"_blank\">".$o['place']['full_name']."</a>";
 			}
 			if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) {
 				$twitter[$i]->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id_str']."\">".$o['in_reply_to_screen_name']."</a>";
 			}
-			if (($params->get("showTweetReply", 1) == 1) || ($params->get("showRetweetCount", 1) == 1)) {
+			if (($tweetReply == 1) || ($tweetRTCount == 1)) {
 				$twitter[$i]->tweet->created .= " &bull; ";
 			}
-			if ($params->get("showTweetReply", 1) == 1) {
+			if ($tweetReply == 1) {
 				$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/?status=@".$o['user']['screen_name']." &in_reply_to_status_id=".$o['id_str']."&in_reply_to=".$o['user']['screen_name']."\" target=\"_blank\">".JText::_('MOD_TWEETDISPLAYBACK_REPLY')."</a>";
 			}
-			if (($params->get("showTweetReply", 1) == 1) && (($params->get("showRetweetCount", 1) == 1) && ($o['retweet_count'] >= 1))) {
+			if (($tweetReply == 1) && (($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
 				$twitter[$i]->tweet->created .= " &bull; ";
 			}
-			if (($params->get("showRetweetCount", 1) == 1) && ($o['retweet_count'] >= 1)) {
+			if (($tweetRTCount == 1) && ($o['retweet_count'] >= 1)) {
 				$twitter[$i]->tweet->created .= JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $o['retweet_count']);
 			}
-			if ($params->get("showLinks", 1) == 1) {
+			if ($params->get("tweetLinks", 1) == 1) {
 				$twitter[$i]->tweet->text = preg_replace("/@(\w+)/", "@<a href=\"http://twitter.com/\\1\" target=\"_blank\">\\1</a>", $twitter[$i]->tweet->text);
 				$twitter[$i]->tweet->text = preg_replace("/#(\w+)/", "#<a href=\"http://twitter.com/search?q=\\1\" target=\"_blank\">\\1</a>", $twitter[$i]->tweet->text);
 			}

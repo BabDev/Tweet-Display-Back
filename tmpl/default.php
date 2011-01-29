@@ -12,10 +12,10 @@ defined('_JEXEC') or die;
 
 $imgpath 		= JURI::root()."modules/mod_tweetdisplayback/media/images";
 $headerAlign	= $params->get("headerAvatarAlignment");
-$tweetDisplay	= $params->get("tweetDisplayLocation");
+$tweetAlign		= $params->get("tweetAlignment");
 
 // load appropriate CSS depending on CSS3 use
-if ($params->get("css3Active", 1)==1) {
+if ($params->get("templateCSS3", 1)==1) {
 	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default-css3.css', false, false, false);
 } else {
 	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, false, false);
@@ -28,7 +28,7 @@ $max	= count($twitter) - 1;
 foreach ($twitter as $o) {
 	if ($i == 0) { 
 	
-		if ($params->get("showHeader", 1)==1) { ?>
+		if ($params->get("headerDisplay", 1)==1) { ?>
 		<div class="tweetheadermain">
 			<div class="tweetheader">
 				<div class="tweetheaderuser">
@@ -55,11 +55,11 @@ foreach ($twitter as $o) {
     } ?>
 
     	<div class="tweetmain">
-			<?php if ($params->get("showTweetImage", 1)==1) { ?>
+			<?php if ($params->get("tweetAvatar", 1)==1) { ?>
 			<div class="tweetavatar"><?php echo $o->tweet->avatar; ?></div>
-			<div class="tweet-<?php echo $tweetDisplay;?>">
+			<div class="tweet-<?php echo $tweetAlign;?>">
 			<?php } else { ?>
-			<div class="tweet-<?php echo $tweetDisplay;?>-noavatar">
+			<div class="tweet-<?php echo $tweetAlign;?>-noavatar">
 			<?php } ?>
 				<?php echo $o->tweet->user;
 				echo $o->tweet->text; ?>

@@ -19,17 +19,17 @@ $conf = JFactory::getConfig();
 $options = array(
 	'defaultgroup' => 'mod_tweetdisplayback',
 	'cachebase' => $conf->get('config.cache_path'),
-	'lifetime' => $params->get('cachetime') * 60, // minutes to seconds
+	'lifetime' => $params->get('advancedCachetime') * 60, // minutes to seconds
 	'language' => $conf->get('config.language'),
 	'storage' => 'file' );
 $cache = JCache::getInstance("callback", $options );
-$cache->setCaching($params->get("cache"));
+$cache->setCaching($params->get("advancedCache"));
 
 // do cache call
 $twitter = $cache->call(array('modTweetDisplayBackHelper', 'getTweets'), $params);
 if (!$twitter) {
-	echo JText::_('MOD_TWEETDISPLAYBACK_UNABLE_TO_LOAD');
+	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
 	return;
 }
-$layout = $params->get("layout", "default");
+$layout = $params->get("templateLayout", "default");
 require(JModuleHelper::getLayoutPath('mod_tweetdisplayback', $layout));
