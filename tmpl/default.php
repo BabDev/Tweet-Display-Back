@@ -35,7 +35,7 @@ foreach ($twitter as $o) {
 					<?php echo $o->header->user; ?>
 				</div>
 			
-			<?php if ($params->get("showHeaderAvatar", 1)==1) { ?>
+			<?php if ($params->get("headerAvatar", 1)==1) { ?>
 				<span class="tweetheaderavatar<?php echo $headerAlign;?>">
 				<?php echo $o->header->avatar; ?>
 				</span>

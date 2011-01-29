@@ -5,12 +5,12 @@
 	client="site"
 	method="upgrade">
 	<name>mod_tweetdisplayback</name>
-	<creationDate>28 August 2010</creationDate>
+	<creationDate>January 2011</creationDate>
 	<author>Michael Babker</author>
 	<copyright>(C) 2010-2011 Michael Babker</copyright>
 	<authorEmail>mbabker@flbab.com</authorEmail>
 	<authorUrl>http://www.flbab.com</authorUrl>
-	<version>1.2 Alpha</version>
+	<version>1.2 Beta</version>
 	<license>GNU/GPL</license>
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
 	<files>
@@ -26,9 +26,9 @@
 		<language tag="en-GB">language/en-GB/en-GB.mod_tweetdisplayback.ini</language>
 		<language tag="en-GB">language/en-GB/en-GB.mod_tweetdisplayback.sys.ini</language>
 	</languages>
-	<updateservers>
+	<!-- Update server disabled in beta <updateservers>
 		<server type="extension" name="Tweet Display Back Updates" priority="2">http://www.flbab.com/updates/TDB.xml</server>
-	</updateservers>
+	</updateservers> -->
 	<config>
 		<fields name="params">
 			<fieldset name="twitter">
@@ -194,6 +194,13 @@
 					<option
 						value="1">JYES</option>
 				</field>
+				<field
+					name="tweetUserSeparator"
+					type="text"
+					length="5"
+					default=""
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USERSEPARATOR_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USERSEPARATOR_DESCRIPTION" />
 				<field
 					name="tweetCreated"
 					type="radio"

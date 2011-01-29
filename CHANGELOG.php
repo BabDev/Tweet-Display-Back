@@ -26,15 +26,18 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.2 Beta - Released 29-January-2011
+--------------------------------------------------
 29-January-2011 Michael Babker
 ^ Partial solution for [#24089} - Refactored CSS for speech bubble on left-aligned default
 ^ Partial solution for [#24089} - Refactored CSS for speech bubble on right-aligned default
 ^ [#24091] Reorganize Parameters
 ^ Renamed most parameters to match reorganization
++ Add a username separator parameter
 
 22-January-2011 Michael Babker
 - Removed avatar template
-^ XML tagged 1.2 Alpha
 + Partial solution for [#24190] Better error reporting
 + Implimented [#24551] Modify tweet footer
 + Implimented [#24552] Refactor tweetDisplayHelper::renderRelativeTime
