@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+2-February-2011 Michael Babker
++ Added a class for user and hash tag links (Thanks Babs for the idea)
+
 --------------------------------------------------
 Tweet Display Back 1.2 Beta - Released 29-January-2011
 --------------------------------------------------
