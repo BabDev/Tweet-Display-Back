@@ -83,6 +83,11 @@
 						value="1">JYES</option>
 				</field>
 				<field
+					name="headerclasssfx"
+					type="text"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_HEADERCLASSSFX_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_HEADERCLASSSFX_DESCRIPTION" />
+				<field
 					name="headerUser"
 					type="radio"
 					default="1"
@@ -161,6 +166,11 @@
 				</field>
 			</fieldset>
 			<fieldset name="tweet">
+				<field
+					name="tweetclasssfx"
+					type="text"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_TWEETCLASSSFX_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_TWEETCLASSSFX_DESCRIPTION" />
 				<field
 					name="tweetAvatar"
 					type="radio"

@@ -13,6 +13,9 @@ defined('_JEXEC') or die;
 $imgpath 		= JURI::root()."modules/mod_tweetdisplayback/media/images";
 $headerAlign	= $params->get("headerAvatarAlignment");
 $tweetAlign		= $params->get("tweetAlignment");
+$headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
+$tweetClassSfx = htmlspecialchars($params->get('tweetclasssfx'));
+
 
 // load appropriate CSS depending on CSS3 use
 if ($params->get("templateCSS3", 1)==1) {
@@ -29,7 +32,7 @@ foreach ($twitter as $o) {
 	if ($i == 0) { 
 	
 		if ($params->get("headerDisplay", 1)==1) { ?>
-		<div class="tweetheadermain">
+		<div class="tweetheadermain<?php echo $headerClassSfx; ?>">
 			<div class="tweetheader">
 				<div class="tweetheaderuser">
 					<?php echo $o->header->user; ?>
@@ -54,7 +57,7 @@ foreach ($twitter as $o) {
     	<?php }
     } ?>
 
-    	<div class="tweetmain">
+    	<div class="tweetmain<?php echo $tweetClassSfx; ?>">
 			<?php if ($params->get("tweetAvatar", 1)==1) { ?>
 			<div class="tweetavatar"><?php echo $o->tweet->avatar; ?></div>
 			<div class="tweet-<?php echo $tweetAlign;?>">
