@@ -208,7 +208,7 @@
 					name="tweetUserSeparator"
 					type="text"
 					length="5"
-					default=""
+					default=": "
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USERSEPARATOR_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USERSEPARATOR_DESCRIPTION" />
 				<field

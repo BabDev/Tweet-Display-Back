@@ -26,6 +26,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+8-February-2011 Michael Babker
+^ [#24555] Standardize CSS calls
+^ Actually implement separator character parameter
+
 4-February-2011 Michael Babker
 + [#24090] Include "Module Class Suffix" option
 

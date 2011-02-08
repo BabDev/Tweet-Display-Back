@@ -6,81 +6,68 @@
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
 
-.tweetheadermain {
+.TDB-header {
 }
 
-.tweetheaderleft {
-}
-
-.tweetheaderright {
-}
-
-span.tweetheaderavatarleft {
+span.TDB-header-avatar-left {
 	float: left;
 	padding: 3px;
 }
 
-span.tweetheaderavatarright {
+span.TDB-header-avatar-right {
 	float: right;
 	margin: 2px;
 	padding: 3px;
 }
 
-.tweetheaderbio {
+.TDB-header-bio {
 }
 	
-.tweetheaderweb {
+.TDB-header-location {
 }
 
-.tweetheaderlocation {
-}
-	
-.tweetmain {
+.TDB-header-web {
 }
 
-.tweetavatar-left {
-	float: left;
+.TDB-tweet {
+}
+
+.TDB-tweet-avatar {
 	height: 32px;
 	padding: 2px;
 }
 
-.tweetavatar-right {
-	float: right;
-	height: 32px;
-	padding: 2px;
-}
-
-.tweet-left {
+.TDB-tweet-left, .TDB-tweet-left-noavatar {
 	word-wrap: break-word;
 	text-align: left;
 }
 
-.tweet-left .tweettime {
+.TDB-tweet-left .TDB-tweet-time {
 	font-size: 85%;
 }
 
-.tweet-right {
+.TDB-tweet-right, .TDB-tweet-right-noavatar {
 	word-wrap: break-word;
 	text-align: right;
 }
 
-.tweet-right .tweettime {
+.TDB-tweet-right .TDB-tweet-time {
 	font-size: 85%;
 }
 
-.followImg {
+.TDB-footer-follow-img {
 	text-align: center;
 }
 
-.followLink {
+.TDB-footer-follow-link {
 	text-align: right;
 }
 
-.poweredByImg {
+.TDB-footer-powered-img {
 	font-size: 85%;
 	text-align: center;
 }
 
-.poweredBy {
+.TDB-footer-powered-text {
 	font-size: 85%;
 }

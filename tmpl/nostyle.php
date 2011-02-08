@@ -26,41 +26,41 @@ foreach ($twitter as $o) {
 	if ($i == 0) {
 	
 	if ($params->get("headerDisplay", 0)==1) { ?>
-		<div class="tweetheadermain<?php echo $headerClassSfx; ?>">
-			<div class="tweetheader<?php echo $headerAlign;?>">
-				<div class="tweetheaderuser">
-					<?php echo $o->header->user; ?>
-				</div>
-			<?php if ($params->get("headerAvatar", 0)==1) { ?>
-				<span class="tweetheaderavatar<?php echo $headerAlign;?>">
-					<?php echo $o->header->avatar; ?><br/>
-				</span>
-			<?php } ?>
-				<div class="tweetheaderbio">
-					<?php echo $o->header->bio; ?>
-				</div>
-				<div class="tweetheaderlocation">
-					<?php echo $o->header->location; ?>
-				</div>
-				<div class="tweetheaderweb">
-					<?php echo $o->header->web; ?>
-				</div>
-			<hr/>
+		<div class="TDB-header<?php echo $headerClassSfx; ?>">
+			<div class="TDB-header-user">
+				<?php echo $o->header->user; ?>
 			</div>
+		<?php if ($params->get("headerAvatar", 0)==1) { ?>
+			<span class="TDB-header-avatar-<?php echo $headerAlign;?>">
+				<?php echo $o->header->avatar; ?><br />
+			</span>
+		<?php } ?>
+			<div class="TDB-header-bio">
+				<?php echo $o->header->bio; ?><br />
+			</div>
+			<div class="TDB-header-location">
+				<?php echo $o->header->location; ?><br />
+			</div>
+			<div class="TDB-header-web">
+				<?php echo $o->header->web; ?>
+			</div>
+		<hr/>
 		</div>
 	<?php }
 	} ?>
 
-		<div class="tweetmain<?php echo $tweetClassSfx; ?>">
-			<div class="tweet-<?php echo $tweetAlign;?>">
+		<div class="TDB-tweet<?php echo $tweetClassSfx; ?>">
 			<?php if ($params->get("tweetAvatar", 1)==1) { ?>
-				<span class="tweetavatar-<?php echo $tweetAlign;?>">
+			<div class="TDB-tweet-<?php echo $tweetAlign;?>">
+				<span class="TDB-tweet-avatar">
 				<?php echo $o->tweet->avatar; ?>
 				</span>
+			<?php } else { ?>
+			<div class="TDB-tweet-<?php echo $tweetAlign;?>-noavatar">
 			<?php }
 				echo $o->tweet->user;
 				echo $o->tweet->text; ?><br />
-				<p class="tweettime"><?php echo $o->tweet->created; ?></p>
+				<p class="TDB-tweet-time"><?php echo $o->tweet->created; ?></p>
 			</div>
 		</div>
 	

@@ -6,7 +6,7 @@
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
 
-.tweetheader {
+.TDB-header {
 	background: #fff;
 	border: 1px solid #999999;
 	border-radius: 10px;
@@ -15,53 +15,53 @@
 	padding: 2px 10px;
 }
 
-.tweetheaderuser {
+.TDB-header-user {
 	text-align: center;
 }
 
-.tweetheaderuser a {
+.TDB-header-user a {
 	font-size: 120%;
 	font-weight: bold;
 	margin-bottom: 5px;
 }
 
-span.tweetheaderavatarleft {
+span.TDB-header-avatar-left {
 	height: 73px;
 	float: left;
 	padding-right: 4px;
 }
 
-span.tweetheaderavatarright {
+span.TDB-header-avatar-right {
 	height: 73px;
 	float: right;
 	padding-left: 4px;
 }
 
-.tweetheaderbio {
+.TDB-header-bio {
 	text-align: left;
 }
 	
-.tweetheaderweb {
+.TDB-header-location {
+	text-align: left;
+}
+	
+.TDB-header-web {
 	padding-top: 5px;
 	font-size: 90%;
 }
 
-.tweetheaderlocation {
-	text-align: left;
-}
-	
-.tweetavatar {
+.TDB-tweet {
 }
 
-.tweetavatar img {
+.TDB-tweet-avatar {
+}
+
+.TDB-tweet-avatar img {
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
 }
 
-.tweetmain {
-}
-
-.tweet-left {
+.TDB-tweet-left {
 	background: #fff;
 	border: 1px solid #999999;
 	border-radius: 10px;
@@ -74,14 +74,14 @@ span.tweetheaderavatarright {
 	text-align: left;
 }
 
-.tweet-left .tweettime {
+.TDB-tweet-left .TDB-tweet-time {
 	font-size: 85%;
 	text-align: right;
 	margin-left: 0px;
 	margin-bottom: 0px;
 }
 
-.tweet-left:before {
+.TDB-tweet-left:before {
 	content: "";
 	display: block; /* reduce the damage in FF3.0 */
 	position: absolute;
@@ -97,7 +97,7 @@ span.tweetheaderavatarright {
 	border-color: transparent #999999;
 }
 
-.tweet-left:after {
+.TDB-tweet-left:after {
 	content: "";
 	display: block; /* reduce the damage in FF3.0 */
 	position: absolute;
@@ -113,7 +113,7 @@ span.tweetheaderavatarright {
 	border-color: transparent #fff;
 }
 
-.tweet-right {
+.TDB-tweet-right {
 	background: #fff;
 	border: 1px solid #999999;
 	border-radius: 10px;
@@ -126,13 +126,13 @@ span.tweetheaderavatarright {
 	text-align: right;
 }
 
-.tweet-right .tweettime {
+.TDB-tweet-right .TDB-tweet-time {
 	font-size: 85%;
 	text-align: left;
 	margin-left: 0px;
 }
 
-.tweet-right:before {
+.TDB-tweet-right:before {
 	content: "";
 	display: block; /* reduce the damage in FF3.0 */
 	position: absolute;
@@ -148,7 +148,7 @@ span.tweetheaderavatarright {
 	border-color: transparent #999999;
 }
 
-.tweet-right:after {
+.TDB-tweet-right:after {
 	content: "";
 	display: block; /* reduce the damage in FF3.0 */
 	position: absolute;
@@ -164,7 +164,7 @@ span.tweetheaderavatarright {
 	border-color: transparent #fff;
 }
 
-.tweet-left-noavatar {
+.TDB-tweet-left-noavatar {
 	background: #fff;
 	border: 1px solid #999999;
 	border-radius: 10px;
@@ -175,14 +175,14 @@ span.tweetheaderavatarright {
 	text-align: left;
 }
 
-.tweet-left-noavatar .tweettime {
+.TDB-tweet-left-noavatar .tweettime {
 	font-size: 85%;
 	text-align: right;
 	margin-left: 0px;
 	margin-bottom: 0px;
 }
 
-.tweet-right-noavatar {
+.TDB-tweet-right-noavatar {
 	background: #fff;
 	border: 1px solid #999999;
 	border-radius: 10px;
@@ -193,31 +193,37 @@ span.tweetheaderavatarright {
 	text-align: right;
 }
 
-.tweet-right-noavatar .tweettime {
+.TDB-tweet-right-noavatar .tweettime {
 	font-size: 85%;
 	text-align: left;
 	margin-left: 0px;
 	margin-bottom: 0px;
 }
 
+.userlink {
+}
+	
+.hashlink {
+}
+
 .clr {
 	clear: both;
 }
 
-.followImg {
+.TDB-footer-follow-img {
 	text-align: center;
 	margin-top: 20px;
 }
 
-.followLink {
+.TDB-footer-follow-link {
 	text-align: right;
 }
 
-.poweredByImg {
+.TDB-footer-powered-img {
 	font-size: 85%;
 	text-align: center;
 }
 
-.poweredBy {
+.TDB-footer-powered-text {
 	font-size: 85%;
 }

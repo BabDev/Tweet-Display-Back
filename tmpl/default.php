@@ -32,41 +32,39 @@ foreach ($twitter as $o) {
 	if ($i == 0) { 
 	
 		if ($params->get("headerDisplay", 1)==1) { ?>
-		<div class="tweetheadermain<?php echo $headerClassSfx; ?>">
-			<div class="tweetheader">
-				<div class="tweetheaderuser">
-					<?php echo $o->header->user; ?>
-				</div>
+		<div class="TDB-header<?php echo $headerClassSfx; ?>">
+			<div class="TDB-header-user">
+				<?php echo $o->header->user; ?>
+			</div>
 			
 			<?php if ($params->get("headerAvatar", 1)==1) { ?>
-				<span class="tweetheaderavatar<?php echo $headerAlign;?>">
+			<span class="TDB-header-avatar-<?php echo $headerAlign;?>">
 				<?php echo $o->header->avatar; ?>
-				</span>
+			</span>
 			<?php } ?>
-				<div class="tweetheaderbio">
-					<?php echo $o->header->bio; ?>
-				</div>
-				<div class="tweetheaderlocation">
-					<?php echo $o->header->location; ?>
-				</div>
-				<div class="tweetheaderweb">
-					<?php echo $o->header->web; ?>
-				</div>
+			<div class="TDB-header-bio">
+				<?php echo $o->header->bio; ?>
+			</div>
+			<div class="TDB-header-location">
+				<?php echo $o->header->location; ?>
+			</div>
+			<div class="TDB-header-web">
+				<?php echo $o->header->web; ?>
 			</div>
 		</div>
     	<?php }
     } ?>
 
-    	<div class="tweetmain<?php echo $tweetClassSfx; ?>">
+    	<div class="TDB-tweet<?php echo $tweetClassSfx; ?>">
 			<?php if ($params->get("tweetAvatar", 1)==1) { ?>
-			<div class="tweetavatar"><?php echo $o->tweet->avatar; ?></div>
-			<div class="tweet-<?php echo $tweetAlign;?>">
+			<div class="TDB-tweet-avatar"><?php echo $o->tweet->avatar; ?></div>
+			<div class="TDB-tweet-<?php echo $tweetAlign;?>">
 			<?php } else { ?>
-			<div class="tweet-<?php echo $tweetAlign;?>-noavatar">
+			<div class="TDB-tweet-<?php echo $tweetAlign;?>-noavatar">
 			<?php } ?>
 				<?php echo $o->tweet->user;
 				echo $o->tweet->text; ?>
-				<p class="tweettime"><?php echo $o->tweet->created; ?></p>
+				<p class="TDB-tweet-time"><?php echo $o->tweet->created; ?></p>
 			</div>
 		</div>
 		<div class="clr"></div>

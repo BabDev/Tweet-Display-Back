@@ -162,18 +162,18 @@ class modTweetDisplayBackHelper {
 		$footerFollowMe = '';
 		if ($params->get("footerFollowLink", 1) == 1) {
 			if ($params->get("footerFollowType", 1) == 1) {
-				$footerFollowMe = "<div class=\"followImg\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$userInfo['user']['screen_name']." on Twitter\" align=\"center\" /></a></b></div>";
+				$footerFollowMe = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$userInfo['user']['screen_name']." on Twitter\" align=\"center\" /></a></b></div>";
 			} else {
-				$footerFollowMe = "<hr /><div class=\"followLink\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
+				$footerFollowMe = "<hr /><div class=\"TDB-footer-follow-link\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
 			}
 		}
 		$footerPoweredBy = '';
 		if ($params->get("footerPoweredBy", 1) == 1) {
 			//Check the type of link to determine the appropriate opening tags
 			if ($params->get("footerFollowType", 1) == 1) {
-				$footerPoweredBy = "<div class=\"poweredByImg\">";
+				$footerPoweredBy = "<div class=\"TDB-footer-powered-img\">";
 			} else {
-				$footerPoweredBy = "<hr /><div class=\"poweredBy\">";
+				$footerPoweredBy = "<hr /><div class=\"TDB-footer-powered-text\">";
 			}
 			$footerPoweredBy .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back/13-info\">Tweet Display Back</a></div>";
 		}
@@ -196,7 +196,7 @@ class modTweetDisplayBackHelper {
 			if(isset($o['retweeted_status'])) {
 				// retweeted user
 				if ($tweetName == 1) {
-					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/".$o['retweeted_status']['user']['screen_name']."\">".$o['retweeted_status']['user']['screen_name']."</a>:</b> ";
+					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/".$o['retweeted_status']['user']['screen_name']."\">".$o['retweeted_status']['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
 				}
 				$twitter[$i]->tweet->created = "Retweeted ";
 				$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['retweeted_status']['user']['screen_name']."\" src=\"".$o['retweeted_status']['user']['profile_image_url']."\" width=\"32px\"/>";
@@ -204,7 +204,7 @@ class modTweetDisplayBackHelper {
 			} else {
 				// user
 				if ($tweetName == 1) {
-					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/".$o['user']['screen_name']."\">".$o['user']['screen_name']."</a>:</b> ";
+					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/".$o['user']['screen_name']."\">".$o['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
 				}
 				$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['user']['screen_name']."\" src=\"".$o['user']['profile_image_url']."\" width=\"32px\"/>";
 				$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $o['text']);
