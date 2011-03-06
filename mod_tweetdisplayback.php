@@ -19,32 +19,19 @@ if (!extension_loaded('curl')) {
 // Include the helper
 require_once dirname(__FILE__).DS.'helper.php';
 
-// Set the cache parameters
-//TODO: Test this method with a live connection
-$cacheparams = new stdClass;
-$cacheparams->cachemode = 'static';
-$cacheparams->class = 'modTweetDisplayBackHelper';
-$cacheparams->method = 'getTweets';
-$cacheparams->methodparams = $params;
-
-$twitter = JModuleHelper::moduleCache($module, $params, $cacheparams);
-
-if (empty($twitter)) {
-	// Check the number of hits available if the cache is disabled or expired;
-	// If there are 0 hits remaining, then proceed no further
-	if (($params->get('cache')) == 0) {
-		$hits = modTweetDisplayBackHelper::getLimit($params);
-		if ($hits == 0) {
-			echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
-			return;
-		}
+// Check the number of hits available if the cache is disabled or expired;
+// If there are 0 hits remaining, then proceed no further
+//TODO: Check if the cache is expired
+if (($params->get('cache')) == 0) {
+	$hits = modTweetDisplayBackHelper::getLimit($params);
+	if ($hits == 0) {
+		echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
+		return;
 	}
-	require(JModuleHelper::getLayoutPath('mod_tweetdisplayback', $params->get('templateLayout', 'default')));
+	print_r($hits);
 }
 
-/** TDB 1.1 Cache calling and module loading procedure, delete if refactored code works as expected
-
-Initialize the cache
+//Initialize the cache
 jimport('joomla.cache.cache');
 $conf = JFactory::getConfig();
 $options = array(
@@ -65,4 +52,3 @@ if (!$twitter) {
 
 $layout = $params->get("templateLayout", "default");
 require(JModuleHelper::getLayoutPath('mod_tweetdisplayback', $layout));
-*/
