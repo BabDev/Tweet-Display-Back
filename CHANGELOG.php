@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+6-March-2011 Michael Babker
+^ Moved the getLimit check to (logically) be executed only when the cache is disabled or expired
+
 11-February-2011 Michael Babker
 ^ Moved the check to determine if CURL is enabled to be the first code executed by the module
 ^ Moved the getLimits check to the module controller

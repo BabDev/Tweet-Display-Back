@@ -19,17 +19,6 @@ if (!extension_loaded('curl')) {
 // Include the helper
 require_once dirname(__FILE__).DS.'helper.php';
 
-// Check the number of hits available if the cache is disabled;
-// If there are 0 hits remaining, then proceed no further
-//TODO: Also run if the cache is expired, end state is getTweets does NOT need to do this
-if (($params->get('cache')) == 0) {
-	$hits = modTweetDisplayBackHelper::getLimit($params);
-	if ($hits == 0) {
-		echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
-		return;
-	}
-}
-
 // Set the cache parameters
 //TODO: Test this method with a live connection
 $cacheparams = new stdClass;
@@ -41,6 +30,15 @@ $cacheparams->methodparams = $params;
 $twitter = JModuleHelper::moduleCache($module, $params, $cacheparams);
 
 if (empty($twitter)) {
+	// Check the number of hits available if the cache is disabled or expired;
+	// If there are 0 hits remaining, then proceed no further
+	if (($params->get('cache')) == 0) {
+		$hits = modTweetDisplayBackHelper::getLimit($params);
+		if ($hits == 0) {
+			echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
+			return;
+		}
+	}
 	require(JModuleHelper::getLayoutPath('mod_tweetdisplayback', $params->get('templateLayout', 'default')));
 }
 
