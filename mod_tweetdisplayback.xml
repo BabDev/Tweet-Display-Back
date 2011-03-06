@@ -10,7 +10,7 @@
 	<copyright>(C) 2010-2011 Michael Babker</copyright>
 	<authorEmail>mbabker@flbab.com</authorEmail>
 	<authorUrl>http://www.flbab.com</authorUrl>
-	<version>1.2 Beta</version>
+	<version>1.6 Beta</version>
 	<license>GNU/GPL</license>
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
 	<files>
@@ -367,22 +367,29 @@
 			</fieldset>
 			<fieldset name="advanced">
 				<field
-					name="advancedCache"
-					type="radio"
+					name="owncache"
+					type="list"
 					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_CACHE_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_CACHE_DESCRIPTION">
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC" >
 					<option
-						value="0">JNO</option>
+						value="1">JGLOBAL_USE_GLOBAL</option>
 					<option
-						value="1">JYES</option>
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 				</field>
 				<field
-					name="advancedCachetime"
+					name="cache_time"
 					type="text"
 					default="15"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_CACHE_TIME_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_CACHE_TIME_DESCRIPTION" />
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+				<field
+					name="cachemode"
+					type="hidden"
+					default="static">
+					<option
+						value="static"></option>
+				</field>
 			</fieldset>
 		</fields>
 	</config>

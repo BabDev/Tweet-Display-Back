@@ -7,7 +7,7 @@
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die;
 
 class modTweetDisplayBackHelper {
@@ -20,27 +20,20 @@ class modTweetDisplayBackHelper {
 	 * @since	1.0.7
 	 */
 	static function getJSON($req) {
-		// check if cURL is loaded
-		// TODO: Suppress MOD_TWEETDISPLAYBACK_UNABLE_TO_LOAD
-		if (!extension_loaded('curl')) {
-			echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL');
-			return;
-		}
-		
-		// create a new cURL resource
+		// Create a new CURL resource
 		$ch = curl_init($req);
 		
-		// set cURL options
+		// Set options
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		
-		// grab URL and pass it to the browser and store it as $json
+		// Grab URL and pass it to the browser and store it as $json
 		$json = curl_exec($ch);
 		
-		// close cURL resource
+		// Close CURL resource
 		curl_close($ch);
 		
-		// decode the fetched JSON
+		// Decode the fetched JSON
 		$obj = json_decode($json, true);
 		
 		if (isset($obj['error'])) return false;
@@ -56,14 +49,14 @@ class modTweetDisplayBackHelper {
 	 * @since	1.0.6
 	 */
 	static function getLimit($params) {
-		// load the parameters
+		// Load the parameters
 		$uname = $params->get("twitterName","");
 		$req = "http://api.twitter.com/1/account/rate_limit_status.json?screen_name=".$uname."";
 		
-		// fetch the decoded JSON
+		// Fetch the decoded JSON
 		$obj = self::getJSON($req);
 				
-		// get the remaining hits count
+		// Get the remaining hits count
 		if (isset ($obj['remaining_hits'])) { 
 		 	$hits = $obj['remaining_hits'];
 		} else {
@@ -80,29 +73,22 @@ class modTweetDisplayBackHelper {
 	 * @since	1.0.0
 	 */
 	static function getTweets($params) {
-		// check the number of hits available; if 0, proceed no further
-		// TODO: Suppress MOD_TWEETDISPLAYBACK_UNABLE_TO_LOAD
-		$hits = self::getLimit($params);
-		if ($hits == 0) {
-			echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
-			return;
-		}
-		
-		// load the parameters
+		// Load the parameters
 		$uname = $params->get("twitterName","");
 		$count = $params->get("twitterCount",3);
 		$retweet = $params->get("tweetRetweets",1);
 		
-		// determine whether to pull retweets or not
+		// Determine whether to pull retweets or not
 		if ($retweet == 1) {
 			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&include_rts=1&screen_name=".$uname."";
 		} else {
 			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname."";
 		}
 		
-		// fetch the decoded JSON
+		// Fetch the decoded JSON
 		$obj = self::getJSON($req);
 		
+		// Render the JSON into a formatted array
 		$twitter = self::renderTwitter($obj, $params);
 		return $twitter;
 	}
@@ -116,38 +102,38 @@ class modTweetDisplayBackHelper {
 	 * @since	1.0.0
 	 */
 	static function renderTwitter($obj, $params) {
-		// initialize
+		// Initialize
 		$twitter = array();
 		
-		// set variables
+		// Set variables
 		$tweetName		= $params->get("tweetName", 1);
 		$tweetAlignment	= $params->get("tweetAlignment", 'left');
 		$tweetReply		= $params->get("tweetReply", 1);
 		$tweetRTCount	= $params->get("tweetRetweetCount", 1);
 
-		// check the first object for user info
+		// Check the first object for user info
 		if (isset($obj[0])) {
 			$userInfo = $obj[0];
 		} else {
 		 	return false;
 		}
-		// header info
+		// Header info
 		$headerUser = '';
 		if ($params->get("headerUser", 1)==1) {
 			if ($params->get("headerName", 1)==1) {
-				$headerUser = "<a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\">".$userInfo['user']['name']."</a><br />";
+				$headerUser = "<a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\">".$userInfo['user']['name']."</a>";
 			}
 			else {
-				$headerUser = "<a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\">".$userInfo['user']['screen_name']."</a><br />";
+				$headerUser = "<a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\">".$userInfo['user']['screen_name']."</a>";
 			}
 		}
 		$headerBio = '';
 		if ($params->get("headerBio", 1)==1) {
-			$headerBio = $userInfo['user']['description']."<br />";
+			$headerBio = $userInfo['user']['description'];
 		}
 		$headerLocation = '';
 		if ($params->get("headerLocation", 1)==1) {
-			$headerLocation = $userInfo['user']['location']."<br />";
+			$headerLocation = $userInfo['user']['location'];
 		}
 		$headerWeb = '';
 		if ($params->get("headerWeb", 1)==1) {
@@ -155,7 +141,7 @@ class modTweetDisplayBackHelper {
 		}
 		$headerAvatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$userInfo['user']['screen_name']."&size=bigger\" width=\"73px\" alt=\"".$userInfo['user']['screen_name']."\" />";
 		
-		// footer info
+		// Footer info
 		
 		// If a "Follow me" link is displayed, determine whether to display a button or text
 		// followType 1 is image, 0 is text
@@ -178,7 +164,7 @@ class modTweetDisplayBackHelper {
 			$footerPoweredBy .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back/13-info\">Tweet Display Back</a></div>";
 		}
 		
-		// tweets
+		// Tweets
 		$i = 0;
 		foreach ($obj as $o) {
 			// Header Information
@@ -192,9 +178,9 @@ class modTweetDisplayBackHelper {
 			$twitter[$i]->footer->follow_me = $footerFollowMe;
 			$twitter[$i]->footer->powered_by = $footerPoweredBy;
 
-			// check if the item is a retweet, and if so gather data from the retweeted_status datapoint
+			// Check if the item is a retweet, and if so gather data from the retweeted_status datapoint
 			if(isset($o['retweeted_status'])) {
-				// retweeted user
+				// Retweeted user
 				if ($tweetName == 1) {
 					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/".$o['retweeted_status']['user']['screen_name']."\">".$o['retweeted_status']['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
 				}
@@ -202,14 +188,15 @@ class modTweetDisplayBackHelper {
 				$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['retweeted_status']['user']['screen_name']."\" src=\"".$o['retweeted_status']['user']['profile_image_url']."\" width=\"32px\"/>";
 				$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $o['retweeted_status']['text']);
 			} else {
-				// user
+				// User
 				if ($tweetName == 1) {
 					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/".$o['user']['screen_name']."\">".$o['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
 				}
 				$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['user']['screen_name']."\" src=\"".$o['user']['profile_image_url']."\" width=\"32px\"/>";
 				$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $o['text']);
 			}
-			// info below is specific to the tweet, so it isn't checked against a retweet
+			// Info below is specific to each tweet, so it isn't checked against a retweet
+			// Determine whether to display the time as a relative or static time
 			if ($params->get("tweetCreated", 1)==1) {
 				if ($params->get("tweetRelativeTime", 1) == 1) {
 					$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\">".self::renderRelativeTime($o['created_at'])."</a>";
@@ -218,27 +205,33 @@ class modTweetDisplayBackHelper {
 					$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\">".JHTML::date($o['created_at'])."</a>";
 				}
 			}
+			// Display the tweet source
 			if (($params->get("tweetSource", 1) == 1)) {
 				$twitter[$i]->tweet->created .= " via ".$o['source'];
 			}
+			// Display the location the tweet was made from
 			if (($params->get("tweetLocation", 1) == 1) && ($o['place']['full_name'])) {
 				$twitter[$i]->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$o['place']['full_name']."\" target=\"_blank\">".$o['place']['full_name']."</a>";
 			}
+			// If the tweet is a reply, display a link to the tweet it's in reply to
 			if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) {
 				$twitter[$i]->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id_str']."\">".$o['in_reply_to_screen_name']."</a>";
 			}
-			if (($tweetReply == 1) || ($tweetRTCount == 1)) {
+			if (($tweetReply == 1) || (($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
 				$twitter[$i]->tweet->created .= " &bull; ";
 			}
+			// Display a reply link
 			if ($tweetReply == 1) {
 				$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/?status=@".$o['user']['screen_name']." &in_reply_to_status_id=".$o['id_str']."&in_reply_to=".$o['user']['screen_name']."\" target=\"_blank\">".JText::_('MOD_TWEETDISPLAYBACK_REPLY')."</a>";
 			}
 			if (($tweetReply == 1) && (($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
 				$twitter[$i]->tweet->created .= " &bull; ";
 			}
+			// Display the number of times the tweet has been retweeted
 			if (($tweetRTCount == 1) && ($o['retweet_count'] >= 1)) {
 				$twitter[$i]->tweet->created .= JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $o['retweet_count']);
 			}
+			// If set, convert user and hash tags into links
 			if ($params->get("tweetLinks", 1) == 1) {
 				$twitter[$i]->tweet->text = preg_replace("/@(\w+)/", "@<a class=\"userlink\" href=\"http://twitter.com/\\1\" target=\"_blank\">\\1</a>", $twitter[$i]->tweet->text);
 				$twitter[$i]->tweet->text = preg_replace("/#(\w+)/", "#<a class=\"hashlink\" href=\"http://twitter.com/search?q=\\1\" target=\"_blank\">\\1</a>", $twitter[$i]->tweet->text);
@@ -281,6 +274,7 @@ class modTweetDisplayBackHelper {
 		if ($diff < 4) {
 			return JText::plural('MOD_TWEETDISPLAYBACK_CREATE_WEEKS', $diff);
 		}
+		// If older than 4 weeks, display a static time
 		return JHTML::date($date);	
 	}
 }

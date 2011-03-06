@@ -7,7 +7,7 @@
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die;
 ?>
 1. Changelog
@@ -26,12 +26,19 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+11-February-2011 Michael Babker
+^ Moved the check to determine if CURL is enabled to be the first code executed by the module
+^ Moved the getLimits check to the module controller
+^ Added !empty checks to template elements to prevent rendering empty elements
+^$ Modified caching parameters to use Joomla! globals and removed specific language strings
+^ Code for cache calling refactored
+
 8-February-2011 Michael Babker
 ^ [#24555] Standardize CSS calls
 ^ Actually implement separator character parameter
 
 4-February-2011 Michael Babker
-+ [#24090] Include "Module Class Suffix" option
++$ [#24090] Include "Module Class Suffix" option
 
 2-February-2011 Michael Babker
 + Added a class for user and hash tag links (Thanks Babs for the idea)
@@ -40,18 +47,18 @@ $ - Language fix or change
 Tweet Display Back 1.2 Beta - Released 29-January-2011
 --------------------------------------------------
 29-January-2011 Michael Babker
-^ Partial solution for [#24089} - Refactored CSS for speech bubble on left-aligned default
-^ Partial solution for [#24089} - Refactored CSS for speech bubble on right-aligned default
-^ [#24091] Reorganize Parameters
-^ Renamed most parameters to match reorganization
-+ Add a username separator parameter
+^ Partial solution for [#24089] - Refactored CSS for speech bubble on left-aligned default
+^ Partial solution for [#24089] - Refactored CSS for speech bubble on right-aligned default
+^$ [#24091] Reorganize Parameters
+^$ Renamed most parameters to match reorganization
++$ Add a username separator parameter
 
 22-January-2011 Michael Babker
 - Removed avatar template
-+ Partial solution for [#24190] Better error reporting
-+ Implimented [#24551] Modify tweet footer
-+ Implimented [#24552] Refactor tweetDisplayHelper::renderRelativeTime
-+ Implimented [#24565] Follow Me/Us Option
++$ Partial solution for [#24190] Better error reporting
++$ Implemented [#24551] Modify tweet footer
++$ Implemented [#24552] Refactor tweetDisplayHelper::renderRelativeTime
++$ Implemented [#24565] Follow Me/Us Option
 
 --------------------------------------------------
 Branched from Tweet Display Back 1.1.10 - 22-January-2011

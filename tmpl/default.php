@@ -7,71 +7,92 @@
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die;
 
-$imgpath 		= JURI::root()."modules/mod_tweetdisplayback/media/images";
+// Set the variables
+$imgpath		= JURI::root()."modules/mod_tweetdisplayback/media/images";
 $headerAlign	= $params->get("headerAvatarAlignment");
 $tweetAlign		= $params->get("tweetAlignment");
-$headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
-$tweetClassSfx = htmlspecialchars($params->get('tweetclasssfx'));
+$headerClassSfx	= htmlspecialchars($params->get('headerclasssfx'));
+$tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
 
-
-// load appropriate CSS depending on CSS3 use
-if ($params->get("templateCSS3", 1)==1) {
+// If CSS3 is selected, load it's stylesheet
+if ($params->get("templateCSS3", 1) == 1) {
 	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default-css3.css', false, false, false);
 } else {
 	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, false, false);
 }
 
-//variables foreach
+// Variables for the foreach
 $i		= 0;
 $max	= count($twitter) - 1;
 
 foreach ($twitter as $o) {
+	// On the first iteration, render the header
 	if ($i == 0) { 
-	
-		if ($params->get("headerDisplay", 1)==1) { ?>
+		// Check to see if the header is set to display
+		if ($params->get("headerDisplay", 1) == 1) { ?>
 		<div class="TDB-header<?php echo $headerClassSfx; ?>">
+			<?php if (!empty($o->header->user)) { ?>
 			<div class="TDB-header-user">
-				<?php echo $o->header->user; ?>
+				<?php echo $o->header->user; ?><br />
 			</div>
-			
-			<?php if ($params->get("headerAvatar", 1)==1) { ?>
+			<?php }
+			// Check to determine if the avatar is displayed in the header
+			if (($params->get("headerAvatar", 1) == 1)  && (!empty($o->header->avatar))) { ?>
 			<span class="TDB-header-avatar-<?php echo $headerAlign;?>">
 				<?php echo $o->header->avatar; ?>
 			</span>
-			<?php } ?>
+			<?php }
+			if (!empty($o->header->bio)) { ?>
 			<div class="TDB-header-bio">
-				<?php echo $o->header->bio; ?>
+				<?php echo $o->header->bio; ?><br />
 			</div>
+			<?php }
+			if (!empty($o->header->location)) { ?>
 			<div class="TDB-header-location">
-				<?php echo $o->header->location; ?>
+				<?php echo $o->header->location; ?><br />
 			</div>
+			<?php }
+			if (!empty($o->header->web)) { ?>
 			<div class="TDB-header-web">
 				<?php echo $o->header->web; ?>
 			</div>
+			<?php } ?>
 		</div>
     	<?php }
     } ?>
 
     	<div class="TDB-tweet<?php echo $tweetClassSfx; ?>">
-			<?php if ($params->get("tweetAvatar", 1)==1) { ?>
+			<?php
+			// Determine if the noavatar class is used for tweets by checking the setting and whether an avatar was returned
+			if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) { ?>
 			<div class="TDB-tweet-avatar"><?php echo $o->tweet->avatar; ?></div>
 			<div class="TDB-tweet-<?php echo $tweetAlign;?>">
 			<?php } else { ?>
 			<div class="TDB-tweet-<?php echo $tweetAlign;?>-noavatar">
-			<?php } ?>
-				<?php echo $o->tweet->user;
-				echo $o->tweet->text; ?>
+			<?php }
+				if (!empty($o->tweet->user)) {
+					echo $o->tweet->user;
+				}
+				echo $o->tweet->text;
+				if (!empty($o->tweet->created)) { ?>
 				<p class="TDB-tweet-time"><?php echo $o->tweet->created; ?></p>
+				<?php } ?>
 			</div>
 		</div>
 		<div class="clr"></div>
 		
-	<?php if ($i == $max) {
-		echo $o->footer->follow_me;
-		echo $o->footer->powered_by;
+	<?php
+	// On the final iteration, render the footer
+	if ($i == $max) {
+		if (!empty($o->footer->follow_me)) {
+			echo $o->footer->follow_me;
+		}
+		if (!empty($o->footer->powered_by)) {
+			echo $o->footer->powered_by;
+		}
 	} else {
 		$i++;
 	}
