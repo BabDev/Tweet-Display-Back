@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.6 Beta - Released 6-March-2011
+--------------------------------------------------
 6-March-2011 Michael Babker
 ^ Moved the getLimit check to (logically) be executed only when the cache is disabled or expired
 - Removed the cache refactoring
