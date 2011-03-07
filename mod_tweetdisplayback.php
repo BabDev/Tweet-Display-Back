@@ -28,7 +28,6 @@ if (($params->get('cache')) == 0) {
 		echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
 		return;
 	}
-	print_r($hits);
 }
 
 //Initialize the cache

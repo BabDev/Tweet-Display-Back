@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+8-March-2011 Michael Babker
+#- [#25214] Removed debug code that accidentally made it into the release package
+
 --------------------------------------------------
 Tweet Display Back 1.6 Beta - Released 6-March-2011
 --------------------------------------------------
