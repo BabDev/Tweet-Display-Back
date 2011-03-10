@@ -28,6 +28,8 @@ $ - Language fix or change
 
 10-March-2011 Michael Babker
 +^ [#25063] Initial conversion of the helper to pull both user and list feeds, list options added
+^ Renamed prepareStatic to prepareUser
+^ First pass at reformatting the default template for the new rendering
 
 8-March-2011 Michael Babker
 #- [#25214] Removed debug code that accidentally made it into the release package
