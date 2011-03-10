@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+10-March-2011 Michael Babker
++^ [#25063] Initial conversion of the helper to pull both user and list feeds, list options added
+
 8-March-2011 Michael Babker
 #- [#25214] Removed debug code that accidentally made it into the release package
 

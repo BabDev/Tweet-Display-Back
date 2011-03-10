@@ -66,42 +66,141 @@ class modTweetDisplayBackHelper {
 	}
 
 	/**
-	 * Function to load a user's user_timeline Twitter feed
+	 * Function to compile the data to render a formatted object displaying a Twitter feed
 	 * 
 	 * @param	string	$params
-	 * @return	object	$twitter	A formatted object with the user's tweets
-	 * @since	1.0.0
+	 * @return	object	$twitter	A formatted object with the requested tweets
+	 * @since	1.6.0
 	 */
-	static function getTweets($params) {
+	static function compileData($params) {
 		// Load the parameters
-		$uname = $params->get("twitterName","");
-		$count = $params->get("twitterCount",3);
-		$retweet = $params->get("tweetRetweets",1);
+		$uname		= $params->get("twitterName", "");
+		$list		= $params->get("twitterList", "");
+		$count		= $params->get("twitterCount", 3);
+		$retweet	= $params->get("tweetRetweets", 1);
 		
-		// Determine whether to pull retweets or not
-		if ($retweet == 1) {
-			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&include_rts=1&screen_name=".$uname."";
+		// Convert the list name to a useable string for the JSON
+		$list		= self::toAscii($list);
+
+		// Get the user info
+		$twitter	= self::prepareStatic($params, $list);
+		
+		// Determine whether the feed being returned is a user or list feed
+		// 0 is user, 1 is list
+		if ($params->get("twitterFeedType", 0) == 1) {
+			// Get the list feed
+			//TODO: Determine if include_rts and count are valid params
+			$req = "http://api.twitter.com/1/".$uname."/lists/".$list."/statuses.json";
 		} else {
-			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname."";
+			// Get the user feed
+			// Determine whether to pull retweets or not
+			if ($retweet == 1) {
+				$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&include_rts=1&screen_name=".$uname."";
+			} else {
+				$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname."";
+			}
 		}
 		
 		// Fetch the decoded JSON
 		$obj = self::getJSON($req);
 		
 		// Render the JSON into a formatted array
-		$twitter = self::renderTwitter($obj, $params);
+		$twitter->tweet = self::renderFeed($obj, $params);
+		
 		return $twitter;
 	}
 		
 	/**
-	 * Function to render the user timeline JSON into HTML
+	 * Function to fetch the user JSON and render it
+	 * 
+	 * @param	string	$param
+	 * @return	array	$twitter	The formatted object for display
+	 * @since	1.6.0
+	 */
+	static function prepareStatic($params, $list) {
+		// Load the parameters
+		$uname		= $params->get("twitterName", "");
+		$list		= $params->get("twitterList", "");
+		
+		// Convert the list name to a useable string for the URL
+		$flist		= self::toAscii($list);
+		
+		// Get the user JSON
+		$req	= "http://api.twitter.com/1/users/show.json?screen_name=".$uname;
+		
+		// Decode the fetched JSON
+		$obj	= self::getJSON($req);
+				
+		if (isset($obj['error'])) return false;
+		
+		// Header info
+		if ($params->get("showHeaderUser", 1)==1) {
+			if ($params->get("showHeaderName", 1)==1) {
+				if ($params->get("twitterFeedType", 0) == 1) {
+					$twitter->header->user = "<a href=\"http://twitter.com/".$obj['screen_name']."\">".$obj['name']."</a> - <a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\">".$list." list</a>";
+				} else {
+					$twitter->header->user = "<a href=\"http://twitter.com/".$obj['screen_name']."\">".$obj['name']."</a>";
+				}
+			} else {
+				if ($params->get("twitterFeedType", 0) == 1) {
+					$twitter->header->user = "<a href=\"http://twitter.com/".$obj['screen_name']."\">".$obj['screen_name']."</a> - <a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\">".$list." list</a>";
+				} else {
+					$twitter->header->user = "<a href=\"http://twitter.com/".$obj['screen_name']."\">".$obj['screen_name']."</a>";
+				}
+			}
+		}
+		if ($params->get("showHeaderBio", 1)==1) {
+			$twitter->header->bio = $obj['description'];
+		}
+		if ($params->get("showHeaderLocation", 1)==1) {
+			$twitter->header->location = $obj['location'];
+		}
+		if ($params->get("showHeaderWeb", 1)==1) {
+			$twitter->header->web = "<a href=\"".$obj['url']."\">".$obj['url'];
+		}
+		$twitter->header->avatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$obj['screen_name']."&size=bigger\" width=\"73px\" alt=\"".$obj['screen_name']."\" />";
+		
+		// Footer info
+		
+		// If a "Follow me" link is displayed, determine whether to display a button or text
+		// followType 1 is image, 0 is text
+		if ($params->get("footerFollowLink", 1) == 1) {
+			if ($params->get("footerFollowType", 1) == 1) {
+				if ($params->get("twitterFeedType", 0) == 1) {
+					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$obj['screen_name']."'s ".$list." list on Twitter\" align=\"center\" /></a></b></div>";
+				} else {
+					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/".$obj['screen_name']."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$obj['screen_name']." on Twitter\" align=\"center\" /></a></b></div>";
+				}
+			} else {
+				if ($params->get("twitterFeedType", 0) == 1) {
+					$twitter->footer->follow_me = "<hr /><div class=\"TDB-footer-follow-link\"><b><a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
+				} else {
+					$twitter->footer->follow_me = "<hr /><div class=\"TDB-footer-follow-link\"><b><a href=\"http://twitter.com/".$obj['screen_name']."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
+				}
+			}
+		}
+		if ($params->get("footerPoweredBy", 1) == 1) {
+			//Check the type of link to determine the appropriate opening tags
+			if ($params->get("footerFollowType", 1) == 1) {
+				$twitter->footer->powered_by = "<div class=\"TDB-footer-powered-img\">";
+			} else {
+				$twitter->footer->powered_by = "<hr /><div class=\"TDB-footer-powered-text\">";
+			}
+			$twitter->footer->powered_by .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back/13-info\">Tweet Display Back</a></div>";
+		}
+				
+		return $twitter;		
+	}
+	
+	/**
+	 * Function to render the Twitter feed into a formatted object
 	 * 
 	 * @param	array	$obj		The decoded JSON feed
 	 * @param	string	$params
 	 * @return	object	$twitter	The formatted object for display
-	 * @since	1.0.0
+	 * @since	1.6.0
 	 */
-	static function renderTwitter($obj, $params) {
+	static function renderFeed($obj, $params) {
 		// Initialize
 		$twitter = array();
 		
@@ -111,75 +210,11 @@ class modTweetDisplayBackHelper {
 		$tweetReply		= $params->get("tweetReply", 1);
 		$tweetRTCount	= $params->get("tweetRetweetCount", 1);
 
-		// Check the first object for user info
-		if (isset($obj[0])) {
-			$userInfo = $obj[0];
-		} else {
-		 	return false;
-		}
-		// Header info
-		$headerUser = '';
-		if ($params->get("headerUser", 1)==1) {
-			if ($params->get("headerName", 1)==1) {
-				$headerUser = "<a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\">".$userInfo['user']['name']."</a>";
-			}
-			else {
-				$headerUser = "<a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\">".$userInfo['user']['screen_name']."</a>";
-			}
-		}
-		$headerBio = '';
-		if ($params->get("headerBio", 1)==1) {
-			$headerBio = $userInfo['user']['description'];
-		}
-		$headerLocation = '';
-		if ($params->get("headerLocation", 1)==1) {
-			$headerLocation = $userInfo['user']['location'];
-		}
-		$headerWeb = '';
-		if ($params->get("headerWeb", 1)==1) {
-			$headerWeb = "<a href=\"".$userInfo['user']['url']."\">".$userInfo['user']['url']."</a>";
-		}
-		$headerAvatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$userInfo['user']['screen_name']."&size=bigger\" width=\"73px\" alt=\"".$userInfo['user']['screen_name']."\" />";
-		
-		// Footer info
-		
-		// If a "Follow me" link is displayed, determine whether to display a button or text
-		// followType 1 is image, 0 is text
-		$footerFollowMe = '';
-		if ($params->get("footerFollowLink", 1) == 1) {
-			if ($params->get("footerFollowType", 1) == 1) {
-				$footerFollowMe = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$userInfo['user']['screen_name']." on Twitter\" align=\"center\" /></a></b></div>";
-			} else {
-				$footerFollowMe = "<hr /><div class=\"TDB-footer-follow-link\"><b><a href=\"http://twitter.com/".$userInfo['user']['screen_name']."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
-			}
-		}
-		$footerPoweredBy = '';
-		if ($params->get("footerPoweredBy", 1) == 1) {
-			//Check the type of link to determine the appropriate opening tags
-			if ($params->get("footerFollowType", 1) == 1) {
-				$footerPoweredBy = "<div class=\"TDB-footer-powered-img\">";
-			} else {
-				$footerPoweredBy = "<hr /><div class=\"TDB-footer-powered-text\">";
-			}
-			$footerPoweredBy .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back/13-info\">Tweet Display Back</a></div>";
-		}
-		
 		// Tweets
 		$i = 0;
 		foreach ($obj as $o) {
-			// Header Information
-			$twitter[$i]->header->user = $headerUser;
-			$twitter[$i]->header->bio = $headerBio;
-			$twitter[$i]->header->location = $headerLocation;
-			$twitter[$i]->header->web = $headerWeb;
-			$twitter[$i]->header->avatar = $headerAvatar;
-			
-			// Footer Information
-			$twitter[$i]->footer->follow_me = $footerFollowMe;
-			$twitter[$i]->footer->powered_by = $footerPoweredBy;
-
 			// Check if the item is a retweet, and if so gather data from the retweeted_status datapoint
-			if(isset($o['retweeted_status'])) {
+			if (isset($o['retweeted_status'])) {
 				// Retweeted user
 				if ($tweetName == 1) {
 					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/".$o['retweeted_status']['user']['screen_name']."\">".$o['retweeted_status']['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
@@ -276,5 +311,21 @@ class modTweetDisplayBackHelper {
 		}
 		// If older than 4 weeks, display a static time
 		return JHTML::date($date);	
+	}
+	
+	/**
+	 * Function to convert a formatted list name into it's URL equivilent
+	 * 
+	 * @param	string	$list	The user inputted list name
+	 * @return	string	$list	The list name converted
+	 * @since	1.6.0
+	 */
+	
+	static function toAscii($list) {
+		$clean = preg_replace("/[^a-z'A-Z0-9\/_|+ -]/", '', $list);
+		$clean = strtolower(trim($clean, '-'));
+		$list  = preg_replace("/[\/_|+ -']+/", '-', $clean);
+		
+		return $list;
 	}
 }

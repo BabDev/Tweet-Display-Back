@@ -43,11 +43,10 @@ $cache = JCache::getInstance("callback", $options );
 $cache->setCaching($params->get("cache"));
 
 // Call the cache; if expired, pull new data
-$twitter = $cache->call(array('modTweetDisplayBackHelper', 'getTweets'), $params);
+$twitter = $cache->call(array('modTweetDisplayBackHelper', 'compileData'), $params);
 if (!$twitter) {
 	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
 	return;
 }
 
-$layout = $params->get("templateLayout", "default");
-require(JModuleHelper::getLayoutPath('mod_tweetdisplayback', $layout));
+require(JModuleHelper::getLayoutPath('mod_tweetdisplayback', $params->get("templateLayout", "default")));

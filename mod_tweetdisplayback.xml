@@ -33,10 +33,27 @@
 		<fields name="params">
 			<fieldset name="twitter">
 				<field
+					name="twitterFeedType"
+					type="radio"
+					default="0"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_DESCRIPTION" >
+					<option
+						value="0">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_USER</option>
+					<option
+						value="1">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_LIST</option>
+				</field>
+				<field
 					name="twitterName"
 					type="text"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_USERNAME_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_USERNAME_DESCRIPTION"
+					required="true" />
+				<field
+					name="twitterList"
+					type="text"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LISTNAME_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LISTNAME_DESCRIPTION"
 					required="true" />
 				<field
 					name="twitterCount"
