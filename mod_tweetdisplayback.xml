@@ -53,8 +53,7 @@
 					name="twitterList"
 					type="text"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LISTNAME_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LISTNAME_DESCRIPTION"
-					required="true" />
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LISTNAME_DESCRIPTION" />
 				<field
 					name="twitterCount"
 					type="text"
