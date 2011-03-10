@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+11-March-2011 Michael Babker
+^ Partial fix for [#24576] PHP Strict
+
 10-March-2011 Michael Babker
 +^ [#25063] Initial conversion of the helper to pull both user and list feeds, list options added
 ^ Renamed prepareStatic to prepareUser

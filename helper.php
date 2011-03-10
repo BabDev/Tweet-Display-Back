@@ -82,6 +82,9 @@ class modTweetDisplayBackHelper {
 		// Convert the list name to a useable string for the JSON
 		$list		= self::toAscii($list);
 
+		// Initialize the array
+		$twitter	= array();
+		
 		// Get the user info
 		$twitter	= self::prepareUser($params, $list);
 		
@@ -121,6 +124,11 @@ class modTweetDisplayBackHelper {
 		// Load the parameters
 		$uname		= $params->get("twitterName", "");
 		$list		= $params->get("twitterList", "");
+		
+		// Initialize new object containers
+		$twitter			= new stdClass();
+		$twitter->header	= new stdClass();
+		$twitter->footer	= new stdClass();
 		
 		// Convert the list name to a useable string for the URL
 		$flist		= self::toAscii($list);
@@ -218,6 +226,9 @@ class modTweetDisplayBackHelper {
 		// Tweets
 		$i = 0;
 		foreach ($obj as $o) {
+			// Initialize a new object
+			$twitter[$i]->tweet	= new stdClass();
+			
 			// Check if the item is a retweet, and if so gather data from the retweeted_status datapoint
 			if (isset($o['retweeted_status'])) {
 				// Retweeted user
