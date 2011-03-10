@@ -31,6 +31,7 @@ $ - Language fix or change
 ^ Renamed prepareStatic to prepareUser
 ^ First pass at reformatting the default template for the new rendering
 ^ List name is not a required field
+^ Changed references that are not processed through foreach from $o to $twitter
 
 8-March-2011 Michael Babker
 #- [#25214] Removed debug code that accidentally made it into the release package
