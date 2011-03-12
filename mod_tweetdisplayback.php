@@ -22,7 +22,7 @@ require_once dirname(__FILE__).DS.'helper.php';
 // Check the number of hits available if the cache is disabled or expired;
 // If there are 0 hits remaining, then proceed no further
 //TODO: Check if the cache is expired
-if (($params->get('cache')) == 0) {
+if (($params->get('owncache')) == 0) {
 	$hits = modTweetDisplayBackHelper::getLimit($params);
 	if ($hits == 0) {
 		echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
