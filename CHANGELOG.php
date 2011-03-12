@@ -26,6 +26,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.6 Beta 2 - Released 12-March-2011
+--------------------------------------------------
+
 11-March-2011 Michael Babker
 ^ Partial fix for [#24576] PHP Strict
 
