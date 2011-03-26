@@ -26,10 +26,13 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+27-March-2011 Michael Babker
+^ Add safehtml filter as appropriate
+^ Modified the character separator to a single space to prevent a display bug when trying to make it blank
+
 --------------------------------------------------
 Tweet Display Back 1.6 Beta 2 - Released 12-March-2011
 --------------------------------------------------
-
 11-March-2011 Michael Babker
 ^ Partial fix for [#24576] PHP Strict
 

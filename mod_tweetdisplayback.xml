@@ -138,7 +138,7 @@
 				</field>
 				<field
 					name="headerAvatarAlignment"
-					type="list"
+					type="radio"
 					default="left"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_ALIGNMENT_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_ALIGNMENT_DESCRIPTION" >
@@ -200,7 +200,7 @@
 				</field>
 				<field
 					name="tweetAlignment"
-					type="list"
+					type="radio"
 					default="left"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ALIGNMENT_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ALIGNMENT_DESCRIPTION" >
@@ -224,7 +224,8 @@
 					name="tweetUserSeparator"
 					type="text"
 					length="5"
-					default=": "
+					filter="safehtml"
+					default=" "
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USERSEPARATOR_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USERSEPARATOR_DESCRIPTION" />
 				<field
@@ -366,6 +367,7 @@
 				<field
 					name="footerFollowText"
 					type="text"
+					filter="safehtml"
 					default="Follow me on Twitter"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_TEXT_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_TEXT_DESCRIPTION" />
@@ -384,7 +386,7 @@
 			<fieldset name="advanced">
 				<field
 					name="owncache"
-					type="list"
+					type="radio"
 					default="1"
 					label="COM_MODULES_FIELD_CACHING_LABEL"
 					description="COM_MODULES_FIELD_CACHING_DESC" >

@@ -40,7 +40,7 @@ $options = array(
 	'language' => $conf->get('config.language'),
 	'storage' => 'file' );
 $cache = JCache::getInstance("callback", $options );
-$cache->setCaching($params->get("cache"));
+$cache->setCaching($params->get("owncache"));
 
 // Call the cache; if expired, pull new data
 $twitter = $cache->call(array('modTweetDisplayBackHelper', 'compileData'), $params);
