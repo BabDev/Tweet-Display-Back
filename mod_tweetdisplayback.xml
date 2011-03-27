@@ -26,9 +26,9 @@
 		<language tag="en-GB">language/en-GB/en-GB.mod_tweetdisplayback.ini</language>
 		<language tag="en-GB">language/en-GB/en-GB.mod_tweetdisplayback.sys.ini</language>
 	</languages>
-	<!-- Update server disabled in beta <updateservers>
+	<updateservers>
 		<server type="extension" name="Tweet Display Back Updates" priority="2">http://www.flbab.com/updates/TDB.xml</server>
-	</updateservers> -->
+	</updateservers>
 	<config>
 		<fields name="params">
 			<fieldset name="twitter">

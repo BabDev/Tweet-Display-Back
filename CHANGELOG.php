@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+28-March-2011 Michael Babker
+^ Re-enable updateservers
+
 27-March-2011 Michael Babker
 ^ Add safehtml filter as appropriate
 ^ Modified the character separator to a single space to prevent a display bug when trying to make it blank
