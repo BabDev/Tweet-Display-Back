@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.6.0 - Released 29-March-2011
+--------------------------------------------------
 28-March-2011 Michael Babker
 ^ Re-enable updateservers
 
