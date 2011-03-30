@@ -273,7 +273,7 @@ class modTweetDisplayBackHelper {
 			}
 			// Display a reply link
 			if ($tweetReply == 1) {
-				$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/?status=@".$o['user']['screen_name']." &in_reply_to_status_id=".$o['id_str']."&in_reply_to=".$o['user']['screen_name']."\" target=\"_blank\">".JText::_('MOD_TWEETDISPLAYBACK_REPLY')."</a>";
+				$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/intent/tweet?in_reply_to=".$o['id_str']."\">".JText::_('MOD_TWEETDISPLAYBACK_REPLY')."</a>";
 			}
 			if (($tweetReply == 1) && (($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
 				$twitter[$i]->tweet->created .= " &bull; ";
