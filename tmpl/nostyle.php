@@ -19,6 +19,10 @@ $tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
 
 JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/nostyle.css', false, false, false);
 
+// Add the Twitter Web Intents script
+$document = JFactory::getDocument();
+$document->addCustomTag('<script type="text/javascript" src="http://platform.twitter.com/widgets.js" /></script>');
+
 // Variables for the foreach
 $i		= 0;
 $count	= $params->get("twitterCount", 3) - 1;

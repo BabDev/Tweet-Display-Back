@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+31-March-2011 Michael Babker
++ Add a link for the Twitter Web Intents script
+
 --------------------------------------------------
 Tweet Display Back 1.6.0 - Released 29-March-2011
 --------------------------------------------------
