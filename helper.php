@@ -147,16 +147,16 @@ class modTweetDisplayBackHelper {
 			if ($params->get("showHeaderName", 1)==1) {
 				// Determine whether a list or user feed is being generated
 				if ($params->get("twitterFeedType", 0) == 1) {
-					$twitter->header->user = "<a href=\"http://twitter.com/".$obj['screen_name']."\">".$obj['name']."</a> - <a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\">".$list." list</a>";
+					$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$obj['screen_name']."\">".$obj['name']."</a> - <a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\">".$list." list</a>";
 				} else {
-					$twitter->header->user = "<a href=\"http://twitter.com/".$obj['screen_name']."\">".$obj['name']."</a>";
+					$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$obj['screen_name']."\">".$obj['name']."</a>";
 				}
 			} else {
 				// Determine whether a list or user feed is being generated
 				if ($params->get("twitterFeedType", 0) == 1) {
-					$twitter->header->user = "<a href=\"http://twitter.com/".$obj['screen_name']."\">".$obj['screen_name']."</a> - <a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\">".$list." list</a>";
+					$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$obj['screen_name']."\">".$obj['screen_name']."</a> - <a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\">".$list." list</a>";
 				} else {
-					$twitter->header->user = "<a href=\"http://twitter.com/".$obj['screen_name']."\">".$obj['screen_name']."</a>";
+					$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$obj['screen_name']."\">".$obj['screen_name']."</a>";
 				}
 			}
 		}
@@ -179,16 +179,16 @@ class modTweetDisplayBackHelper {
 			if ($params->get("footerFollowType", 1) == 1) {
 				// Determine whether a list or user feed is being generated
 				if ($params->get("twitterFeedType", 0) == 1) {
-					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$obj['screen_name']."'s ".$list." list on Twitter\" align=\"center\" /></a></b></div>";
+					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/intent/user?screen_name=".$obj['screen_name']."/".$flist."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$obj['screen_name']."'s ".$list." list on Twitter\" align=\"center\" /></a></b></div>";
 				} else {
-					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/".$obj['screen_name']."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$obj['screen_name']." on Twitter\" align=\"center\" /></a></b></div>";
+					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/intent/user?screen_name=".$obj['screen_name']."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$obj['screen_name']." on Twitter\" align=\"center\" /></a></b></div>";
 				}
 			} else {
 				// Determine whether a list or user feed is being generated
 				if ($params->get("twitterFeedType", 0) == 1) {
-					$twitter->footer->follow_me = "<hr /><div class=\"TDB-footer-follow-link\"><b><a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
+					$twitter->footer->follow_me = "<hr /><div class=\"TDB-footer-follow-link\"><b><a href=\"http://twitter.com/intent/user?screen_name=".$obj['screen_name']."/".$flist."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
 				} else {
-					$twitter->footer->follow_me = "<hr /><div class=\"TDB-footer-follow-link\"><b><a href=\"http://twitter.com/".$obj['screen_name']."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
+					$twitter->footer->follow_me = "<hr /><div class=\"TDB-footer-follow-link\"><b><a href=\"http://twitter.com/intent/user?screen_name=".$obj['screen_name']."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
 				}
 			}
 		}
@@ -233,7 +233,7 @@ class modTweetDisplayBackHelper {
 			if (isset($o['retweeted_status'])) {
 				// Retweeted user
 				if ($tweetName == 1) {
-					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/".$o['retweeted_status']['user']['screen_name']."\">".$o['retweeted_status']['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
+					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/intent/user?screen_name=".$o['retweeted_status']['user']['screen_name']."\">".$o['retweeted_status']['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
 				}
 				$twitter[$i]->tweet->created = "Retweeted ";
 				$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['retweeted_status']['user']['screen_name']."\" src=\"".$o['retweeted_status']['user']['profile_image_url']."\" width=\"32px\"/>";
@@ -241,7 +241,7 @@ class modTweetDisplayBackHelper {
 			} else {
 				// User
 				if ($tweetName == 1) {
-					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/".$o['user']['screen_name']."\">".$o['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
+					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/intent/user?screen_name=".$o['user']['screen_name']."\">".$o['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
 				}
 				$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['user']['screen_name']."\" src=\"".$o['user']['profile_image_url']."\" width=\"32px\"/>";
 				$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $o['text']);
@@ -284,7 +284,7 @@ class modTweetDisplayBackHelper {
 			}
 			// If set, convert user and hash tags into links
 			if ($params->get("tweetLinks", 1) == 1) {
-				$twitter[$i]->tweet->text = preg_replace("/@(\w+)/", "@<a class=\"userlink\" href=\"http://twitter.com/\\1\" target=\"_blank\">\\1</a>", $twitter[$i]->tweet->text);
+				$twitter[$i]->tweet->text = preg_replace("/@(\w+)/", "@<a class=\"userlink\" href=\"http://twitter.com/intent/user?screen_name=\\1\">\\1</a>", $twitter[$i]->tweet->text);
 				$twitter[$i]->tweet->text = preg_replace("/#(\w+)/", "#<a class=\"hashlink\" href=\"http://twitter.com/search?q=\\1\" target=\"_blank\">\\1</a>", $twitter[$i]->tweet->text);
 			}
 			$i++;
