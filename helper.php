@@ -167,7 +167,7 @@ class modTweetDisplayBackHelper {
 			$twitter->header->location = $obj['location'];
 		}
 		if ($params->get("showHeaderWeb", 1)==1) {
-			$twitter->header->web = "<a href=\"".$obj['url']."\">".$obj['url'];
+			$twitter->header->web = "<a href=\"".$obj['url']."\">".$obj['url']."</a>";
 		}
 		$twitter->header->avatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$obj['screen_name']."&size=bigger\" width=\"73px\" alt=\"".$obj['screen_name']."\" />";
 		
@@ -216,78 +216,83 @@ class modTweetDisplayBackHelper {
 	static function renderFeed($obj, $params) {
 		// Initialize
 		$twitter = array();
-		
+		$i = 0;
+
 		// Set variables
 		$tweetName		= $params->get("tweetName", 1);
 		$tweetAlignment	= $params->get("tweetAlignment", 'left');
 		$tweetReply		= $params->get("tweetReply", 1);
 		$tweetRTCount	= $params->get("tweetRetweetCount", 1);
 
-		// Tweets
-		$i = 0;
-		foreach ($obj as $o) {
-			// Initialize a new object
-			$twitter[$i]->tweet	= new stdClass();
-			
-			// Check if the item is a retweet, and if so gather data from the retweeted_status datapoint
-			if (isset($o['retweeted_status'])) {
-				// Retweeted user
-				if ($tweetName == 1) {
-					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/intent/user?screen_name=".$o['retweeted_status']['user']['screen_name']."\">".$o['retweeted_status']['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
+		// Check if $obj has data; if not, return an error
+		if (is_null($obj)) {
+			// Set an error
+			$twitter[$i]->tweet->text = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
+		} else {
+			// Process the feed
+			foreach ($obj as $o) {
+				// Initialize a new object
+				$twitter[$i]->tweet	= new stdClass();
+
+				// Check if the item is a retweet, and if so gather data from the retweeted_status datapoint
+				if (isset($o['retweeted_status'])) {
+					// Retweeted user
+					if ($tweetName == 1) {
+						$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/intent/user?screen_name=".$o['retweeted_status']['user']['screen_name']."\">".$o['retweeted_status']['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
+					}
+					$twitter[$i]->tweet->created = "Retweeted ";
+					$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['retweeted_status']['user']['screen_name']."\" src=\"".$o['retweeted_status']['user']['profile_image_url']."\" width=\"32px\"/>";
+					$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $o['retweeted_status']['text']);
+				} else {
+					// User
+					if ($tweetName == 1) {
+						$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/intent/user?screen_name=".$o['user']['screen_name']."\">".$o['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
+					}
+					$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['user']['screen_name']."\" src=\"".$o['user']['profile_image_url']."\" width=\"32px\"/>";
+					$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $o['text']);
 				}
-				$twitter[$i]->tweet->created = "Retweeted ";
-				$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['retweeted_status']['user']['screen_name']."\" src=\"".$o['retweeted_status']['user']['profile_image_url']."\" width=\"32px\"/>";
-				$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $o['retweeted_status']['text']);
-			} else {
-				// User
-				if ($tweetName == 1) {
-					$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/intent/user?screen_name=".$o['user']['screen_name']."\">".$o['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
+				// Info below is specific to each tweet, so it isn't checked against a retweet
+				// Determine whether to display the time as a relative or static time
+				if ($params->get("tweetCreated", 1)==1) {
+					if ($params->get("tweetRelativeTime", 1) == 1) {
+						$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\">".self::renderRelativeTime($o['created_at'])."</a>";
+					} else {
+						$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\">".JHTML::date($o['created_at'])."</a>";
+					}
 				}
-				$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['user']['screen_name']."\" src=\"".$o['user']['profile_image_url']."\" width=\"32px\"/>";
-				$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $o['text']);
-			}
-			// Info below is specific to each tweet, so it isn't checked against a retweet
-			// Determine whether to display the time as a relative or static time
-			if ($params->get("tweetCreated", 1)==1) {
-				if ($params->get("tweetRelativeTime", 1) == 1) {
-					$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\">".self::renderRelativeTime($o['created_at'])."</a>";
+				// Display the tweet source
+				if (($params->get("tweetSource", 1) == 1)) {
+					$twitter[$i]->tweet->created .= " via ".$o['source'];
 				}
-				else {
-					$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\">".JHTML::date($o['created_at'])."</a>";
+				// Display the location the tweet was made from
+				if (($params->get("tweetLocation", 1) == 1) && ($o['place']['full_name'])) {
+					$twitter[$i]->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$o['place']['full_name']."\" target=\"_blank\">".$o['place']['full_name']."</a>";
 				}
+				// If the tweet is a reply, display a link to the tweet it's in reply to
+				if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) {
+					$twitter[$i]->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id_str']."\">".$o['in_reply_to_screen_name']."</a>";
+				}
+				if (($tweetReply == 1) || (($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
+					$twitter[$i]->tweet->created .= " &bull; ";
+				}
+				// Display a reply link
+				if ($tweetReply == 1) {
+					$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/intent/tweet?in_reply_to=".$o['id_str']."\">".JText::_('MOD_TWEETDISPLAYBACK_REPLY')."</a>";
+				}
+				if (($tweetReply == 1) && (($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
+					$twitter[$i]->tweet->created .= " &bull; ";
+				}
+				// Display the number of times the tweet has been retweeted
+				if (($tweetRTCount == 1) && ($o['retweet_count'] >= 1)) {
+					$twitter[$i]->tweet->created .= JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $o['retweet_count']);
+				}
+				// If set, convert user and hash tags into links
+				if ($params->get("tweetLinks", 1) == 1) {
+					$twitter[$i]->tweet->text = preg_replace("/@(\w+)/", "@<a class=\"userlink\" href=\"http://twitter.com/intent/user?screen_name=\\1\" target=\"_blank\">\\1</a>", $twitter[$i]->tweet->text);
+					$twitter[$i]->tweet->text = preg_replace("/#(\w+)/", "#<a class=\"hashlink\" href=\"http://twitter.com/search?q=\\1\" target=\"_blank\">\\1</a>", $twitter[$i]->tweet->text);
+				}
+				$i++;
 			}
-			// Display the tweet source
-			if (($params->get("tweetSource", 1) == 1)) {
-				$twitter[$i]->tweet->created .= " via ".$o['source'];
-			}
-			// Display the location the tweet was made from
-			if (($params->get("tweetLocation", 1) == 1) && ($o['place']['full_name'])) {
-				$twitter[$i]->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$o['place']['full_name']."\" target=\"_blank\">".$o['place']['full_name']."</a>";
-			}
-			// If the tweet is a reply, display a link to the tweet it's in reply to
-			if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) {
-				$twitter[$i]->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id_str']."\">".$o['in_reply_to_screen_name']."</a>";
-			}
-			if (($tweetReply == 1) || (($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
-				$twitter[$i]->tweet->created .= " &bull; ";
-			}
-			// Display a reply link
-			if ($tweetReply == 1) {
-				$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/intent/tweet?in_reply_to=".$o['id_str']."\">".JText::_('MOD_TWEETDISPLAYBACK_REPLY')."</a>";
-			}
-			if (($tweetReply == 1) && (($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
-				$twitter[$i]->tweet->created .= " &bull; ";
-			}
-			// Display the number of times the tweet has been retweeted
-			if (($tweetRTCount == 1) && ($o['retweet_count'] >= 1)) {
-				$twitter[$i]->tweet->created .= JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $o['retweet_count']);
-			}
-			// If set, convert user and hash tags into links
-			if ($params->get("tweetLinks", 1) == 1) {
-				$twitter[$i]->tweet->text = preg_replace("/@(\w+)/", "@<a class=\"userlink\" href=\"http://twitter.com/intent/user?screen_name=\\1\">\\1</a>", $twitter[$i]->tweet->text);
-				$twitter[$i]->tweet->text = preg_replace("/#(\w+)/", "#<a class=\"hashlink\" href=\"http://twitter.com/search?q=\\1\" target=\"_blank\">\\1</a>", $twitter[$i]->tweet->text);
-			}
-			$i++;
 		}
 		return $twitter;
 	}

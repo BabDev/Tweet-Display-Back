@@ -30,6 +30,8 @@ $ - Language fix or change
 + Add a link for the Twitter Web Intents script
 + Add the user intent to all user links
 + Add the reply intent
++ Added an additional error check to verify that data has been retrieved (Thanks rb for the suggestion)
+# Closed the unclosed URL tag
 
 --------------------------------------------------
 Tweet Display Back 1.6.0 - Released 29-March-2011
