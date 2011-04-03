@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.6.1 - Released 4-April-2011
+--------------------------------------------------
 31-March-2011 Michael Babker
 + Add a link for the Twitter Web Intents script
 + Add the user intent to all user links
