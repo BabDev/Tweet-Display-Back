@@ -26,6 +26,11 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+6-April-2011 Michael Babker
+^ Modified cache parameters
+^ Modified header user link generation
+# Removed Web Intent from list links
+
 --------------------------------------------------
 Tweet Display Back 1.6.1 - Released 4-April-2011
 --------------------------------------------------

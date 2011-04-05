@@ -17,12 +17,12 @@ if (!extension_loaded('curl')) {
 }
 		
 // Include the helper
-require_once dirname(__FILE__).DS.'helper.php';
+require_once dirname(__FILE__).'/helper.php';
 
 // Check the number of hits available if the cache is disabled or expired;
 // If there are 0 hits remaining, then proceed no further
 //TODO: Check if the cache is expired
-if (($params->get('owncache')) == 0) {
+if (($params->get('cache')) == 0) {
 	$hits = modTweetDisplayBackHelper::getLimit($params);
 	if ($hits == 0) {
 		echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
@@ -31,16 +31,11 @@ if (($params->get('owncache')) == 0) {
 }
 
 //Initialize the cache
-jimport('joomla.cache.cache');
 $conf = JFactory::getConfig();
 $options = array(
-	'defaultgroup' => 'mod_tweetdisplayback',
-	'cachebase' => $conf->get('config.cache_path'),
-	'lifetime' => $params->get('cache_time') * 60, // minutes to seconds
-	'language' => $conf->get('config.language'),
-	'storage' => 'file' );
-$cache = JCache::getInstance("callback", $options );
-$cache->setCaching($params->get("owncache"));
+	'lifetime' => ($params->get('cache_time') * 60)); // Convert minutes to seconds
+$cache = JCache::getInstance('callback', $options );
+$cache->setCaching($params->get('cache'));
 
 // Call the cache; if expired, pull new data
 $twitter = $cache->call(array('modTweetDisplayBackHelper', 'compileData'), $params);
@@ -49,4 +44,4 @@ if (!$twitter) {
 	return;
 }
 
-require(JModuleHelper::getLayoutPath('mod_tweetdisplayback', $params->get("templateLayout", "default")));
+require(JModuleHelper::getLayoutPath('mod_tweetdisplayback', $params->get('templateLayout', 'default')));

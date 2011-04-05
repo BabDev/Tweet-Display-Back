@@ -385,7 +385,7 @@
 			</fieldset>
 			<fieldset name="advanced">
 				<field
-					name="owncache"
+					name="cache"
 					type="radio"
 					default="1"
 					label="COM_MODULES_FIELD_CACHING_LABEL"
