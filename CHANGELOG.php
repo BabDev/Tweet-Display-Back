@@ -30,6 +30,7 @@ $ - Language fix or change
 ^ [#25578] Changed prepareUser $obj['name'] references to $uname to help with error situations
 ^ Restore defaultgroup cache parameter
 ^ [#25578] Modified setCaching param
+^ [#25578] Remove the minutes to seconds conversion; locally, cache seems to be working OK
 
 6-April-2011 Michael Babker
 ^ Modified cache parameters

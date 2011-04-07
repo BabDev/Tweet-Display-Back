@@ -34,7 +34,7 @@ if (($params->get('cache')) == 0) {
 $conf = JFactory::getConfig();
 $options = array(
 	'defaultgroup' => 'mod_tweetdisplayback',
-	'lifetime' => ($params->get('cache_time') * 60)); // Convert minutes to seconds
+	'lifetime' => ($params->get('cache_time')));
 $cache = JCache::getInstance('callback', $options );
 if ($params->get('cache') == 1) {
 	$cache->setCaching(true);
