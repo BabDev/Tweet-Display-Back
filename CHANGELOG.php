@@ -29,6 +29,7 @@ $ - Language fix or change
 7-April-2011 Michael Babker
 ^ [#25578] Changed prepareUser $obj['name'] references to $uname to help with error situations
 ^ Restore defaultgroup cache parameter
+^ [#25578] Modified setCaching param
 
 6-April-2011 Michael Babker
 ^ Modified cache parameters
