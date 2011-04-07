@@ -146,13 +146,13 @@ class modTweetDisplayBackHelper {
 		if ($params->get("showHeaderUser", 1)==1) {
 			// Show the real name or the username
 			if ($params->get("showHeaderName", 1)==1) {
-				$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$obj['screen_name']."\">".$obj['name']."</a>";
+				$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$uname."\">".$obj['name']."</a>";
 			} else {
-				$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$obj['screen_name']."\">".$obj['screen_name']."</a>";
+				$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$uname."\">".$uname."</a>";
 			}
 			// Append the list name if being pulled
 			if ($params->get("twitterFeedType", 0) == 1) {
-				$twitter->header->user .= " - <a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\">".$list." list</a>";
+				$twitter->header->user .= " - <a href=\"http://twitter.com/".$uname."/".$flist."\">".$list." list</a>";
 			}
 		}
 		if ($params->get("showHeaderBio", 1)==1) {
@@ -164,7 +164,7 @@ class modTweetDisplayBackHelper {
 		if ($params->get("showHeaderWeb", 1)==1) {
 			$twitter->header->web = "<a href=\"".$obj['url']."\">".$obj['url']."</a>";
 		}
-		$twitter->header->avatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$obj['screen_name']."&size=bigger\" width=\"73px\" alt=\"".$obj['screen_name']."\" />";
+		$twitter->header->avatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$uname."&size=bigger\" width=\"73px\" alt=\"".$uname."\" />";
 
 		// Footer info
 
@@ -174,16 +174,16 @@ class modTweetDisplayBackHelper {
 			if ($params->get("footerFollowType", 1) == 1) {
 				// Determine whether a list or user feed is being generated
 				if ($params->get("twitterFeedType", 0) == 1) {
-					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$obj['screen_name']."'s ".$list." list on Twitter\" align=\"center\" /></a></b></div>";
+					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/".$uname."/".$flist."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$uname."'s ".$list." list on Twitter\" align=\"center\" /></a></b></div>";
 				} else {
-					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/intent/user?screen_name=".$obj['screen_name']."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$obj['screen_name']." on Twitter\" align=\"center\" /></a></b></div>";
+					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/intent/user?screen_name=".$uname."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$uname." on Twitter\" align=\"center\" /></a></b></div>";
 				}
 			} else {
 				// Determine whether a list or user feed is being generated
 				if ($params->get("twitterFeedType", 0) == 1) {
-					$twitter->footer->follow_me = "<hr /><div class=\"TDB-footer-follow-link\"><b><a href=\"http://twitter.com/".$obj['screen_name']."/".$flist."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
+					$twitter->footer->follow_me = "<hr /><div class=\"TDB-footer-follow-link\"><b><a href=\"http://twitter.com/".$uname."/".$flist."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
 				} else {
-					$twitter->footer->follow_me = "<hr /><div class=\"TDB-footer-follow-link\"><b><a href=\"http://twitter.com/intent/user?screen_name=".$obj['screen_name']."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
+					$twitter->footer->follow_me = "<hr /><div class=\"TDB-footer-follow-link\"><b><a href=\"http://twitter.com/intent/user?screen_name=".$uname."\" rel=\"nofollow\">".$params->get('footerFollowText', 'Follow me on Twitter')."</a></b></div>";
 				}
 			}
 		}
