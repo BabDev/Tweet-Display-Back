@@ -113,12 +113,6 @@ class modTweetDisplayBackHelper {
 		// Fetch the decoded JSON
 		$obj = self::getJSON($req);
 
-		// Check if an error was set in the statuses JSON; if so, end the processing
-		if (isset($obj['error'])) {
-			$twitter->tweet->text = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
-			return $twitter;
-		}
-
 		// Render the JSON into a formatted array
 		$twitter->tweet = self::renderFeed($obj, $params);
 
@@ -236,7 +230,7 @@ class modTweetDisplayBackHelper {
 		$tweetRTCount	= $params->get("tweetRetweetCount", 1);
 
 		// Check if $obj has data; if not, return an error
-		if (is_null($obj)) {
+		if ((is_null($obj)) || (isset($obj['error']))) {
 			// Set an error
 			$twitter[$i]->tweet->text = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
 		} else {
