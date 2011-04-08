@@ -42,7 +42,10 @@ if ($params->get('cache') == 1) {
 
 // Call the cache; if expired, pull new data
 $twitter = $cache->call(array('modTweetDisplayBackHelper', 'compileData'), $params);
-if (!$twitter) {
+if (isset($twitter['error'])) {
+	// Error message already echoed
+	return;
+} else if (!$twitter) {
 	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
 	return;
 }

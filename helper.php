@@ -37,8 +37,6 @@ class modTweetDisplayBackHelper {
 		// Decode the fetched JSON
 		$obj = json_decode($json, true);
 
-		if (isset($obj['error'])) return false;
-
 		return $obj;
 	}
 
@@ -91,6 +89,12 @@ class modTweetDisplayBackHelper {
 		// Get the user info
 		$twitter	= self::prepareUser($params);
 
+		// Check if an error was set in the user JSON; if so, end the processing
+		if (isset($twitter['error'])) {
+			echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
+			return $twitter;
+		}
+
 		// Determine whether the feed being returned is a user or list feed
 		// 0 is user, 1 is list
 		if ($params->get("twitterFeedType", 0) == 1) {
@@ -108,6 +112,12 @@ class modTweetDisplayBackHelper {
 
 		// Fetch the decoded JSON
 		$obj = self::getJSON($req);
+
+		// Check if an error was set in the statuses JSON; if so, end the processing
+		if (isset($obj['error'])) {
+			$twitter->tweet->text = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
+			return $twitter;
+		}
 
 		// Render the JSON into a formatted array
 		$twitter->tweet = self::renderFeed($obj, $params);
@@ -141,6 +151,11 @@ class modTweetDisplayBackHelper {
 
 		// Decode the fetched JSON
 		$obj	= self::getJSON($req);
+
+		// Check if an error was returned in the JSON and end processing if so
+		if (isset($obj['error'])) {
+			return $obj;
+		}
 
 		// Header info
 		if ($params->get("showHeaderUser", 1)==1) {
