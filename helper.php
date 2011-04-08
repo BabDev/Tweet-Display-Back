@@ -74,6 +74,13 @@ class modTweetDisplayBackHelper {
 	 * @since	1.6.0
 	 */
 	static function compileData($params) {
+		// Check the number of hits available
+		$hits = self::getLimit($params);
+		if ($hits == 0) {
+			$twitter->hits	= $hits;
+			return $twitter;
+		}
+
 		// Load the parameters
 		$uname		= $params->get("twitterName", "");
 		$list		= $params->get("twitterList", "");
