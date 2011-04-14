@@ -273,9 +273,6 @@ class modTweetDisplayBackHelper {
 				if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) {
 					$twitter[$i]->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id_str']."\">".$o['in_reply_to_screen_name']."</a>";
 				}
-				if (($tweetReply == 1) || (($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
-					$twitter[$i]->tweet->created .= " &bull; ";
-				}
 				// Display the number of times the tweet has been retweeted
 				if ((($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
 					$twitter[$i]->tweet->created .= " &bull; ".JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $o['retweet_count']);
