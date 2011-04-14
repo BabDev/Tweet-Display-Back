@@ -81,6 +81,9 @@ if ($i <= $count) { ?>
 			echo $o->tweet->text;
 		if (!empty($o->tweet->created)) { ?>
 			<p class="TDB-tweet-time"><?php echo $o->tweet->created; ?></p>
+		<?php } 
+		if (!empty($o->tweet->actions)) { ?>
+			<div class="TDB-tweet-actions"><?php echo $o->tweet->actions; ?></div>
 		<?php } ?>
 		</div>
 	</div>

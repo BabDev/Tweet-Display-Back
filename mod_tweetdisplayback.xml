@@ -254,8 +254,8 @@
 					name="tweetReply"
 					type="radio"
 					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_REPLY_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_REPLY_DESCRIPTION" >
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ACTION_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ACTION_DESCRIPTION" >
 					<option
 						value="0">JNO</option>
 					<option

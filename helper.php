@@ -276,16 +276,15 @@ class modTweetDisplayBackHelper {
 				if (($tweetReply == 1) || (($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
 					$twitter[$i]->tweet->created .= " &bull; ";
 				}
-				// Display a reply link
-				if ($tweetReply == 1) {
-					$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/intent/tweet?in_reply_to=".$o['id_str']."\">".JText::_('MOD_TWEETDISPLAYBACK_REPLY')."</a>";
-				}
-				if (($tweetReply == 1) && (($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
-					$twitter[$i]->tweet->created .= " &bull; ";
-				}
 				// Display the number of times the tweet has been retweeted
-				if (($tweetRTCount == 1) && ($o['retweet_count'] >= 1)) {
-					$twitter[$i]->tweet->created .= JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $o['retweet_count']);
+				if ((($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
+					$twitter[$i]->tweet->created .= " &bull; ".JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $o['retweet_count']);
+				}
+				// Display Twitter Actions
+				if ($tweetReply == 1) {
+					$twitter[$i]->tweet->actions = "<span class=\"TDB-action TDB-reply\"><a href=\"http://twitter.com/intent/tweet?in_reply_to=".$o['id_str']."\" title=\"Reply\"></a></span>";
+					$twitter[$i]->tweet->actions .= "<span class=\"TDB-action TDB-retweet\"><a href=\"http://twitter.com/intent/retweet?tweet_id=".$o['id_str']."\" title=\"Retweet\"></a></span>";
+					$twitter[$i]->tweet->actions .= "<span class=\"TDB-action TDB-favorite\"><a href=\"http://twitter.com/intent/favorite?tweet_id=".$o['id_str']."\" title=\"Favorite\"></a></span>";
 				}
 				// If set, convert user and hash tags into links
 				if ($params->get("tweetLinks", 1) == 1) {

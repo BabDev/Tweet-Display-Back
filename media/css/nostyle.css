@@ -55,6 +55,61 @@ span.TDB-header-avatar-right {
 	font-size: 85%;
 }
 
+.TDB-tweet-left .TDB-tweet-actions, .TDB-tweet-left-noavatar .TDB-tweet-actions {
+	text-align: right;
+}
+
+.TDB-tweet-right .TDB-tweet-actions, .TDB-tweet-right-noavatar .TDB-tweet-actions {
+	text-align: left;
+}
+
+.TDB-action {
+	background: url("../../media/images/icon-sprite.png") no-repeat scroll 0 0 transparent;
+	display: inline-block;
+	height: 16px;
+	position: relative;
+	width: 16px;
+}
+
+.TDB-action a {
+    background: none repeat scroll 0 0 transparent !important;
+    height: 16px;
+    left: 0px;
+    position: absolute;
+    text-decoration: none !important;
+    width: 16px;
+}	
+
+.TDB-reply {
+	background-position: 0 0;
+}
+
+.TDB-reply:hover {
+	background-position: -16px 0;
+}
+
+.TDB-retweet {
+	background-position: -80px 0;
+}
+
+.TDB-retweet:hover {
+	background-position: -96px 0;
+}
+
+.TDB-favorite {
+	background-position: -32px 0;
+}
+
+.TDB-favorite:hover {
+	background-position: -48px 0;
+}
+
+.userlink {
+}
+	
+.hashlink {
+}
+
 .TDB-footer-follow-img {
 	text-align: center;
 }

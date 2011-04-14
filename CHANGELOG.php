@@ -26,6 +26,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+14-April-2011 Michael Babker
++ Added Web Intents for Retweet and Favorite
+^ Modified templates to display intent icons
+
 7-April-2011 Michael Babker
 ^ [#25578] Changed prepareUser $obj['name'] references to $uname to help with error situations
 ^ Restore defaultgroup cache parameter
