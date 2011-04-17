@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.5.2 - Released 18-April-2011
+--------------------------------------------------
 14-April-2011 Michael Babker
 + Added Web Intents for Retweet and Favorite
 ^ Modified templates to display intent icons
