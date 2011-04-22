@@ -26,7 +26,7 @@ if ($params->get("templateCSS3", 1) == 1) {
 
 // Add the Twitter Web Intents script
 $document = JFactory::getDocument();
-$document->addCustomTag('<script type="text/javascript" src="http://platform.twitter.com/widgets.js" /></script>');
+$document->addCustomTag('<script type="text/javascript" src="http://platform.twitter.com/widgets.js" />');
 
 // Variables for the foreach
 $i		= 0;

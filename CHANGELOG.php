@@ -26,8 +26,11 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+22-April-2011 Michael Babker
+^ Fixed validation error with external JS
+
 --------------------------------------------------
-Tweet Display Back 1.5.2 - Released 18-April-2011
+Tweet Display Back 1.6.2 - Released 18-April-2011
 --------------------------------------------------
 14-April-2011 Michael Babker
 + Added Web Intents for Retweet and Favorite
