@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+9-May-2011 Michael Babker
+- Reverted previous commit
+
 22-April-2011 Michael Babker
 ^ Fixed validation error with external JS
 

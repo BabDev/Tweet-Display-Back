@@ -21,7 +21,7 @@ JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/nostyle.css', false, f
 
 // Add the Twitter Web Intents script
 $document = JFactory::getDocument();
-$document->addCustomTag('<script type="text/javascript" src="http://platform.twitter.com/widgets.js" />');
+$document->addCustomTag('<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>');
 
 // Variables for the foreach
 $i		= 0;
