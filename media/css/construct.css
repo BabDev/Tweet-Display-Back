@@ -1,0 +1,176 @@
+/**
+* Tweet Display Back Module for Joomla!
+*
+* @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
+* @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+*/
+
+.TDB-header {
+	background: #fff;
+	border: 1px solid #999999;
+	margin: 0px 0px 20px 0px;
+	padding: 4px;
+}
+
+.TDB-header-user {
+	text-align: center;
+}
+
+.TDB-header-user a {
+	font-size: 120%;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+span.TDB-header-avatar-left {
+	height: 73px;
+	float: left;
+	margin: 1px;
+	padding: 3px;
+}
+
+span.TDB-header-avatar-right {
+	height: 73px;
+	float: right;
+	margin: 1px;
+	padding: 3px;
+}
+
+.TDB-header-bio {
+	text-align: left;
+}
+	
+.TDB-header-location {
+	text-align: left;
+}
+
+.TDB-header-web {
+	padding-top: 5px;
+	font-size: 90%;
+}
+
+.TDB-tweet {
+}
+
+.TDB-tweet-avatar-left {
+	float: right;
+	height: 32px;
+	padding: 2px;
+}
+
+.TDB-tweet-avatar-right {
+	float: left;
+	height: 32px;
+	padding: 2px;
+}
+
+.TDB-tweet-user {
+	text-align: center;
+}
+
+.TDB-tweet-left {
+	background: #fff;
+	border: 1px solid #999999;
+	padding: 4px;
+	word-wrap: break-word;
+	margin: 0px 0px 20px 0px;
+	text-align: left;
+}
+
+.TDB-tweet-left .TDB-tweet-time {
+	font-size: 85%;
+	text-align: right;
+	margin-left: 0px;
+}
+
+.TDB-tweet-right {
+	background: #fff;
+	border: 1px solid #999999;
+	padding: 4px;
+	word-wrap: break-word;
+	margin: 20px 0px 0px 0px;
+	text-align: right;
+}
+
+.TDB-tweet-right .TDB-tweet-time {
+	font-size: 85%;
+	text-align: left;
+	margin-left: 0px;
+}
+
+.TDB-tweet-left .TDB-tweet-actions, .TDB-tweet-left-noavatar .TDB-tweet-actions {
+	text-align: right;
+}
+
+.TDB-tweet-right .TDB-tweet-actions, .TDB-tweet-right-noavatar .TDB-tweet-actions {
+	text-align: left;
+}
+
+.TDB-action {
+	background: url("../../media/images/icon-sprite.png") no-repeat scroll 0 0 transparent;
+	display: inline-block;
+	height: 16px;
+	position: relative;
+	width: 16px;
+}
+
+.TDB-action a {
+    background: none repeat scroll 0 0 transparent !important;
+    height: 16px;
+    left: 0px;
+    position: absolute;
+    text-decoration: none !important;
+    width: 16px;
+}	
+
+.TDB-reply {
+	background-position: 0 0;
+}
+
+.TDB-reply:hover {
+	background-position: -16px 0;
+}
+
+.TDB-retweet {
+	background-position: -80px 0;
+}
+
+.TDB-retweet:hover {
+	background-position: -96px 0;
+}
+
+.TDB-favorite {
+	background-position: -32px 0;
+}
+
+.TDB-favorite:hover {
+	background-position: -48px 0;
+}
+
+.userlink {
+}
+	
+.hashlink {
+}
+
+.clr {
+	clear: both;
+}
+
+.TDB-footer-follow-img {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.TDB-footer-follow-link {
+	text-align: right;
+}
+
+.TDB-footer-powered-img {
+	font-size: 85%;
+	text-align: center;
+}
+
+.TDB-footer-powered-text {
+	font-size: 85%;
+}

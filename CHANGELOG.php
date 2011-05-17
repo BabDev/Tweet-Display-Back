@@ -29,6 +29,7 @@ $ - Language fix or change
 17-May-2011 Michael Babker
 + Add moduleclass_sfx
 ^ Change the Follow Me button to align=middle for validation
++ Add Construct template
 
 --------------------------------------------------
 Tweet Display Back 1.6.2 - Released 18-April-2011
