@@ -169,7 +169,14 @@ class modTweetDisplayBackHelper {
 		if ($params->get("showHeaderWeb", 1)==1) {
 			$twitter->header->web = "<a href=\"".$obj['url']."\">".$obj['url']."</a>";
 		}
-		$twitter->header->avatar = "<img src=\"http://api.twitter.com/1/users/profile_image/twitter.json?screen_name=".$uname."&size=bigger\" width=\"73px\" alt=\"".$uname."\" />";
+
+		// Get the profile image URL from the object
+		$avatar	= $obj['profile_image_url'];
+
+		// Switch from the normal size avatar (48px) to the large one (73px)
+		$avatar	= str_replace('normal.jpg', 'bigger.jpg', $avatar);
+
+		$twitter->header->avatar = "<img src=\"".$avatar."\" alt=\"".$uname."\" />";
 
 		// Footer info
 

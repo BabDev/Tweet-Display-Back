@@ -30,6 +30,7 @@ $ - Language fix or change
 + Add moduleclass_sfx
 ^ Change the Follow Me button to align=middle for validation
 + Add Construct template
+# Fixed [#24554] Avatar URL for $headerAvatar
 
 --------------------------------------------------
 Tweet Display Back 1.6.2 - Released 18-April-2011
