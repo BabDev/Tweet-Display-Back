@@ -2,6 +2,7 @@
 /**
 * Tweet Display Back Module for Joomla!
 *
+* @version		$Id$
 * @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
