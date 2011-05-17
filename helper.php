@@ -179,9 +179,9 @@ class modTweetDisplayBackHelper {
 			if ($params->get("footerFollowType", 1) == 1) {
 				// Determine whether a list or user feed is being generated
 				if ($params->get("twitterFeedType", 0) == 1) {
-					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/".$uname."/".$flist."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$uname."'s ".$list." list on Twitter\" align=\"center\" /></a></b></div>";
+					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/".$uname."/".$flist."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$uname."'s ".$list." list on Twitter\" align=\"middle\" /></a></b></div>";
 				} else {
-					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/intent/user?screen_name=".$uname."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$uname." on Twitter\" align=\"center\" /></a></b></div>";
+					$twitter->footer->follow_me = "<div class=\"TDB-footer-follow-img\"><b><a href=\"http://twitter.com/intent/user?screen_name=".$uname."\" rel=\"nofollow\"><img src=\"http://twitter-badges.s3.amazonaws.com/".$params->get('footerFollowImgMeUs')."-".$params->get('footerFollowImg').".png\" alt=\"Follow ".$uname." on Twitter\" align=\"middle\" /></a></b></div>";
 				}
 			} else {
 				// Determine whether a list or user feed is being generated
