@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.6.3 - Released 19-May-2011
+--------------------------------------------------
 17-May-2011 Michael Babker
 + Add moduleclass_sfx
 ^ Change the Follow Me button to align=middle for validation
