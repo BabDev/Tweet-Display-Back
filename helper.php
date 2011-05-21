@@ -96,19 +96,21 @@ class modTweetDisplayBackHelper {
 		// Get the user info
 		$twitter	= self::prepareUser($params);
 
+		// Set the include RT's string
+		if ($retweet == 1) {
+			$incRT	= '&include_rts=1';
+		} else {
+			$incRT	= '';
+		}
+
 		// Determine whether the feed being returned is a user or list feed
 		// 0 is user, 1 is list
 		if ($params->get("twitterFeedType", 0) == 1) {
 			// Get the list feed
-			$req = "http://api.twitter.com/1/".$uname."/lists/".$flist."/statuses.json";
+			$req = "http://api.twitter.com/1/lists/statuses.json?slug=".$flist."&owner_screen_name=".$uname."&count=".$count.$incRT."";
 		} else {
 			// Get the user feed
-			// Determine whether to pull retweets or not
-			if ($retweet == 1) {
-				$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&include_rts=1&screen_name=".$uname."";
-			} else {
-				$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname."";
-			}
+			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname.$incRT."";
 		}
 
 		// Fetch the decoded JSON

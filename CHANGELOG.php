@@ -26,6 +26,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+21-May-2011 Michael Babker
+^ Changed the list feed to the new end point
+^ Added a variable for the include_rts string
+
 --------------------------------------------------
 Tweet Display Back 1.6.3 - Released 19-May-2011
 --------------------------------------------------
