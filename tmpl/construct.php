@@ -18,15 +18,21 @@ $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
 
 // If CSS3 is selected, load it's stylesheet
+$css3	= '';
 if ($params->get("templateCSS3", 1) == 1) {
-	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/construct-css3.css', false, false, false);
-} else {
-	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/construct.css', false, false, false);
+	$css3	= '-css3';
 }
+JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/construct'.$css3.'.css', false, false, false);
 
 // Add the Twitter Web Intents script
 $document = JFactory::getDocument();
 $document->addCustomTag('<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>');
+
+// Prechecked parameters
+$headerAvatar	= '';
+if (($params->get("headerAvatar", 1) == 0) || (empty($twitter->header->avatar))) {
+	$headerAvatar	= '-noavatar';
+}
 
 // Variables for the foreach
 $i		= 0;
@@ -34,7 +40,7 @@ $count	= $params->get("twitterCount", 3) - 1;
 
 // Check to see if the header is set to display
 if ($params->get("headerDisplay", 1) == 1) { ?>
-	<div class="TDB-header<?php echo $headerClassSfx; ?>">
+	<div class="TDB-header<?php echo $headerClassSfx.$headerAvatar; ?>">
 	<?php if (!empty($twitter->header->user)) { ?>
 		<div class="TDB-header-user">
 			<?php echo $twitter->header->user; ?><br />

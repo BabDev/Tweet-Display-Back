@@ -13,6 +13,10 @@
 	padding: 4px;
 }
 
+.TDB-headavatar {
+	min-height: 98px;
+}
+
 .TDB-header-user {
 	text-align: center;
 }
@@ -48,6 +52,10 @@ span.TDB-header-avatar-right {
 .TDB-header-web {
 	padding-top: 5px;
 	font-size: 90%;
+}
+
+.TDB-headavatar .TDB-header-web {
+	text-align: center;
 }
 
 .TDB-tweet {

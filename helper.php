@@ -97,17 +97,16 @@ class modTweetDisplayBackHelper {
 		$twitter	= self::prepareUser($params);
 
 		// Set the include RT's string
+		$incRT	= '';
 		if ($retweet == 1) {
 			$incRT	= '&include_rts=1';
-		} else {
-			$incRT	= '';
 		}
 
 		// Determine whether the feed being returned is a user or list feed
 		// 0 is user, 1 is list
 		if ($params->get("twitterFeedType", 0) == 1) {
 			// Get the list feed
-			$req = "http://api.twitter.com/1/lists/statuses.json?slug=".$flist."&owner_screen_name=".$uname."&count=".$count.$incRT."";
+			$req = "http://api.twitter.com/1/lists/statuses.json?slug=".$flist."&owner_screen_name=".$uname.$incRT."";
 		} else {
 			// Get the user feed
 			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname.$incRT."";
@@ -151,11 +150,12 @@ class modTweetDisplayBackHelper {
 
 		// Header info
 		if ($params->get("headerUser", 1) == 1) {
+			$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$uname."\">";
 			// Show the real name or the username
 			if ($params->get("headerName", 1) == 1) {
-				$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$uname."\">".$obj['name']."</a>";
+				$twitter->header->user .= $obj['name']."</a>";
 			} else {
-				$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$uname."\">".$uname."</a>";
+				$twitter->header->user .= $uname."</a>";
 			}
 			// Append the list name if being pulled
 			if ($params->get("twitterFeedType", 0) == 1) {

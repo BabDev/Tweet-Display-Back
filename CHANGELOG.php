@@ -29,6 +29,9 @@ $ - Language fix or change
 30-May-2011 Michael Babker
 ^ Simplified parameters check
 # Corrected parameter names for header objects in helper
++ Added TDB-headavatar class for construct
+^ Modified header name generation
+- Remove count param from list API
 
 21-May-2011 Michael Babker
 ^ Changed the list feed to the new end point
