@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.6.4 - Released 30-May-2011
+--------------------------------------------------
 30-May-2011 Michael Babker
 ^ Simplified parameters check
 # Corrected parameter names for header objects in helper
