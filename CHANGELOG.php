@@ -34,6 +34,7 @@ $ - Language fix or change
 - Remove count param from list API
 + Added TDB-tweetavatar class for construct
 # Corrected parameter check for tweet avatar
+^ Reformatted default template
 
 21-May-2011 Michael Babker
 ^ Changed the list feed to the new end point

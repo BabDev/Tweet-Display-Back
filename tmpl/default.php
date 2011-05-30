@@ -18,15 +18,22 @@ $headerClassSfx	= htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
 
 // If CSS3 is selected, load it's stylesheet
+$css3	= '';
 if ($params->get("templateCSS3", 1) == 1) {
-	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default-css3.css', false, false, false);
-} else {
-	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default.css', false, false, false);
+	$css3	= '-css3';
 }
+JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/default'.$css3.'.css', false, false, false);
 
 // Add the Twitter Web Intents script
 $document = JFactory::getDocument();
 $document->addCustomTag('<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>');
+
+// Prechecked parameters
+$headerAvatar	= '';
+$tweetAvatar	= '';
+if (($params->get("headerAvatar", 1) == 1) && (!empty($twitter->header->avatar))) {
+	$headerAvatar	= ' TDB-headavatar';
+}
 
 // Variables for the foreach
 $i		= 0;
@@ -34,14 +41,14 @@ $count	= $params->get("twitterCount", 3) - 1;
 
 // Check to see if the header is set to display
 if ($params->get("headerDisplay", 1) == 1) { ?>
-	<div class="TDB-header<?php echo $headerClassSfx; ?>">
+	<div class="TDB-header<?php echo $headerClassSfx.$headerAvatar; ?>">
 	<?php if (!empty($twitter->header->user)) { ?>
 		<div class="TDB-header-user">
 			<?php echo $twitter->header->user; ?><br />
 		</div>
 	<?php }
 	// Check to determine if the avatar is displayed in the header
-	if (($params->get("headerAvatar", 1) == 1)  && (!empty($twitter->header->avatar))) { ?>
+	if (($params->get("headerAvatar", 1) == 1) && (!empty($twitter->header->avatar))) { ?>
 		<span class="TDB-header-avatar-<?php echo $headerAlign;?>">
 			<?php echo $twitter->header->avatar; ?>
 		</span>
@@ -49,7 +56,7 @@ if ($params->get("headerDisplay", 1) == 1) { ?>
 		if (!empty($twitter->header->bio)) { ?>
 		<div class="TDB-header-bio">
 			<?php echo $twitter->header->bio; ?><br />
-			</div>
+		</div>
 		<?php }
 		if (!empty($twitter->header->location)) { ?>
 		<div class="TDB-header-location">
@@ -65,23 +72,26 @@ if ($params->get("headerDisplay", 1) == 1) { ?>
 <?php }
 
 foreach ($twitter->tweet as $o) {
-if ($i <= $count) { ?>
-    <div class="TDB-tweet<?php echo $tweetClassSfx; ?>">
+if ($i <= $count) {
+if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) {
+	$tweetAvatar	= ' TDB-tweetavatar-'.$tweetAlign;
+} ?>
+    <div class="TDB-tweet<?php echo $tweetClassSfx.$tweetAvatar; ?>">
 	<?php
 	// Determine if the noavatar class is used for tweets by checking the setting and whether an avatar was returned
 	if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) { ?>
 		<div class="TDB-tweet-avatar"><?php echo $o->tweet->avatar; ?></div>
-		<div class="TDB-tweet-<?php echo $tweetAlign;?>">
-	<?php } else { ?>
-		<div class="TDB-tweet-<?php echo $tweetAlign;?>-noavatar">
-	<?php }
-		if (!empty($o->tweet->user)) {
+	<?php } ?>
+		<div class="TDB-tweet-container TDB-tweet-align-<?php echo $tweetAlign;?>">
+	<?php } ?>
+		<div class="TDB-tweet-text">
+		<?php if (!empty($o->tweet->user)) {
 			echo $o->tweet->user;
 		}
-			echo $o->tweet->text;
-		if (!empty($o->tweet->created)) { ?>
+			echo $o->tweet->text; ?></div>
+		<?php if (!empty($o->tweet->created)) { ?>
 			<p class="TDB-tweet-time"><?php echo $o->tweet->created; ?></p>
-		<?php } 
+		<?php }
 		if (!empty($o->tweet->actions)) { ?>
 			<div class="TDB-tweet-actions"><?php echo $o->tweet->actions; ?></div>
 		<?php } ?>
@@ -89,7 +99,6 @@ if ($i <= $count) { ?>
 	</div>
 	<div class="clr"></div>
 	<?php $i++;
-	}
 }
 
 if (!empty($twitter->footer->follow_me)) {
