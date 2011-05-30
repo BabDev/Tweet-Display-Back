@@ -9,6 +9,10 @@
 .TDB-header {
 }
 
+.TDB-headavatar {
+	min-height: 98px;
+}
+
 span.TDB-header-avatar-left {
 	float: left;
 	padding: 3px;
@@ -37,30 +41,36 @@ span.TDB-header-avatar-right {
 	padding: 2px;
 }
 
-.TDB-tweet-left, .TDB-tweet-left-noavatar {
+.TDB-tweet-container {
 	word-wrap: break-word;
+}
+
+.TDB-tweet-text {
+}
+
+.TDB-tweetavatar-left .TDB-tweet-text, .TDB-tweetavatar-right .TDB-tweet-text {
+	min-height: 30px;
+}
+
+.TDB-tweetavatar-left .TDB-tweet-avatar {
+	float: left;
+}
+
+.TDB-tweetavatar-right .TDB-tweet-avatar {
+	float: right;
+}
+
+.TDB-tweet-time {
+	font-size: 85%;
+	margin-bottom: 0px;
+}
+
+.TDB-tweet-align-left {
 	text-align: left;
 }
 
-.TDB-tweet-left .TDB-tweet-time {
-	font-size: 85%;
-}
-
-.TDB-tweet-right, .TDB-tweet-right-noavatar {
-	word-wrap: break-word;
+.TDB-tweet-align-right {
 	text-align: right;
-}
-
-.TDB-tweet-right .TDB-tweet-time {
-	font-size: 85%;
-}
-
-.TDB-tweet-left .TDB-tweet-actions, .TDB-tweet-left-noavatar .TDB-tweet-actions {
-	text-align: right;
-}
-
-.TDB-tweet-right .TDB-tweet-actions, .TDB-tweet-right-noavatar .TDB-tweet-actions {
-	text-align: left;
 }
 
 .TDB-action {

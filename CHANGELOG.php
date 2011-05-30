@@ -35,6 +35,7 @@ $ - Language fix or change
 + Added TDB-tweetavatar class for construct
 # Corrected parameter check for tweet avatar
 ^ Reformatted default template
+^ Reformatted nostyle template
 
 21-May-2011 Michael Babker
 ^ Changed the list feed to the new end point
