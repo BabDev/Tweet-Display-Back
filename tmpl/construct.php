@@ -30,6 +30,7 @@ $document->addCustomTag('<script type="text/javascript" src="http://platform.twi
 
 // Prechecked parameters
 $headerAvatar	= '';
+$tweetAvatar	= '';
 if (($params->get("headerAvatar", 1) == 0) || (empty($twitter->header->avatar))) {
 	$headerAvatar	= '-noavatar';
 }
@@ -71,21 +72,24 @@ if ($params->get("headerDisplay", 1) == 1) { ?>
 <?php }
 
 foreach ($twitter->tweet as $o) {
-if ($i <= $count) { ?>
-    <div class="TDB-tweet<?php echo $tweetClassSfx; ?>">
-		<div class="TDB-tweet-<?php echo $tweetDisplay;?>">
+if ($i <= $count) {
+if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) {
+	$tweetAvatar	= ' TDB-tweetavatar';
+} ?>
+    <div class="TDB-tweet<?php echo $tweetClassSfx.$tweetAvatar; ?>">
+		<div class="TDB-tweet-container TDB-tweet-align-<?php echo $tweetDisplay;?>">
 		<?php if (!empty($o->tweet->user)) { ?>
 			<div class="TDB-tweet-user">
 				<?php echo $o->tweet->user; ?>
 			</div>
 		<?php }
-		if (($params->get("showTweetImage", 1)==1) && (!empty($o->tweet->avatar))) { ?>
+		if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) { ?>
 			<span class="TDB-tweet-avatar-<?php echo $tweetDisplay;?>">
 				<?php echo $o->tweet->avatar; ?>
 			</span>
-		<?php }
-		echo $o->tweet->text;
-		if (!empty($o->tweet->created)) { ?>
+		<?php } ?>
+		<div class="TDB-tweet-text"><?php echo $o->tweet->text;?></div>
+		<?php if (!empty($o->tweet->created)) { ?>
 			<p class="TDB-tweet-time"><?php echo $o->tweet->created; ?></p>
 		<?php }
 		if (!empty($o->tweet->actions)) { ?>

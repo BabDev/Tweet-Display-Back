@@ -77,41 +77,41 @@ span.TDB-header-avatar-right {
 	text-align: center;
 }
 
-.TDB-tweet-left {
+.TDB-tweet-text {
+}
+
+.TDB-tweetavatar .TDB-tweet-text {
+	min-height: 30px;
+}
+
+.TDB-tweet-container {
 	background: #fff;
 	border: 1px solid #999999;
 	padding: 4px;
 	word-wrap: break-word;
+}
+
+.TDB-tweet-time {
+	font-size: 85%;
+	margin-left: 0px;
+	margin-bottom: 0px;
+}
+
+.TDB-tweet-align-left {
 	margin: 0px 0px 20px 0px;
 	text-align: left;
 }
 
-.TDB-tweet-left .TDB-tweet-time {
-	font-size: 85%;
-	text-align: right;
-	margin-left: 0px;
-}
-
-.TDB-tweet-right {
-	background: #fff;
-	border: 1px solid #999999;
-	padding: 4px;
-	word-wrap: break-word;
+.TDB-tweet-align-right {
 	margin: 20px 0px 0px 0px;
 	text-align: right;
 }
 
-.TDB-tweet-right .TDB-tweet-time {
-	font-size: 85%;
-	text-align: left;
-	margin-left: 0px;
-}
-
-.TDB-tweet-left .TDB-tweet-actions, .TDB-tweet-left-noavatar .TDB-tweet-actions {
+.TDB-tweet-align-left .TDB-tweet-time, .TDB-tweet-align-left .TDB-tweet-actions {
 	text-align: right;
 }
 
-.TDB-tweet-right .TDB-tweet-actions, .TDB-tweet-right-noavatar .TDB-tweet-actions {
+.TDB-tweet-align-right .TDB-tweet-time, .TDB-tweet-align-right .TDB-tweet-actions {
 	text-align: left;
 }
 

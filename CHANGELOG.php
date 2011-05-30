@@ -32,6 +32,8 @@ $ - Language fix or change
 + Added TDB-headavatar class for construct
 ^ Modified header name generation
 - Remove count param from list API
++ Added TDB-tweetavatar class for construct
+# Corrected parameter check for tweet avatar
 
 21-May-2011 Michael Babker
 ^ Changed the list feed to the new end point
