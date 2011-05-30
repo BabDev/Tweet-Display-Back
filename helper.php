@@ -14,9 +14,9 @@ class modTweetDisplayBackHelper {
 
 	/**
 	 * Function to fetch a JSON feed
-	 * 
+	 *
 	 * @param	string	$req	The URL of the feed to load
-	 * 
+	 *
 	 * @return	array	$obj	The fetched JSON query
 	 * @since	1.0.7
 	 */
@@ -42,9 +42,9 @@ class modTweetDisplayBackHelper {
 
 	/**
 	 * Function to get the rate limit of a Twitter user
-	 * 
+	 *
 	 * @param	string	$params	The module parameters
-	 * 
+	 *
 	 * @return	string	$hits	The number of remaining hits on a user's rate limit
 	 * @since	1.0.6
 	 */
@@ -67,9 +67,9 @@ class modTweetDisplayBackHelper {
 
 	/**
 	 * Function to compile the data to render a formatted object displaying a Twitter feed
-	 * 
+	 *
 	 * @param	string	$params		The module parameters
-	 * 
+	 *
 	 * @return	object	$twitter	A formatted object with the requested tweets
 	 * @since	1.6.0
 	 */
@@ -124,9 +124,9 @@ class modTweetDisplayBackHelper {
 
 	/**
 	 * Function to fetch the user JSON and render it
-	 * 
+	 *
 	 * @param	string	$param		The module parameters
-	 * 
+	 *
 	 * @return	array	$twitter	The formatted object for display
 	 * @since	1.6.0
 	 */
@@ -150,9 +150,9 @@ class modTweetDisplayBackHelper {
 		$obj	= self::getJSON($req);
 
 		// Header info
-		if ($params->get("showHeaderUser", 1)==1) {
+		if ($params->get("headerUser", 1) == 1) {
 			// Show the real name or the username
-			if ($params->get("showHeaderName", 1)==1) {
+			if ($params->get("headerName", 1) == 1) {
 				$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$uname."\">".$obj['name']."</a>";
 			} else {
 				$twitter->header->user = "<a href=\"http://twitter.com/intent/user?screen_name=".$uname."\">".$uname."</a>";
@@ -162,13 +162,13 @@ class modTweetDisplayBackHelper {
 				$twitter->header->user .= " - <a href=\"http://twitter.com/".$uname."/".$flist."\">".$list." list</a>";
 			}
 		}
-		if ($params->get("showHeaderBio", 1)==1) {
+		if ($params->get("headerBio", 1) == 1) {
 			$twitter->header->bio = $obj['description'];
 		}
-		if ($params->get("showHeaderLocation", 1)==1) {
+		if ($params->get("headerLocation", 1) == 1) {
 			$twitter->header->location = $obj['location'];
 		}
-		if ($params->get("showHeaderWeb", 1)==1) {
+		if ($params->get("headerWeb", 1) == 1) {
 			$twitter->header->web = "<a href=\"".$obj['url']."\">".$obj['url']."</a>";
 		}
 
@@ -216,10 +216,10 @@ class modTweetDisplayBackHelper {
 
 	/**
 	 * Function to render the Twitter feed into a formatted object
-	 * 
+	 *
 	 * @param	array	$obj		The decoded JSON feed
 	 * @param	string	$params		The module parameters
-	 * 
+	 *
 	 * @return	object	$twitter	The formatted object for display
 	 * @since	1.6.0
 	 */
@@ -305,9 +305,9 @@ class modTweetDisplayBackHelper {
 
 	/**
 	 * Function to convert a static time into a relative measurement
-	 * 
+	 *
 	 * @param	string	$date	The date to convert
-	 * 
+	 *
 	 * @return	string	$date	A text string of a relative time
 	 * @since	1.0.0
 	 */
@@ -343,9 +343,9 @@ class modTweetDisplayBackHelper {
 
 	/**
 	 * Function to convert a formatted list name into it's URL equivilent
-	 * 
+	 *
 	 * @param	string	$list	The user inputted list name
-	 * 
+	 *
 	 * @return	string	$list	The list name converted
 	 * @since	1.6.0
 	 */
