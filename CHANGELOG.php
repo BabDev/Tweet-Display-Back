@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+30-May-2011 Michael Babker
+^ Simplified parameters check
+
 21-May-2011 Michael Babker
 ^ Changed the list feed to the new end point
 ^ Added a variable for the include_rts string

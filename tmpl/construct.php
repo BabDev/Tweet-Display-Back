@@ -41,7 +41,7 @@ if ($params->get("headerDisplay", 1) == 1) { ?>
 		</div>
 	<?php }
 	// Check to determine if the avatar is displayed in the header
-	if (($params->get("headerAvatar", 1) == 1)  && (!empty($twitter->header->avatar))) { ?>
+	if (($params->get("headerAvatar", 1) == 1) && (!empty($twitter->header->avatar))) { ?>
 		<span class="TDB-header-avatar-<?php echo $headerAlign;?>">
 			<?php echo $twitter->header->avatar; ?>
 		</span>
@@ -73,17 +73,15 @@ if ($i <= $count) { ?>
 				<?php echo $o->tweet->user; ?>
 			</div>
 		<?php }
-		if ($params->get("showTweetImage", 1)==1) {
-			if (!empty($o->tweet->avatar)) { ?>
-				<span class="TDB-tweet-avatar-<?php echo $tweetDisplay;?>">
-					<?php echo $o->tweet->avatar; ?>
-				</span>
-			<?php }
-		}
+		if (($params->get("showTweetImage", 1)==1) && (!empty($o->tweet->avatar))) { ?>
+			<span class="TDB-tweet-avatar-<?php echo $tweetDisplay;?>">
+				<?php echo $o->tweet->avatar; ?>
+			</span>
+		<?php }
 		echo $o->tweet->text;
 		if (!empty($o->tweet->created)) { ?>
 			<p class="TDB-tweet-time"><?php echo $o->tweet->created; ?></p>
-		<?php } 
+		<?php }
 		if (!empty($o->tweet->actions)) { ?>
 			<div class="TDB-tweet-actions"><?php echo $o->tweet->actions; ?></div>
 		<?php } ?>
