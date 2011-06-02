@@ -26,6 +26,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+2-June-2011 Michael Babker
+$+ Added Swedish translation (translated by JOKR Solutions)
+$+ Added Portuguese (Brazilian) translation (translated by Manoel Silva)
+
 --------------------------------------------------
 Tweet Display Back 1.6.4 - Released 30-May-2011
 --------------------------------------------------

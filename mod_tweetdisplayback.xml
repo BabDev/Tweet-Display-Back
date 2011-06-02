@@ -25,6 +25,8 @@
 	<languages>
 		<language tag="en-GB">language/en-GB/en-GB.mod_tweetdisplayback.ini</language>
 		<language tag="en-GB">language/en-GB/en-GB.mod_tweetdisplayback.sys.ini</language>
+		<language tag="sv-SE">language/sv-SE/sv-SE.mod_tweetdisplayback.ini</language>
+		<language tag="sv-SE">language/sv-SE/sv-SE.mod_tweetdisplayback.sys.ini</language>
 	</languages>
 	<updateservers>
 		<server type="extension" name="Tweet Display Back Updates" priority="2">http://www.flbab.com/updates/TDB.xml</server>
