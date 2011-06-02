@@ -25,6 +25,8 @@
 	<languages>
 		<language tag="en-GB">language/en-GB/en-GB.mod_tweetdisplayback.ini</language>
 		<language tag="en-GB">language/en-GB/en-GB.mod_tweetdisplayback.sys.ini</language>
+		<language tag="pt-BR">language/pt-BR/pt-BR.mod_tweetdisplayback.ini</language>
+		<language tag="pt-BR">language/pt-BR/pt-BR.mod_tweetdisplayback.sys.ini</language>
 		<language tag="sv-SE">language/sv-SE/sv-SE.mod_tweetdisplayback.ini</language>
 		<language tag="sv-SE">language/sv-SE/sv-SE.mod_tweetdisplayback.sys.ini</language>
 	</languages>
