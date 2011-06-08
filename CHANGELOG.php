@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+8-June-2011 Michael Babker
+^ Change "Powered By" link to point to category page
+
 2-June-2011 Michael Babker
 $+ Added Swedish translation (translated by JOKR Solutions)
 $+ Added Portuguese (Brazilian) translation (translated by Manoel Silva)

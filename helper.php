@@ -208,7 +208,7 @@ class modTweetDisplayBackHelper {
 			} else {
 				$twitter->footer->powered_by = "<hr /><div class=\"TDB-footer-powered-text\">";
 			}
-			$twitter->footer->powered_by .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back/13-info\">Tweet Display Back</a></div>";
+			$twitter->footer->powered_by .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back\">Tweet Display Back</a></div>";
 		}
 
 		return $twitter;
