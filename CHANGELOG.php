@@ -26,6 +26,11 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+10-June-2011 Michael Babker
+^ Changed cache time to process in seconds versus minutes
+^ Return an empty string when getLimit doesn't get the JSON
+^ Added checks to ensure the user object pulls data
+
 8-June-2011 Michael Babker
 ^ Change "Powered By" link to point to category page
 

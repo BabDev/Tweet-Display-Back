@@ -15,7 +15,7 @@ if (!extension_loaded('curl')) {
 	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL');
 	return;
 }
-		
+
 // Include the helper
 require_once dirname(__FILE__).'/helper.php';
 
@@ -25,7 +25,7 @@ if ($params->get('cache') == 1) {
 	$options = array(
 		'defaultgroup' => 'mod_tweetdisplayback');
 	$cache = JCache::getInstance('callback', $options);
-	$cache->setLifeTime($params->get('cache_time') * 60);
+	$cache->setLifeTime($params->get('cache_time'));
 	$cache->setCaching(true);
 
 	// Call the cache; if expired, pull new data
@@ -38,7 +38,7 @@ if ($params->get('cache') == 1) {
 if (isset($twitter->hits)) {
 	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
 	return;
-} else if (!$twitter) {
+} else if ((!$twitter) || (isset($twitter->error))) {
 	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
 	return;
 }

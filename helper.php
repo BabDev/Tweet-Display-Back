@@ -60,7 +60,7 @@ class modTweetDisplayBackHelper {
 		if (isset ($obj['remaining_hits'])) {
 		 	$hits = $obj['remaining_hits'];
 		} else {
-		 	return false;
+		 	$hits = '';
 		}
 		return $hits;
 	}
@@ -77,7 +77,7 @@ class modTweetDisplayBackHelper {
 		// Check the number of hits available
 		$hits = self::getLimit($params);
 		if ($hits == 0) {
-			$twitter->hits	= $hits;
+			$twitter->hits	= '';
 			return $twitter;
 		}
 
@@ -95,6 +95,11 @@ class modTweetDisplayBackHelper {
 
 		// Get the user info
 		$twitter	= self::prepareUser($params);
+
+		// Check to see if we have an error
+		if (isset ($twitter->error)) {
+		 	return $twitter;
+		}
 
 		// Set the include RT's string
 		$incRT	= '';
@@ -147,6 +152,12 @@ class modTweetDisplayBackHelper {
 
 		// Decode the fetched JSON
 		$obj	= self::getJSON($req);
+
+		// Check that we have the JSON, otherwise set an error
+		if (!$obj) {
+			$twitter->error	= '';
+			return $twitter;
+		}
 
 		// Header info
 		if ($params->get("headerUser", 1) == 1) {

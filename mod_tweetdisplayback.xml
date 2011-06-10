@@ -402,7 +402,7 @@
 				<field
 					name="cache_time"
 					type="text"
-					default="15"
+					default="900"
 					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
 					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
 				<field
