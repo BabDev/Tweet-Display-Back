@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 1.6.5 - Released 17-June-2011
+--------------------------------------------------
 10-June-2011 Michael Babker
 ^ Changed cache time to process in seconds versus minutes
 ^ Return an empty string when getLimit doesn't get the JSON
