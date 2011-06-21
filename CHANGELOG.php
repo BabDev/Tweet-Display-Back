@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+22-June-2011 Michael Babker
++ Added rel="nofollow" to all links (thanks Jurian for the suggestion)
+
 --------------------------------------------------
 Tweet Display Back 1.6.5 - Released 17-June-2011
 --------------------------------------------------
