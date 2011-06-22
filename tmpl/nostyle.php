@@ -72,7 +72,7 @@ if ($i <= $count) {
 if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) {
 	$tweetAvatar	= ' TDB-tweetavatar-'.$tweetAlign;
 } ?>
-    <div class="TDB-tweet<?php echo $tweetClassSfx.$tweetAvatar; ?>">
+    <div class="TDB-tweet<?php echo $tweetClassSfx.$tweetAvatar; if ($i==$count) {echo ' TDB-last-tweet';} ?>">
 	<?php if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) { ?>
 		<span class="TDB-tweet-avatar">
 			<?php echo $o->tweet->avatar; ?>

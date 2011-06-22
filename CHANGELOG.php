@@ -26,6 +26,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+23-June-2011 Michael Babker
++ Added TDB-last-tweet class for nostyle (thanks Jurian for the suggestion)
+
 22-June-2011 Michael Babker
 + Added rel="nofollow" to all links (thanks Jurian for the suggestion)
 
