@@ -1,0 +1,15 @@
+# Packages #
+*.zip
+
+# Package directories #
+packages
+releases
+
+# Update Server #
+TDB.xml
+
+# IDE #
+.buildpath
+.project
+.settings
+.DS_Store

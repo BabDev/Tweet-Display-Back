@@ -2,7 +2,6 @@
 /**
 * Tweet Display Back Module for Joomla!
 *
-* @version		$Id$
 * @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
@@ -26,6 +25,12 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+23-June-2011 Michael Babker
+^ Began restructuring repo for single repo version for J! 1.5 & 1.6+
+
+--------------------------------------------------
+Branched from Tweet Display Back Trunk revision 212 - 23-June-2011
+--------------------------------------------------
 23-June-2011 Michael Babker
 + Added TDB-last-tweet class for nostyle (thanks Jurian for the suggestion)
 

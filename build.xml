@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="tweetdisplayback" default="dev_head" basedir=".">
+	<target
+		name="dev_head"
+		description="Builds test packages based on the development head"
+		depends="rebuild-packages,common-files,15-package,17-package"
+	>
+		<echo msg="Deleting old master builds" />
+		<delete quiet="yes" includeemptydirs="true">
+			<fileset dir="*">
+				<include name="releases/mod_tweetdisplayback_15master.zip" />
+				<include name="releases/mod_tweetdisplayback_17master.zip" />
+			</fileset>
+		</delete>
+		<echo msg="Build 1.5 package" />
+		<zip destfile="releases/mod_tweetdisplayback_15master.zip">
+			<fileset dir="packages/1.5">
+				<include name="**" />
+			</fileset>
+			<fileset dir="packages/common">
+				<include name="**" />
+			</fileset>
+		</zip>
+		<echo msg="Build 1.7 package" />
+		<zip destfile="releases/mod_tweetdisplayback_17master.zip">
+			<fileset dir="packages/1.7">
+				<include name="**" />
+			</fileset>
+			<fileset dir="packages/common">
+				<include name="**" />
+			</fileset>
+		</zip>
+	</target>
+	<target
+		name="release"
+		description="Builds release packages based on the development head"
+		depends="rebuild-packages,15-package,17-package"
+	>
+		<echo msg="Build 1.5 package" />
+		<zip destfile="releases/mod_tweetdisplayback_200alpha_15.zip">
+			<fileset dir="packages/1.5">
+				<include name="**" />
+			</fileset>
+		</zip>
+		<echo msg="Build 1.7 package" />
+		<zip destfile="releases/mod_tweetdisplayback_200alpha_17.zip">
+			<fileset dir="packages/1.7">
+				<include name="**" />
+			</fileset>
+		</zip>
+	</target>
+	<target name="common-files" description="Stages the common files" >
+		<echo msg="Create temp folder" />
+		<mkdir dir="packages/common" />
+		<echo msg="Copy files" />
+		<copy todir="packages/common/media">
+			<fileset dir="media" />
+		</copy>
+		<copy todir="packages/common/tmpl">
+			<fileset dir="tmpl" />
+		</copy>
+		<copy todir="packages/common">
+			<fileset dir=".">
+				<include name="CHANGELOG.php" />
+				<include name="helper.php" />
+				<include name="index.html" />
+				<include name="mod_tweetdisplayback.php" />
+			</fileset>
+	    </copy>
+	</target>
+	<target name="15-package" description="Builds the 1.5 package" >
+		<echo msg="Create 1.5 temp folder" />
+		<mkdir dir="packages/1.5" />
+		<echo msg="Create 1.5 language folder" />
+		<copy todir="packages/1.5/language">
+			<fileset dir="language/1.5" />
+	    </copy>
+		<echo msg="Copy 1.5 manifest" />
+		<copy
+			file="mod_tweetdisplayback_15.xml"
+			tofile="packages/1.5/mod_tweetdisplayback.xml"
+			overwrite="true" />
+	</target>
+	<target name="17-package" description="Builds the 1.7 package" >
+		<echo msg="Create 1.5 temp folder" />
+		<mkdir dir="packages/1.7" />
+		<echo msg="Create 1.7 language folder" />
+		<copy todir="packages/1.7/language">
+			<fileset dir="language/1.7" />
+	    </copy>
+		<echo msg="Copy 1.7 manifest" />
+		<copy
+			file="mod_tweetdisplayback_17.xml"
+			tofile="packages/1.7/mod_tweetdisplayback.xml"
+			overwrite="true" />
+	</target>
+	<target name="rebuild-packages" description="Delete old packages">
+		<echo msg="Deleting packages dir" />
+		<delete quiet="yes" includeemptydirs="true">
+			<fileset dir="*">
+				<include name="packages" />
+			</fileset>
+		</delete>
+		<echo msg="Creating packages dir" />
+		<mkdir dir="packages" />
+	</target>
+</project>
