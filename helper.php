@@ -294,7 +294,7 @@ class modTweetDisplayBackHelper {
 				}
 				// Display the number of times the tweet has been retweeted
 				if ((($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
-					$twitter[$i]->tweet->created .= " &bull; ".JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $o['retweet_count']);
+					$twitter[$i]->tweet->created .= " &bull; ".self::renderRetweetCount($o['retweet_count']);
 				}
 				// Display Twitter Actions
 				if ($tweetReply == 1) {
@@ -328,27 +328,65 @@ class modTweetDisplayBackHelper {
 			return JText::_('MOD_TWEETDISPLAYBACK_CREATE_LESSTHANAMINUTE');
 		}
 		$diff = round($diff/60);
-		// 1 to 59 minutes
+		// 60 to 119 seconds
+		if ($diff < 2) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTE');
+		}
+		// 2 to 59 minutes
 		if ($diff < 60) {
-			return JText::plural('MOD_TWEETDISPLAYBACK_CREATE_MINUTES', $diff);
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTES');
 		}
 		$diff = round($diff/60);
-		// 1 to 23 hours
+		// 1 hour
+		if ($diff < 2) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOUR');
+		}
+		// 2 to 23 hours
 		if ($diff < 24) {
-			return JText::plural('MOD_TWEETDISPLAYBACK_CREATE_HOURS', $diff);
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOURS');
 		}
 		$diff = round($diff/24);
-		// 1 to 6 days
+		// 1 day
+		if ($diff < 2) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAY');
+		}
+		// 2 to 6 days
 		if ($diff < 7) {
-			return JText::plural('MOD_TWEETDISPLAYBACK_CREATE_DAYS', $diff);
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAYS');
 		}
 		$diff = round($diff/7);
-		// 1 to 3 weeks
-		if ($diff < 4) {
-			return JText::plural('MOD_TWEETDISPLAYBACK_CREATE_WEEKS', $diff);
+		// 1 week
+		if ($diff < 2) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEK');
 		}
-		// If older than 4 weeks, display a static time
+		// 2 or 3 weeks
+		if ($diff < 4) {
+			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEKS');
+		}
 		return JHTML::date($date);
+	}
+
+	/**
+	 * Function to count the number of retweets and return the appropriate string
+	 *
+	 * @param	string	$count	The number of retweets
+	 * @return	string	$count	A text string of the number of retweets
+	 * @since	1.6.0
+	 */
+	static function renderRetweetCount($count) {
+		// No retweets
+		if ($count = 0) {
+			return $count . JText::_('MOD_TWEETDISPLAYBACK_RETWEETS');
+		}
+		// 1 retweet
+		else if ($count = 1) {
+			return $count . JText::_('MOD_TWEETDISPLAYBACK_RETWEET');
+		}
+		// 2 or more retweets
+		else if ($count > 1) {
+			return $count . JText::_('MOD_TWEETDISPLAYBACK_RETWEETS');
+		}
+		return;
 	}
 
 	/**
