@@ -10,25 +10,20 @@
 // No direct access
 defined('_JEXEC') or die;
 
-/*
- * Included user entities in the Twitter feeds
- * Added new function processFeed()
- * 
- * TODO: make filtering compatible with list feed, gives an error now 
+/* TODO: make filtering compatible with list feed. List feed gives an error now (!) 
  * 
  * BUG :
- * When fetching with setting: "Show Retweet:no" the amount of tweets to show is not correct.
- * This is because retweeted tweets are filtered out, the JSON won't give 
- *
- * Example If show tweets=3, and 2nd tweet is a retweet. Then only tweet 1 and 3 are fetched. 
- * The API won't look for an extra tweet...
+ * When filtering deleteUserMentions, the following is filtered out:
+ * - @mentions
+ * - @userreplys
+ * - retweets (at least retweets done by the user, don't know if by others retweeted messages are affected, but think so)
+ * The retweets should not filtered out, but I didn't saw another solution at the API...
+ * The retweets radion button does not do anything if deleteUserMentions=yes.
  * 
- * Because of this bug, the lastTweet class is also not applied.
+ * Solve this or call the deleteUserMentions radiobutton different: "Filter retweets, mentions and replys? Note: retweet radio button does not work if set to yes".
  */
 
-
 class modTweetDisplayBackHelper {
-
 	/**
 	 * Function to fetch a JSON feed
 	 *
@@ -132,7 +127,8 @@ class modTweetDisplayBackHelper {
 		} else {
 			// Get the user feed
 			if($params->get("deleteReplyToUser", 0)==1 ||
-			   $params->get("deleteUserMentions", 0)==1) // Filter deleteReplyToUser
+			   $params->get("deleteUserMentions", 0)==1) 
+			   // If tweets are filtered by ReplyToUser or deleteUserMentions:
 			{
 				$count=$count*4; // deleteReplyToUser and deleteUserMentions are filtered out AFTER the fetched tweets, 
 								 // this affects the displayed tweets. Fetch more tweets to prevent this.
@@ -278,10 +274,8 @@ class modTweetDisplayBackHelper {
 				else {
 					// Feedtype is user list, filter if needed and then process feed			 
 					if ($params->get("deleteUserMentions", 0)==1) {
-						// If user mentions has to filtered out, deletes ALL tweets which contains @
+						// If user @mentions and @replies has to filtered out, deletes ALL tweets which contains @
 						// Deletes also retweets! Even if Show Retweets is set to yes.
-						//  example  Lorem @Ipsum...
-						//  or		 @Lorem Ipsum...
 						if ($o['entities']['user_mentions']==null && $tweetCounter>0) {	
 							// Process feed
 							self::processFeed($twitter, $o, $i, $params);
@@ -291,8 +285,7 @@ class modTweetDisplayBackHelper {
 						}
 					}
 					
-					// If only reply to user has to be filtered out
-					// example @Username lorem ipsum...
+					// If only reply to user has to be filtered out (@replies)
 					else if ($params->get("deleteReplyToUser", 0)==1) { 
 						if ($o['in_reply_to_user_id']==null && $tweetCounter>0) {	
 							// Process feed
@@ -302,8 +295,8 @@ class modTweetDisplayBackHelper {
 							$tweetCounter--;
 						}
 					}
-					else {	// No filtering required
-							// Process feed
+					else {	
+							// No filtering required, process feed
 							self::processFeed($twitter, $o, $i, $params);
 					}
 				}
