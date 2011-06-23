@@ -258,11 +258,10 @@ class modTweetDisplayBackHelper {
 					if ($params->get("twitterFeedType", 0) == 1) {
 						self::processItem($twitter, $o, $i, $params);
 					} else {
-						//@TODO: If both filter options are set, replies are slipping through
 						// Filter mentions
 						if ($params->get("filterMentions", 0) == 1) {
 							// Check if the mentions entity is null, whether the tweet is a reply, or if the tweet is a retweet
-							if (($o['entities']['user_mentions'] == null || $o['in_reply_to_user_id'] != null || isset($o['retweeted_status'])) && $count > 0) {
+							if (($o['entities']['user_mentions'] == null || ($o['entities']['user_mentions']['0']['indices']['0'] != '0') || isset($o['retweeted_status'])) && $count > 0) {
 								// Process feed
 								self::processItem($twitter, $o, $i, $params);
 
