@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5" method="upgrade">
+	<name>Tweet Display Back</name>
+	<creationDate>January 2011</creationDate>
+	<author>Michael Babker</author>
+	<copyright>(C) 2010-2011 Michael Babker</copyright>
+	<authorEmail>mbabker@flbab.com</authorEmail>
+	<authorUrl>http://www.flbab.com</authorUrl>
+	<version>1.5.5</version>
+	<license>GNU/GPL</license>
+	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
+	<params>
+		<param
+			name="twitterFeedType"
+			type="radio"
+			default="0"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_DESCRIPTION" >
+			<option
+				value="0">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_USER</option>
+			<option
+				value="1">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_LIST</option>
+		</param>
+		<param
+			name="twitterName"
+			type="text"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_USERNAME_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_USERNAME_DESCRIPTION" />
+		<param
+			name="twitterList"
+			type="text"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LISTNAME_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LISTNAME_DESCRIPTION" />
+		<param
+			name="twitterCount"
+			type="text"
+			default="3"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_COUNT_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_COUNT_DESCRIPTION" />
+		<param
+			name="@spacer"
+			type="spacer"
+			default=""
+			label="MOD_TWEETDISPLAYBACK_TEMPLATE_FIELDSET_LABEL"
+			description="" />
+		<param 
+			name="templateLayout"
+			type="filelist"
+			default="default"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_LABEL"
+			directory="modules/mod_tweetdisplayback/tmpl"
+			exclude = "\.html"
+			hide_default="1"
+			hide_none="1"
+			stripext="1"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_DESCRIPTION" />
+		<param
+			name="templateCSS3"
+			type="radio"
+			default="0"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_CSS3_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_CSS3_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="@spacer"
+			type="spacer"
+			default=""
+			label="MOD_TWEETDISPLAYBACK_HEADER_FIELDSET_LABEL"
+			description="" />
+		<param
+			name="headerDisplay"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_DISPLAY_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_DISPLAY_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="headerclasssfx"
+			type="text"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_HEADERCLASSSFX_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_HEADERCLASSSFX_DESCRIPTION" />
+		<param
+			name="headerUser"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_USER_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_USER_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="headerName"
+			type="radio"
+			default="0"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_NAME_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_NAME_DESCRIPTION" >
+			<option
+				value="0">MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_NAME_OPTION_USER</option>
+			<option
+				value="1">MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_NAME_OPTION_NAME</option>
+		</param>
+		<param
+			name="headerAvatar"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="headerAvatarAlignment"
+			type="radio"
+			default="left"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_ALIGNMENT_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_ALIGNMENT_DESCRIPTION" >
+			<option
+				value="left">Left</option>
+			<option
+				value="right">Right</option>
+		</param>
+		<param
+			name="headerBio"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_BIO_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_BIO_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="headerWeb"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_URL_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_URL_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="headerLocation"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_LOCATION_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_LOCATION_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="@spacer"
+			type="spacer"
+			default=""
+			label="MOD_TWEETDISPLAYBACK_TWEET_FIELDSET_LABEL"
+			description="" />
+		<param
+			name="tweetclasssfx"
+			type="text"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_TWEETCLASSSFX_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_TWEETCLASSSFX_DESCRIPTION" />
+		<param
+			name="tweetAvatar"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_AVATAR_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_AVATAR_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="tweetAlignment"
+			type="radio"
+			default="left"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ALIGNMENT_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ALIGNMENT_DESCRIPTION" >
+			<option
+				value="left">Left</option>
+			<option
+				value="right">Right</option>
+		</param>
+		<param
+			name="tweetName"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USER_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USER_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="tweetUserSeparator"
+			type="text"
+			length="5"
+			default=" "
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USERSEPARATOR_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USERSEPARATOR_DESCRIPTION" />
+		<param
+			name="tweetCreated"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_CREATEDATE_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_CREATEDATE_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="tweetRelativeTime"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RELATIVEDATE_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RELATIVEDATE_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="tweetReply"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ACTION_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ACTION_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="tweetRetweetCount"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RTCOUNT_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RTCOUNT_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="tweetSource"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_SOURCE_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_SOURCE_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="tweetLocation"
+			type="radio"
+			default="0"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_LOCATION_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_LOCATION_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="tweetRetweets"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RETWEET_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RETWEET_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="tweetLinks"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LINK_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LINK_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="@spacer"
+			type="spacer"
+			default="0" 
+			label="Filters"
+			description="" />
+		<param
+			name="deleteUserMentions"
+			type="radio"
+			default="0"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_DELETE_USER_MENTIONS"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_DELETE_USER_MENTIONS" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="deleteReplyToUser"
+			type="radio"
+			default="0"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_DELETE_REPLY_TO_USER"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_DELETE_REPLY_TO_USER" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="@spacer"
+			type="spacer"
+			default=""
+			label="MOD_TWEETDISPLAYBACK_FOOTER_FIELDSET_LABEL"
+			description="" />
+		<param
+			name="footerFollowLink"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_LINK_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_LINK_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="footerFollowType"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_TYPE_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_TYPE_DESCRIPTION" >
+			<option
+				value="0">MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_TYPE_OPTION_TEXT</option>
+			<option
+				value="1">MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_TYPE_OPTION_IMAGE</option>
+		</param>
+		<param
+			name="footerFollowImg"
+			type="radio"
+			default="a"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_IMAGE_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_IMAGE_DESCRIPTION" >
+			<option
+				value="a">MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_IMAGE_OPTION_BLUE</option>
+			<option
+				value="b">MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_IMAGE_OPTION_GREY</option>
+			<option
+				value="c">MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_IMAGE_OPTION_BLACK</option>
+		</param>
+		<param
+			name="footerFollowImgMeUs"
+			type="radio"
+			default="follow_me"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_IMAGE_ME_US_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_IMAGE_ME_US_DESCRIPTION" >
+			<option
+				value="follow_me">MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_IMAGE_ME_US_OPTION_ME</option>
+			<option
+				value="follow_us">MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_IMAGE_ME_US_OPTION_US</option>
+		</param>
+		<param
+			name="footerFollowText"
+			type="text"
+			default="Follow me on Twitter"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_TEXT_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_TEXT_DESCRIPTION" />
+		<param
+			name="footerPoweredBy"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_POWEREDBY_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_POWEREDBY_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+	</params>
+	<params group="advanced">
+		<param
+			name="cache"
+			type="radio"
+			default="1"
+			label="Cache"
+			description="Choose whether to cache the contents of this module or not" >
+			<option
+				value="1">Yes</option>
+			<option
+				value="0">No</option>
+		</param>
+		<param
+			name="cache_time"
+			type="text"
+			default="15"
+			label="Cache Time"
+			description="The time in minutes that the module's contents are cached" />
+		<param
+			name="moduleclass_sfx"
+			type="text"
+			default=""
+			label="Module Class Suffix"
+			description="PARAMMODULECLASSSUFFIX" />
+	</params>
+	<files>
+		<filename module="mod_tweetdisplayback">CHANGELOG.php</filename>
+		<filename module="mod_tweetdisplayback">helper.php</filename>
+		<filename module="mod_tweetdisplayback">index.html</filename>
+		<filename module="mod_tweetdisplayback">media/index.html</filename>
+		<filename module="mod_tweetdisplayback">media/css/construct-css3.css</filename>
+		<filename module="mod_tweetdisplayback">media/css/construct.css</filename>
+		<filename module="mod_tweetdisplayback">media/css/default-css3.css</filename>
+		<filename module="mod_tweetdisplayback">media/css/default.css</filename>
+		<filename module="mod_tweetdisplayback">media/css/index.html</filename>
+		<filename module="mod_tweetdisplayback">media/css/nostyle.css</filename>
+		<filename module="mod_tweetdisplayback">media/images/icon-sprite.png</filename>
+		<filename module="mod_tweetdisplayback">media/images/index.html</filename>
+		<filename module="mod_tweetdisplayback">mod_tweetdisplayback.php</filename>
+		<filename module="mod_tweetdisplayback">tmpl/construct.php</filename>
+		<filename module="mod_tweetdisplayback">tmpl/default.php</filename>
+		<filename module="mod_tweetdisplayback">tmpl/index.html</filename>
+		<filename module="mod_tweetdisplayback">tmpl/nostyle.php</filename>
+	</files>
+	<languages folder="language/">
+		<language tag="en-GB">en-GB/en-GB.mod_tweetdisplayback.ini</language>
+		<language tag="pt-BR">pt-BR/pt-BR.mod_tweetdisplayback.ini</language>
+		<language tag="sv-SE">sv-SE/sv-SE.mod_tweetdisplayback.ini</language>
+	</languages>
+</install>
