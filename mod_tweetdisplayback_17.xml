@@ -317,6 +317,30 @@
 						value="1">JYES</option>
 				</field>
 			</fieldset>
+			<fieldset name="filter">
+				<field
+					name="filterUserMentions"
+					type="radio"
+					default="0"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="filterReplyToUser"
+					type="radio"
+					default="0"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+			</fieldset>
 			<fieldset name="footer">
 				<field
 					name="footerFollowLink"

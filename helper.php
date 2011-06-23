@@ -2,7 +2,6 @@
 /**
 * Tweet Display Back Module for Joomla!
 *
-* @version		$Id: helper.php 206 2011-06-10 08:41:19Z mbabker $
 * @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
@@ -10,8 +9,8 @@
 // No direct access
 defined('_JEXEC') or die;
 
-/* TODO: make filtering compatible with list feed. List feed gives an error now (!) 
- * 
+/* TODO: make filtering compatible with list feed. List feed gives an error now (!)
+ *
  * BUG :
  * When filtering deleteUserMentions, the following is filtered out:
  * - @mentions
@@ -19,11 +18,12 @@ defined('_JEXEC') or die;
  * - retweets (at least retweets done by the user, don't know if by others retweeted messages are affected, but think so)
  * The retweets should not filtered out, but I didn't saw another solution at the API...
  * The retweets radion button does not do anything if deleteUserMentions=yes.
- * 
+ *
  * Solve this or call the deleteUserMentions radiobutton different: "Filter retweets, mentions and replys? Note: retweet radio button does not work if set to yes".
  */
 
 class modTweetDisplayBackHelper {
+
 	/**
 	 * Function to fetch a JSON feed
 	 *
@@ -98,7 +98,7 @@ class modTweetDisplayBackHelper {
 		$list		= $params->get("twitterList", "");
 		$count		= $params->get("twitterCount", 3);
 		$retweet	= $params->get("tweetRetweets", 1);
-		
+
 		// Convert the list name to a useable string for the JSON
 		$flist		= self::toAscii($list);
 
@@ -126,21 +126,19 @@ class modTweetDisplayBackHelper {
 			$req = "http://api.twitter.com/1/lists/statuses.json?slug=".$flist."&owner_screen_name=".$uname.$incRT."&include_entities=1"."";
 		} else {
 			// Get the user feed
-			if($params->get("deleteReplyToUser", 0)==1 ||
-			   $params->get("deleteUserMentions", 0)==1) 
-			   // If tweets are filtered by ReplyToUser or deleteUserMentions:
-			{
-				$count=$count*4; // deleteReplyToUser and deleteUserMentions are filtered out AFTER the fetched tweets, 
-								 // this affects the displayed tweets. Fetch more tweets to prevent this.
+			// Determine if we are filtering
+			if (($params->get("filterMentions", 0) == 1 || $params->get("filterReplies", 0) == 1)) {
+				// Tweets are filtered post-retreival, so need to pull in extra to be safe
+				$count = $count * 4;
 			}
-			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname.$incRT."&include_entities=1"."";
+			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname.$incRT."&include_entities=1";
 		}
 
 		// Fetch the decoded JSON
 		$obj = self::getJSON($req);
 
-		// Render the JSON into a formatted array
-		$twitter->tweet = self::renderFeed($obj, $params);
+		// Process the filtering options and render the feed
+		$twitter->tweet = self::processFiltering($obj, $params);
 
 		return $twitter;
 	}
@@ -250,54 +248,54 @@ class modTweetDisplayBackHelper {
 	 * @param	string	$params		The module parameters
 	 *
 	 * @return	object	$twitter	The formatted object for display
-	 * @since	1.6.0
+	 * @since	2.0.0
 	 */
-	static function renderFeed($obj, $params) {
+	static function processFiltering($obj, $params) {
 		// Initialize
 		$twitter = array();
 		$tweetCounter = $params->get("twitterCount", 3);
 		$i = 0;
 
 		// Check if $obj has data; if not, return an error
-		if (is_null($obj)) {			// Set an error
+		if (is_null($obj)) {
+			// Set an error
 			$twitter[$i]->tweet->text = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
-		} else 
-		{
+		} else {
 			// Process the feed
-			foreach ($obj as $o) {			
+			foreach ($obj as $o) {
 				// Determine whether the feedtype is a user or list feed
 				// 0 is user, 1 is list
-				if($params->get("twitterFeedType", 0) == 1) {
+				if ($params->get("twitterFeedType", 0) == 1) {
 					// Feedtype is list, process feed without filtering
-					self::processFeed($twitter, $o, $i, $params);
+					self::processItem($twitter, $o, $i, $params);
 				}
 				else {
-					// Feedtype is user list, filter if needed and then process feed			 
+					// Feedtype is user list, filter if needed and then process feed
 					if ($params->get("deleteUserMentions", 0)==1) {
 						// If user @mentions and @replies has to filtered out, deletes ALL tweets which contains @
 						// Deletes also retweets! Even if Show Retweets is set to yes.
-						if ($o['entities']['user_mentions']==null && $tweetCounter>0) {	
+						if ($o['entities']['user_mentions']==null && $tweetCounter>0) {
 							// Process feed
-							self::processFeed($twitter, $o, $i, $params);
-							
+							self::processItem($twitter, $o, $i, $params);
+
 							// Lower tweetCounter
 							$tweetCounter--;
 						}
 					}
-					
+
 					// If only reply to user has to be filtered out (@replies)
-					else if ($params->get("deleteReplyToUser", 0)==1) { 
-						if ($o['in_reply_to_user_id']==null && $tweetCounter>0) {	
+					else if ($params->get("deleteReplyToUser", 0)==1) {
+						if ($o['in_reply_to_user_id']==null && $tweetCounter>0) {
 							// Process feed
-							self::processFeed($twitter, $o, $i, $params);
-							
+							self::processItem($twitter, $o, $i, $params);
+
 							// Lower tweetCounter
 							$tweetCounter--;
 						}
 					}
-					else {	
+					else {
 							// No filtering required, process feed
-							self::processFeed($twitter, $o, $i, $params);
+							self::processItem($twitter, $o, $i, $params);
 					}
 				}
 				$i++;
@@ -310,22 +308,23 @@ class modTweetDisplayBackHelper {
 	/**
 	 * Function to process the Twitter feed into a formatted object
 	 *
-	 * @param	STRING?	$o			The decoded JSON feed
+	 * @param	object	$twitter	The final output object
+	 * @param	array	$o			The item within the JSON feed
 	 * @param	int		$i			Counter from renderFeed
 	 * @param	string	$params		The module parameters
 	 *
 	 * @since	2.0.0
 	 */
-	static function processFeed(&$twitter, $o, $i, $params) {
+	static function processItem(&$twitter, $o, $i, $params) {
 		// Set variables
 		$tweetName		= $params->get("tweetName", 1);
 		$tweetAlignment	= $params->get("tweetAlignment", 'left');
 		$tweetReply		= $params->get("tweetReply", 1);
 		$tweetRTCount	= $params->get("tweetRetweetCount", 1);
-		
+
 		// Initialize a new object
 		$twitter[$i]->tweet	= new stdClass();
-			
+
 		// Check if the item is a retweet, and if so gather data from the retweeted_status datapoint
 		if (isset($o['retweeted_status'])) {
 			// Retweeted user
@@ -381,7 +380,7 @@ class modTweetDisplayBackHelper {
 	        $twitter[$i]->tweet->text = preg_replace("/#(\w+)/", "#<a class=\"hashlink\" href=\"http://twitter.com/search?q=\\1\" target=\"_blank\" rel=\"nofollow\">\\1</a>", $twitter[$i]->tweet->text);
 		}
 	}
-	
+
 	/**
 	 * Function to convert a static time into a relative measurement
 	 *

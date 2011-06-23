@@ -307,25 +307,25 @@
 			name="@spacer"
 			type="spacer"
 			default="0" 
-			label="Filters"
+			label="MOD_TWEETDISPLAYBACK_FILTER_FIELDSET_LABEL"
 			description="" />
 		<param
-			name="deleteUserMentions"
+			name="filterMentions"
 			type="radio"
 			default="0"
-			label="MOD_TWEETDISPLAYBACK_FIELDSET_DELETE_USER_MENTIONS"
-			description="MOD_TWEETDISPLAYBACK_FIELDSET_DELETE_USER_MENTIONS" >
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_DESCRIPTION" >
 			<option
 				value="0">No</option>
 			<option
 				value="1">Yes</option>
 		</param>
 		<param
-			name="deleteReplyToUser"
+			name="filterReplies"
 			type="radio"
 			default="0"
-			label="MOD_TWEETDISPLAYBACK_FIELDSET_DELETE_REPLY_TO_USER"
-			description="MOD_TWEETDISPLAYBACK_FIELDSET_DELETE_REPLY_TO_USER" >
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_DESCRIPTION" >
 			<option
 				value="0">No</option>
 			<option
