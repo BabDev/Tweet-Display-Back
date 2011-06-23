@@ -9,19 +9,6 @@
 // No direct access
 defined('_JEXEC') or die;
 
-/* TODO: make filtering compatible with list feed. List feed gives an error now (!)
- *
- * BUG :
- * When filtering deleteUserMentions, the following is filtered out:
- * - @mentions
- * - @userreplys
- * - retweets (at least retweets done by the user, don't know if by others retweeted messages are affected, but think so)
- * The retweets should not filtered out, but I didn't saw another solution at the API...
- * The retweets radion button does not do anything if deleteUserMentions=yes.
- *
- * Solve this or call the deleteUserMentions radiobutton different: "Filter retweets, mentions and replys? Note: retweet radio button does not work if set to yes".
- */
-
 class modTweetDisplayBackHelper {
 
 	/**
@@ -123,12 +110,12 @@ class modTweetDisplayBackHelper {
 		// 0 is user, 1 is list
 		if ($params->get("twitterFeedType", 0) == 1) {
 			// Get the list feed
-			$req = "http://api.twitter.com/1/lists/statuses.json?slug=".$flist."&owner_screen_name=".$uname.$incRT."&include_entities=1"."";
+			$req = "http://api.twitter.com/1/lists/statuses.json?slug=".$flist."&owner_screen_name=".$uname.$incRT."&include_entities=1";
 		} else {
 			// Get the user feed
 			// Determine if we are filtering
 			if (($params->get("filterMentions", 0) == 1 || $params->get("filterReplies", 0) == 1)) {
-				// Tweets are filtered post-retreival, so need to pull in extra to be safe
+				// Tweets are filtered post-retrieval, so need to pull in extra tweets to be safe
 				$count = $count * 4;
 			}
 			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname.$incRT."&include_entities=1";
@@ -263,45 +250,49 @@ class modTweetDisplayBackHelper {
 		} else {
 			// Process the feed
 			foreach ($obj as $o) {
-				// Determine whether the feedtype is a user or list feed
-				// 0 is user, 1 is list
-				if ($params->get("twitterFeedType", 0) == 1) {
-					// Feedtype is list, process feed without filtering
-					self::processItem($twitter, $o, $i, $params);
-				}
-				else {
-					// Feedtype is user list, filter if needed and then process feed
-					if ($params->get("filterMentions", 0)==1) {
-						// If user @mentions and @replies has to filtered out, deletes ALL tweets which contains @
-						// Deletes also retweets! Even if Show Retweets is set to yes.
-						if ($o['entities']['user_mentions'] == null && $count > 0) {
-							// Process feed
+				// Check if we have all of the items we want and end processing
+				if ($i == $params->get("twitterCount", 3)) {
+					return $twitter;
+				} else {
+					// @TODO: Filtering doesn't yet work with feeds, so just process each item
+					if ($params->get("twitterFeedType", 0) == 1) {
+						self::processItem($twitter, $o, $i, $params);
+					} else {
+						//@TODO: If both filter options are set, replies are slipping through
+						// Filter mentions
+						if ($params->get("filterMentions", 0) == 1) {
+							// Check if the mentions entity is null, whether the tweet is a reply, or if the tweet is a retweet
+							if (($o['entities']['user_mentions'] == null || $o['in_reply_to_user_id'] != null || isset($o['retweeted_status'])) && $count > 0) {
+								// Process feed
+								self::processItem($twitter, $o, $i, $params);
+
+								// Modify counts
+								$count--;
+								$i++;
+							}
+						}
+						// Filter @replies
+						else if ($params->get("filterReplies", 0) == 1) {
+							if ($o['in_reply_to_user_id'] == null && $count > 0) {
+								// Process feed
+								self::processItem($twitter, $o, $i, $params);
+
+								// Modify counts
+								$count--;
+								$i++;
+							}
+						// No filtering required
+						} else {
 							self::processItem($twitter, $o, $i, $params);
 
-							// Lower tweetCounter
-							$tweetCounter--;
+							// Modify counts
+							$count--;
+							$i++;
 						}
 					}
-
-					// If only reply to user has to be filtered out (@replies)
-					else if ($params->get("filterReplies", 0)==1) {
-						if ($o['in_reply_to_user_id']== null && $count > 0) {
-							// Process feed
-							self::processItem($twitter, $o, $i, $params);
-
-							// Lower tweetCounter
-							$tweetCounter--;
-						}
-					}
-					else {
-							// No filtering required, process feed
-							self::processItem($twitter, $o, $i, $params);
-					}
 				}
-				$i++;
 			}
 		}
-		return $twitter;
 	}
 
 	/**
