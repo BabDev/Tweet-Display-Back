@@ -253,7 +253,7 @@ class modTweetDisplayBackHelper {
 	static function processFiltering($obj, $params) {
 		// Initialize
 		$twitter = array();
-		$tweetCounter = $params->get("twitterCount", 3);
+		$count = $params->get("twitterCount", 3);
 		$i = 0;
 
 		// Check if $obj has data; if not, return an error
@@ -271,10 +271,10 @@ class modTweetDisplayBackHelper {
 				}
 				else {
 					// Feedtype is user list, filter if needed and then process feed
-					if ($params->get("deleteUserMentions", 0)==1) {
+					if ($params->get("filterMentions", 0)==1) {
 						// If user @mentions and @replies has to filtered out, deletes ALL tweets which contains @
 						// Deletes also retweets! Even if Show Retweets is set to yes.
-						if ($o['entities']['user_mentions']==null && $tweetCounter>0) {
+						if ($o['entities']['user_mentions'] == null && $count > 0) {
 							// Process feed
 							self::processItem($twitter, $o, $i, $params);
 
@@ -284,8 +284,8 @@ class modTweetDisplayBackHelper {
 					}
 
 					// If only reply to user has to be filtered out (@replies)
-					else if ($params->get("deleteReplyToUser", 0)==1) {
-						if ($o['in_reply_to_user_id']==null && $tweetCounter>0) {
+					else if ($params->get("filterReplies", 0)==1) {
+						if ($o['in_reply_to_user_id']== null && $count > 0) {
 							// Process feed
 							self::processItem($twitter, $o, $i, $params);
 
@@ -304,7 +304,6 @@ class modTweetDisplayBackHelper {
 		return $twitter;
 	}
 
-//**PLEASE REVIEW THIS DESCRIPTION**
 	/**
 	 * Function to process the Twitter feed into a formatted object
 	 *
