@@ -2,12 +2,30 @@
 /**
 * Tweet Display Back Module for Joomla!
 *
+* @version		$Id: helper.php 206 2011-06-10 08:41:19Z mbabker $
 * @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
 
 // No direct access
 defined('_JEXEC') or die;
+
+/*
+ * Included user entities in the Twitter feeds
+ * Added new function processFeed()
+ * 
+ * TODO: make filtering compatible with list feed, gives an error now 
+ * 
+ * BUG :
+ * When fetching with setting: "Show Retweet:no" the amount of tweets to show is not correct.
+ * This is because retweeted tweets are filtered out, the JSON won't give 
+ *
+ * Example If show tweets=3, and 2nd tweet is a retweet. Then only tweet 1 and 3 are fetched. 
+ * The API won't look for an extra tweet...
+ * 
+ * Because of this bug, the lastTweet class is also not applied.
+ */
+
 
 class modTweetDisplayBackHelper {
 
@@ -85,7 +103,7 @@ class modTweetDisplayBackHelper {
 		$list		= $params->get("twitterList", "");
 		$count		= $params->get("twitterCount", 3);
 		$retweet	= $params->get("tweetRetweets", 1);
-
+		
 		// Convert the list name to a useable string for the JSON
 		$flist		= self::toAscii($list);
 
@@ -110,10 +128,16 @@ class modTweetDisplayBackHelper {
 		// 0 is user, 1 is list
 		if ($params->get("twitterFeedType", 0) == 1) {
 			// Get the list feed
-			$req = "http://api.twitter.com/1/lists/statuses.json?slug=".$flist."&owner_screen_name=".$uname.$incRT."";
+			$req = "http://api.twitter.com/1/lists/statuses.json?slug=".$flist."&owner_screen_name=".$uname.$incRT."&include_entities=1"."";
 		} else {
 			// Get the user feed
-			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname.$incRT."";
+			if($params->get("deleteReplyToUser", 0)==1 ||
+			   $params->get("deleteUserMentions", 0)==1) // Filter deleteReplyToUser
+			{
+				$count=$count*4; // deleteReplyToUser and deleteUserMentions are filtered out AFTER the fetched tweets, 
+								 // this affects the displayed tweets. Fetch more tweets to prevent this.
+			}
+			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname.$incRT."&include_entities=1"."";
 		}
 
 		// Fetch the decoded JSON
@@ -220,7 +244,6 @@ class modTweetDisplayBackHelper {
 			}
 			$twitter->footer->powered_by .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back\" rel=\"nofollow\">Tweet Display Back</a></div>";
 		}
-
 		return $twitter;
 	}
 
@@ -236,76 +259,53 @@ class modTweetDisplayBackHelper {
 	static function renderFeed($obj, $params) {
 		// Initialize
 		$twitter = array();
+		$tweetCounter = $params->get("twitterCount", 3);
 		$i = 0;
 
-		// Set variables
-		$tweetName		= $params->get("tweetName", 1);
-		$tweetAlignment	= $params->get("tweetAlignment", 'left');
-		$tweetReply		= $params->get("tweetReply", 1);
-		$tweetRTCount	= $params->get("tweetRetweetCount", 1);
-
 		// Check if $obj has data; if not, return an error
-		if (is_null($obj)) {
-			// Set an error
+		if (is_null($obj)) {			// Set an error
 			$twitter[$i]->tweet->text = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
-		} else {
+		} else 
+		{
 			// Process the feed
-			foreach ($obj as $o) {
-				// Initialize a new object
-				$twitter[$i]->tweet	= new stdClass();
-
-				// Check if the item is a retweet, and if so gather data from the retweeted_status datapoint
-				if (isset($o['retweeted_status'])) {
-					// Retweeted user
-					if ($tweetName == 1) {
-						$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/intent/user?screen_name=".$o['retweeted_status']['user']['screen_name']."\" rel=\"nofollow\">".$o['retweeted_status']['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
+			foreach ($obj as $o) {			
+				// Determine whether the feedtype is a user or list feed
+				// 0 is user, 1 is list
+				if($params->get("twitterFeedType", 0) == 1) {
+					// Feedtype is list, process feed without filtering
+					self::processFeed($twitter, $o, $i, $params);
+				}
+				else {
+					// Feedtype is user list, filter if needed and then process feed			 
+					if ($params->get("deleteUserMentions", 0)==1) {
+						// If user mentions has to filtered out, deletes ALL tweets which contains @
+						// Deletes also retweets! Even if Show Retweets is set to yes.
+						//  example  Lorem @Ipsum...
+						//  or		 @Lorem Ipsum...
+						if ($o['entities']['user_mentions']==null && $tweetCounter>0) {	
+							// Process feed
+							self::processFeed($twitter, $o, $i, $params);
+							
+							// Lower tweetCounter
+							$tweetCounter--;
+						}
 					}
-					$twitter[$i]->tweet->created = "Retweeted ";
-					$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['retweeted_status']['user']['screen_name']."\" src=\"".$o['retweeted_status']['user']['profile_image_url']."\" width=\"32px\"/>";
-					$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\" rel=\"nofollow\">\\2</a>", $o['retweeted_status']['text']);
-				} else {
-					// User
-					if ($tweetName == 1) {
-						$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/intent/user?screen_name=".$o['user']['screen_name']."\" rel=\"nofollow\">".$o['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
+					
+					// If only reply to user has to be filtered out
+					// example @Username lorem ipsum...
+					else if ($params->get("deleteReplyToUser", 0)==1) { 
+						if ($o['in_reply_to_user_id']==null && $tweetCounter>0) {	
+							// Process feed
+							self::processFeed($twitter, $o, $i, $params);
+							
+							// Lower tweetCounter
+							$tweetCounter--;
+						}
 					}
-					$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['user']['screen_name']."\" src=\"".$o['user']['profile_image_url']."\" width=\"32px\"/>";
-					$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\" rel=\"nofollow\">\\2</a>", $o['text']);
-				}
-				// Info below is specific to each tweet, so it isn't checked against a retweet
-				// Determine whether to display the time as a relative or static time
-				if ($params->get("tweetCreated", 1)==1) {
-					if ($params->get("tweetRelativeTime", 1) == 1) {
-						$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\" rel=\"nofollow\">".self::renderRelativeTime($o['created_at'])."</a>";
-					} else {
-						$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\" rel=\"nofollow\">".JHTML::date($o['created_at'])."</a>";
+					else {	// No filtering required
+							// Process feed
+							self::processFeed($twitter, $o, $i, $params);
 					}
-				}
-				// Display the tweet source
-				if (($params->get("tweetSource", 1) == 1)) {
-					$twitter[$i]->tweet->created .= " via ".$o['source'];
-				}
-				// Display the location the tweet was made from
-				if (($params->get("tweetLocation", 1) == 1) && ($o['place']['full_name'])) {
-					$twitter[$i]->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$o['place']['full_name']."\" target=\"_blank\" rel=\"nofollow\">".$o['place']['full_name']."</a>";
-				}
-				// If the tweet is a reply, display a link to the tweet it's in reply to
-				if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) {
-					$twitter[$i]->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id_str']."\" rel=\"nofollow\">".$o['in_reply_to_screen_name']."</a>";
-				}
-				// Display the number of times the tweet has been retweeted
-				if ((($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
-					$twitter[$i]->tweet->created .= " &bull; ".self::renderRetweetCount($o['retweet_count']);
-				}
-				// Display Twitter Actions
-				if ($tweetReply == 1) {
-					$twitter[$i]->tweet->actions = "<span class=\"TDB-action TDB-reply\"><a href=\"http://twitter.com/intent/tweet?in_reply_to=".$o['id_str']."\" title=\"Reply\" rel=\"nofollow\"></a></span>";
-					$twitter[$i]->tweet->actions .= "<span class=\"TDB-action TDB-retweet\"><a href=\"http://twitter.com/intent/retweet?tweet_id=".$o['id_str']."\" title=\"Retweet\" rel=\"nofollow\"></a></span>";
-					$twitter[$i]->tweet->actions .= "<span class=\"TDB-action TDB-favorite\"><a href=\"http://twitter.com/intent/favorite?tweet_id=".$o['id_str']."\" title=\"Favorite\" rel=\"nofollow\"></a></span>";
-				}
-				// If set, convert user and hash tags into links
-				if ($params->get("tweetLinks", 1) == 1) {
-					$twitter[$i]->tweet->text = preg_replace("/@(\w+)/", "@<a class=\"userlink\" href=\"http://twitter.com/intent/user?screen_name=\\1\" target=\"_blank\" rel=\"nofollow\">\\1</a>", $twitter[$i]->tweet->text);
-					$twitter[$i]->tweet->text = preg_replace("/#(\w+)/", "#<a class=\"hashlink\" href=\"http://twitter.com/search?q=\\1\" target=\"_blank\" rel=\"nofollow\">\\1</a>", $twitter[$i]->tweet->text);
 				}
 				$i++;
 			}
@@ -313,6 +313,82 @@ class modTweetDisplayBackHelper {
 		return $twitter;
 	}
 
+//**PLEASE REVIEW THIS DESCRIPTION**
+	/**
+	 * Function to process the Twitter feed into a formatted object
+	 *
+	 * @param	STRING?	$o			The decoded JSON feed
+	 * @param	int		$i			Counter from renderFeed
+	 * @param	string	$params		The module parameters
+	 *
+	 * @since	2.0.0
+	 */
+	static function processFeed(&$twitter, $o, $i, $params) {
+		// Set variables
+		$tweetName		= $params->get("tweetName", 1);
+		$tweetAlignment	= $params->get("tweetAlignment", 'left');
+		$tweetReply		= $params->get("tweetReply", 1);
+		$tweetRTCount	= $params->get("tweetRetweetCount", 1);
+		
+		// Initialize a new object
+		$twitter[$i]->tweet	= new stdClass();
+			
+		// Check if the item is a retweet, and if so gather data from the retweeted_status datapoint
+		if (isset($o['retweeted_status'])) {
+			// Retweeted user
+			if ($tweetName == 1) {
+				$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/intent/user?screen_name=".$o['retweeted_status']['user']['screen_name']."\" rel=\"nofollow\">".$o['retweeted_status']['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
+			}
+			$twitter[$i]->tweet->created = "Retweeted ";
+			$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['retweeted_status']['user']['screen_name']."\" src=\"".$o['retweeted_status']['user']['profile_image_url']."\" width=\"32px\"/>";
+			$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\" rel=\"nofollow\">\\2</a>", $o['retweeted_status']['text']);
+		} else {
+			// User
+			if ($tweetName == 1) {
+				$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/intent/user?screen_name=".$o['user']['screen_name']."\" rel=\"nofollow\">".$o['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
+			}
+			$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['user']['screen_name']."\" src=\"".$o['user']['profile_image_url']."\" width=\"32px\"/>";
+			$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\" rel=\"nofollow\">\\2</a>", $o['text']);
+		}
+		// Info below is specific to each tweet, so it isn't checked against a retweet
+		// Determine whether to display the time as a relative or static time
+		if ($params->get("tweetCreated", 1)==1) {
+			if ($params->get("tweetRelativeTime", 1) == 1) {
+				$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\" rel=\"nofollow\">".self::renderRelativeTime($o['created_at'])."</a>";
+			}
+			else {
+				$twitter[$i]->tweet->created .= "<a href=\"http://twitter.com/".$o['user']['screen_name']."/status/".$o['id_str']."\" rel=\"nofollow\">".JHTML::date($o['created_at'])."</a>";
+			}
+		}
+		// Display the tweet source
+		if (($params->get("tweetSource", 1) == 1)) {
+			$twitter[$i]->tweet->created .= " via ".$o['source'];
+		}
+		// Display the location the tweet was made from
+		if (($params->get("tweetLocation", 1) == 1) && ($o['place']['full_name'])) {
+			$twitter[$i]->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$o['place']['full_name']."\" target=\"_blank\" rel=\"nofollow\">".$o['place']['full_name']."</a>";
+		}
+		// If the tweet is a reply, display a link to the tweet it's in reply to
+		if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) {
+			$twitter[$i]->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id_str']."\" rel=\"nofollow\">".$o['in_reply_to_screen_name']."</a>";
+		}
+		// Display the number of times the tweet has been retweeted
+		if ((($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
+			$twitter[$i]->tweet->created .= " &bull; ".self::renderRetweetCount($o['retweet_count']);
+		}
+		// Display Twitter Actions
+		if ($tweetReply == 1) {
+			$twitter[$i]->tweet->actions = "<span class=\"TDB-action TDB-reply\"><a href=\"http://twitter.com/intent/tweet?in_reply_to=".$o['id_str']."\" title=\"Reply\" rel=\"nofollow\"></a></span>";
+          	$twitter[$i]->tweet->actions .= "<span class=\"TDB-action TDB-retweet\"><a href=\"http://twitter.com/intent/retweet?tweet_id=".$o['id_str']."\" title=\"Retweet\" rel=\"nofollow\"></a></span>";
+        	$twitter[$i]->tweet->actions .= "<span class=\"TDB-action TDB-favorite\"><a href=\"http://twitter.com/intent/favorite?tweet_id=".$o['id_str']."\" title=\"Favorite\" rel=\"nofollow\"></a></span>";
+		}
+		// If set, convert user and hash tags into links
+		if ($params->get("tweetLinks", 1) == 1) {
+			$twitter[$i]->tweet->text = preg_replace("/@(\w+)/", "@<a class=\"userlink\" href=\"http://twitter.com/intent/user?screen_name=\\1\" target=\"_blank\" rel=\"nofollow\">\\1</a>", $twitter[$i]->tweet->text);
+	        $twitter[$i]->tweet->text = preg_replace("/#(\w+)/", "#<a class=\"hashlink\" href=\"http://twitter.com/search?q=\\1\" target=\"_blank\" rel=\"nofollow\">\\1</a>", $twitter[$i]->tweet->text);
+		}
+	}
+	
 	/**
 	 * Function to convert a static time into a relative measurement
 	 *
