@@ -319,7 +319,7 @@
 			</fieldset>
 			<fieldset name="filter">
 				<field
-					name="filterUserMentions"
+					name="filterMentions"
 					type="radio"
 					default="0"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_LABEL"
@@ -330,7 +330,7 @@
 						value="1">JYES</option>
 				</field>
 				<field
-					name="filterReplyToUser"
+					name="filterReplies"
 					type="radio"
 					default="0"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_LABEL"
