@@ -34,7 +34,7 @@
 	<target
 		name="release"
 		description="Builds release packages based on the development head"
-		depends="rebuild-packages,15-package,17-package"
+		depends="rebuild-packages,common-files,15-package,17-package"
 	>
 		<echo msg="Build 1.5 package" />
 		<zip destfile="releases/mod_tweetdisplayback_200alpha_15.zip">
@@ -49,7 +49,7 @@
 			</fileset>
 		</zip>
 	</target>
-	<target name="common-files" description="Stages the common files" >
+	<target name="common-files" description="Stages the common files" depends="rebuild-packages">
 		<echo msg="Create temp folder" />
 		<mkdir dir="packages/common" />
 		<echo msg="Copy files" />
@@ -68,7 +68,7 @@
 			</fileset>
 	    </copy>
 	</target>
-	<target name="15-package" description="Builds the 1.5 package" >
+	<target name="15-package" description="Builds the 1.5 package" depends="rebuild-packages">
 		<echo msg="Create 1.5 temp folder" />
 		<mkdir dir="packages/1.5" />
 		<echo msg="Create 1.5 language folder" />
@@ -81,7 +81,7 @@
 			tofile="packages/1.5/mod_tweetdisplayback.xml"
 			overwrite="true" />
 	</target>
-	<target name="17-package" description="Builds the 1.7 package" >
+	<target name="17-package" description="Builds the 1.7 package" depends="rebuild-packages">
 		<echo msg="Create 1.5 temp folder" />
 		<mkdir dir="packages/1.7" />
 		<echo msg="Create 1.7 language folder" />
