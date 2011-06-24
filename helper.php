@@ -267,6 +267,7 @@ class modTweetDisplayBackHelper {
 								$i++;
 							}
 						} else if ($params->get("filterReplies", 0) == 1) {
+							// @TODO: If both filters are active, replies are making it through
 							// Filter @replies
 							if ($o['in_reply_to_user_id'] == null && $count > 0) {
 								self::processItem($twitter, $o, $i, $params);
