@@ -61,9 +61,10 @@ class modTweetDisplayBackHelper {
 		} else {
 			// Get the user feed
 			// Determine if we are filtering
-			if (($params->get("filterMentions", 0) == 1 || $params->get("filterReplies", 0) == 1)) {
-				// Tweets are filtered post-retrieval, so need to pull in extra tweets to be safe
-				$count = $count * 4;
+			if (($params->get("filterMentions", 0) == 1 || $params->get("filterReplies", 0) == 1 || $retweet == 0)) {
+				// We have to manually filter mentions and replies,
+				// & Twitter doesn't send additional tweets when RTs are not included
+				$count = $count * 3;
 			}
 			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname.$incRT."&include_entities=1";
 		}

@@ -29,6 +29,7 @@ $ - Language fix or change
 ! Merge remote-tracking branches 'twentronix/twentronix' and 'origin/master'
 # Corrected check for replies within the mentions conditional
 ^ Moved check for replies out of mentions conditional (this causes replies to be filtered with mentions)
+^ Add check for RTs to count multiplier
 
 24-June-2011 Jurian Even
 # Corrected error with no tweets returning with filtering disabled
