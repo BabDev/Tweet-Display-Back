@@ -12,62 +12,9 @@ defined('_JEXEC') or die;
 class modTweetDisplayBackHelper {
 
 	/**
-	 * Function to fetch a JSON feed
-	 *
-	 * @param	string	$req	The URL of the feed to load
-	 *
-	 * @return	array	$obj	The fetched JSON query
-	 * @since	1.0.7
-	 */
-	static function getJSON($req) {
-		// Create a new CURL resource
-		$ch = curl_init($req);
-
-		// Set options
-		curl_setopt($ch, CURLOPT_HEADER, false);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-		// Grab URL and pass it to the browser and store it as $json
-		$json = curl_exec($ch);
-
-		// Close CURL resource
-		curl_close($ch);
-
-		// Decode the fetched JSON
-		$obj = json_decode($json, true);
-
-		return $obj;
-	}
-
-	/**
-	 * Function to get the rate limit of a Twitter user
-	 *
-	 * @param	string	$params	The module parameters
-	 *
-	 * @return	string	$hits	The number of remaining hits on a user's rate limit
-	 * @since	1.0.6
-	 */
-	static function getLimit($params) {
-		// Load the parameters
-		$uname = $params->get("twitterName","");
-		$req = "http://api.twitter.com/1/account/rate_limit_status.json?screen_name=".$uname."";
-
-		// Fetch the decoded JSON
-		$obj = self::getJSON($req);
-
-		// Get the remaining hits count
-		if (isset ($obj['remaining_hits'])) {
-		 	$hits = $obj['remaining_hits'];
-		} else {
-		 	$hits = '';
-		}
-		return $hits;
-	}
-
-	/**
 	 * Function to compile the data to render a formatted object displaying a Twitter feed
 	 *
-	 * @param	string	$params		The module parameters
+	 * @param	object	$params		The module parameters
 	 *
 	 * @return	object	$twitter	A formatted object with the requested tweets
 	 * @since	1.6.0
@@ -131,9 +78,62 @@ class modTweetDisplayBackHelper {
 	}
 
 	/**
+	 * Function to fetch a JSON feed
+	 *
+	 * @param	string	$req	The URL of the feed to load
+	 *
+	 * @return	array	$obj	The fetched JSON query
+	 * @since	1.0.7
+	 */
+	static function getJSON($req) {
+		// Create a new CURL resource
+		$ch = curl_init($req);
+
+		// Set options
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		// Grab URL and pass it to the browser and store it as $json
+		$json = curl_exec($ch);
+
+		// Close CURL resource
+		curl_close($ch);
+
+		// Decode the fetched JSON
+		$obj = json_decode($json, true);
+
+		return $obj;
+	}
+
+	/**
+	 * Function to get the rate limit of a Twitter user
+	 *
+	 * @param	object	$params	The module parameters
+	 *
+	 * @return	string	$hits	The number of remaining hits on a user's rate limit
+	 * @since	1.0.6
+	 */
+	static function getLimit($params) {
+		// Load the parameters
+		$uname = $params->get("twitterName","");
+		$req = "http://api.twitter.com/1/account/rate_limit_status.json?screen_name=".$uname."";
+
+		// Fetch the decoded JSON
+		$obj = self::getJSON($req);
+
+		// Get the remaining hits count
+		if (isset ($obj['remaining_hits'])) {
+		 	$hits = $obj['remaining_hits'];
+		} else {
+		 	$hits = '';
+		}
+		return $hits;
+	}
+
+	/**
 	 * Function to fetch the user JSON and render it
 	 *
-	 * @param	string	$param		The module parameters
+	 * @param	object	$params		The module parameters
 	 *
 	 * @return	array	$twitter	The formatted object for display
 	 * @since	1.6.0
@@ -232,7 +232,7 @@ class modTweetDisplayBackHelper {
 	 * Function to render the Twitter feed into a formatted object
 	 *
 	 * @param	array	$obj		The decoded JSON feed
-	 * @param	string	$params		The module parameters
+	 * @param	object	$params		The module parameters
 	 *
 	 * @return	object	$twitter	The formatted object for display
 	 * @since	2.0.0
@@ -295,9 +295,9 @@ class modTweetDisplayBackHelper {
 	 * Function to process the Twitter feed into a formatted object
 	 *
 	 * @param	object	$twitter	The final output object
-	 * @param	array	$o			The item within the JSON feed
-	 * @param	int		$i			Counter from renderFeed
-	 * @param	string	$params		The module parameters
+	 * @param	object	$o			The item within the JSON feed
+	 * @param	int		$i			Iteration of processFiltering
+	 * @param	object	$params		The module parameters
 	 *
 	 * @since	2.0.0
 	 */
@@ -444,6 +444,7 @@ class modTweetDisplayBackHelper {
 	 * Function to count the number of retweets and return the appropriate string
 	 *
 	 * @param	string	$count	The number of retweets
+	 *
 	 * @return	string	$count	A text string of the number of retweets
 	 * @since	1.6.0
 	 */
