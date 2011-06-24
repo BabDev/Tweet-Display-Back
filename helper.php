@@ -241,6 +241,7 @@ class modTweetDisplayBackHelper {
 		// Initialize
 		$twitter = array();
 		$count = $params->get("twitterCount", 3);
+		$tweetCount = $params->get("twitterCount", 3);
 		$i = 0;
 
 		// Check if $obj has data; if not, return an error
@@ -251,14 +252,14 @@ class modTweetDisplayBackHelper {
 			// Process the feed
 			foreach ($obj as $o) {
 				// Check if we have all of the items we want and end processing
-				if ($i == $params->get("twitterCount", 3)) {
-					return $twitter;
-				} else {
+				if ($i < $tweetCount) {
 					// We can't filter list feeds, so just process them
 					if ($params->get("twitterFeedType", 0) == 1) {
 						self::processItem($twitter, $o, $i, $params);
 					} else {
 						if ($params->get("filterMentions", 0) == 1) {
+							// @TODO: Filtering mentions does not work corectly, this comes through: 
+							// 		  "Twentronix Just a test @Fine_Point"
 							// Filter mentions
 							if (($o['entities']['user_mentions'] == null || ($o['entities']['user_mentions']['0']['indices']['0'] != '0') || isset($o['retweeted_status'])) && $count > 0) {
 								self::processItem($twitter, $o, $i, $params);
@@ -277,7 +278,6 @@ class modTweetDisplayBackHelper {
 								$i++;
 							}
 						} else {
-							// @TODO: If both filtering options are disbled, there's no feed
 							// No filtering required
 							self::processItem($twitter, $o, $i, $params);
 
@@ -289,6 +289,7 @@ class modTweetDisplayBackHelper {
 				}
 			}
 		}
+		return $twitter;
 	}
 
 	/**
