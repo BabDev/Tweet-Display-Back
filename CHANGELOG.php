@@ -25,6 +25,14 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+24-June-2011 Michael Babker
+! Merge remote-tracking branches 'twentronix/twentronix' and 'origin/master'
++ Added work from Jurian for filtering
++ Add new params to 1.7
+$ Updated pt-BR translation
+^ Modified Jurian's structure to optimize filtering checks
+^ Replaced preg_replace with str_replace using entities
+
 23-June-2011 Michael Babker
 ^ Began restructuring repo for single repo version for J! 1.5 & 1.6+
 
