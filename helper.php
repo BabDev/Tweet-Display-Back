@@ -258,10 +258,8 @@ class modTweetDisplayBackHelper {
 						self::processItem($twitter, $o, $i, $params);
 					} else {
 						if ($params->get("filterMentions", 0) == 1) {
-							// @TODO: Filtering mentions does not work corectly, this comes through: 
-							// 		  "Twentronix Just a test @Fine_Point"
 							// Filter mentions
-							if (($o['entities']['user_mentions'] == null || ($o['entities']['user_mentions']['0']['indices']['0'] != '0') || isset($o['retweeted_status'])) && $count > 0) {
+							if (($o['entities']['user_mentions'] == null || ($o['entities']['user_mentions']['0']['indices']['0'] == '0') || isset($o['retweeted_status'])) && $count > 0) {
 								self::processItem($twitter, $o, $i, $params);
 
 								// Modify counts
