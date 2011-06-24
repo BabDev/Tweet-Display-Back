@@ -258,8 +258,10 @@ class modTweetDisplayBackHelper {
 						self::processItem($twitter, $o, $i, $params);
 					} else {
 						if ($params->get("filterMentions", 0) == 1) {
+							// @TODO: Need a way to exclude @replies, but checking here causes them to not be filtered out of the next check
+							// Likewise, not checking here causes replies to not be present for the next check
 							// Filter mentions
-							if (($o['entities']['user_mentions'] == null || ($o['entities']['user_mentions']['0']['indices']['0'] == '0') || isset($o['retweeted_status'])) && $count > 0) {
+							if (($o['entities']['user_mentions'] == null || isset($o['retweeted_status'])) && $count > 0) {
 								self::processItem($twitter, $o, $i, $params);
 
 								// Modify counts
@@ -267,9 +269,8 @@ class modTweetDisplayBackHelper {
 								$i++;
 							}
 						} else if ($params->get("filterReplies", 0) == 1) {
-							// @TODO: If both filters are active, replies are making it through
 							// Filter @replies
-							if ($o['in_reply_to_user_id'] == null && $count > 0) {
+							if (($o['in_reply_to_user_id'] == null || (($o['entities']['user_mentions']['0']['indices']['0'] == '0') && ($params->get("filterMentions", 0) == 1))) && $count > 0) {
 								self::processItem($twitter, $o, $i, $params);
 
 								// Modify counts

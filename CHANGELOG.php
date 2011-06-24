@@ -25,13 +25,24 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+25-June-2011 Michael Babker
+! Merge remote-tracking branches 'twentronix/twentronix' and 'origin/master'
+# Corrected check for replies within the mentions conditional
+^ Moved check for replies out of mentions conditional (this causes replies to be filtered with mentions)
+
+24-June-2011 Jurian Even
+# Corrected error with no tweets returning with filtering disabled
+
 24-June-2011 Michael Babker
 ! Merge remote-tracking branches 'twentronix/twentronix' and 'origin/master'
-+ Added work from Jurian for filtering
 + Add new params to 1.7
 $ Updated pt-BR translation
-^ Modified Jurian's structure to optimize filtering checks
+^ Modified Jurian's code to optimize filtering checks
 ^ Replaced preg_replace with str_replace using entities
+
+23-June-2011 Jurian Even
++ Added params for filtering to 1.5 manifest
++ Initial code for filtering based on mentions and replies
 
 23-June-2011 Michael Babker
 ^ Began restructuring repo for single repo version for J! 1.5 & 1.6+
