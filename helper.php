@@ -254,34 +254,31 @@ class modTweetDisplayBackHelper {
 				if ($i == $params->get("twitterCount", 3)) {
 					return $twitter;
 				} else {
-					// @TODO: Filtering doesn't yet work with feeds, so just process each item
+					// We can't filter list feeds, so just process them
 					if ($params->get("twitterFeedType", 0) == 1) {
 						self::processItem($twitter, $o, $i, $params);
 					} else {
-						// Filter mentions
 						if ($params->get("filterMentions", 0) == 1) {
-							// Check if the mentions entity is null, whether the tweet is a reply, or if the tweet is a retweet
+							// Filter mentions
 							if (($o['entities']['user_mentions'] == null || ($o['entities']['user_mentions']['0']['indices']['0'] != '0') || isset($o['retweeted_status'])) && $count > 0) {
-								// Process feed
 								self::processItem($twitter, $o, $i, $params);
 
 								// Modify counts
 								$count--;
 								$i++;
 							}
-						}
-						// Filter @replies
-						else if ($params->get("filterReplies", 0) == 1) {
+						} else if ($params->get("filterReplies", 0) == 1) {
+							// Filter @replies
 							if ($o['in_reply_to_user_id'] == null && $count > 0) {
-								// Process feed
 								self::processItem($twitter, $o, $i, $params);
 
 								// Modify counts
 								$count--;
 								$i++;
 							}
-						// No filtering required
 						} else {
+							// @TODO: If both filtering options are disbled, there's no feed
+							// No filtering required
 							self::processItem($twitter, $o, $i, $params);
 
 							// Modify counts
@@ -322,14 +319,30 @@ class modTweetDisplayBackHelper {
 			}
 			$twitter[$i]->tweet->created = "Retweeted ";
 			$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['retweeted_status']['user']['screen_name']."\" src=\"".$o['retweeted_status']['user']['profile_image_url']."\" width=\"32px\"/>";
-			$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\" rel=\"nofollow\">\\2</a>", $o['retweeted_status']['text']);
+			$twitter[$i]->tweet->text = $o['retweeted_status']['text'];
+			foreach ($o['retweeted_status']['entities']['urls'] as $url) {
+				if (isset($url['display_url'])) {
+					$d_url = $url['display_url'];
+				} else {
+					$d_url = $url['url'];
+				}
+				$twitter[$i]->tweet->text = str_replace($url['url'], "<a href=\"".$url['url']."\" target=\"_blank\" rel=\"nofollow\">".$d_url."</a>", $twitter[$i]->tweet->text);
+			}
 		} else {
 			// User
 			if ($tweetName == 1) {
 				$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/intent/user?screen_name=".$o['user']['screen_name']."\" rel=\"nofollow\">".$o['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
 			}
 			$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['user']['screen_name']."\" src=\"".$o['user']['profile_image_url']."\" width=\"32px\"/>";
-			$twitter[$i]->tweet->text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\" rel=\"nofollow\">\\2</a>", $o['text']);
+			$twitter[$i]->tweet->text = $o['text'];
+			foreach ($o['entities']['urls'] as $url) {
+				if (isset($url['display_url'])) {
+					$d_url = $url['display_url'];
+				} else {
+					$d_url = $url['url'];
+				}
+				$twitter[$i]->tweet->text = str_replace($url['url'], "<a href=\"".$url['url']."\" target=\"_blank\" rel=\"nofollow\">".$d_url."</a>", $twitter[$i]->tweet->text);
+			}
 		}
 		// Info below is specific to each tweet, so it isn't checked against a retweet
 		// Determine whether to display the time as a relative or static time
@@ -365,8 +378,12 @@ class modTweetDisplayBackHelper {
 		}
 		// If set, convert user and hash tags into links
 		if ($params->get("tweetLinks", 1) == 1) {
-			$twitter[$i]->tweet->text = preg_replace("/@(\w+)/", "@<a class=\"userlink\" href=\"http://twitter.com/intent/user?screen_name=\\1\" target=\"_blank\" rel=\"nofollow\">\\1</a>", $twitter[$i]->tweet->text);
-	        $twitter[$i]->tweet->text = preg_replace("/#(\w+)/", "#<a class=\"hashlink\" href=\"http://twitter.com/search?q=\\1\" target=\"_blank\" rel=\"nofollow\">\\1</a>", $twitter[$i]->tweet->text);
+			foreach ($o['entities']['user_mentions'] as $mention) {
+				$twitter[$i]->tweet->text = str_replace($mention['screen_name'], "<a class=\"userlink\" href=\"http://twitter.com/intent/user?screen_name=".$mention['screen_name']."\" rel=\"nofollow\">".$mention['screen_name']."</a>", $twitter[$i]->tweet->text);
+			}
+			foreach ($o['entities']['hashtags'] as $hashtag) {
+				$twitter[$i]->tweet->text = str_replace($hashtag['text'], "<a class=\"hashlink\" href=\"http://twitter.com/search?q=".$hashtag['text']."\" target=\"_blank\" rel=\"nofollow\">".$hashtag['text']."</a>", $twitter[$i]->tweet->text);
+			}
 		}
 	}
 
