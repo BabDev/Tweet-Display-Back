@@ -31,6 +31,8 @@ $ - Language fix or change
 ^ Cleaned code 
 + Added different variables
 
+^ Restructured $count > 0
+
 25-June-2011 Michael Babker
 ! Merge remote-tracking branches 'twentronix/twentronix' and 'origin/master'
 # Corrected check for replies within the mentions conditional

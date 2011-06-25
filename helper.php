@@ -249,12 +249,12 @@ class modTweetDisplayBackHelper {
 		if (is_null($obj)) {
 			// Set an error
 			$twitter[$i]->tweet->text = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
-		} else {
+		} else if($count>0){
 			// Process the feed
 			foreach ($obj as $o) {
 				// @TODO change Filter replies/mentions -> Show replies/mentions? in XML file and helper.php
 				// Note: filtering @mentions and/or @replies IN retweets is NOT working (and don't have to be I think?)
-				
+								
 				// Set variables
 				$tweetContainsReply		=  $o['in_reply_to_user_id'] != null;			// Tweets which contains a @reply (or @reply and @mention)
 				$tweetMentionAndOrReply =  $o['entities']['user_mentions'] != null;		// Tweets which contains a @mention, @reply and @mention, or only @reply 
@@ -263,21 +263,34 @@ class modTweetDisplayBackHelper {
 				$tweetOnlyMention 		= ($o['entities']['user_mentions'] != null) && !$tweetContainsReply; 				// Tweets with only @mentions
 // @TODO Fix notice: Undefined index: 1 in \mod_tweetdisplayback\helper.php on line 266
 // Is probably only vissible with Joomla error reporting on max, needs to be fixed howevers.
-				$tweetOnlyReply 		= ($o['entities']['user_mentions']['1']['indices'] ==null) && $tweetContainsReply;	// Tweets with only @reply without @mention
-
+				$tweetOnlyReply 		= ($o['entities']['user_mentions']['1']['indices'] == null) && $tweetContainsReply;	// Tweets with only @reply without @mention
+//===tweetOnlyReply test				
+				/*if($o['entities']['user_mentions'] != null ) { // Tweets with only @reply without @mention
+					if (($o['entities']['user_mentions']['1']['indices'] ==null) && $tweetContainsReply) {
+						$tweetOnlyReply = 1;
+					}
+					else {
+						$tweetOnlyReply = 0;
+					}		
+				} 	
+				else {
+					$tweetOnlyReply = 0;
+				}*/
+//===
+	
 				// Calculate userMention
 				$userMention 			= $tweetMentionAndOrReply && !$tweetOnlyReply;
-				
+	
 				// Check if we have all of the items we want and end processing
 				if ($i < $numberOfTweets) {
 					// We can't filter list feeds, so just process them
 					if ($params->get("twitterFeedType", 0) == 1) {
 						self::processItem($twitter, $o, $i, $params);
-					} else {
+					} else if($count>0) {
 						if ($params->get("filterMentions", 0) == 1 
 						&&  $params->get("filterReplies", 0)  == 1) {
 							// Filter @mentions and @replies, leaving retweets unchanged
-							if ((!$tweetMentionAndOrReply || isset($o['retweeted_status'])) && $count > 0) {
+							if (!$tweetMentionAndOrReply || isset($o['retweeted_status'])) {
 								self::processItem($twitter, $o, $i, $params);
 	
 								// Modify counts
@@ -285,10 +298,10 @@ class modTweetDisplayBackHelper {
 								$i++;								
 							}
 						} 
-						else {
+						else if($count>0) {
 							if ($params->get("filterMentions", 0) == 1) {
 								// Filter @mentions only, leaving retweets unchanged
-								if ( !$userMention || isset($o['retweeted_status']) && $count > 0) {
+								if (!$userMention || isset($o['retweeted_status'])) {
 									self::processItem($twitter, $o, $i, $params);
 	
 									// Modify counts
@@ -298,7 +311,7 @@ class modTweetDisplayBackHelper {
 							}
 							if ($params->get("filterReplies", 0) == 1) {
 								// Filter @replies only, leaving retweets unchanged
-								if (!$tweetContainsReply && $count > 0) {
+								if (!$tweetContainsReply) {
 									self::processItem($twitter, $o, $i, $params);
 	
 									// Modify counts
