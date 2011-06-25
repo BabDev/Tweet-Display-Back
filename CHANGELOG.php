@@ -27,6 +27,8 @@ $ - Language fix or change
 
 25-June 2011 Jurian Even
 # Corrected if else structure in processFiltering function. Filering both filterMentions and filterReplies did not activate both if statements.
+# Corrected if else structure in processFiltering function some more. 
+! Cleaned code using variables
 
 25-June-2011 Michael Babker
 ! Merge remote-tracking branches 'twentronix/twentronix' and 'origin/master'

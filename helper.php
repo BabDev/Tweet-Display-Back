@@ -241,10 +241,13 @@ class modTweetDisplayBackHelper {
 	static function processFiltering($obj, $params) {
 		// Initialize
 		$twitter = array();
+		$i = 0;
+		
+		// Set variables
 		$count = $params->get("twitterCount", 3);
 		$numberOfTweets = $params->get("twitterCount", 3);
-		$i = 0;
-
+		//$tweetRetweets = $params->get("tweetRetweets", 1);	
+		
 		// Check if $obj has data; if not, return an error
 		if (is_null($obj)) {
 			// Set an error
@@ -252,42 +255,65 @@ class modTweetDisplayBackHelper {
 		} else {
 			// Process the feed
 			foreach ($obj as $o) {
+				// @TODO BUG? When number of tweets is setup more then there are on the account, and both filters=1?
+				// @TODO change Filter replies/mentions? -> Show replies/mentions? in XML file and helper.php
+				// Note: filtering @mentions and/or @replies IN retweets is NOT working (and don't have to be I think?)
+				
+				// Set variables
+				$userReply				=  $o['in_reply_to_user_id'] != null;
+				//@TODO:
+				$userMention 			= ( ($o['entities']['user_mentions'] != null) && !$userReply /*|| 			// Tweets with only @mentions
+											($o['entities']['user_mentions']['indices[0]']!= '0' && $userReply)*/	); 	// @TODO: Tweets with @mentions and @replies
+			//$o['entities']['user_mentions']['0']['indices']['0'] == '0'
+				$userMentionAndReply 	=  $o['entities']['user_mentions'] != null;				
+				
 				// Check if we have all of the items we want and end processing
 				if ($i < $numberOfTweets) {
 					// We can't filter list feeds, so just process them
 					if ($params->get("twitterFeedType", 0) == 1) {
 						self::processItem($twitter, $o, $i, $params);
 					} else {
-	// @TODO BUG? When number of tweets is setup more then there are on the account, and both filters=1?
-						if ($params->get("filterMentions", 0) == 1) {
-							// @TODO: Only filter @mentions, leaving @replies unchanged
-							// Filter @mentions
-							if (($o['entities']['user_mentions'] == null || isset($o['retweeted_status'])) && $count > 0) {
+						if ($params->get("filterMentions", 0) == 1 
+						&&  $params->get("filterReplies", 0)  == 1) {
+							// Filter @mentions and @replies, leaving retweets unchanged
+							if ((!$userMentionAndReply || isset($o['retweeted_status'])) && $count > 0) {
 								self::processItem($twitter, $o, $i, $params);
-
+	
+								// Modify counts
+								$count--;
+								$i++;								
+							}
+						} 
+						else {
+							if ($params->get("filterMentions", 0) == 1) {
+								// Filter @mentions only, leaving retweets unchanged
+								if ( !$userMention  || isset($o['retweeted_status']) && $count > 0) {
+									self::processItem($twitter, $o, $i, $params);
+	
+									// Modify counts
+									$count--;
+									$i++;
+								}
+							}
+							if ($params->get("filterReplies", 0) == 1) {
+								// Filter @replies only, leaving retweets unchanged
+								if (!$userReply && $count > 0) {
+									self::processItem($twitter, $o, $i, $params);
+	
+									// Modify counts
+									$count--;
+									$i++;
+								}
+							}
+							if ($params->get("filterMentions", 0) == 0 
+							&&  $params->get("filterReplies", 0)  == 0) {
+								// No filtering required
+								self::processItem($twitter, $o, $i, $params);
+	
 								// Modify counts
 								$count--;
 								$i++;
 							}
-						}
-						if ($params->get("filterReplies", 0) == 1) {
-							// Filter @replies
-							if (($o['in_reply_to_user_id'] == null || (($o['entities']['user_mentions']['0']['indices']['0'] == '0') && ($params->get("filterMentions", 0) == 1))) && $count > 0) {
-								self::processItem($twitter, $o, $i, $params);
-
-								// Modify counts
-								$count--;
-								$i++;
-							}
-						}
-						if ($params->get("filterMentions", 0) == 0 
-						&&  $params->get("filterReplies", 0)  == 0) {
-							// No filtering required
-							self::processItem($twitter, $o, $i, $params);
-
-							// Modify counts
-							$count--;
-							$i++;
 						}
 					}
 				}
