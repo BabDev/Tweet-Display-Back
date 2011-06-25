@@ -286,7 +286,7 @@ class modTweetDisplayBackHelper {
 					// We can't filter list feeds, so just process them
 					if ($params->get("twitterFeedType", 0) == 1) {
 						self::processItem($twitter, $o, $i, $params);
-					} else if($count>0) {
+					} else {
 						if ($params->get("filterMentions", 0) == 1 
 						&&  $params->get("filterReplies", 0)  == 1) {
 							// Filter @mentions and @replies, leaving retweets unchanged
@@ -298,7 +298,7 @@ class modTweetDisplayBackHelper {
 								$i++;								
 							}
 						} 
-						else if($count>0) {
+						else {
 							if ($params->get("filterMentions", 0) == 1) {
 								// Filter @mentions only, leaving retweets unchanged
 								if (!$userMention || isset($o['retweeted_status'])) {
