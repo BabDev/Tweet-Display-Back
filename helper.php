@@ -242,7 +242,7 @@ class modTweetDisplayBackHelper {
 		// Initialize
 		$twitter = array();
 		$count = $params->get("twitterCount", 3);
-		$tweetCount = $params->get("twitterCount", 3);
+		$numberOfTweets = $params->get("twitterCount", 3);
 		$i = 0;
 
 		// Check if $obj has data; if not, return an error
@@ -253,15 +253,15 @@ class modTweetDisplayBackHelper {
 			// Process the feed
 			foreach ($obj as $o) {
 				// Check if we have all of the items we want and end processing
-				if ($i < $tweetCount) {
+				if ($i < $numberOfTweets) {
 					// We can't filter list feeds, so just process them
 					if ($params->get("twitterFeedType", 0) == 1) {
 						self::processItem($twitter, $o, $i, $params);
 					} else {
+	// @TODO BUG? When number of tweets is setup more then there are on the account, and both filters=1?
 						if ($params->get("filterMentions", 0) == 1) {
-							// @TODO: Need a way to exclude @replies, but checking here causes them to not be filtered out of the next check
-							// Likewise, not checking here causes replies to not be present for the next check
-							// Filter mentions
+							// @TODO: Only filter @mentions, leaving @replies unchanged
+							// Filter @mentions
 							if (($o['entities']['user_mentions'] == null || isset($o['retweeted_status'])) && $count > 0) {
 								self::processItem($twitter, $o, $i, $params);
 
@@ -269,7 +269,8 @@ class modTweetDisplayBackHelper {
 								$count--;
 								$i++;
 							}
-						} else if ($params->get("filterReplies", 0) == 1) {
+						}
+						if ($params->get("filterReplies", 0) == 1) {
 							// Filter @replies
 							if (($o['in_reply_to_user_id'] == null || (($o['entities']['user_mentions']['0']['indices']['0'] == '0') && ($params->get("filterMentions", 0) == 1))) && $count > 0) {
 								self::processItem($twitter, $o, $i, $params);
@@ -278,7 +279,9 @@ class modTweetDisplayBackHelper {
 								$count--;
 								$i++;
 							}
-						} else {
+						}
+						if ($params->get("filterMentions", 0) == 0 
+						&&  $params->get("filterReplies", 0)  == 0) {
 							// No filtering required
 							self::processItem($twitter, $o, $i, $params);
 
