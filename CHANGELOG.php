@@ -25,6 +25,14 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+25-June 2011 Jurian Even
+# Corrected if else structure in processFiltering function bigtime. Filering both filterMentions and filterReplies did not activate both if statements. 
+# Corrected check for filter @mentions only, there is however a notice warning left (needs to be fixed)
+^ Cleaned code 
++ Added different variables
+
+^ Restructured $count > 0
+
 25-June-2011 Michael Babker
 ! Merge remote-tracking branches 'twentronix/twentronix' and 'origin/master'
 # Corrected check for replies within the mentions conditional
