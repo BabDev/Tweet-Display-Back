@@ -25,12 +25,18 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
-25-June 2011 Jurian Even
-# Corrected if else structure in processFiltering function bigtime. Filering both filterMentions and filterReplies did not activate both if statements. 
-# Corrected check for filter @mentions only, there is however a notice warning left (needs to be fixed)
-^ Cleaned code 
-+ Added different variables
+26-June-2011 Michael Babker
+! Merge pull request #1 from Twentronix/twentronix
+^ Modified variable names
+! Code formatting
+# Added conditional to check mention to resolve undefined index error
+^ Moved the check for number of tweets to execute pre-variable setup
 
+25-June 2011 Jurian Even
+# Corrected if else structure in processFiltering function bigtime. Filering both filterMentions and filterReplies did not activate both if statements.
+# Corrected check for filter @mentions only, there is however a notice warning left (needs to be fixed)
+^ Cleaned code
++ Added different variables
 ^ Restructured $count > 0
 
 25-June-2011 Michael Babker
