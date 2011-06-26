@@ -25,6 +25,13 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+27-June-2011 Jurian Even
+! Merge from mbabker
+^ Comments improved
+^ Fixed naming of $tweetContainsMention to $tweetContainsMentionAndOrReply
+^ Changed naming of $mention to $mentionSet
+# New calculation for $tweetOnlyReply, bug not yet fixed
+
 26-June-2011 Michael Babker
 ! Merge pull request #1 from Twentronix/twentronix
 ^ Modified variable names
