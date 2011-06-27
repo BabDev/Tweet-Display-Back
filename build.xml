@@ -41,10 +41,16 @@
 			<fileset dir="packages/1.5">
 				<include name="**" />
 			</fileset>
+			<fileset dir="packages/common">
+				<include name="**" />
+			</fileset>
 		</zip>
 		<echo msg="Build 1.7 package" />
 		<zip destfile="releases/mod_tweetdisplayback_dev-20110628-j16.zip">
 			<fileset dir="packages/1.7">
+				<include name="**" />
+			</fileset>
+			<fileset dir="packages/common">
 				<include name="**" />
 			</fileset>
 		</zip>

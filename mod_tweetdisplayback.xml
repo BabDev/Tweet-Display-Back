@@ -416,9 +416,9 @@
 		<param
 			name="cache_time"
 			type="text"
-			default="15"
+			default="900"
 			label="Cache Time"
-			description="The time in minutes that the module's contents are cached" />
+			description="The time in seconds that the module's contents are cached" />
 		<param
 			name="moduleclass_sfx"
 			type="text"
