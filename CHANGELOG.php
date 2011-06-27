@@ -25,6 +25,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+28-June-2011 Michael Babker
+^$ Changed "Filter ..." to "Show ..." for filter settings
+
 27-June-2011 Jurian Even
 ! Merge pull from mbabker
 ^ Changed some comments
@@ -36,7 +39,7 @@ $ - Language fix or change
 - Removed commented out logic since it has been replaced
 ^ Made $tweetContainsMentionAndReply more generalized and reset false value
 
-27-June-2011 Jurian Even
+26-June-2011 Jurian Even
 ! Merge from mbabker
 ^ Comments improved
 ^ Fixed naming of $tweetContainsMention to $tweetContainsMentionAndOrReply

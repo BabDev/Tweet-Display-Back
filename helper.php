@@ -61,7 +61,7 @@ class modTweetDisplayBackHelper {
 		} else {
 			// Get the user feed
 			// Determine if we are filtering
-			if (($params->get("filterMentions", 0) == 1 || $params->get("filterReplies", 0) == 1 || $retweet == 0)) {
+			if (($params->get("showMentions", 0) == 0 || $params->get("showReplies", 0) == 0 || $retweet == 0)) {
 				// We have to manually filter mentions and replies,
 				// & Twitter doesn't send additional tweets when RTs are not included
 				$count = $count * 3;
@@ -241,8 +241,8 @@ class modTweetDisplayBackHelper {
 	static function processFiltering($obj, $params) {
 		// Initialize
 		$count			= $params->get("twitterCount", 3);
-		$filterMentions	= $params->get("filterMentions", 0);
-		$filterReplies	= $params->get("filterReplies", 0);
+		$showMentions	= $params->get("showMentions", 0);
+		$showReplies	= $params->get("showReplies", 0);
 		$numberOfTweets	= $params->get("twitterCount", 3);
 		$twitter		= array();
 		$i				= 0;
@@ -271,7 +271,6 @@ class modTweetDisplayBackHelper {
 						// 			When using for tweets where there is no reply, tweets with 1 mention only are missed(!)
 						if (isset($o['entities']['user_mentions']['1'])) {
 							$replyTweetContainsMention = $o['entities']['user_mentions']['1'];
-
 						} else {
 							$replyTweetContainsMention = '0';
 						}
@@ -286,7 +285,7 @@ class modTweetDisplayBackHelper {
 						if ($params->get("twitterFeedType", 0) == 1) {
 							self::processItem($twitter, $o, $i, $params);
 						} else {
-							if ($filterMentions == 1 && $filterReplies == 1) {
+							if ($showMentions == 0 && $showReplies == 0) {
 								// Filter @mentions and @replies, leaving retweets unchanged
 								if (!$tweetContainsMentionAndOrReply || isset($o['retweeted_status'])) {
 									self::processItem($twitter, $o, $i, $params);
@@ -296,7 +295,7 @@ class modTweetDisplayBackHelper {
 									$i++;
 								}
 							} else {
-								if ($filterMentions == 1) {
+								if ($showMentions == 0) {
 									// Filter @mentions only leaving @replies and retweets unchanged
 									if (!$tweetContainsMention || isset($o['retweeted_status'])) {
 										self::processItem($twitter, $o, $i, $params);
@@ -306,7 +305,7 @@ class modTweetDisplayBackHelper {
 										$i++;
 									}
 								}
-								if ($filterReplies == 1) {
+								if ($showReplies == 0) {
 									// Filter @replies only (including @replies with @mentions) leaving retweets unchanged
 									if (!$tweetContainsReply) {
 										self::processItem($twitter, $o, $i, $params);
@@ -316,7 +315,7 @@ class modTweetDisplayBackHelper {
 										$i++;
 									}
 								}
-								if ($filterMentions == 0 && $filterReplies == 0) {
+								if ($showMentions == 1 && $showReplies == 1) {
 									// No filtering required
 									self::processItem($twitter, $o, $i, $params);
 

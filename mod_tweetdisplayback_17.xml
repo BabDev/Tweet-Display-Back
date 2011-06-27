@@ -319,9 +319,9 @@
 			</fieldset>
 			<fieldset name="filter">
 				<field
-					name="filterMentions"
+					name="showMentions"
 					type="radio"
-					default="0"
+					default="1"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_DESCRIPTION" >
 					<option
@@ -330,9 +330,9 @@
 						value="1">JYES</option>
 				</field>
 				<field
-					name="filterReplies"
+					name="showReplies"
 					type="radio"
-					default="0"
+					default="1"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_DESCRIPTION" >
 					<option

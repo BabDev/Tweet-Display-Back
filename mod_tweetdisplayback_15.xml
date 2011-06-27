@@ -310,9 +310,9 @@
 			label="MOD_TWEETDISPLAYBACK_FILTER_FIELDSET_LABEL"
 			description="" />
 		<param
-			name="filterMentions"
+			name="showMentions"
 			type="radio"
-			default="0"
+			default="1"
 			label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_LABEL"
 			description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_DESCRIPTION" >
 			<option
@@ -321,9 +321,9 @@
 				value="1">Yes</option>
 		</param>
 		<param
-			name="filterReplies"
+			name="showReplies"
 			type="radio"
-			default="0"
+			default="1"
 			label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_LABEL"
 			description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_DESCRIPTION" >
 			<option
