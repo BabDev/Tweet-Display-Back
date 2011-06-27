@@ -25,6 +25,11 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+27-June-2011 Michael Babker
+! Merge pull request #3 from Twentronix/twentronix
+- Removed commented out logic since it has been replaced
+^ Made $tweetContainsMentionAndReply more generalized and reset false value
+
 27-June-2011 Jurian Even
 ! Merge from mbabker
 ^ Comments improved
