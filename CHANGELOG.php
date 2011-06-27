@@ -25,6 +25,11 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+27-June-2011 Jurian Even
+! Merge pull from mbabker
+^ Changed some comments
+^ Changed variable name $tweetContainsMention to $tweetContainsMentionAndOrReply
+
 27-June-2011 Michael Babker
 ! Merge pull request #3 from Twentronix/twentronix
 - Removed commented out logic since it has been replaced
