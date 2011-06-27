@@ -29,6 +29,7 @@ $ - Language fix or change
 ! Merge pull from mbabker
 ^ Changed some comments
 ^ Changed variable name $tweetContainsMention to $tweetContainsMentionAndOrReply
+^ Repositioned if ($count > 0) check in foreach loop, improved loadtime
 
 27-June-2011 Michael Babker
 ! Merge pull request #3 from Twentronix/twentronix
