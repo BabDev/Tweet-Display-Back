@@ -25,6 +25,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+29-June-2011 Michael Babker
+$ Update sv-SE translation
+
 28-June-2011 Michael Babker
 ^$ Changed "Filter ..." to "Show ..." for filter settings
 
