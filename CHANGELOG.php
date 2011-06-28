@@ -27,6 +27,7 @@ $ - Language fix or change
 
 29-June-2011 Michael Babker
 $ Update sv-SE translation
+$+ Added French translation (translated by Benjamin Ach)
 
 28-June-2011 Michael Babker
 ^$ Changed "Filter ..." to "Show ..." for filter settings
