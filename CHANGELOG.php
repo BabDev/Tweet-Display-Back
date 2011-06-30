@@ -25,6 +25,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+30-June-2011 Michael Babker
+# Correct error with hashtag str_replace
+
 29-June-2011 Michael Babker
 $ Update sv-SE translation
 $+ Added French translation (translated by Benjamin Ach)
