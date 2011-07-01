@@ -332,6 +332,23 @@
 				value="1">Yes</option>
 		</param>
 		<param
+			name="overrideCount"
+			type="radio"
+			default="0"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_OVERRIDECOUNT_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_OVERRIDECOUNT_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
+			name="tweetsToScan"
+			type="text"
+			default="3"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_TWEETSTOSCAN_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_TWEETSTOSCAN_DESCRIPTION" />
+		<param
 			name="@spacer"
 			type="spacer"
 			default=""

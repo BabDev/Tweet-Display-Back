@@ -25,6 +25,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+2-July-2011 Michael Babker
++ Add fields to override the number of tweets queried from Twitter
+
 30-June-2011 Michael Babker
 # Correct error with hashtag str_replace
 
