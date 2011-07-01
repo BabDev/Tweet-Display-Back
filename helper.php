@@ -66,6 +66,11 @@ class modTweetDisplayBackHelper {
 				// & Twitter doesn't send additional tweets when RTs are not included
 				$count = $count * 3;
 			}
+			// Determine whether the user has overridden the count parameter with a manual number of tweets to retrieve
+			// Override the $count variable if this is the case
+			if ($params->get("overrideCount", 1) == 1) {
+				$count = $params->get("tweetsToScan", 3);
+			}
 			$req = "http://api.twitter.com/1/statuses/user_timeline.json?count=".$count."&screen_name=".$uname.$incRT."&include_entities=1";
 		}
 

@@ -27,6 +27,7 @@ $ - Language fix or change
 
 2-July-2011 Michael Babker
 + Add fields to override the number of tweets queried from Twitter
+^ Add logic to compileData to override the count when building the query JSON
 
 30-June-2011 Michael Babker
 # Correct error with hashtag str_replace
