@@ -25,6 +25,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+3-July-2011 Michael Babker
++ Add logic to count the number of active filters
+^ Calculate the $count multiplier based on the number of active filters
+
 2-July-2011 Michael Babker
 + Add fields to override the number of tweets queried from Twitter
 ^ Add logic to compileData to override the count when building the query JSON

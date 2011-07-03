@@ -53,6 +53,18 @@ class modTweetDisplayBackHelper {
 			$incRT	= '&include_rts=1';
 		}
 
+		// Count the number of active filters
+		$activeFilters = 0;
+		if ($params->get("showMentions", 0) == 0) {
+			$activeFilters++;
+		}
+		if ($params->get("showReplies", 0) == 0) {
+			$activeFilters++;
+		}
+		if ($retweet == 0) {
+			$activeFilters++;
+		}
+
 		// Determine whether the feed being returned is a user or list feed
 		// 0 is user, 1 is list
 		if ($params->get("twitterFeedType", 0) == 1) {
@@ -60,11 +72,14 @@ class modTweetDisplayBackHelper {
 			$req = "http://api.twitter.com/1/lists/statuses.json?slug=".$flist."&owner_screen_name=".$uname.$incRT."&include_entities=1";
 		} else {
 			// Get the user feed
-			// Determine if we are filtering
-			if (($params->get("showMentions", 0) == 0 || $params->get("showReplies", 0) == 0 || $retweet == 0)) {
-				// We have to manually filter mentions and replies,
-				// & Twitter doesn't send additional tweets when RTs are not included
+			// We have to manually filter mentions and replies,
+			// & Twitter doesn't send additional tweets when RTs are not included
+			if ($activeFilters == 1) {
 				$count = $count * 3;
+			} else if ($activeFilters == 2) {
+				$count = $count * 4;
+			} else if ($activeFilters == 3) {
+				$count = $count * 5;
 			}
 			// Determine whether the user has overridden the count parameter with a manual number of tweets to retrieve
 			// Override the $count variable if this is the case
