@@ -465,38 +465,38 @@ class modTweetDisplayBackHelper {
 		$diff = round($diff/60);
 		// 60 to 119 seconds
 		if ($diff < 2) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTE');
+			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_MINUTE', $diff);
 		}
 		// 2 to 59 minutes
 		if ($diff < 60) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_MINUTES');
+			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_MINUTES', $diff);
 		}
 		$diff = round($diff/60);
 		// 1 hour
 		if ($diff < 2) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOUR');
+			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_HOUR', $diff);
 		}
 		// 2 to 23 hours
 		if ($diff < 24) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_HOURS');
+			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_HOURS', $diff);
 		}
 		$diff = round($diff/24);
 		// 1 day
 		if ($diff < 2) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAY');
+			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_DAY', $diff);
 		}
 		// 2 to 6 days
 		if ($diff < 7) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_DAYS');
+			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_DAYS', $diff);
 		}
 		$diff = round($diff/7);
 		// 1 week
 		if ($diff < 2) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEK');
+			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_WEEK', $diff);
 		}
 		// 2 or 3 weeks
 		if ($diff < 4) {
-			return $diff . JText::_('MOD_TWEETDISPLAYBACK_CREATE_WEEKS');
+			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_WEEKS', $diff);
 		}
 		return JHTML::date($date);
 	}
@@ -512,15 +512,15 @@ class modTweetDisplayBackHelper {
 	static function renderRetweetCount($count) {
 		// No retweets
 		if ($count = 0) {
-			return $count . JText::_('MOD_TWEETDISPLAYBACK_RETWEETS');
+			return JText::sprintf('MOD_TWEETDISPLAYBACK_RETWEETS', $count);
 		}
 		// 1 retweet
 		else if ($count = 1) {
-			return $count . JText::_('MOD_TWEETDISPLAYBACK_RETWEET');
+			return JText::sprintf('MOD_TWEETDISPLAYBACK_RETWEETS', $count);
 		}
 		// 2 or more retweets
 		else if ($count > 1) {
-			return $count . JText::_('MOD_TWEETDISPLAYBACK_RETWEETS');
+			return JText::sprintf('MOD_TWEETDISPLAYBACK_RETWEETS', $count);
 		}
 		return;
 	}

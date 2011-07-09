@@ -25,6 +25,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+9-July-2011 Michael Babker
+^$ Process count values through JText::sprintf to allow for greater international compatibility
+
 3-July-2011 Michael Babker
 + Add logic to count the number of active filters
 ^ Calculate the $count multiplier based on the number of active filters
