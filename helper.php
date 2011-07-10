@@ -516,7 +516,7 @@ class modTweetDisplayBackHelper {
 		}
 		// 1 retweet
 		else if ($count = 1) {
-			return JText::sprintf('MOD_TWEETDISPLAYBACK_RETWEETS', $count);
+			return JText::sprintf('MOD_TWEETDISPLAYBACK_RETWEET', $count);
 		}
 		// 2 or more retweets
 		else if ($count > 1) {
