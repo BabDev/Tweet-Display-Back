@@ -25,6 +25,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+10-July-2011 Michael Babker
+$ Updated pt-BR translation
+$- Removed unused string
+
 9-July-2011 Michael Babker
 ^$ Process count values through JText::sprintf to allow for greater international compatibility
 
