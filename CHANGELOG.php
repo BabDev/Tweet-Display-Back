@@ -25,6 +25,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 2.0 Beta - Released 13-July-2011
+--------------------------------------------------
 10-July-2011 Michael Babker
 $ Updated pt-BR translation
 $- Removed unused string
