@@ -25,6 +25,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+13-July-2011 Michael Babker
+^ Optimize processFiltering by having no filtering conditions and list feeds process before filtering begins
+^ Check if $list is defined before ASCII'ing it
+
 --------------------------------------------------
 Tweet Display Back 2.0 Beta - Released 13-July-2011
 --------------------------------------------------

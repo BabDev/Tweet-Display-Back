@@ -34,7 +34,9 @@ class modTweetDisplayBackHelper {
 		$retweet	= $params->get("tweetRetweets", 1);
 
 		// Convert the list name to a useable string for the JSON
-		$flist		= self::toAscii($list);
+		if ($list) {
+			$flist		= self::toAscii($list);
+		}
 
 		// Initialize the array
 		$twitter	= array();
@@ -170,7 +172,9 @@ class modTweetDisplayBackHelper {
 		$twitter->footer	= new stdClass();
 
 		// Convert the list name to a useable string for the URL
-		$flist		= self::toAscii($list);
+		if ($list) {
+			$flist		= self::toAscii($list);
+		}
 
 		// Get the user JSON
 		$req	= "http://api.twitter.com/1/users/show.json?screen_name=".$uname;
@@ -277,34 +281,46 @@ class modTweetDisplayBackHelper {
 				if ($count > 0) {
 					// Check if we have all of the items we want
 					if ($i < $numberOfTweets) {
-						// Set variables
-						// Tweets which contains a @reply
-						$tweetContainsReply				= $o['in_reply_to_user_id'] != null;
-						// Tweets which contains a @mention and/or @reply
-						$tweetContainsMentionAndOrReply	= $o['entities']['user_mentions'] != null;
-						// Tweets which contains only @mentions
-						$tweetOnlyMention 				= $tweetContainsMentionAndOrReply && !$tweetContainsReply;
-
-						// Check if reply tweet contains mention(s)
-						// NOTE: 	Works only for tweets where there is also a reply, since reply is at
-						// 			the position ['0'] and mention begin at ['1'].
-						// 			When using for tweets where there is no reply, tweets with 1 mention only are missed(!)
-						if (isset($o['entities']['user_mentions']['1'])) {
-							$replyTweetContainsMention = $o['entities']['user_mentions']['1'];
-						} else {
-							$replyTweetContainsMention = '0';
-						}
-
-						// Tweets with only @reply
-						$tweetOnlyReply = $tweetContainsReply && $replyTweetContainsMention == '0';
-
-						// Tweets which contains @mentions or @mentions+@reply
-						$tweetContainsMention = $tweetContainsMentionAndOrReply && !$tweetOnlyReply;
-
-						// We can't filter list feeds, so just process them
-						if ($params->get("twitterFeedType", 0) == 1) {
+						// If we aren't filtering, just render the item
+						if ($showMentions == 1 && $showReplies == 1) {
 							self::processItem($twitter, $o, $i, $params);
+
+							// Modify counts
+							$count--;
+							$i++;
+						} else if ($params->get("twitterFeedType", 0) == 1) {
+							// We can't filter list feeds, so just process them
+							self::processItem($twitter, $o, $i, $params);
+
+							// Modify counts
+							$count--;
+							$i++;
 						} else {
+							// We're filtering, the fun starts here
+							// Set variables
+							// Tweets which contains a @reply
+							$tweetContainsReply				= $o['in_reply_to_user_id'] != null;
+							// Tweets which contains a @mention and/or @reply
+							$tweetContainsMentionAndOrReply	= $o['entities']['user_mentions'] != null;
+							// Tweets which contains only @mentions
+							$tweetOnlyMention 				= $tweetContainsMentionAndOrReply && !$tweetContainsReply;
+
+							// Check if reply tweet contains mention(s)
+							// NOTE: 	Works only for tweets where there is also a reply, since reply is at
+							// 			the position ['0'] and mention begin at ['1'].
+							// 			When using for tweets where there is no reply, tweets with 1 mention only are missed(!)
+							if (isset($o['entities']['user_mentions']['1'])) {
+								$replyTweetContainsMention = $o['entities']['user_mentions']['1'];
+							} else {
+								$replyTweetContainsMention = '0';
+							}
+
+							// Tweets with only @reply
+							$tweetOnlyReply = $tweetContainsReply && $replyTweetContainsMention == '0';
+
+							// Tweets which contains @mentions or @mentions+@reply
+							$tweetContainsMention = $tweetContainsMentionAndOrReply && !$tweetOnlyReply;
+
 							if ($showMentions == 0 && $showReplies == 0) {
 								// Filter @mentions and @replies, leaving retweets unchanged
 								if (!$tweetContainsMentionAndOrReply || isset($o['retweeted_status'])) {
