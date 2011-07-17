@@ -248,7 +248,8 @@ class modTweetDisplayBackHelper {
 			} else {
 				$twitter->footer->powered_by = "<hr /><div class=\"TDB-footer-powered-text\">";
 			}
-			$twitter->footer->powered_by .= "Powered by <a href=\"http://www.flbab.com/extensions/tweet-display-back\" rel=\"nofollow\">Tweet Display Back</a></div>";
+			$site	= '<a href=\"http://www.flbab.com/extensions/tweet-display-back\" rel=\"nofollow\">Tweet Display Back</a>';
+			$twitter->footer->powered_by .= JText::sprintf('MOD_TWEETDISPLAYBACK_POWERED_BY', $site)."</div>";
 		}
 		return $twitter;
 	}
@@ -394,7 +395,7 @@ class modTweetDisplayBackHelper {
 			if ($tweetName == 1) {
 				$twitter[$i]->tweet->user = "<b><a href=\"http://twitter.com/intent/user?screen_name=".$o['retweeted_status']['user']['screen_name']."\" rel=\"nofollow\">".$o['retweeted_status']['user']['screen_name']."</a>".$params->get("tweetUserSeparator")."</b> ";
 			}
-			$twitter[$i]->tweet->created = "Retweeted ";
+			$twitter[$i]->tweet->created = JText::_('MOD_TWEETDISPLAYBACK_RETWEETED');
 			$twitter[$i]->tweet->avatar = "<img align=\"".$tweetAlignment."\" alt=\"".$o['retweeted_status']['user']['screen_name']."\" src=\"".$o['retweeted_status']['user']['profile_image_url']."\" width=\"32px\"/>";
 			$twitter[$i]->tweet->text = $o['retweeted_status']['text'];
 			foreach ($o['retweeted_status']['entities']['urls'] as $url) {
@@ -433,15 +434,15 @@ class modTweetDisplayBackHelper {
 		}
 		// Display the tweet source
 		if (($params->get("tweetSource", 1) == 1)) {
-			$twitter[$i]->tweet->created .= " via ".$o['source'];
+			$twitter[$i]->tweet->created .= JText::sprintf('MOD_TWEETDISPLAYBACK_VIA', $o['source']);
 		}
 		// Display the location the tweet was made from
 		if (($params->get("tweetLocation", 1) == 1) && ($o['place']['full_name'])) {
-			$twitter[$i]->tweet->created .= " from <a href=\"http://maps.google.com/maps?q=".$o['place']['full_name']."\" target=\"_blank\" rel=\"nofollow\">".$o['place']['full_name']."</a>";
+			$twitter[$i]->tweet->created .= JText::_('MOD_TWEETDISPLAYBACK_FROM')."<a href=\"http://maps.google.com/maps?q=".$o['place']['full_name']."\" target=\"_blank\" rel=\"nofollow\">".$o['place']['full_name']."</a>";
 		}
 		// If the tweet is a reply, display a link to the tweet it's in reply to
 		if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) {
-			$twitter[$i]->tweet->created .= " in reply to <a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id_str']."\" rel=\"nofollow\">".$o['in_reply_to_screen_name']."</a>";
+			$twitter[$i]->tweet->created .= JText::_('MOD_TWEETDISPLAYBACK_IN_REPLY_TO')."<a href=\"http://twitter.com/".$o['in_reply_to_screen_name']."/status/".$o['in_reply_to_status_id_str']."\" rel=\"nofollow\">".$o['in_reply_to_screen_name']."</a>";
 		}
 		// Display the number of times the tweet has been retweeted
 		if ((($tweetRTCount == 1) && ($o['retweet_count'] >= 1))) {
