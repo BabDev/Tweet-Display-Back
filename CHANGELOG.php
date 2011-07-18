@@ -27,6 +27,7 @@ $ - Language fix or change
 
 18-July-2011 Michael Babker
 ^ Set cache life in minutes for Joomla! 1.7
+$+ Add nl-BE and nl-NL translations (translated by Jurian Even)
 
 13-July-2011 Michael Babker
 ^ Optimize processFiltering by having no filtering conditions and list feeds process before filtering begins
