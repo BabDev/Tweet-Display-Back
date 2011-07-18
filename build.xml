@@ -37,7 +37,7 @@
 		depends="rebuild-packages,common-files,15-package,17-package"
 	>
 		<echo msg="Build 1.5 package" />
-		<zip destfile="releases/mod_tweetdisplayback_20beta-j15.zip">
+		<zip destfile="releases/mod_tweetdisplayback_20rc-j15.zip">
 			<fileset dir="packages/1.5">
 				<include name="**" />
 			</fileset>
@@ -45,8 +45,8 @@
 				<include name="**" />
 			</fileset>
 		</zip>
-		<echo msg="Build 1.7 package" />
-		<zip destfile="releases/mod_tweetdisplayback_20beta-j16.zip">
+		<echo msg="Build 1.6/1.7 package" />
+		<zip destfile="releases/mod_tweetdisplayback_20rc-j16.zip">
 			<fileset dir="packages/1.7">
 				<include name="**" />
 			</fileset>
