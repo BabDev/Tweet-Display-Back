@@ -465,6 +465,8 @@
 	<languages folder="language/">
 		<language tag="en-GB">en-GB/en-GB.mod_tweetdisplayback.ini</language>
 		<language tag="fr-FR">fr-FR/fr-FR.mod_tweetdisplayback.ini</language>
+		<language tag="nl-BE">nl-BE/nl-BE.mod_tweetdisplayback.ini</language>
+		<language tag="nl-NL">nl-NL/nl-NL.mod_tweetdisplayback.ini</language>
 		<language tag="pt-BR">pt-BR/pt-BR.mod_tweetdisplayback.ini</language>
 		<language tag="sv-SE">sv-SE/sv-SE.mod_tweetdisplayback.ini</language>
 	</languages>

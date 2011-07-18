@@ -23,6 +23,10 @@
 		<language tag="en-GB">language/en-GB/en-GB.mod_tweetdisplayback.sys.ini</language>
 		<language tag="fr-FR">language/fr-FR/fr-FR.mod_tweetdisplayback.ini</language>
 		<language tag="fr-FR">language/fr-FR/fr-FR.mod_tweetdisplayback.sys.ini</language>
+		<language tag="nl-BE">language/nl-BE/nl-BE.mod_tweetdisplayback.ini</language>
+		<language tag="nl-BE">language/nl-BE/nl-BE.mod_tweetdisplayback.sys.ini</language>
+		<language tag="nl-NL">language/nl-NL/nl-NL.mod_tweetdisplayback.ini</language>
+		<language tag="nl-NL">language/nl-NL/nl-NL.mod_tweetdisplayback.sys.ini</language>
 		<language tag="pt-BR">language/pt-BR/pt-BR.mod_tweetdisplayback.ini</language>
 		<language tag="pt-BR">language/pt-BR/pt-BR.mod_tweetdisplayback.sys.ini</language>
 		<language tag="sv-SE">language/sv-SE/sv-SE.mod_tweetdisplayback.ini</language>
