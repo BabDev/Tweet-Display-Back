@@ -26,7 +26,7 @@ if ($params->get('cache') == 1) {
 	$cache		= JCache::getInstance('callback', $options);
 	$cacheTime	= $params->get('cache_time');
 	// J! 1.5 and 1.6 cache is set in seconds, 1.7 caches in minutes
-	if (version_compare(JVERSION,'1.7.0','ge') {
+	if (version_compare(JVERSION,'1.7.0','ge')) {
 		$cacheTime	= round($cacheTime / 60);
 	}
 	$cache->setLifeTime($cacheTime);
