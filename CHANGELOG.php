@@ -25,6 +25,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+18-July-2011 Michael Babker
+^ Set cache life in minutes for Joomla! 1.7
+
 13-July-2011 Michael Babker
 ^ Optimize processFiltering by having no filtering conditions and list feeds process before filtering begins
 ^ Check if $list is defined before ASCII'ing it
