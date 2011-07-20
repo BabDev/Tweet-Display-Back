@@ -25,6 +25,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+20-July-2011 Michael Babker
+# Make the @mentions str_replace str_ireplace
+
 18-July-2011 Michael Babker
 ^ Set cache life in minutes for Joomla! 1.7
 $+ Add nl-BE and nl-NL translations (translated by Jurian Even)

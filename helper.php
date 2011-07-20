@@ -457,7 +457,7 @@ class modTweetDisplayBackHelper {
 		// If set, convert user and hash tags into links
 		if ($params->get("tweetLinks", 1) == 1) {
 			foreach ($o['entities']['user_mentions'] as $mention) {
-				$twitter[$i]->tweet->text = str_replace($mention['screen_name'], "<a class=\"userlink\" href=\"http://twitter.com/intent/user?screen_name=".$mention['screen_name']."\" rel=\"nofollow\">".$mention['screen_name']."</a>", $twitter[$i]->tweet->text);
+				$twitter[$i]->tweet->text = str_ireplace($mention['screen_name'], "<a class=\"userlink\" href=\"http://twitter.com/intent/user?screen_name=".$mention['screen_name']."\" rel=\"nofollow\">".$mention['screen_name']."</a>", $twitter[$i]->tweet->text);
 			}
 			foreach ($o['entities']['hashtags'] as $hashtag) {
 				$twitter[$i]->tweet->text = str_replace('#'.$hashtag['text'], "#<a class=\"hashlink\" href=\"http://twitter.com/search?q=".$hashtag['text']."\" target=\"_blank\" rel=\"nofollow\">".$hashtag['text']."</a>", $twitter[$i]->tweet->text);
