@@ -25,6 +25,12 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 2.0.0 - Released 22-July-2011
+--------------------------------------------------
+22-July-2011 Michael Babker
+$ Synchronize all translations
+
 20-July-2011 Michael Babker
 # Make the @mentions str_replace str_ireplace
 
