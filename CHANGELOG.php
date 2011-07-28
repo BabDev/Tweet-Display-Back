@@ -28,6 +28,7 @@ $ - Language fix or change
 29-July-2011 Michael Babker
 # Add the @ symbol to the mentions check
 # Make the hash check case insensitive
+^ Improve renderRetweetCount
 
 --------------------------------------------------
 Tweet Display Back 2.0.0 - Released 22-July-2011

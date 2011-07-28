@@ -527,16 +527,12 @@ class modTweetDisplayBackHelper {
 	 * @since	1.6.0
 	 */
 	static function renderRetweetCount($count) {
-		// No retweets
-		if ($count = 0) {
-			return JText::sprintf('MOD_TWEETDISPLAYBACK_RETWEETS', $count);
-		}
 		// 1 retweet
-		else if ($count = 1) {
+		if ($count = 1) {
 			return JText::sprintf('MOD_TWEETDISPLAYBACK_RETWEET', $count);
 		}
-		// 2 or more retweets
-		else if ($count > 1) {
+		// 0 (shouldn't even be here!) or 2+ retweets
+		else {
 			return JText::sprintf('MOD_TWEETDISPLAYBACK_RETWEETS', $count);
 		}
 		return;
