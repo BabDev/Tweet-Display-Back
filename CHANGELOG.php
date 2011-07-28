@@ -29,6 +29,7 @@ $ - Language fix or change
 # Add the @ symbol to the mentions check
 # Make the hash check case insensitive
 ^ Improve renderRetweetCount
+$ Update fr-FR translation
 
 --------------------------------------------------
 Tweet Display Back 2.0.0 - Released 22-July-2011
