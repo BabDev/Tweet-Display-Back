@@ -248,7 +248,7 @@ class modTweetDisplayBackHelper {
 			} else {
 				$twitter->footer->powered_by = "<hr /><div class=\"TDB-footer-powered-text\">";
 			}
-			$site	= '<a href=\"http://www.flbab.com/extensions/tweet-display-back\" rel=\"nofollow\">Tweet Display Back</a>';
+			$site	= '<a href="http://www.flbab.com/extensions/tweet-display-back" rel="nofollow">Tweet Display Back</a>';
 			$twitter->footer->powered_by .= JText::sprintf('MOD_TWEETDISPLAYBACK_POWERED_BY', $site)."</div>";
 		}
 		return $twitter;

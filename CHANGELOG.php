@@ -25,6 +25,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+31-July-2011 Michael Babker
+# Fix a bug in the Powered By link generation
+
 29-July-2011 Michael Babker
 # Add the @ symbol to the mentions check
 # Make the hash check case insensitive
