@@ -25,6 +25,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+2-August-2011 Michael Babker
++ Add jUpgrade migration files
+
 31-July-2011 Michael Babker
 # Fix a bug in the Powered By link generation
 

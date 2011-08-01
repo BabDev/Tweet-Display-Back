@@ -86,9 +86,18 @@
 			file="mod_tweetdisplayback_15.xml"
 			tofile="packages/1.5/mod_tweetdisplayback.xml"
 			overwrite="true" />
+		<echo msg="Copy jUpgrade files" />
+		<copy
+			file="tdb_migrate.xml"
+			tofile="packages/1.5/tdb_migrate.xml"
+			overwrite="true" />
+		<copy
+			file="tdb_migrate.php"
+			tofile="packages/1.5/tdb_migrate.php"
+			overwrite="true" />
 	</target>
 	<target name="17-package" description="Builds the 1.7 package" depends="rebuild-packages">
-		<echo msg="Create 1.5 temp folder" />
+		<echo msg="Create 1.7 temp folder" />
 		<mkdir dir="packages/1.7" />
 		<echo msg="Create 1.7 language folder" />
 		<copy todir="packages/1.7/language">

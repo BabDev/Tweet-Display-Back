@@ -457,6 +457,8 @@
 		<filename module="mod_tweetdisplayback">media/images/icon-sprite.png</filename>
 		<filename module="mod_tweetdisplayback">media/images/index.html</filename>
 		<filename module="mod_tweetdisplayback">mod_tweetdisplayback.php</filename>
+		<filename module="mod_tweetdisplayback">tdb_migrate.php</filename>
+		<filename module="mod_tweetdisplayback">tdb_migrate.xml</filename>
 		<filename module="mod_tweetdisplayback">tmpl/construct.php</filename>
 		<filename module="mod_tweetdisplayback">tmpl/default.php</filename>
 		<filename module="mod_tweetdisplayback">tmpl/index.html</filename>
