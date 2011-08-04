@@ -67,7 +67,7 @@
 		</copy>
 		<copy todir="packages/common">
 			<fileset dir=".">
-				<include name="CHANGELOG.php" />
+				<include name="CHANGELOG" />
 				<include name="helper.php" />
 				<include name="index.html" />
 				<include name="mod_tweetdisplayback.php" />
