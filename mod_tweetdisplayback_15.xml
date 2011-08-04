@@ -444,7 +444,6 @@
 			description="PARAMMODULECLASSSUFFIX" />
 	</params>
 	<files>
-		<filename module="mod_tweetdisplayback">CHANGELOG.php</filename>
 		<filename module="mod_tweetdisplayback">helper.php</filename>
 		<filename module="mod_tweetdisplayback">index.html</filename>
 		<filename module="mod_tweetdisplayback">media/index.html</filename>
