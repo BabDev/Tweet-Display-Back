@@ -4,6 +4,7 @@
 *
 * @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+* @package		mod_tweetdisplayback
 */
 
 // No direct access

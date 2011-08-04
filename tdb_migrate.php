@@ -4,6 +4,7 @@
 *
 * @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
 * @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+* @package		mod_tweetdisplayback
 */
 
 // No direct access
@@ -11,6 +12,9 @@ defined('_JEXEC') or die;
 
 /**
  * Tweet Display Back migration class from Joomla 1.5 to Joomla 1.6/1.7
+ *
+ * @package	mod_tweetdisplayback
+ * @since	2.0.1
  */
 class jUpgradeModuleTDB extends jUpgrade {
 	/**
