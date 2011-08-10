@@ -14,6 +14,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+10-August-2011 Michael Babker
+^ Move common template variables to be processed pre-rendering
+^ Removed the count check from the templates as it is handled in the helper
+
 8-August-2011 Michael Babker
 $+ Add it-IT translation (translated by Enrico Ardito)
 

@@ -10,19 +10,6 @@
 // No direct access
 defined('_JEXEC') or die;
 
-// Set the variables
-$imgpath 		= JURI::root()."modules/mod_tweetdisplayback/media/images";
-$headerAlign	= $params->get("headerAvatarAlignment");
-$tweetAlign		= $params->get("tweetAlignment");
-$headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
-$tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
-
-JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/nostyle.css', false, false, false);
-
-// Add the Twitter Web Intents script
-$document = JFactory::getDocument();
-$document->addCustomTag('<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>');
-
 // Prechecked parameters
 $headerAvatar	= '';
 $tweetAvatar	= '';
@@ -68,7 +55,6 @@ if ($params->get("headerDisplay", 0) == 1) { ?>
 
 <?php }
 foreach ($twitter->tweet as $o) {
-if ($i <= $count) {
 if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) {
 	$tweetAvatar	= ' TDB-tweetavatar-'.$tweetAlign;
 } ?>
@@ -93,7 +79,6 @@ if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) {
 		</div>
 	</div>
 	<?php $i++;
-	}
 }
 
 if (!empty($twitter->footer->follow_me)) {

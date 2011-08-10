@@ -10,24 +10,6 @@
 // No direct access
 defined('_JEXEC') or die;
 
-// Set the variables
-$imgpath 		= JURI::root()."modules/mod_tweetdisplayback/media/images";
-$headerAlign	= $params->get("headerAvatarAlignment");
-$tweetDisplay	= $params->get("tweetAlignment");
-$headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
-$tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
-
-// If CSS3 is selected, load it's stylesheet
-$css3	= '';
-if ($params->get("templateCSS3", 1) == 1) {
-	$css3	= '-css3';
-}
-JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/construct'.$css3.'.css', false, false, false);
-
-// Add the Twitter Web Intents script
-$document = JFactory::getDocument();
-$document->addCustomTag('<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>');
-
 // Prechecked parameters
 $headerAvatar	= '';
 $tweetAvatar	= '';
@@ -72,19 +54,18 @@ if ($params->get("headerDisplay", 1) == 1) { ?>
 <?php }
 
 foreach ($twitter->tweet as $o) {
-if ($i <= $count) {
 if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) {
 	$tweetAvatar	= ' TDB-tweetavatar';
 } ?>
     <div class="TDB-tweet<?php echo $tweetClassSfx.$tweetAvatar; ?>">
-		<div class="TDB-tweet-container TDB-tweet-align-<?php echo $tweetDisplay;?>">
+		<div class="TDB-tweet-container TDB-tweet-align-<?php echo $tweetAlign;?>">
 		<?php if (!empty($o->tweet->user)) { ?>
 			<div class="TDB-tweet-user">
 				<?php echo $o->tweet->user; ?>
 			</div>
 		<?php }
 		if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) { ?>
-			<span class="TDB-tweet-avatar-<?php echo $tweetDisplay;?>">
+			<span class="TDB-tweet-avatar-<?php echo $tweetAlign;?>">
 				<?php echo $o->tweet->avatar; ?>
 			</span>
 		<?php } ?>
@@ -99,7 +80,6 @@ if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) {
 	</div>
 	<div class="clr"></div>
 	<?php $i++;
-	}
 }
 
 if (!empty($twitter->footer->follow_me)) {

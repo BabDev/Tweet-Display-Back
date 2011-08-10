@@ -48,4 +48,25 @@ if (isset($twitter->hits)) {
 	return;
 }
 
-require(JModuleHelper::getLayoutPath('mod_tweetdisplayback', $params->get('templateLayout', 'default')));
+// Set the template variables
+$imgpath 		= JURI::root()."modules/mod_tweetdisplayback/media/images";
+$headerAlign	= $params->get("headerAvatarAlignment");
+$tweetAlign		= $params->get("tweetAlignment");
+$headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
+$tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
+$template		= $params->get('templateLayout', 'default');
+
+// If CSS3 is selected, load it's stylesheet
+$css3	= '';
+if ($params->get("templateCSS3", 1) == 1 && $template != 'nostyle') {
+	$css3	= '-css3';
+}
+JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/'.$template.$css3.'.css', false, false, false);
+
+// Add the Twitter Web Intents script if something else already hasn't
+$document = JFactory::getDocument();
+if (!in_array('<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>', $document->_custom)) {
+	$document->addCustomTag('<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>');
+}
+
+require(JModuleHelper::getLayoutPath('mod_tweetdisplayback', $template));
