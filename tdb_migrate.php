@@ -17,6 +17,7 @@ defined('_JEXEC') or die;
  * @since	2.0.1
  */
 class jUpgradeModuleTDB extends jUpgrade {
+
 	/**
 	 * Check if extension migration is supported.
 	 *

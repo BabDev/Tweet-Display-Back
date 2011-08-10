@@ -13,16 +13,16 @@ defined('_JEXEC') or die;
 // Prechecked parameters
 $headerAvatar	= '';
 $tweetAvatar	= '';
-if (($params->get("headerAvatar", 1) == 0) || (empty($twitter->header->avatar))) {
+if (($params->get('headerAvatar', 1) == 0) || (empty($twitter->header->avatar))) {
 	$headerAvatar	= '-noavatar';
 }
 
 // Variables for the foreach
 $i		= 0;
-$count	= $params->get("twitterCount", 3) - 1;
+$count	= $params->get('twitterCount', 3) - 1;
 
 // Check to see if the header is set to display
-if ($params->get("headerDisplay", 1) == 1) { ?>
+if ($params->get('headerDisplay', 1) == 1) { ?>
 	<div class="TDB-header<?php echo $headerClassSfx.$headerAvatar; ?>">
 	<?php if (!empty($twitter->header->user)) { ?>
 		<div class="TDB-header-user">
@@ -30,7 +30,7 @@ if ($params->get("headerDisplay", 1) == 1) { ?>
 		</div>
 	<?php }
 	// Check to determine if the avatar is displayed in the header
-	if (($params->get("headerAvatar", 1) == 1) && (!empty($twitter->header->avatar))) { ?>
+	if (($params->get('headerAvatar', 1) == 1) && (!empty($twitter->header->avatar))) { ?>
 		<span class="TDB-header-avatar-<?php echo $headerAlign;?>">
 			<?php echo $twitter->header->avatar; ?>
 		</span>
@@ -54,7 +54,7 @@ if ($params->get("headerDisplay", 1) == 1) { ?>
 <?php }
 
 foreach ($twitter->tweet as $o) {
-if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) {
+if (($params->get('tweetAvatar', 1) == 1) && (!empty($o->tweet->avatar))) {
 	$tweetAvatar	= ' TDB-tweetavatar';
 } ?>
     <div class="TDB-tweet<?php echo $tweetClassSfx.$tweetAvatar; ?>">
@@ -64,12 +64,12 @@ if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) {
 				<?php echo $o->tweet->user; ?>
 			</div>
 		<?php }
-		if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) { ?>
+		if (($params->get('tweetAvatar', 1) == 1) && (!empty($o->tweet->avatar))) { ?>
 			<span class="TDB-tweet-avatar-<?php echo $tweetAlign;?>">
 				<?php echo $o->tweet->avatar; ?>
 			</span>
 		<?php } ?>
-		<div class="TDB-tweet-text"><?php echo $o->tweet->text;?></div>
+		<div class='TDB-tweet-text'><?php echo $o->tweet->text;?></div>
 		<?php if (!empty($o->tweet->created)) { ?>
 			<p class="TDB-tweet-time"><?php echo $o->tweet->created; ?></p>
 		<?php }

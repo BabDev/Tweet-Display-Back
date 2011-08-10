@@ -49,16 +49,16 @@ if (isset($twitter->hits)) {
 }
 
 // Set the template variables
-$imgpath 		= JURI::root()."modules/mod_tweetdisplayback/media/images";
-$headerAlign	= $params->get("headerAvatarAlignment");
-$tweetAlign		= $params->get("tweetAlignment");
+$imgpath 		= JURI::root().'modules/mod_tweetdisplayback/media/images';
+$headerAlign	= $params->get('headerAvatarAlignment');
+$tweetAlign		= $params->get('tweetAlignment');
 $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
 $template		= $params->get('templateLayout', 'default');
 
 // If CSS3 is selected, load it's stylesheet
 $css3	= '';
-if ($params->get("templateCSS3", 1) == 1 && $template != 'nostyle') {
+if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle') {
 	$css3	= '-css3';
 }
 JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/'.$template.$css3.'.css', false, false, false);

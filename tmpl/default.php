@@ -13,16 +13,16 @@ defined('_JEXEC') or die;
 // Prechecked parameters
 $headerAvatar	= '';
 $tweetAvatar	= '';
-if (($params->get("headerAvatar", 1) == 1) && (!empty($twitter->header->avatar))) {
+if (($params->get('headerAvatar', 1) == 1) && (!empty($twitter->header->avatar))) {
 	$headerAvatar	= ' TDB-headavatar';
 }
 
 // Variables for the foreach
 $i		= 0;
-$count	= $params->get("twitterCount", 3) - 1;
+$count	= $params->get('twitterCount', 3) - 1;
 
 // Check to see if the header is set to display
-if ($params->get("headerDisplay", 1) == 1) { ?>
+if ($params->get('headerDisplay', 1) == 1) { ?>
 	<div class="TDB-header<?php echo $headerClassSfx.$headerAvatar; ?>">
 	<?php if (!empty($twitter->header->user)) { ?>
 		<div class="TDB-header-user">
@@ -30,7 +30,7 @@ if ($params->get("headerDisplay", 1) == 1) { ?>
 		</div>
 	<?php }
 	// Check to determine if the avatar is displayed in the header
-	if (($params->get("headerAvatar", 1) == 1) && (!empty($twitter->header->avatar))) { ?>
+	if (($params->get('headerAvatar', 1) == 1) && (!empty($twitter->header->avatar))) { ?>
 		<span class="TDB-header-avatar-<?php echo $headerAlign;?>">
 			<?php echo $twitter->header->avatar; ?>
 		</span>
@@ -54,13 +54,13 @@ if ($params->get("headerDisplay", 1) == 1) { ?>
 <?php }
 
 foreach ($twitter->tweet as $o) {
-if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) {
+if (($params->get('tweetAvatar', 1) == 1) && (!empty($o->tweet->avatar))) {
 	$tweetAvatar	= ' TDB-tweetavatar-'.$tweetAlign;
 } ?>
     <div class="TDB-tweet<?php echo $tweetClassSfx.$tweetAvatar; ?>">
 	<?php
 	// Determine if the noavatar class is used for tweets by checking the setting and whether an avatar was returned
-	if (($params->get("tweetAvatar", 1) == 1) && (!empty($o->tweet->avatar))) { ?>
+	if (($params->get('tweetAvatar', 1) == 1) && (!empty($o->tweet->avatar))) { ?>
 		<div class="TDB-tweet-avatar"><?php echo $o->tweet->avatar; ?></div>
 	<?php } ?>
 		<div class="TDB-tweet-container TDB-tweet-align-<?php echo $tweetAlign;?>">
