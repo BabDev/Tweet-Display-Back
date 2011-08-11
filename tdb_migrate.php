@@ -2,32 +2,38 @@
 /**
 * Tweet Display Back Module for Joomla!
 *
-* @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
-* @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
-* @package		mod_tweetdisplayback
+* @package    TweetDisplayBack
+*
+* @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
+* @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
 
-// No direct access
 defined('_JEXEC') or die;
 
 /**
  * Tweet Display Back migration class from Joomla 1.5 to Joomla 1.6/1.7
  *
- * @package	mod_tweetdisplayback
- * @since	2.0.1
+ * @package  TweetDisplayBack
+ * @since    2.0.1
  */
-class jUpgradeModuleTDB extends jUpgrade {
+class jUpgradeModuleTDB extends jUpgrade
+{
 
 	/**
 	 * Check if extension migration is supported.
 	 *
-	 * @return	boolean
-	 * @since	1.1.0
+	 * @return  boolean
+	 *
+	 * @since   2.0.1
 	 */
-	protected function detectExtension() {
-		if (!file_exists(JPATH_ROOT.'/modules/mod_tweetdisplayback/mod_tweetdisplayback.php')) {
+	protected function detectExtension()
+	{
+		if (!file_exists(JPATH_ROOT.'/modules/mod_tweetdisplayback/mod_tweetdisplayback.php'))
+		{
 			return false;
-		} else {
+		}
+		else
+		{
 			return true;
 		}
 	}
@@ -35,10 +41,12 @@ class jUpgradeModuleTDB extends jUpgrade {
 	/**
 	 * Get update site information
 	 *
-	 * @return	array	List of tables without prefix
-	 * @since	1.1.0
+	 * @return  array  List of tables without prefix
+	 *
+	 * @since   2.0.1
 	 */
-	protected function getUpdateSite() {
+	protected function getUpdateSite()
+	{
 		return parent::getUpdateSite();
 	}
 
@@ -46,9 +54,10 @@ class jUpgradeModuleTDB extends jUpgrade {
 	 * Get folders to be migrated.
 	 *
 	 * @return	array	List of folders relative to JPATH_ROOT
-	 * @since	1.1.0
+	 * @since	2.0.1
 	 */
-	protected function getCopyFolders() {
+	protected function getCopyFolders()
+	{
 		return parent::getCopyFolders();
 	}
 
@@ -62,8 +71,9 @@ class jUpgradeModuleTDB extends jUpgrade {
 	 * Returning false will force jUpgrade to call this function again,
 	 * which allows you to continue import by reading $this->state before continuing.
 	 *
-	 * @return	boolean Ready (true/false)
-	 * @since	1.1.0
+	 * @return  boolean
+	 *
+	 * @since	2.0.1
 	 */
 	protected function migrateExtensionFolders()
 	{

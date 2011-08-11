@@ -2,12 +2,12 @@
 /**
 * Tweet Display Back Module for Joomla!
 *
-* @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
-* @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
-* @package		mod_tweetdisplayback
+* @package    TweetDisplayBack
+*
+* @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
+* @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
 
-// No direct access
 defined('_JEXEC') or die;
 
 // Prechecked parameters

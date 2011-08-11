@@ -1,9 +1,10 @@
 /**
 * Tweet Display Back Module for Joomla!
 *
-* @copyright	Copyright (C) 2010-2011 Michael Babker. All rights reserved.
-* @license		GNU/GPL - http://www.gnu.org/copyleft/gpl.html
-* @package		mod_tweetdisplayback
+* @package    TweetDisplayBack
+*
+* @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
+* @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
 
 .TDB-header {
@@ -124,13 +125,13 @@ span.TDB-header-avatar-right {
 }
 
 .TDB-action a {
-    background: none repeat scroll 0 0 transparent !important;
-    height: 16px;
-    left: 0px;
-    position: absolute;
-    text-decoration: none !important;
-    width: 16px;
-}	
+	background: none repeat scroll 0 0 transparent !important;
+	height: 16px;
+	left: 0px;
+	position: absolute;
+	text-decoration: none !important;
+	width: 16px;
+}
 
 .TDB-reply {
 	background-position: 0 0;
