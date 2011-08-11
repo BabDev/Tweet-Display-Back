@@ -78,7 +78,7 @@ class modTweetDisplayBackHelper {
 		// 0 is user, 1 is list
 		if ($params->get('twitterFeedType', 0) == 1) {
 			// Get the list feed
-			$req = 'http://api.twitter.com/1/lists/statuses.json?slug='.$flist.'&owner_screen_name='.$uname.$incRT.'&include_entities=1';
+			$req = 'http://api.twitter.com/1/lists/statuses.json?slug='.$flist.'&owner_screen_name='.$uname.'&include_entities=1';
 		} else {
 			// Get the user feed
 			// We have to manually filter mentions and replies,
