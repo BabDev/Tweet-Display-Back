@@ -18,7 +18,6 @@ defined('_JEXEC') or die;
  */
 class ModTweetDisplayBackHelper
 {
-
 	/**
 	 * Function to compile the data to render a formatted object displaying a Twitter feed
 	 *
@@ -71,14 +70,17 @@ class ModTweetDisplayBackHelper
 
 		// Count the number of active filters
 		$activeFilters = 0;
+		// Mentions
 		if ($params->get('showMentions', 0) == 0)
 		{
 			$activeFilters++;
 		}
+		// Replies
 		if ($params->get('showReplies', 0) == 0)
 		{
 			$activeFilters++;
 		}
+		// Retweets
 		if ($retweet == 0)
 		{
 			$activeFilters++;
@@ -89,11 +91,14 @@ class ModTweetDisplayBackHelper
 		{
 			// Get the list feed
 			$req = 'http://api.twitter.com/1/lists/statuses.json?slug='.$flist.'&owner_screen_name='.$uname.'&include_entities=1';
-		} else
+		}
+		else
 		{
-			// Get the user feed
-			// We have to manually filter mentions and replies,
-			// & Twitter doesn't send additional tweets when RTs are not included
+			/* Get the user feed, we have to manually filter mentions and replies,
+			 * & Twitter doesn't send additional tweets when RTs are not included
+			 * So get additional tweets by multiplying $count based on the number
+			 * of active filters
+			 */
 			if ($activeFilters == 1)
 			{
 				$count = $count * 3;
@@ -106,8 +111,10 @@ class ModTweetDisplayBackHelper
 			{
 				$count = $count * 5;
 			}
-			// Determine whether the user has overridden the count parameter with a manual number of tweets to retrieve
-			// Override the $count variable if this is the case
+			/* Determine whether the user has overridden the count parameter with a
+			 * manual number of tweets to retrieve.  Override the $count variable
+			 * if this is the case
+			 */
 			if ($params->get('overrideCount', 1) == 1)
 			{
 				$count = $params->get('tweetsToScan', 3);
@@ -135,17 +142,17 @@ class ModTweetDisplayBackHelper
 	 */
 	static function getJSON($req)
 	{
-		// Create a new CURL resource
+		// Create a new cURL resource
 		$ch = curl_init($req);
 
 		// Set options
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-		// Grab URL and pass it to the browser and store it as $json
+		// Grab the URL, pass it to the browser and store it as $json
 		$json = curl_exec($ch);
 
-		// Close CURL resource
+		// Close cURL resource
 		curl_close($ch);
 
 		// Decode the fetched JSON
@@ -243,14 +250,17 @@ class ModTweetDisplayBackHelper
 				$twitter->header->user .= ' - <a href="http://twitter.com/'.$uname.'/'.$flist.'" rel="nofollow">'.$list.' list</a>';
 			}
 		}
+		// Show the bio
 		if ($params->get('headerBio', 1) == 1)
 		{
 			$twitter->header->bio = $obj['description'];
 		}
+		// Show the location
 		if ($params->get('headerLocation', 1) == 1)
 		{
 			$twitter->header->location = $obj['location'];
 		}
+		// Show the user's URL
 		if ($params->get('headerWeb', 1) == 1)
 		{
 			$twitter->header->web = '<a href="'.$obj['url'].'" rel="nofollow">'.$obj['url'].'</a>';
@@ -267,7 +277,6 @@ class ModTweetDisplayBackHelper
 		// Footer info
 
 		// If a "Follow me" link is displayed, determine whether to display a button or text
-		// followType 1 is image, 0 is text
 		if ($params->get('footerFollowLink', 1) == 1)
 		{
 			if ($params->get('footerFollowType', 1) == 1)
@@ -373,9 +382,9 @@ class ModTweetDisplayBackHelper
 							$count--;
 							$i++;
 						}
+						// We're filtering, the fun starts here
 						else
 						{
-							// We're filtering, the fun starts here
 							// Set variables
 							// Tweets which contains a @reply
 							$tweetContainsReply = $o['in_reply_to_user_id'] != null;
@@ -384,10 +393,10 @@ class ModTweetDisplayBackHelper
 							// Tweets which contains only @mentions
 							$tweetOnlyMention = $tweetContainsMentionAndOrReply && !$tweetContainsReply;
 
-							// Check if reply tweet contains mention(s)
-							// NOTE: 	Works only for tweets where there is also a reply, since reply is at
-							// 			the position ['0'] and mention begin at ['1'].
-							// 			When using for tweets where there is no reply, tweets with 1 mention only are missed(!)
+							/* Check if a reply tweet contains mentions
+							 * NOTE: Works only for tweets where there is also a reply, since reply is at
+							 * the position ['0'] and mentions begin at ['1'].
+							 */
 							if (isset($o['entities']['user_mentions']['1']))
 							{
 								$replyTweetContainsMention = $o['entities']['user_mentions']['1'];
@@ -403,9 +412,9 @@ class ModTweetDisplayBackHelper
 							// Tweets which contains @mentions or @mentions+@reply
 							$tweetContainsMention = $tweetContainsMentionAndOrReply && !$tweetOnlyReply;
 
+							// Filter @mentions and @replies, leaving retweets unchanged
 							if ($showMentions == 0 && $showReplies == 0)
 							{
-								// Filter @mentions and @replies, leaving retweets unchanged
 								if (!$tweetContainsMentionAndOrReply || isset($o['retweeted_status']))
 								{
 									self::processItem($twitter, $o, $i, $params);
@@ -415,11 +424,12 @@ class ModTweetDisplayBackHelper
 									$i++;
 								}
 							}
+							// Filtering only @mentions or @replies
 							else
 							{
+								// Filter @mentions only leaving @replies and retweets unchanged
 								if ($showMentions == 0)
 								{
-									// Filter @mentions only leaving @replies and retweets unchanged
 									if (!$tweetContainsMention || isset($o['retweeted_status']))
 									{
 										self::processItem($twitter, $o, $i, $params);
@@ -429,9 +439,9 @@ class ModTweetDisplayBackHelper
 										$i++;
 									}
 								}
+								// Filter @replies only (including @replies with @mentions) leaving retweets unchanged
 								if ($showReplies == 0)
 								{
-									// Filter @replies only (including @replies with @mentions) leaving retweets unchanged
 									if (!$tweetContainsReply)
 									{
 										self::processItem($twitter, $o, $i, $params);
@@ -441,6 +451,7 @@ class ModTweetDisplayBackHelper
 										$i++;
 									}
 								}
+								// Somehow, we got this far; process the tweet
 								if ($showMentions == 1 && $showReplies == 1)
 								{
 									// No filtering required
@@ -510,7 +521,7 @@ class ModTweetDisplayBackHelper
 		// Generate the object with the user data
 		if ($tweetName == 1)
 		{
-			$twitter[$i]->tweet->user = '<b><a href="http://twitter.com/intent/user?screen_name='.$tweetedBy.'" rel="nofollow">'.$tweetedBy.'</a>'.$params->get('tweetUserSeparator').'</b> ';
+			$twitter[$i]->tweet->user = '<b><a href="http://twitter.com/intent/user?screen_name='.$tweetedBy.'" rel="nofollow">'.$tweetedBy.'</a>'.$params->get('tweetUserSeparator').'</b>';
 		}
 		$twitter[$i]->tweet->avatar = '<img align="'.$tweetAlignment.'" alt="'.$tweetedBy.'" src="'.$avatar.'" width="32px"/>';
 		$twitter[$i]->tweet->text = $text;
@@ -528,10 +539,11 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Info below is specific to each tweet, so it isn't checked against a retweet
-		// Determine whether to display the time as a relative or static time
+		// Display the time the tweet was created
 		if ($params->get('tweetCreated', 1) == 1)
 		{
 			$twitter[$i]->tweet->created .= '<a href="http://twitter.com/'.$o['user']['screen_name'].'/status/'.$o['id_str'].'" rel="nofollow">';
+			// Determine whether to display the time as a relative or static time
 			if ($params->get('tweetRelativeTime', 1) == 1)
 			{
 				$twitter[$i]->tweet->created .= self::renderRelativeTime($o['created_at']).'</a>';
@@ -593,12 +605,14 @@ class ModTweetDisplayBackHelper
 	 */
 	static function renderRelativeTime($date)
 	{
+		// Get the difference in seconds between now and the tweet time
 		$diff = time() - strtotime($date);
 		// Less than a minute
 		if ($diff < 60)
 		{
 			return JText::_('MOD_TWEETDISPLAYBACK_CREATE_LESSTHANAMINUTE');
 		}
+		// Round to minutes
 		$diff = round($diff / 60);
 		// 60 to 119 seconds
 		if ($diff < 2)
@@ -610,6 +624,7 @@ class ModTweetDisplayBackHelper
 		{
 			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_MINUTES', $diff);
 		}
+		// Round to hours
 		$diff = round($diff / 60);
 		// 1 hour
 		if ($diff < 2)
@@ -621,6 +636,7 @@ class ModTweetDisplayBackHelper
 		{
 			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_HOURS', $diff);
 		}
+		// Round to days
 		$diff = round($diff / 24);
 		// 1 day
 		if ($diff < 2)
@@ -632,6 +648,7 @@ class ModTweetDisplayBackHelper
 		{
 			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_DAYS', $diff);
 		}
+		// Round to weeks
 		$diff = round($diff / 7);
 		// 1 week
 		if ($diff < 2)

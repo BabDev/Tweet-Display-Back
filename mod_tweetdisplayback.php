@@ -45,11 +45,13 @@ else
 	$twitter = ModTweetDisplayBackHelper::compileData($params);
 }
 
+// No hits remaining
 if (isset($twitter->hits))
 {
 	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
 	return;
 }
+// No data object and no other error was set
 else if ((!$twitter) || (isset($twitter->error)))
 {
 	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
@@ -64,7 +66,7 @@ $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
 $template		= $params->get('templateLayout', 'default');
 
-// If CSS3 is selected, load it's stylesheet
+// If CSS3 is selected, load it's stylesheet except for nostyle
 $css3	= '';
 if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle')
 {
@@ -79,4 +81,5 @@ if (!in_array('<script type="text/javascript" src="http://platform.twitter.com/w
 	$document->addCustomTag('<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>');
 }
 
+// Build the output
 require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $template);

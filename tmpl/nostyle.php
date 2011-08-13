@@ -18,8 +18,7 @@ if (($params->get('headerAvatar', 1) == 1) && (!empty($twitter->header->avatar))
 }
 
 // Variables for the foreach
-$i		= 0;
-$count	= $params->get('twitterCount', 3) - 1;
+$i = 0;
 
 // Check to see if the header is set to display
 if ($params->get('headerDisplay', 0) == 1) { ?>

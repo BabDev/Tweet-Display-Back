@@ -18,7 +18,6 @@ defined('_JEXEC') or die;
  */
 class jUpgradeModuleTDB extends jUpgrade
 {
-
 	/**
 	 * Check if extension migration is supported.
 	 *
@@ -28,14 +27,12 @@ class jUpgradeModuleTDB extends jUpgrade
 	 */
 	protected function detectExtension()
 	{
+		// For whatever reason, the module's dispatcher isn't there; proceed no further
 		if (!file_exists(JPATH_ROOT.'/modules/mod_tweetdisplayback/mod_tweetdisplayback.php'))
 		{
 			return false;
 		}
-		else
-		{
-			return true;
-		}
+		return true;
 	}
 
 	/**
@@ -53,8 +50,9 @@ class jUpgradeModuleTDB extends jUpgrade
 	/**
 	 * Get folders to be migrated.
 	 *
-	 * @return	array	List of folders relative to JPATH_ROOT
-	 * @since	2.0.1
+	 * @return  array  List of folders relative to JPATH_ROOT
+	 *
+	 * @since   2.0.1
 	 */
 	protected function getCopyFolders()
 	{
@@ -64,16 +62,9 @@ class jUpgradeModuleTDB extends jUpgrade
 	/**
 	 * Migrate the folders.
 	 *
-	 * This function gets called after tables have been copied.
-	 *
-	 * If you want to split this task into even smaller chunks,
-	 * please store your custom state variables into $this->state and return false.
-	 * Returning false will force jUpgrade to call this function again,
-	 * which allows you to continue import by reading $this->state before continuing.
-	 *
 	 * @return  boolean
 	 *
-	 * @since	2.0.1
+	 * @since   2.0.1
 	 */
 	protected function migrateExtensionFolders()
 	{
