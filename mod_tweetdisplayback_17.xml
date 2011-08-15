@@ -41,7 +41,7 @@
 			<fieldset name="twitter">
 				<field
 					name="twitterFeedType"
-					type="radio"
+					type="list"
 					default="0"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_DESCRIPTION" >
@@ -49,6 +49,8 @@
 						value="0">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_USER</option>
 					<option
 						value="1">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_LIST</option>
+					<option
+						value="2">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_WIDGET</option>
 				</field>
 				<field
 					name="twitterName"

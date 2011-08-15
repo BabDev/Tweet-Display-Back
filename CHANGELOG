@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+16-August-2011 Michael Babker
++ Add Widgets for profile, list, and search
+
 11-August-2011 Michael Babker
 - Remove the include_rts param from list queries
 

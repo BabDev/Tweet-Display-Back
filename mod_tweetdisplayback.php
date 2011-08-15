@@ -18,67 +18,85 @@ if (!extension_loaded('curl'))
 }
 
 // Include the helper
-require_once dirname(__FILE__).'/helper.php';
+include_once dirname(__FILE__).'/helper.php';
 
-// Check if caching is enabled
-if ($params->get('cache') == 1)
+// If using a widget, don't need to perform custom module rendering
+if ($params->get('twitterFeedType') != 2)
 {
-	// Set the cache parameters
-	$options = array(
-		'defaultgroup' => 'mod_tweetdisplayback');
-	$cache		= JCache::getInstance('callback', $options);
-	$cacheTime	= $params->get('cache_time');
-	// J! 1.5 and 1.6 cache is set in seconds, 1.7 caches in minutes
-	if (version_compare(JVERSION, '1.7.0', 'ge'))
+	// Check if caching is enabled
+	if ($params->get('cache') == 1)
 	{
-		$cacheTime	= round($cacheTime / 60);
+		// Set the cache parameters
+		$options = array(
+			'defaultgroup' => 'mod_tweetdisplayback');
+		$cache		= JCache::getInstance('callback', $options);
+		$cacheTime	= $params->get('cache_time');
+		// J! 1.5 and 1.6 cache is set in seconds, 1.7 caches in minutes
+		if (version_compare(JVERSION, '1.7.0', 'ge'))
+		{
+			$cacheTime	= round($cacheTime / 60);
+		}
+		$cache->setLifeTime($cacheTime);
+		$cache->setCaching(true);
+
+		// Call the cache; if expired, pull new data
+		$twitter = $cache->call(array('ModTweetDisplayBackHelper', 'compileData'), $params);
 	}
-	$cache->setLifeTime($cacheTime);
-	$cache->setCaching(true);
+	else
+	{
+		// Pull new data
+		$twitter = ModTweetDisplayBackHelper::compileData($params);
+	}
 
-	// Call the cache; if expired, pull new data
-	$twitter = $cache->call(array('ModTweetDisplayBackHelper', 'compileData'), $params);
-}
-else
-{
-	// Pull new data
-	$twitter = ModTweetDisplayBackHelper::compileData($params);
-}
-
-// No hits remaining
-if (isset($twitter->hits))
-{
-	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
-	return;
-}
-// No data object and no other error was set
-else if ((!$twitter) || (isset($twitter->error)))
-{
-	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
-	return;
+	// No hits remaining
+	if (isset($twitter->hits))
+	{
+		echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
+		return;
+	}
+	// No data object and no other error was set
+	else if ((!$twitter) || (isset($twitter->error)))
+	{
+		echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
+		return;
+	}
 }
 
-// Set the template variables
+// Set the variables
 $imgpath 		= JURI::root().'modules/mod_tweetdisplayback/media/images';
 $headerAlign	= $params->get('headerAvatarAlignment');
 $tweetAlign		= $params->get('tweetAlignment');
 $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
 $template		= $params->get('templateLayout', 'default');
+$flist			= ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
 
-// If CSS3 is selected, load it's stylesheet except for nostyle
-$css3	= '';
-if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle')
+// Don't load module CSS if loading a widget
+if ($params->get('twitterFeedType') != 2)
 {
-	$css3	= '-css3';
+	// If CSS3 is selected, load it's stylesheet except for nostyle
+	$css3	= '';
+	if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle')
+	{
+		$css3	= '-css3';
+	}
+	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/'.$template.$css3.'.css', false, false, false);
 }
-JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/'.$template.$css3.'.css', false, false, false);
 
 // Add the Twitter Web Intents script if something else already hasn't
 $document = JFactory::getDocument();
 if (!in_array('<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>', $document->_custom))
 {
 	$document->addCustomTag('<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>');
+}
+
+// Add the Widgets script if needed
+if ($params->get('twitterFeedType') == 2)
+{
+	if (!in_array('<script src="http://widgets.twimg.com/j/2/widget.js"></script>', $document->_custom))
+	{
+		$document->addCustomTag('<script src="http://widgets.twimg.com/j/2/widget.js"></script>');
+	}
 }
 
 // Build the output

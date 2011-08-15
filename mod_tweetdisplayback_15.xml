@@ -20,6 +20,8 @@
 				value="0">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_USER</option>
 			<option
 				value="1">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_LIST</option>
+			<option
+				value="2">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_WIDGET</option>
 		</param>
 		<param
 			name="twitterName"
@@ -461,7 +463,10 @@
 		<filename module="mod_tweetdisplayback">tmpl/construct.php</filename>
 		<filename module="mod_tweetdisplayback">tmpl/default.php</filename>
 		<filename module="mod_tweetdisplayback">tmpl/index.html</filename>
+		<filename module="mod_tweetdisplayback">tmpl/list.php</filename>
 		<filename module="mod_tweetdisplayback">tmpl/nostyle.php</filename>
+		<filename module="mod_tweetdisplayback">tmpl/profile.php</filename>
+		<filename module="mod_tweetdisplayback">tmpl/search.php</filename>
 	</files>
 	<languages folder="language/">
 		<language tag="en-GB">en-GB/en-GB.mod_tweetdisplayback.ini</language>
