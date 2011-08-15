@@ -286,7 +286,7 @@ class ModTweetDisplayBackHelper
 				if ($params->get('twitterFeedType', 0) == 1)
 				{
 					$twitter->footer->follow_me .= '<a href="http://twitter.com/'.$uname.'/'.$flist.'" rel="nofollow">';
-					$alt = 'Follow '.$uname.'&#39;s '.$list.' list on Twitter'
+					$alt = 'Follow '.$uname.'&#39;s '.$list.' list on Twitter';
 				}
 				else
 				{
@@ -307,7 +307,7 @@ class ModTweetDisplayBackHelper
 				{
 					$twitter->footer->follow_me .= '<b><a href="http://twitter.com/intent/user?screen_name='.$uname.'" rel="nofollow">';
 				}
-				$twitter->footer->follow_me .= $params->get('footerFollowText', 'Follow me on Twitter').'</a></b></div>'
+				$twitter->footer->follow_me .= $params->get('footerFollowText', 'Follow me on Twitter').'</a></b></div>';
 			}
 		}
 		if ($params->get('footerPoweredBy', 1) == 1)
@@ -503,7 +503,7 @@ class ModTweetDisplayBackHelper
 				$tweetedBy = $o['retweeted_status']['user']['screen_name'];
 			}
 			$avatar = $o['retweeted_status']['user']['profile_image_url'];
-			$text   = $o['retweeted_status']['text']
+			$text   = $o['retweeted_status']['text'];
 			$urls   = $o['retweeted_status']['entities']['urls'];
 			$twitter[$i]->tweet->created = JText::_('MOD_TWEETDISPLAYBACK_RETWEETED');
 		}
@@ -515,7 +515,7 @@ class ModTweetDisplayBackHelper
 				$tweetedBy = $o['user']['screen_name'];
 			}
 			$avatar = $o['user']['profile_image_url'];
-			$text   = $o['text']
+			$text   = $o['text'];
 			$urls   = $o['entities']['urls'];
 		}
 		// Generate the object with the user data
