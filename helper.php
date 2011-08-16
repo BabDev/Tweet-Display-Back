@@ -90,7 +90,7 @@ class ModTweetDisplayBackHelper
 		if ($params->get('twitterFeedType', 0) == 1)
 		{
 			// Get the list feed
-			$req = 'http://api.twitter.com/1/lists/statuses.json?slug='.$flist.'&owner_screen_name='.$uname.'&include_entities=1';
+			$req = 'http://api.twitter.com/1/lists/statuses.json?slug='.$flist.'&owner_screen_name='.$uname.$incRT.'&include_entities=1';
 		}
 		else
 		{
