@@ -14,9 +14,6 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
-11-August-2011 Michael Babker
-- Remove the include_rts param from list queries
-
 10-August-2011 Michael Babker
 ^ Move common template variables to be processed pre-rendering
 ^ Removed the count check from the templates as it is handled in the helper
