@@ -21,7 +21,7 @@ if (!extension_loaded('curl'))
 include_once dirname(__FILE__).'/helper.php';
 
 // If using a widget, don't need to perform custom module rendering
-if ($params->get('twitterFeedType') != 2)
+if ($params->get('twitterFeedType') != 'widget')
 {
 	// Check if caching is enabled
 	if ($params->get('cache') == 1)
@@ -72,7 +72,7 @@ $template		= $params->get('templateLayout', 'default');
 $flist			= ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
 
 // Don't load module CSS if loading a widget
-if ($params->get('twitterFeedType') != 2)
+if ($params->get('twitterFeedType') != 'widget')
 {
 	// If CSS3 is selected, load it's stylesheet except for nostyle
 	$css3	= '';
@@ -91,7 +91,7 @@ if (!in_array('<script type="text/javascript" src="http://platform.twitter.com/w
 }
 
 // Add the Widgets script if needed
-if ($params->get('twitterFeedType') == 2)
+if ($params->get('twitterFeedType') == 'widget')
 {
 	if (!in_array('<script src="http://widgets.twimg.com/j/2/widget.js"></script>', $document->_custom))
 	{

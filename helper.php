@@ -87,7 +87,7 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Determine whether the feed being returned is a user or list feed
-		if ($params->get('twitterFeedType', 0) == 1)
+		if ($params->get('twitterFeedType', 'user') == 'list')
 		{
 			// Get the list feed
 			$req = 'http://api.twitter.com/1/lists/statuses.json?slug='.$flist.'&owner_screen_name='.$uname.$incRT.'&include_entities=1';
@@ -204,8 +204,9 @@ class ModTweetDisplayBackHelper
 	static function prepareUser($params)
 	{
 		// Load the parameters
-		$uname		= $params->get('twitterName', '');
-		$list		= $params->get('twitterList', '');
+		$uname	= $params->get('twitterName', '');
+		$list	= $params->get('twitterList', '');
+		$feed	= $params->get('twitterFeedType', 'user');
 
 		// Initialize new object containers
 		$twitter			= new stdClass();
@@ -245,7 +246,7 @@ class ModTweetDisplayBackHelper
 				$twitter->header->user .= $uname.'</a>';
 			}
 			// Append the list name if being pulled
-			if ($params->get('twitterFeedType', 0) == 1)
+			if ($feed == 'list')
 			{
 				$twitter->header->user .= ' - <a href="http://twitter.com/'.$uname.'/'.$flist.'" rel="nofollow">'.$list.' list</a>';
 			}
@@ -283,7 +284,7 @@ class ModTweetDisplayBackHelper
 			{
 				$twitter->footer->follow_me = '<div class="TDB-footer-follow-img"><b>';
 				// Determine whether a list or user feed is being generated
-				if ($params->get('twitterFeedType', 0) == 1)
+				if ($feed == 'list')
 				{
 					$twitter->footer->follow_me .= '<a href="http://twitter.com/'.$uname.'/'.$flist.'" rel="nofollow">';
 					$alt = 'Follow '.$uname.'&#39;s '.$list.' list on Twitter';
@@ -299,7 +300,7 @@ class ModTweetDisplayBackHelper
 			{
 				$twitter->footer->follow_me = '<hr /><div class="TDB-footer-follow-link"><b>';
 				// Determine whether a list or user feed is being generated
-				if ($params->get('twitterFeedType', 0) == 1)
+				if ($feed == 'list')
 				{
 					$twitter->footer->follow_me .= '<a href="http://twitter.com/'.$uname.'/'.$flist.'" rel="nofollow">';
 				}
@@ -373,7 +374,7 @@ class ModTweetDisplayBackHelper
 							$count--;
 							$i++;
 						}
-						else if ($params->get('twitterFeedType', 0) == 1)
+						else if ($params->get('twitterFeedType', 'user') == 'list')
 						{
 							// We can't filter list feeds, so just process them
 							self::processItem($twitter, $o, $i, $params);
