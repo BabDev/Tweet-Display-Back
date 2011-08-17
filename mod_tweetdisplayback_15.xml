@@ -51,7 +51,8 @@
 			default="default"
 			label="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_LABEL"
 			directory="modules/mod_tweetdisplayback/tmpl"
-			exclude = "\.html"
+			filter="\.php$"
+			exclude="w_"
 			hide_default="1"
 			hide_none="1"
 			stripext="1"
@@ -463,10 +464,10 @@
 		<filename module="mod_tweetdisplayback">tmpl/construct.php</filename>
 		<filename module="mod_tweetdisplayback">tmpl/default.php</filename>
 		<filename module="mod_tweetdisplayback">tmpl/index.html</filename>
-		<filename module="mod_tweetdisplayback">tmpl/list.php</filename>
 		<filename module="mod_tweetdisplayback">tmpl/nostyle.php</filename>
-		<filename module="mod_tweetdisplayback">tmpl/profile.php</filename>
-		<filename module="mod_tweetdisplayback">tmpl/search.php</filename>
+		<filename module="mod_tweetdisplayback">tmpl/w_list.php</filename>
+		<filename module="mod_tweetdisplayback">tmpl/w_profile.php</filename>
+		<filename module="mod_tweetdisplayback">tmpl/w_search.php</filename>
 	</files>
 	<languages folder="language/">
 		<language tag="en-GB">en-GB/en-GB.mod_tweetdisplayback.ini</language>
