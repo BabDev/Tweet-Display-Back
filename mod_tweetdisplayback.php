@@ -18,7 +18,7 @@ if (!extension_loaded('curl'))
 }
 
 // Include the helper
-include_once dirname(__FILE__).'/helper.php';
+require_once dirname(__FILE__).'/helper.php';
 
 // If using a widget, don't need to perform custom module rendering
 if ($params->get('twitterFeedType') != 'widget')
