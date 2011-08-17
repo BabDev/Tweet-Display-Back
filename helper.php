@@ -293,7 +293,7 @@ class ModTweetDisplayBackHelper
 					$twitter->footer->follow_me .= '<a href="http://twitter.com/intent/user?screen_name='.$uname.'" rel="nofollow">';
 					$alt = 'Follow '.$uname.' on Twitter';
 				}
-				$twitter->fotter->follow_me .= '<img src="http://twitter-badges.s3.amazonaws.com/'.$params->get('footerFollowImgMeUs').'-'.$params->get('footerFollowImg').'.png" alt="'.$alt.'" align="middle" /></a></b></div>';
+				$twitter->footer->follow_me .= '<img src="http://twitter-badges.s3.amazonaws.com/'.$params->get('footerFollowImgMeUs').'-'.$params->get('footerFollowImg').'.png" alt="'.$alt.'" align="middle" /></a></b></div>';
 			}
 			else
 			{
