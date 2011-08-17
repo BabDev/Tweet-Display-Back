@@ -109,6 +109,119 @@
 						value="1">JYES</option>
 				</field>
 			</fieldset>
+			<fieldset name="widget_settings">
+				<field
+					name="widgetLive"
+					type="radio"
+					default="true"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LIVE_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LIVE_DESCRIPTION" >
+					<option
+						value="false">JNO</option>
+					<option
+						value="true">JYES</option>
+				</field>
+				<field
+					name="widgetScroll"
+					type="radio"
+					default="true"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SCROLL_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SCROLL_DESCRIPTION" >
+					<option
+						value="false">JNO</option>
+					<option
+						value="true">JYES</option>
+				</field>
+				<field
+					name="widgetLoadBehavior"
+					type="radio"
+					default="default"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOADBEHAVIOR_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOADBEHAVIOR_DESCRIPTION" >
+					<option
+						value="default">MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOADBEHAVIOR_OPTION_TIMED</option>
+					<option
+						value="all">MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOADBEHAVIOR_OPTION_ALL</option>
+				</field>
+				<field
+					name="widgetInterval"
+					type="text"
+					default="6"
+					filter="integer"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_INTERVAL_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_INTERVAL_DESCRIPTION" />
+				<field
+					name="widgetLoop"
+					type="radio"
+					default="true"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOOP_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOOP_DESCRIPTION" >
+					<option
+						value="false">JNO</option>
+					<option
+						value="true">JYES</option>
+				</field>
+				<field
+					name="widgetAvatar"
+					type="radio"
+					default="true"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_AVATAR_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_AVATAR_DESCRIPTION" >
+					<option
+						value="false">JNO</option>
+					<option
+						value="true">JYES</option>
+				</field>
+				<field
+					name="widgetTimestamp"
+					type="radio"
+					default="true"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TIMESTAMP_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TIMESTAMP_DESCRIPTION" >
+					<option
+						value="false">JNO</option>
+					<option
+						value="true">JYES</option>
+				</field>
+				<field
+					name="widgetHashtag"
+					type="radio"
+					default="true"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_HASHTAG_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_HASHTAG_DESCRIPTION" >
+					<option
+						value="false">JNO</option>
+					<option
+						value="true">JYES</option>
+				</field>
+				<field
+					name="widgetTopTweet"
+					type="radio"
+					default="true"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TOPTWEET_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TOPTWEET_DESCRIPTION" >
+					<option
+						value="false">JNO</option>
+					<option
+						value="true">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="widget_appearance">
+				<field
+					name="widgetWidth"
+					type="text"
+					default="250"
+					filter="integer"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_WIDTH_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_WIDTH_DESCRIPTION" />
+				<field
+					name="widgetHeight"
+					type="text"
+					default="300"
+					filter="integer"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_HEIGHT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_HEIGHT_DESCRIPTION" />
+			</fieldset>
 			<fieldset name="header">
 				<field
 					name="headerDisplay"

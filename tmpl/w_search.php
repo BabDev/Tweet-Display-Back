@@ -16,11 +16,11 @@ new TWTR.Widget({
   version: 2,
   type: 'search',
   search: 'joomla',
-  interval: 6000,
+  interval: <?php echo $params->get('widgetInterval', '6'); ?>000,
   title: '',
   subject: 'Joomla-la-la-la',
-  width: 250,
-  height: 300,
+  width: <?php echo $params->get('widgetWidth', '250'); ?>,
+  height: <?php echo $params->get('widgetHeight', '300'); ?>,
   theme: {
     shell: {
       background: '#8ec1da',
@@ -33,14 +33,14 @@ new TWTR.Widget({
     }
   },
   features: {
-    scrollbar: false,
-    loop: true,
-    live: true,
-    hashtags: true,
-    timestamp: true,
-    avatars: true,
-    toptweets: true,
-    behavior: 'default'
+    scrollbar: <?php echo $params->get('widgetScroll', 'true'); ?>,
+    loop: <?php echo $params->get('widgetLoop', 'true'); ?>,
+    live: <?php echo $params->get('widgetLive', 'true'); ?>,
+    hashtags: <?php echo $params->get('widgetHashtag', 'true'); ?>,
+    timestamp: <?php echo $params->get('widgetTimestamp', 'true'); ?>,
+    avatars: <?php echo $params->get('widgetAvatar', 'true'); ?>,
+    toptweets: <?php echo $params->get('widgetTopTweet', 'true'); ?>,
+    behavior: '<?php echo $params->get('widgetLoadBehavior', 'default'); ?>'
   }
 }).render().start();
 </script>

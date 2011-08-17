@@ -15,10 +15,10 @@ defined('_JEXEC') or die;
 new TWTR.Widget({
   version: 2,
   type: 'profile',
-  rpp: 5,
-  interval: 6000,
-  width: 250,
-  height: 300,
+  rpp: <?php echo $params->get('twitterCount', '3'); ?>,
+  interval: <?php echo $params->get('widgetInterval', '6'); ?>000,
+  width: <?php echo $params->get('widgetWidth', '250'); ?>,
+  height: <?php echo $params->get('widgetHeight', '300'); ?>,
   theme: {
     shell: {
       background: '#333333',
@@ -31,13 +31,13 @@ new TWTR.Widget({
     }
   },
   features: {
-    scrollbar: true,
-    loop: false,
-    live: true,
-    hashtags: true,
-    timestamp: true,
-    avatars: true,
-    behavior: 'all'
+    scrollbar: <?php echo $params->get('widgetScroll', 'true'); ?>,
+    loop: <?php echo $params->get('widgetLoop', 'true'); ?>,
+    live: <?php echo $params->get('widgetLive', 'true'); ?>,
+    hashtags: <?php echo $params->get('widgetHashtag', 'true'); ?>,
+    timestamp: <?php echo $params->get('widgetTimestamp', 'true'); ?>,
+    avatars: <?php echo $params->get('widgetAvatar', 'true'); ?>,
+    behavior: '<?php echo $params->get('widgetLoadBehavior', 'default'); ?>'
   }
 }).render().setUser('<?php echo $params->get('twitterName', ''); ?>').start();
 </script>

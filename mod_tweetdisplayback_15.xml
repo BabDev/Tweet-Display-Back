@@ -43,7 +43,7 @@
 			name="@spacer"
 			type="spacer"
 			default=""
-			label="MOD_TWEETDISPLAYBACK_TEMPLATE_FIELDSET_LABEL"
+			label=""
 			description="" />
 		<param 
 			name="templateLayout"
@@ -85,7 +85,125 @@
 			name="@spacer"
 			type="spacer"
 			default=""
-			label="MOD_TWEETDISPLAYBACK_HEADER_FIELDSET_LABEL"
+			label=""
+			description="" />
+		<param
+			name="widgetLive"
+			type="radio"
+			default="true"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LIVE_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LIVE_DESCRIPTION" >
+			<option
+				value="false">No</option>
+			<option
+				value="true">Yes</option>
+		</param>
+		<param
+			name="widgetScroll"
+			type="radio"
+			default="true"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SCROLL_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SCROLL_DESCRIPTION" >
+			<option
+				value="false">No</option>
+			<option
+				value="true">Yes</option>
+		</param>
+		<param
+			name="widgetLoadBehavior"
+			type="radio"
+			default="default"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOADBEHAVIOR_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOADBEHAVIOR_DESCRIPTION" >
+			<option
+				value="default">MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOADBEHAVIOR_OPTION_TIMED</option>
+			<option
+				value="all">MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOADBEHAVIOR_OPTION_ALL</option>
+		</param>
+		<param
+			name="widgetInterval"
+			type="text"
+			default="6"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_INTERVAL_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_INTERVAL_DESCRIPTION" />
+		<param
+			name="widgetLoop"
+			type="radio"
+			default="true"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOOP_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOOP_DESCRIPTION" >
+			<option
+				value="false">No</option>
+			<option
+				value="true">Yes</option>
+		</param>
+		<param
+			name="widgetAvatar"
+			type="radio"
+			default="true"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_AVATAR_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_AVATAR_DESCRIPTION" >
+			<option
+				value="false">No</option>
+			<option
+				value="true">Yes</option>
+		</param>
+		<param
+			name="widgetTimestamp"
+			type="radio"
+			default="true"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TIMESTAMP_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TIMESTAMP_DESCRIPTION" >
+			<option
+				value="false">No</option>
+			<option
+				value="true">Yes</option>
+		</param>
+		<param
+			name="widgetHashtag"
+			type="radio"
+			default="true"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_HASHTAG_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_HASHTAG_DESCRIPTION" >
+			<option
+				value="false">No</option>
+			<option
+				value="true">Yes</option>
+		</param>
+		<param
+			name="widgetTopTweet"
+			type="radio"
+			default="true"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TOPTWEET_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TOPTWEET_DESCRIPTION" >
+			<option
+				value="false">No</option>
+			<option
+				value="true">Yes</option>
+		</param>
+		<param
+			name="@spacer"
+			type="spacer"
+			default=""
+			label=""
+			description="" />
+		<param
+			name="widgetWidth"
+			type="text"
+			default="250"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_WIDTH_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_WIDTH_DESCRIPTION" />
+		<param
+			name="widgetHeight"
+			type="text"
+			default="300"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_HEIGHT_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_HEIGHT_DESCRIPTION" />
+		<param
+			name="@spacer"
+			type="spacer"
+			default=""
+			label=""
 			description="" />
 		<param
 			name="headerDisplay"
@@ -184,7 +302,7 @@
 			name="@spacer"
 			type="spacer"
 			default=""
-			label="MOD_TWEETDISPLAYBACK_TWEET_FIELDSET_LABEL"
+			label=""
 			description="" />
 		<param
 			name="tweetclasssfx"
@@ -322,8 +440,8 @@
 		<param
 			name="@spacer"
 			type="spacer"
-			default="0" 
-			label="MOD_TWEETDISPLAYBACK_FILTER_FIELDSET_LABEL"
+			default="" 
+			label=""
 			description="" />
 		<param
 			name="showMentions"
@@ -368,7 +486,7 @@
 			name="@spacer"
 			type="spacer"
 			default=""
-			label="MOD_TWEETDISPLAYBACK_FOOTER_FIELDSET_LABEL"
+			label=""
 			description="" />
 		<param
 			name="footerFollowLink"
