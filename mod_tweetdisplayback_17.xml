@@ -85,6 +85,19 @@
 					stripext="1"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_DESCRIPTION" />
 				<field
+					name="templateWidget"
+					type="list"
+					default="profile"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_WIDGET_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_WIDGET_DESCRIPTION" >
+					<option
+						value="list">MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_WIDGET_OPTION_LIST</option>
+					<option
+						value="profile">MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_WIDGET_OPTION_PROFILE</option>
+					<option
+						value="search">MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_WIDGET_OPTION_SEARCH</option>
+				</field>
+				<field
 					name="templateCSS3"
 					type="radio"
 					default="0"
