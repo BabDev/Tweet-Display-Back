@@ -99,5 +99,15 @@ if ($params->get('twitterFeedType') == 'widget')
 	}
 }
 
+// Set the template to the correct option
+if ($params->get('twitterFeedType') == 'widget')
+{
+	$output = 'w_'.$params->get('templateWidget');
+}
+else
+{
+	$output = $template;
+}
+
 // Build the output
-require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $template);
+require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $output);
