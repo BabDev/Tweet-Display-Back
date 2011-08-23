@@ -17,8 +17,8 @@ new TWTR.Widget({
   type: 'list',
   rpp: <?php echo $params->get('twitterCount', '3'); ?>,
   interval: <?php echo $params->get('widgetInterval', '6'); ?>000,
-  title: 'Michael\'s',
-  subject: 'J Sample List',
+  title: '<?php echo addslashes($params->get('widgetTitle')); ?>',
+  subject: '<?php echo addslashes($params->get('widgetSubject')); ?>',
   width: <?php echo $params->get('widgetWidth', '250'); ?>,
   height: <?php echo $params->get('widgetHeight', '300'); ?>,
   theme: {

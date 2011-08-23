@@ -15,10 +15,10 @@ defined('_JEXEC') or die;
 new TWTR.Widget({
   version: 2,
   type: 'search',
-  search: 'joomla',
+  search: '<?php echo addslashes($params->get('widgetSearch')); ?>',
   interval: <?php echo $params->get('widgetInterval', '6'); ?>000,
-  title: '',
-  subject: 'Joomla-la-la-la',
+  title: '<?php echo addslashes($params->get('widgetTitle')); ?>',
+  subject: '<?php echo addslashes($params->get('widgetSubject')); ?>',
   width: <?php echo $params->get('widgetWidth', '250'); ?>,
   height: <?php echo $params->get('widgetHeight', '300'); ?>,
   theme: {

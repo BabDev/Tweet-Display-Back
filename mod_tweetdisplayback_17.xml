@@ -205,8 +205,23 @@
 					<option
 						value="true">JYES</option>
 				</field>
+				<field
+					name="widgetSearch"
+					type="text"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SEARCH_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SEARCH_DESCRIPTION" />
 			</fieldset>
 			<fieldset name="widget_appearance">
+				<field
+					name="widgetTitle"
+					type="text"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TITLE_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TITLE_DESCRIPTION" />
+				<field
+					name="widgetSubject"
+					type="text"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SUBJECT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SUBJECT_DESCRIPTION" />
 				<field
 					name="widgetWidth"
 					type="text"

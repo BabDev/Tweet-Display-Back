@@ -180,6 +180,11 @@
 				value="false">No</option>
 			<option
 				value="true">Yes</option>
+		<param
+			name="widgetSearch"
+			type="text"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SEARCH_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SEARCH_DESCRIPTION" />
 		</param>
 		<param
 			name="@spacer"
@@ -187,6 +192,16 @@
 			default=""
 			label=""
 			description="" />
+		<param
+			name="widgetTitle"
+			type="text"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TITLE_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TITLE_DESCRIPTION" />
+		<param
+			name="widgetSubject"
+			type="text"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SUBJECT_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SUBJECT_DESCRIPTION" />
 		<param
 			name="widgetWidth"
 			type="text"
