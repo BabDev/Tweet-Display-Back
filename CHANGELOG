@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+27-August-2011 Michael Babker
+^ [#19] Apply font size directly to tweet-time links, add last-tweet class to all templates
+
 26-August-2011 Michael Babker
 # [#18] Double <b> tag
 ^ Place error messages inside TDB-tweet-container

@@ -71,6 +71,9 @@ span.TDB-header-avatar-right {
 .TDB-tweet-text {
 }
 
+.TDB-last-tweet {
+}
+
 .TDB-tweet-container {
 	background: #fff;
 	border: 1px solid #999999;
@@ -104,6 +107,10 @@ span.TDB-header-avatar-right {
 	font-size: 85%;
 	margin-left: 0px;
 	margin-bottom: 0px;
+}
+
+.TDB-tweet-time a {
+	font-size: 85%;
 }
 
 .TDB-tweet-align-left .TDB-tweet-time, .TDB-tweet-align-left .TDB-tweet-actions {

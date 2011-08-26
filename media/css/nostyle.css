@@ -72,6 +72,10 @@ span.TDB-header-avatar-right {
 	margin-bottom: 0px;
 }
 
+.TDB-tweet-time a {
+	font-size: 85%;
+}
+
 .TDB-tweet-align-left {
 	text-align: left;
 }

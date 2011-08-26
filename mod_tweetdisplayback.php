@@ -52,6 +52,7 @@ $tweetAlign		= $params->get('tweetAlignment');
 $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
 $template		= $params->get('templateLayout', 'default');
+$count			= $params->get('twitterCount', '3') - 1;
 
 // No hits remaining
 if (isset($twitter->hits))

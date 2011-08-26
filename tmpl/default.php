@@ -56,7 +56,7 @@ foreach ($twitter->tweet as $o) {
 if (($params->get('tweetAvatar', 1) == 1) && (!empty($o->tweet->avatar))) {
 	$tweetAvatar	= ' TDB-tweetavatar-'.$tweetAlign;
 } ?>
-    <div class="TDB-tweet<?php echo $tweetClassSfx.$tweetAvatar; ?>">
+    <div class="TDB-tweet<?php echo $tweetClassSfx.$tweetAvatar; if ($i==$count) {echo ' TDB-last-tweet';} ?>">
 	<?php
 	// Determine if the noavatar class is used for tweets by checking the setting and whether an avatar was returned
 	if (($params->get('tweetAvatar', 1) == 1) && (!empty($o->tweet->avatar))) { ?>

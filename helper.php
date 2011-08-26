@@ -180,7 +180,7 @@ class ModTweetDisplayBackHelper
 		$obj = self::getJSON($req);
 
 		// Get the remaining hits count
-		if (isset ($obj['remaining_hits']))
+		if (isset($obj['remaining_hits']))
 		{
 			$hits = $obj['remaining_hits'];
 		}
