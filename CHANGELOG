@@ -16,6 +16,7 @@ $ - Language fix or change
 
 26-August-2011 Michael Babker
 # [#18] Double <b> tag
+^ Place error messages inside TDB-tweet-container
 
 --------------------------------------------------
 Tweet Display Back 2.0.1 - Released 18-August-2011

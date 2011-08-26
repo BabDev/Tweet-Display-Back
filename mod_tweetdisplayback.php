@@ -45,19 +45,6 @@ else
 	$twitter = ModTweetDisplayBackHelper::compileData($params);
 }
 
-// No hits remaining
-if (isset($twitter->hits))
-{
-	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
-	return;
-}
-// No data object and no other error was set
-else if ((!$twitter) || (isset($twitter->error)))
-{
-	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
-	return;
-}
-
 // Set the template variables
 $imgpath 		= JURI::root().'modules/mod_tweetdisplayback/media/images';
 $headerAlign	= $params->get('headerAvatarAlignment');
@@ -65,6 +52,19 @@ $tweetAlign		= $params->get('tweetAlignment');
 $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
 $template		= $params->get('templateLayout', 'default');
+
+// No hits remaining
+if (isset($twitter->hits))
+{
+	echo '<div class="TDB-tweet'.$tweetClassSfx.$tweetAvatar.'"><div class="TDB-tweet-container TDB-tweet-align-'.$tweetAlign.' TDB-error"><div class="TDB-tweet-text">'.JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS').'</div></div></div>';
+	return;
+}
+// No data object and no other error was set
+else if ((!$twitter) || (isset($twitter->error)))
+{
+	echo '<div class="TDB-tweet'.$tweetClassSfx.$tweetAvatar.'"><div class="TDB-tweet-container TDB-tweet-align-'.$tweetAlign.' TDB-error"><div class="TDB-tweet-text">'.JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD').'</div></div></div>';
+	return;
+}
 
 // If CSS3 is selected, load it's stylesheet except for nostyle
 $css3	= '';
