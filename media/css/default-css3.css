@@ -238,6 +238,7 @@ span.TDB-header-avatar-right {
 }
 
 .TDB-footer-follow-link {
+	font-weight: bold;
 	text-align: right;
 }
 
