@@ -9,7 +9,6 @@
 */
 
 defined('_JEXEC') or die;
-// TODO: Convert all items to params
 ?>
 <script>
 new TWTR.Widget({
@@ -21,13 +20,13 @@ new TWTR.Widget({
   height: <?php echo $params->get('widgetHeight', '300'); ?>,
   theme: {
     shell: {
-      background: '#333333',
-      color: '#ffffff'
+      background: '<?php echo $params->get('widgetShellBackground', '#8ec1da'); ?>',
+      color: '<?php echo $params->get('widgetShellText', '#ffffff'); ?>'
     },
     tweets: {
-      background: '#000000',
-      color: '#ffffff',
-      links: '#4aed05'
+      background: '<?php echo $params->get('widgetTweetBackground', '#ffffff'); ?>',
+      color: '<?php echo $params->get('widgetTweetText', '#444444'); ?>',
+      links: '<?php echo $params->get('widgetTweetLinks', '#1985b5'); ?>'
     }
   },
   features: {

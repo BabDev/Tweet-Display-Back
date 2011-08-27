@@ -9,7 +9,7 @@
 	<version>2.0.1</version>
 	<license>GNU/GPL</license>
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
-	<params>
+	<params addpath="/modules/mod_tweetdisplayback/elements">
 		<param
 			name="twitterFeedType"
 			type="list"
@@ -180,12 +180,12 @@
 				value="false">No</option>
 			<option
 				value="true">Yes</option>
+		</param>
 		<param
 			name="widgetSearch"
 			type="text"
 			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SEARCH_LABEL"
 			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SEARCH_DESCRIPTION" />
-		</param>
 		<param
 			name="@spacer"
 			type="spacer"
@@ -202,6 +202,36 @@
 			type="text"
 			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SUBJECT_LABEL"
 			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SUBJECT_DESCRIPTION" />
+		<param
+			name="widgetShellBackground"
+			type="colorpicker"
+			default="#8ec1da"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLBACKGROUND_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLBACKGROUND_DESCRIPTION" />
+		<param
+			name="widgetShellText"
+			type="colorpicker"
+			default="#ffffff"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLTEXT_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLTEXT_DESCRIPTION" />
+		<param
+			name="widgetTweetBackground"
+			type="colorpicker"
+			default="#ffffff"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETBACKGROUND_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETBACKGROUND_DESCRIPTION" />
+		<param
+			name="widgetTweetText"
+			type="colorpicker"
+			default="#444444"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETTEXT_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETTEXT_DESCRIPTION" />
+		<param
+			name="widgetTweetLinks"
+			type="colorpicker"
+			default="#1985b5"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETLINKS_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETLINKS_DESCRIPTION" />
 		<param
 			name="widgetWidth"
 			type="text"
@@ -593,6 +623,8 @@
 			description="PARAMMODULECLASSSUFFIX" />
 	</params>
 	<files>
+		<filename module="mod_tweetdisplayback">elements/colorpicker.php</filename>
+		<filename module="mod_tweetdisplayback">elements/index.html</filename>
 		<filename module="mod_tweetdisplayback">helper.php</filename>
 		<filename module="mod_tweetdisplayback">index.html</filename>
 		<filename module="mod_tweetdisplayback">media/index.html</filename>
@@ -624,4 +656,8 @@
 		<language tag="pt-BR">pt-BR/pt-BR.mod_tweetdisplayback.ini</language>
 		<language tag="sv-SE">sv-SE/sv-SE.mod_tweetdisplayback.ini</language>
 	</languages>
+	<media destination="colorpicker">
+		<folder>js</folder>
+		<filename>index.html</filename>
+	</media>
 </install>

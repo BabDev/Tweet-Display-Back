@@ -10,6 +10,7 @@
 	<license>GNU/GPL</license>
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
 	<files>
+		<folder>fields</folder>
 		<folder>media</folder>
 		<folder>tmpl</folder>
 		<filename module="mod_tweetdisplayback">mod_tweetdisplayback.php</filename>
@@ -33,11 +34,15 @@
 		<language tag="sv-SE">language/sv-SE/sv-SE.mod_tweetdisplayback.ini</language>
 		<language tag="sv-SE">language/sv-SE/sv-SE.mod_tweetdisplayback.sys.ini</language>
 	</languages>
+	<media destination="colorpicker">
+		<folder>js</folder>
+		<filename>index.html</filename>
+	</media>
 	<updateservers>
 		<server type="extension" name="Tweet Display Back Updates" priority="2">http://www.flbab.com/updates/TDB.xml</server>
 	</updateservers>
 	<config>
-		<fields name="params">
+		<fields name="params" addfieldpath="/modules/mod_tweetdisplayback/fields">
 			<fieldset name="twitter">
 				<field
 					name="twitterFeedType"
@@ -222,6 +227,36 @@
 					type="text"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SUBJECT_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SUBJECT_DESCRIPTION" />
+				<field
+					name="widgetShellBackground"
+					type="colorpicker"
+					default="#8ec1da"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLBACKGROUND_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLBACKGROUND_DESCRIPTION" />
+				<field
+					name="widgetShellText"
+					type="colorpicker"
+					default="#ffffff"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLTEXT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLTEXT_DESCRIPTION" />
+				<field
+					name="widgetTweetBackground"
+					type="colorpicker"
+					default="#ffffff"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETBACKGROUND_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETBACKGROUND_DESCRIPTION" />
+				<field
+					name="widgetTweetText"
+					type="colorpicker"
+					default="#444444"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETTEXT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETTEXT_DESCRIPTION" />
+				<field
+					name="widgetTweetLinks"
+					type="colorpicker"
+					default="#1985b5"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETLINKS_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETLINKS_DESCRIPTION" />
 				<field
 					name="widgetWidth"
 					type="text"

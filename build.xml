@@ -65,6 +65,9 @@
 		<copy todir="packages/common/tmpl">
 			<fileset dir="tmpl" />
 		</copy>
+		<copy todir="packages/common/js">
+			<fileset dir="js" />
+		</copy>
 		<copy todir="packages/common">
 			<fileset dir=".">
 				<include name="CHANGELOG" />
@@ -80,6 +83,10 @@
 		<echo msg="Create 1.5 language folder" />
 		<copy todir="packages/1.5/language">
 			<fileset dir="language/1.5" />
+	    </copy>
+		<echo msg="Create 1.5 elements folder" />
+		<copy todir="packages/1.5/elements">
+			<fileset dir="elements" />
 	    </copy>
 		<echo msg="Copy 1.5 manifest" />
 		<copy
@@ -102,6 +109,10 @@
 		<echo msg="Create 1.7 language folder" />
 		<copy todir="packages/1.7/language">
 			<fileset dir="language/1.7" />
+	    </copy>
+		<echo msg="Create 1.7 fields folder" />
+		<copy todir="packages/1.7/fields">
+			<fileset dir="fields" />
 	    </copy>
 		<echo msg="Copy 1.7 manifest" />
 		<copy
