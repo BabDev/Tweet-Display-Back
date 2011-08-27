@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.net
+lang_map = en: en-GB, fr_FR: fr-FR, it_IT: it-IT, nl_BE: nl-BE, nl_NL: nl-NL, pt_br: pt-BR, sv_SE: sv-SE
+
+[tweetdisplayback.tdb-language]
+file_filter = language/1.7/<lang>/<lang>.mod_tweetdisplayback.ini
+source_file = language/1.7/en-GB/en-GB.mod_tweetdisplayback.ini
+source_lang = en
+

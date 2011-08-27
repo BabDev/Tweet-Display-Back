@@ -51,18 +51,18 @@ if ($params->get('twitterFeedType') != 'widget')
 	// No hits remaining
 	if (isset($twitter->hits))
 	{
-		echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS');
+		echo '<div class="TDB-tweet'.$tweetClassSfx.$tweetAvatar.'"><div class="TDB-tweet-container TDB-tweet-align-'.$tweetAlign.' TDB-error"><div class="TDB-tweet-text">'.JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS').'</div></div></div>';
 		return;
 	}
 	// No data object and no other error was set
 	else if ((!$twitter) || (isset($twitter->error)))
 	{
-		echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
+		echo '<div class="TDB-tweet'.$tweetClassSfx.$tweetAvatar.'"><div class="TDB-tweet-container TDB-tweet-align-'.$tweetAlign.' TDB-error"><div class="TDB-tweet-text">'.JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD').'</div></div></div>';
 		return;
 	}
 }
 
-// Set the variables
+// Set the template variables
 $imgpath 		= JURI::root().'modules/mod_tweetdisplayback/media/images';
 $headerAlign	= $params->get('headerAvatarAlignment');
 $tweetAlign		= $params->get('tweetAlignment');
@@ -70,6 +70,7 @@ $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
 $template		= $params->get('templateLayout', 'default');
 $flist			= ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
+$count			= $params->get('twitterCount', '3') - 1;
 
 // Don't load module CSS if loading a widget
 if ($params->get('twitterFeedType') != 'widget')
@@ -78,9 +79,14 @@ if ($params->get('twitterFeedType') != 'widget')
 	$css3	= '';
 	if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle')
 	{
-		$css3	= '-css3';
+		// If CSS3 is selected, load it's stylesheet except for nostyle
+		$css3	= '';
+		if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle')
+		{
+			$css3	= '-css3';
+		}
+		JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/'.$template.$css3.'.css', false, false, false);
 	}
-	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/'.$template.$css3.'.css', false, false, false);
 }
 
 // Add the Twitter Web Intents script if something else already hasn't

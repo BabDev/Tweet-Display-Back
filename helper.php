@@ -180,7 +180,7 @@ class ModTweetDisplayBackHelper
 		$obj = self::getJSON($req);
 
 		// Get the remaining hits count
-		if (isset ($obj['remaining_hits']))
+		if (isset($obj['remaining_hits']))
 		{
 			$hits = $obj['remaining_hits'];
 		}
@@ -298,7 +298,7 @@ class ModTweetDisplayBackHelper
 			}
 			else
 			{
-				$twitter->footer->follow_me = '<hr /><div class="TDB-footer-follow-link"><b>';
+				$twitter->footer->follow_me = '<hr /><div class="TDB-footer-follow-link">';
 				// Determine whether a list or user feed is being generated
 				if ($feed == 'list')
 				{
@@ -306,9 +306,9 @@ class ModTweetDisplayBackHelper
 				}
 				else
 				{
-					$twitter->footer->follow_me .= '<b><a href="http://twitter.com/intent/user?screen_name='.$uname.'" rel="nofollow">';
+					$twitter->footer->follow_me .= '<a href="http://twitter.com/intent/user?screen_name='.$uname.'" rel="nofollow">';
 				}
-				$twitter->footer->follow_me .= $params->get('footerFollowText', 'Follow me on Twitter').'</a></b></div>';
+				$twitter->footer->follow_me .= $params->get('footerFollowText', 'Follow me on Twitter').'</a></div>';
 			}
 		}
 		if ($params->get('footerPoweredBy', 1) == 1)

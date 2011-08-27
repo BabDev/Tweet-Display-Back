@@ -74,6 +74,9 @@ span.TDB-header-avatar-right {
 	padding: 2px;
 }
 
+.TDB-error {
+}
+
 .TDB-tweet-user {
 	text-align: center;
 }
@@ -83,6 +86,9 @@ span.TDB-header-avatar-right {
 
 .TDB-tweetavatar .TDB-tweet-text {
 	min-height: 30px;
+}
+
+.TDB-last-tweet {
 }
 
 .TDB-tweet-container {
@@ -96,6 +102,10 @@ span.TDB-header-avatar-right {
 	font-size: 85%;
 	margin-left: 0px;
 	margin-bottom: 0px;
+}
+
+.TDB-tweet-time a {
+	font-size: 85%;
 }
 
 .TDB-tweet-align-left {
@@ -173,6 +183,7 @@ span.TDB-header-avatar-right {
 }
 
 .TDB-footer-follow-link {
+	font-weight: bold;
 	text-align: right;
 }
 

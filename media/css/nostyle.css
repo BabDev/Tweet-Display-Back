@@ -49,6 +49,9 @@ span.TDB-header-avatar-right {
 	word-wrap: break-word;
 }
 
+.TDB-error {
+}
+
 .TDB-tweet-text {
 }
 
@@ -67,6 +70,10 @@ span.TDB-header-avatar-right {
 .TDB-tweet-time {
 	font-size: 85%;
 	margin-bottom: 0px;
+}
+
+.TDB-tweet-time a {
+	font-size: 85%;
 }
 
 .TDB-tweet-align-left {
@@ -129,6 +136,7 @@ span.TDB-header-avatar-right {
 }
 
 .TDB-footer-follow-link {
+	font-weight: bold;
 	text-align: right;
 }
 
