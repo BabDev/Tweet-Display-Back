@@ -11,6 +11,15 @@
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
 	<params addpath="/modules/mod_tweetdisplayback/elements">
 		<param
+			type="version"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_LABEL" />
+		<param
+			name="@spacer"
+			type="spacer"
+			default=""
+			label=""
+			description="" />
+		<param
 			name="twitterFeedType"
 			type="list"
 			default="user"
@@ -625,6 +634,7 @@
 	<files>
 		<filename module="mod_tweetdisplayback">elements/colorpicker.php</filename>
 		<filename module="mod_tweetdisplayback">elements/index.html</filename>
+		<filename module="mod_tweetdisplayback">elements/version.php</filename>
 		<filename module="mod_tweetdisplayback">helper.php</filename>
 		<filename module="mod_tweetdisplayback">index.html</filename>
 		<filename module="mod_tweetdisplayback">media/index.html</filename>

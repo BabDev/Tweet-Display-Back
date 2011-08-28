@@ -43,6 +43,11 @@
 	</updateservers>
 	<config>
 		<fields name="params" addfieldpath="/modules/mod_tweetdisplayback/fields">
+			<fieldset name="version">
+				<field
+					type="version"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_LABEL" />
+			</fieldset>	
 			<fieldset name="twitter">
 				<field
 					name="twitterFeedType"

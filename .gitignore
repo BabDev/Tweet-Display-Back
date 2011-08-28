@@ -7,6 +7,7 @@ releases
 
 # Update Server #
 TDB.xml
+TDB_version
 
 # IDE #
 .buildpath
