@@ -10,10 +10,37 @@
 
 defined('_JEXEC') or die;
 
+// Set the template variables
+$imgpath 		= JURI::root().'modules/mod_tweetdisplayback/media/images';
+$headerAlign	= $params->get('headerAvatarAlignment');
+$tweetAlign		= $params->get('tweetAlignment');
+$headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
+$tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
+$template		= $params->get('templateLayout', 'default');
+$flist			= ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
+$count			= $params->get('twitterCount', '3') - 1;
+
+// Don't load module CSS if loading a widget
+if ($params->get('twitterFeedType') != 'widget')
+{
+	// If CSS3 is selected, load it's stylesheet except for nostyle
+	$css3	= '';
+	if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle')
+	{
+		// If CSS3 is selected, load it's stylesheet except for nostyle
+		$css3	= '';
+		if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle')
+		{
+			$css3	= '-css3';
+		}
+		JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/'.$template.$css3.'.css', false, false, false);
+	}
+}
+
 // Check if cURL is loaded; if not, proceed no further
 if (!extension_loaded('curl'))
 {
-	echo JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL');
+	echo '<div class="TDB-tweet'.$tweetClassSfx.$tweetAvatar.'"><div class="TDB-tweet-container TDB-tweet-align-'.$tweetAlign.' TDB-error"><div class="TDB-tweet-text">'.JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL').'</div></div></div>';
 	return;
 }
 
@@ -59,33 +86,6 @@ if ($params->get('twitterFeedType') != 'widget')
 	{
 		echo '<div class="TDB-tweet'.$tweetClassSfx.$tweetAvatar.'"><div class="TDB-tweet-container TDB-tweet-align-'.$tweetAlign.' TDB-error"><div class="TDB-tweet-text">'.JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD').'</div></div></div>';
 		return;
-	}
-}
-
-// Set the template variables
-$imgpath 		= JURI::root().'modules/mod_tweetdisplayback/media/images';
-$headerAlign	= $params->get('headerAvatarAlignment');
-$tweetAlign		= $params->get('tweetAlignment');
-$headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
-$tweetClassSfx	= htmlspecialchars($params->get('tweetclasssfx'));
-$template		= $params->get('templateLayout', 'default');
-$flist			= ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
-$count			= $params->get('twitterCount', '3') - 1;
-
-// Don't load module CSS if loading a widget
-if ($params->get('twitterFeedType') != 'widget')
-{
-	// If CSS3 is selected, load it's stylesheet except for nostyle
-	$css3	= '';
-	if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle')
-	{
-		// If CSS3 is selected, load it's stylesheet except for nostyle
-		$css3	= '';
-		if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle')
-		{
-			$css3	= '-css3';
-		}
-		JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/'.$template.$css3.'.css', false, false, false);
 	}
 }
 
