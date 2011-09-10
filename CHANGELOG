@@ -17,6 +17,7 @@ $ - Language fix or change
 10-September-2011 Michael Babker
 ^ Get the retweet count from a retweeted status
 ^ Set access level on all functions
+# Need to get the helper before the template processing begins
 
 8-September-2011 Michael Babker
 ^ Load the CSS pre-processing so it is available for errors

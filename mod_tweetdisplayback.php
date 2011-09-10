@@ -10,6 +10,9 @@
 
 defined('_JEXEC') or die;
 
+// Include the helper
+require_once dirname(__FILE__).'/helper.php';
+
 // Set the template variables
 $imgpath 		= JURI::root().'modules/mod_tweetdisplayback/media/images';
 $headerAlign	= $params->get('headerAvatarAlignment');
@@ -43,9 +46,6 @@ if (!extension_loaded('curl'))
 	echo '<div class="TDB-tweet'.$tweetClassSfx.$tweetAvatar.'"><div class="TDB-tweet-container TDB-tweet-align-'.$tweetAlign.' TDB-error"><div class="TDB-tweet-text">'.JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL').'</div></div></div>';
 	return;
 }
-
-// Include the helper
-require_once dirname(__FILE__).'/helper.php';
 
 // If using a widget, don't need to perform custom module rendering
 if ($params->get('twitterFeedType') != 'widget')
