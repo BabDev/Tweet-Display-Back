@@ -679,7 +679,7 @@ class ModTweetDisplayBackHelper
 	static protected function renderRetweetCount($count)
 	{
 		// 1 retweet
-		if ($count = 1)
+		if ($count == '1')
 		{
 			return JText::sprintf('MOD_TWEETDISPLAYBACK_RETWEET', $count);
 		}
