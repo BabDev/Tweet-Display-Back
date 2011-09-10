@@ -27,7 +27,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   1.6.0
 	 */
-	static function compileData($params)
+	static public function compileData($params)
 	{
 		// Check the number of hits available
 		$hits = self::getLimit($params);
@@ -140,7 +140,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   1.0.7
 	 */
-	static function getJSON($req)
+	static public function getJSON($req)
 	{
 		// Create a new cURL resource
 		$ch = curl_init($req);
@@ -170,7 +170,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   1.0.6
 	 */
-	static function getLimit($params)
+	static protected function getLimit($params)
 	{
 		// Load the parameters
 		$uname = $params->get('twitterName', '');
@@ -201,7 +201,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   1.6.0
 	 */
-	static function prepareUser($params)
+	static protected function prepareUser($params)
 	{
 		// Load the parameters
 		$uname	= $params->get('twitterName', '');
@@ -339,7 +339,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   2.0.0
 	 */
-	static function processFiltering($obj, $params)
+	static protected function processFiltering($obj, $params)
 	{
 		// Initialize
 		$count			= $params->get('twitterCount', 3);
@@ -484,7 +484,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since	2.0.0
 	 */
-	static function processItem(&$twitter, $o, $i, $params)
+	static protected function processItem(&$twitter, $o, $i, $params)
 	{
 		// Set variables
 		$tweetName		= $params->get('tweetName', 1);
@@ -506,6 +506,7 @@ class ModTweetDisplayBackHelper
 			$avatar = $o['retweeted_status']['user']['profile_image_url'];
 			$text   = $o['retweeted_status']['text'];
 			$urls   = $o['retweeted_status']['entities']['urls'];
+			$RTs	= $o['retweeted_status']['retweet_count'];
 			$twitter[$i]->tweet->created = JText::_('MOD_TWEETDISPLAYBACK_RETWEETED');
 		}
 		else
@@ -518,6 +519,7 @@ class ModTweetDisplayBackHelper
 			$avatar = $o['user']['profile_image_url'];
 			$text   = $o['text'];
 			$urls   = $o['entities']['urls'];
+			$RTs	= $o['retweet_count'];
 		}
 		// Generate the object with the user data
 		if ($tweetName == 1)
@@ -604,7 +606,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   1.0.0
 	 */
-	static function renderRelativeTime($date)
+	static protected function renderRelativeTime($date)
 	{
 		// Get the difference in seconds between now and the tweet time
 		$diff = time() - strtotime($date);
@@ -674,7 +676,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   1.6.0
 	 */
-	static function renderRetweetCount($count)
+	static protected function renderRetweetCount($count)
 	{
 		// 1 retweet
 		if ($count = 1)
@@ -697,7 +699,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   1.6.0
 	 */
-	static function toAscii($list)
+	static public function toAscii($list)
 	{
 		$clean = preg_replace("/[^a-z'A-Z0-9\/_|+ -]/", '', $list);
 		$clean = strtolower(trim($clean, '-'));
