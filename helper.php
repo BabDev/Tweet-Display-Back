@@ -572,9 +572,9 @@ class ModTweetDisplayBackHelper
 			$twitter[$i]->tweet->created .= JText::_('MOD_TWEETDISPLAYBACK_IN_REPLY_TO').'<a href="http://twitter.com/'.$o['in_reply_to_screen_name'].'/status/'.$o['in_reply_to_status_id_str'].'" rel="nofollow">'.$o['in_reply_to_screen_name'].'</a>';
 		}
 		// Display the number of times the tweet has been retweeted
-		if ((($tweetRTCount == 1) && ($o['retweet_count'] >= 1)))
+		if ((($tweetRTCount == 1) && ($RTs >= 1)))
 		{
-			$twitter[$i]->tweet->created .= ' &bull; '.self::renderRetweetCount($o['retweet_count']);
+			$twitter[$i]->tweet->created .= ' &bull; '.self::renderRetweetCount($RTs);
 		}
 		// Display Twitter Actions
 		if ($tweetReply == 1)
