@@ -665,6 +665,7 @@
 		<language tag="nl-BE">nl-BE/nl-BE.mod_tweetdisplayback.ini</language>
 		<language tag="nl-NL">nl-NL/nl-NL.mod_tweetdisplayback.ini</language>
 		<language tag="pt-BR">pt-BR/pt-BR.mod_tweetdisplayback.ini</language>
+		<language tag="pt-PT">pt-PT/pt-PT.mod_tweetdisplayback.ini</language>
 		<language tag="sv-SE">sv-SE/sv-SE.mod_tweetdisplayback.ini</language>
 	</languages>
 	<media destination="colorpicker">
