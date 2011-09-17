@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  * Tweet Display Back migration class from Joomla 1.5 to Joomla 1.6/1.7
  *
  * @package  TweetDisplayBack
- * @since    2.0.1
+ * @since    2.0
  */
 class jUpgradeModuleTDB extends jUpgrade
 {
@@ -23,7 +23,7 @@ class jUpgradeModuleTDB extends jUpgrade
 	 *
 	 * @return  boolean
 	 *
-	 * @since   2.0.1
+	 * @since   2.0
 	 */
 	protected function detectExtension()
 	{
@@ -40,7 +40,7 @@ class jUpgradeModuleTDB extends jUpgrade
 	 *
 	 * @return  array  List of tables without prefix
 	 *
-	 * @since   2.0.1
+	 * @since   2.0
 	 */
 	protected function getUpdateSite()
 	{
@@ -52,7 +52,7 @@ class jUpgradeModuleTDB extends jUpgrade
 	 *
 	 * @return  array  List of folders relative to JPATH_ROOT
 	 *
-	 * @since   2.0.1
+	 * @since   2.0
 	 */
 	protected function getCopyFolders()
 	{
@@ -64,7 +64,7 @@ class jUpgradeModuleTDB extends jUpgrade
 	 *
 	 * @return  boolean
 	 *
-	 * @since   2.0.1
+	 * @since   2.0
 	 */
 	protected function migrateExtensionFolders()
 	{

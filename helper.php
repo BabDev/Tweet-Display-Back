@@ -598,7 +598,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @return  string  The converted date string
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 */
 	static protected function renderRelativeTime($date)
 	{
@@ -668,7 +668,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @return  string  A text string of the number of retweets
 	 *
-	 * @since   1.6.0
+	 * @since   1.6
 	 */
 	static protected function renderRetweetCount($count)
 	{
@@ -691,7 +691,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @return  string  The list name converted
 	 *
-	 * @since   1.6.0
+	 * @since   1.6
 	 */
 	static public function toAscii($list)
 	{

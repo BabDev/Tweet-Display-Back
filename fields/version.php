@@ -16,7 +16,7 @@ require_once JPATH_SITE.'/modules/mod_tweetdisplayback/helper.php';
  * Field type to display the version and check for a newer version.
  *
  * @package  TweetDisplayBack
- * @since    2.1.0
+ * @since    2.1
  */
 class JFormFieldVersion extends JFormField
 {
@@ -24,7 +24,7 @@ class JFormFieldVersion extends JFormField
 	* The form field type.
 	*
 	* @var    string
-	* @since  2.1.0
+	* @since  2.1
 	*/
 	protected $type = 'Version';
 
@@ -33,7 +33,7 @@ class JFormFieldVersion extends JFormField
 	 *
 	 * @return  string
 	 *
-	 * @since   2.1.0
+	 * @since   2.1
 	 */
 	protected function getInput()
 	{
@@ -46,7 +46,7 @@ class JFormFieldVersion extends JFormField
 	 * @return  string  A message containing the installed version and,
 	 *                  if necessary, information on a new version.
 	 *
-	 * @since   2.1.0
+	 * @since   2.1
 	 */
 	protected function getLabel()
 	{

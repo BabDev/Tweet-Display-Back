@@ -16,18 +16,15 @@ require_once JPATH_SITE.'/modules/mod_tweetdisplayback/helper.php';
  * Field type to display the version and check for a newer version.
  *
  * @package  TweetDisplayBack
- * @since    2.1.0
+ * @since    2.1
  */
 class JElementVersion extends JElement
 {
 	/**
 	 * Element name
 	 *
-	 * This has to be set in the final
-	 * renderer classes.
-	 *
 	 * @var    string
-	 * @since  2.1.0
+	 * @since  2.1
 	 */
 	var $_name = 'Version';
 
@@ -37,7 +34,7 @@ class JElementVersion extends JElement
 	 * @return  string  A message containing the installed version and,
 	 *                  if necessary, information on a new version.
 	 *
-	 * @since   2.1.0
+	 * @since   2.1
 	 */
 	function fetchElement($name, $value, &$node, $control_name)
 	{
