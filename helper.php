@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  * Helper class for Tweet Display Back
  *
  * @package  TweetDisplayBack
- * @since    1.0.0
+ * @since    1.0
  */
 class ModTweetDisplayBackHelper
 {
@@ -25,7 +25,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @return  object  $twitter  A formatted object with the requested tweets
 	 *
-	 * @since   1.6.0
+	 * @since   1.5
 	 */
 	static public function compileData($params)
 	{
@@ -138,7 +138,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @return  array  The fetched JSON query
 	 *
-	 * @since   1.0.7
+	 * @since   1.0
 	 */
 	static public function getJSON($req)
 	{
@@ -168,7 +168,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @return  string  The number of remaining hits on a user's rate limit
 	 *
-	 * @since   1.0.6
+	 * @since   1.0
 	 */
 	static protected function getLimit($params)
 	{
@@ -199,7 +199,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @return  array  The formatted object for display
 	 *
-	 * @since   1.6.0
+	 * @since   1.5
 	 */
 	static protected function prepareUser($params)
 	{
@@ -337,7 +337,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @return	object  The formatted object for display
 	 *
-	 * @since   2.0.0
+	 * @since   2.0
 	 */
 	static protected function processFiltering($obj, $params)
 	{
@@ -475,14 +475,14 @@ class ModTweetDisplayBackHelper
 	/**
 	 * Function to process the Twitter feed into a formatted object
 	 *
-	 * @param   object  &$twitter  The final output object
-	 * @param   object  $o         The item within the JSON feed
-	 * @param   int     $i         Iteration of processFiltering
-	 * @param   object  $params    The module parameters
+	 * @param   object   &$twitter  The final output object
+	 * @param   object   $o         The item within the JSON feed
+	 * @param   integer  $i         Iteration of processFiltering
+	 * @param   object   $params    The module parameters
 	 *
 	 * @return  void
 	 *
-	 * @since	2.0.0
+	 * @since	2.0
 	 */
 	static protected function processItem(&$twitter, $o, $i, $params)
 	{
@@ -499,27 +499,21 @@ class ModTweetDisplayBackHelper
 		if (isset($o['retweeted_status']))
 		{
 			// Retweeted user
-			if ($tweetName == 1)
-			{
-				$tweetedBy = $o['retweeted_status']['user']['screen_name'];
-			}
-			$avatar = $o['retweeted_status']['user']['profile_image_url'];
-			$text   = $o['retweeted_status']['text'];
-			$urls   = $o['retweeted_status']['entities']['urls'];
-			$RTs	= $o['retweeted_status']['retweet_count'];
+			$tweetedBy	= $o['retweeted_status']['user']['screen_name'];
+			$avatar		= $o['retweeted_status']['user']['profile_image_url'];
+			$text		= $o['retweeted_status']['text'];
+			$urls		= $o['retweeted_status']['entities']['urls'];
+			$RTs		= $o['retweeted_status']['retweet_count'];
 			$twitter[$i]->tweet->created = JText::_('MOD_TWEETDISPLAYBACK_RETWEETED');
 		}
 		else
 		{
 			// User
-			if ($tweetName == 1)
-			{
-				$tweetedBy = $o['user']['screen_name'];
-			}
-			$avatar = $o['user']['profile_image_url'];
-			$text   = $o['text'];
-			$urls   = $o['entities']['urls'];
-			$RTs	= $o['retweet_count'];
+			$tweetedBy	= $o['user']['screen_name'];
+			$avatar		= $o['user']['profile_image_url'];
+			$text		= $o['text'];
+			$urls		= $o['entities']['urls'];
+			$RTs		= $o['retweet_count'];
 		}
 		// Generate the object with the user data
 		if ($tweetName == 1)
