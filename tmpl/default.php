@@ -64,9 +64,9 @@ if (($params->get('tweetAvatar', 1) == 1) && (!empty($o->tweet->avatar))) {
 	<?php } ?>
 		<div class="TDB-tweet-container TDB-tweet-align-<?php echo $tweetAlign;?>">
 		<div class="TDB-tweet-text">
-		<?php if (!empty($o->tweet->user)) {
-			echo $o->tweet->user;
-		}
+		<?php if (!empty($o->tweet->user)) {?>
+			<span class="TDB-tweet-user"><?php echo $o->tweet->user; ?></span>
+		<?php }
 			echo $o->tweet->text; ?></div>
 		<?php if (!empty($o->tweet->created)) { ?>
 			<p class="TDB-tweet-time"><?php echo $o->tweet->created; ?></p>
