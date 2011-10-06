@@ -239,7 +239,16 @@ class ModTweetDisplayBackHelper
 		// Header info
 		if ($params->get('headerUser', 1) == 1)
 		{
-			$twitter->header->user = '<a href="http://twitter.com/intent/user?screen_name='.$uname.'" rel="nofollow">';
+			// Check if the Intents action is bypassed
+			if ($params->get('bypassIntent', '0') == 1)
+			{
+				$twitter->header->user = '<a href="http://twitter.com/'.$uname.'" rel="nofollow">';
+			}
+			else
+			{
+				$twitter->header->user = '<a href="http://twitter.com/intent/user?screen_name='.$uname.'" rel="nofollow">';
+			}
+
 			// Show the real name or the username
 			if ($params->get('headerName', 1) == 1)
 			{
@@ -522,7 +531,16 @@ class ModTweetDisplayBackHelper
 		// Generate the object with the user data
 		if ($tweetName == 1)
 		{
-			$twitter[$i]->tweet->user = '<b><a href="http://twitter.com/intent/user?screen_name='.$tweetedBy.'" rel="nofollow">'.$tweetedBy.'</a>'.$params->get('tweetUserSeparator').'</b>';
+			// Check if the Intents action is bypassed
+			if ($params->get('bypassIntent', '0') == 1)
+			{
+				$userURL = 'http://twitter.com/'.$tweetedBy;
+			}
+			else
+			{
+				$userURL = 'http://twitter.com/intent/user?screen_name='.$tweetedBy;
+			}
+			$twitter[$i]->tweet->user = '<b><a href="'.$userURL.'" rel="nofollow">'.$tweetedBy.'</a>'.$params->get('tweetUserSeparator').'</b>';
 		}
 		$twitter[$i]->tweet->avatar = '<img align="'.$tweetAlignment.'" alt="'.$tweetedBy.'" src="'.$avatar.'" width="32px"/>';
 		$twitter[$i]->tweet->text = $text;
@@ -586,7 +604,16 @@ class ModTweetDisplayBackHelper
 		{
 			foreach ($o['entities']['user_mentions'] as $mention)
 			{
-				$twitter[$i]->tweet->text = str_ireplace('@'.$mention['screen_name'], '@<a class="userlink" href="http://twitter.com/intent/user?screen_name='.$mention['screen_name'].'" rel="nofollow">'.$mention['screen_name'].'</a>', $twitter[$i]->tweet->text);
+				// Check if the Intents action is bypassed
+				if ($params->get('bypassIntent', '0') == 1)
+				{
+					$mentionURL = 'http://twitter.com/'.$mention['screen_name'];
+				}
+				else
+				{
+					$mentionURL = 'http://twitter.com/intent/user?screen_name='.$mention['screen_name'];
+				}
+				$twitter[$i]->tweet->text = str_ireplace('@'.$mention['screen_name'], '@<a class="userlink" href="'.$mentionURL.'" rel="nofollow">'.$mention['screen_name'].'</a>', $twitter[$i]->tweet->text);
 			}
 			foreach ($o['entities']['hashtags'] as $hashtag)
 			{
