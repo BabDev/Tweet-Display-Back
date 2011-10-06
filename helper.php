@@ -29,12 +29,16 @@ class ModTweetDisplayBackHelper
 	 */
 	static public function compileData($params)
 	{
-		// Check the number of hits available
-		$hits = self::getLimit($params);
-		if ($hits == 0)
+		// Check if we're bypassing the limit check
+		if ($params->get('bypassLimit', '0') == '0')
 		{
-			$twitter->hits	= '';
-			return $twitter;
+			// Check the number of hits available
+			$hits = self::getLimit($params);
+			if ($hits == 0)
+			{
+				$twitter->hits	= '';
+				return $twitter;
+			}
 		}
 
 		// Load the parameters

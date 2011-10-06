@@ -646,6 +646,17 @@
 					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
 					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 				<field
+					name="bypassLimit"
+					type="radio"
+					default="0"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BYPASSLIMIT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BYPASSLIMIT_DESCRIPTION" >
+					<option
+						value="1">JYES</option>
+					<option
+						value="0">JNO</option>
+				</field>
+				<field
 					name="cachemode"
 					type="hidden"
 					default="static">

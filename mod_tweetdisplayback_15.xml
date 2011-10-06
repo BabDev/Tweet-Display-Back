@@ -630,6 +630,17 @@
 			default=""
 			label="Module Class Suffix"
 			description="PARAMMODULECLASSSUFFIX" />
+		<param
+			name="bypassLimit"
+			type="radio"
+			default="0"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BYPASSLIMIT_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BYPASSLIMIT_DESCRIPTION" >
+			<option
+				value="1">Yes</option>
+			<option
+				value="0">No</option>
+		</param>
 	</params>
 	<files>
 		<filename module="mod_tweetdisplayback">elements/colorpicker.php</filename>
