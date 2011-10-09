@@ -129,8 +129,16 @@ class ModTweetDisplayBackHelper
 		// Fetch the decoded JSON
 		$obj = self::getJSON($req);
 
-		// Process the filtering options and render the feed
-		$twitter->tweet = self::processFiltering($obj, $params);
+		// Check to make sure we've got an array
+		if (is_array($obj))
+		{
+			// Process the filtering options and render the feed
+			$twitter->tweet = self::processFiltering($obj, $params);
+		}
+		else
+		{
+			$twitter->error	= '';
+		}
 
 		return $twitter;
 	}
@@ -229,8 +237,8 @@ class ModTweetDisplayBackHelper
 		// Decode the fetched JSON
 		$obj = self::getJSON($req);
 
-		// Check that we have the JSON, otherwise set an error
-		if (!$obj)
+		// Check that we have the JSON and it's a proper array, otherwise set an error
+		if (!$obj && !is_array($obj))
 		{
 			$twitter->error	= '';
 			return $twitter;
@@ -363,7 +371,7 @@ class ModTweetDisplayBackHelper
 		$i				= 0;
 
 		// Check if $obj has data; if not, return an error
-		if (is_null($obj))
+		if (is_null($obj) || !is_array($obj))
 		{
 			// Set an error
 			$twitter[$i]->tweet->text = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
@@ -379,17 +387,8 @@ class ModTweetDisplayBackHelper
 					if ($i < $numberOfTweets)
 					{
 						// If we aren't filtering, just render the item
-						if ($showMentions == 1 && $showReplies == 1)
+						if (($showMentions == 1 && $showReplies == 1) || $params->get('twitterFeedType', 'user') == 'list')
 						{
-							self::processItem($twitter, $o, $i, $params);
-
-							// Modify counts
-							$count--;
-							$i++;
-						}
-						else if ($params->get('twitterFeedType', 'user') == 'list')
-						{
-							// We can't filter list feeds, so just process them
 							self::processItem($twitter, $o, $i, $params);
 
 							// Modify counts

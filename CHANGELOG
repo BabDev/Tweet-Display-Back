@@ -17,6 +17,7 @@ $ - Language fix or change
 9-October-2011 Michael Babker
 # Correct a bug with the CSS declaration
 +$ Add sl-SI translation
+^ Add checks to ensure the data is an array
 
 6-October-2011 Michael Babker
 ^ [#12] Add option to bypass limit check
