@@ -13,7 +13,7 @@
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
-	margin: 0px 0px 20px 0px;
+	margin: 0 0 20px 0;
 	padding: 2px 10px;
 }
 
@@ -67,8 +67,8 @@ span.TDB-header-avatar-right {
 }
 
 .TDB-tweet-avatar img {
-	margin: 0px 0px 0px 0px;
-	padding: 0px 0px 0px 0px;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 }
 
 .TDB-tweet-text {
@@ -89,21 +89,21 @@ span.TDB-header-avatar-right {
 }
 
 .TDB-tweet-align-left {
-	margin: 0px 0px 20px 0px;
+	margin: 0 0 20px 0;
 	text-align: left;
 }
 
 .TDB-tweetavatar-left .TDB-tweet-align-left {
-	margin: 0px 0px 20px 50px;
+	margin: 0 0 20px 50px;
 }
 
 .TDB-tweet-align-right {
-	margin: 20px 0px 0px 0px;
+	margin: 20px 0 0 0;
 	text-align: right;
 }
 
 .TDB-tweetavatar-right .TDB-tweet-align-right {
-	margin: 20px 50px 0px 0px;
+	margin: 20px 50px 0 0;
 }
 
 .TDB-error {
@@ -111,8 +111,8 @@ span.TDB-header-avatar-right {
 
 .TDB-tweet-time {
 	font-size: 85%;
-	margin-left: 0px;
-	margin-bottom: 0px;
+	margin-left: 0;
+	margin-bottom: 0;
 }
 
 .TDB-tweet-time a {
@@ -202,7 +202,7 @@ span.TDB-header-avatar-right {
 .TDB-action a {
 	background: none repeat scroll 0 0 transparent !important;
 	height: 16px;
-	left: 0px;
+	left: 0;
 	position: absolute;
 	text-decoration: none !important;
 	width: 16px;

@@ -69,7 +69,7 @@ span.TDB-header-avatar-right {
 
 .TDB-tweet-time {
 	font-size: 85%;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 
 .TDB-tweet-time a {
@@ -95,7 +95,7 @@ span.TDB-header-avatar-right {
 .TDB-action a {
 	background: none repeat scroll 0 0 transparent !important;
 	height: 16px;
-	left: 0px;
+	left: 0;
 	position: absolute;
 	text-decoration: none !important;
 	width: 16px;

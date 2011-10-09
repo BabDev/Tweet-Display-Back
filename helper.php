@@ -303,7 +303,7 @@ class ModTweetDisplayBackHelper
 		{
 			if ($params->get('footerFollowType', 1) == 1)
 			{
-				$twitter->footer->follow_me = '<div class="TDB-footer-follow-img"><b>';
+				$twitter->footer->follow_me = '<div class="TDB-footer-follow-img">';
 				// Determine whether a list or user feed is being generated
 				if ($feed == 'list')
 				{
@@ -315,7 +315,7 @@ class ModTweetDisplayBackHelper
 					$twitter->footer->follow_me .= '<a href="http://twitter.com/intent/user?screen_name='.$uname.'" rel="nofollow">';
 					$alt = 'Follow '.$uname.' on Twitter';
 				}
-				$twitter->footer->follow_me .= '<img src="http://twitter-badges.s3.amazonaws.com/'.$params->get('footerFollowImgMeUs').'-'.$params->get('footerFollowImg').'.png" alt="'.$alt.'" align="middle" /></a></b></div>';
+				$twitter->footer->follow_me .= '<img src="http://twitter-badges.s3.amazonaws.com/'.$params->get('footerFollowImgMeUs').'-'.$params->get('footerFollowImg').'.png" alt="'.$alt.'" align="middle" /></a></div>';
 			}
 			else
 			{
