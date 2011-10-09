@@ -1,6 +1,6 @@
 [main]
 host = https://www.transifex.net
-lang_map = en: en-GB, fr_FR: fr-FR, it_IT: it-IT, nl_BE: nl-BE, nl_NL: nl-NL, pt_br: pt-BR, sv_SE: sv-SE, pt_PT: pt-PT, hu_HU: hu-HU, es_ES: es-ES, id_ID: id-ID, de_DE: de-DE, uk_UA: uk-UA, hu_HU: hu-HU
+lang_map = en: en-GB, fr_FR: fr-FR, it_IT: it-IT, nl_BE: nl-BE, nl_NL: nl-NL, pt_br: pt-BR, sv_SE: sv-SE, pt_PT: pt-PT, hu_HU: hu-HU, es_ES: es-ES, id_ID: id-ID, de_DE: de-DE, uk_UA: uk-UA, hu_HU: hu-HU, sl_SI: sl-SI
 
 [tweetdisplayback.tdb-language]
 file_filter = language/1.7/<lang>/<lang>.mod_tweetdisplayback.ini

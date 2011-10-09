@@ -16,6 +16,7 @@ $ - Language fix or change
 
 9-October-2011 Michael Babker
 # Correct a bug with the CSS declaration
++$ Add sl-SI translation
 
 6-October-2011 Michael Babker
 ^ [#12] Add option to bypass limit check
