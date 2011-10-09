@@ -23,7 +23,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @param   object  $params  The module parameters
 	 *
-	 * @return  object  $twitter  A formatted object with the requested tweets
+	 * @return  array  An array with the formatted tweets
 	 *
 	 * @since   1.5
 	 */
@@ -488,8 +488,8 @@ class ModTweetDisplayBackHelper
 	/**
 	 * Function to process the Twitter feed into a formatted object
 	 *
-	 * @param   object   &$twitter  The final output object
-	 * @param   object   $o         The item within the JSON feed
+	 * @param   array    &$twitter  The output array
+	 * @param   array    $o         The item within the JSON feed
 	 * @param   integer  $i         Iteration of processFiltering
 	 * @param   object   $params    The module parameters
 	 *
