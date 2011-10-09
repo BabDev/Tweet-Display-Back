@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+9-October-2011 Michael Babker
+# Correct a bug with the CSS declaration
+
 6-October-2011 Michael Babker
 ^ [#12] Add option to bypass limit check
 + [#21] Add TDB-tweet-user class to default and nostyle templates

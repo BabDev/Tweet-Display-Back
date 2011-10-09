@@ -36,8 +36,8 @@ if ($params->get('twitterFeedType') != 'widget')
 		{
 			$css3	= '-css3';
 		}
-		JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/'.$template.$css3.'.css', false, false, false);
 	}
+	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/'.$template.$css3.'.css', false, false, false);
 }
 
 // Check if cURL is loaded; if not, proceed no further
