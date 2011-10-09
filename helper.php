@@ -29,6 +29,9 @@ class ModTweetDisplayBackHelper
 	 */
 	static public function compileData($params)
 	{
+		// Initialize the array
+		$twitter = array();
+
 		// Check if we're bypassing the limit check
 		if ($params->get('bypassLimit', '0') == '0')
 		{
@@ -47,14 +50,11 @@ class ModTweetDisplayBackHelper
 		$count		= $params->get('twitterCount', 3);
 		$retweet	= $params->get('tweetRetweets', 1);
 
-		// Convert the list name to a useable string for the JSON
+		// Convert the list name to a usable string for the JSON
 		if ($list)
 		{
 			$flist = self::toAscii($list);
 		}
-
-		// Initialize the array
-		$twitter = array();
 
 		// Get the user info
 		$twitter = self::prepareUser($params);
@@ -129,8 +129,13 @@ class ModTweetDisplayBackHelper
 		// Fetch the decoded JSON
 		$obj = self::getJSON($req);
 
-		// Check to make sure we've got an array
-		if (is_array($obj))
+		// Check if we've exceeded the rate limit
+		if (isset($obj['error']) && $obj['error'] == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
+		{
+			$twitter->hits = '';
+		}
+		// Make sure we've got an array of data
+		else if (is_array($obj))
 		{
 			// Process the filtering options and render the feed
 			$twitter->tweet = self::processFiltering($obj, $params);
@@ -237,8 +242,13 @@ class ModTweetDisplayBackHelper
 		// Decode the fetched JSON
 		$obj = self::getJSON($req);
 
+		// Check if we've exceeded the rate limit
+		if (isset($obj['error']) && $obj['error'] == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
+		{
+			$twitter->hits = '';
+		}
 		// Check that we have the JSON and it's a proper array, otherwise set an error
-		if (!$obj && !is_array($obj))
+		else if (!$obj && !is_array($obj))
 		{
 			$twitter->error	= '';
 			return $twitter;
