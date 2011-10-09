@@ -6,7 +6,7 @@
 	<copyright>(C) 2010-2011 Michael Babker</copyright>
 	<authorEmail>mbabker@flbab.com</authorEmail>
 	<authorUrl>http://www.flbab.com</authorUrl>
-	<version>2.1.0</version>
+	<version>2.1.1</version>
 	<license>GNU/GPL</license>
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
 	<params addpath="/modules/mod_tweetdisplayback/elements">
