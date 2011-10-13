@@ -1,12 +1,12 @@
 <?php
 /**
-* Tweet Display Back Module for Joomla!
-*
-* @package    TweetDisplayBack
-*
-* @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
-* @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
-*/
+ * Tweet Display Back Module for Joomla!
+ *
+ * @package	  TweetDisplayBack
+ *
+ * @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
+ * @license	   GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ */
 
 defined('_JEXEC') or die;
 

@@ -1,11 +1,11 @@
 /**
-* Tweet Display Back Module for Joomla!
-*
-* @package    TweetDisplayBack
-*
-* @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
-* @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
-*/
+ * Tweet Display Back Module for Joomla!
+ *
+ * @package	  TweetDisplayBack
+ *
+ * @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
+ * @license	   GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ */
 
 .TDB-header {
 	background: #fff;
@@ -48,7 +48,7 @@ span.TDB-header-avatar-right {
 .TDB-header-bio {
 	text-align: left;
 }
-	
+
 .TDB-header-location {
 	text-align: left;
 }
@@ -147,7 +147,7 @@ span.TDB-header-avatar-right {
 	position: absolute;
 	text-decoration: none !important;
 	width: 16px;
-}	
+}
 
 .TDB-reply {
 	background-position: 0 0;
@@ -175,7 +175,7 @@ span.TDB-header-avatar-right {
 
 .userlink {
 }
-	
+
 .hashlink {
 }
 

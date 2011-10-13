@@ -1,12 +1,12 @@
 <?php
 /**
-* Tweet Display Back Module for Joomla!
-*
-* @package    TweetDisplayBack
-*
-* @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
-* @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
-*/
+ * Tweet Display Back Module for Joomla!
+ *
+ * @package	  TweetDisplayBack
+ *
+ * @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
+ * @license	   GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ */
 
 defined('_JEXEC') or die;
 
@@ -107,11 +107,11 @@ class ModTweetDisplayBackHelper
 			{
 				$count = $count * 3;
 			}
-			else if ($activeFilters == 2)
+			elseif ($activeFilters == 2)
 			{
 				$count = $count * 4;
 			}
-			else if ($activeFilters == 3)
+			elseif ($activeFilters == 3)
 			{
 				$count = $count * 5;
 			}
@@ -135,7 +135,7 @@ class ModTweetDisplayBackHelper
 			$twitter->hits = '';
 		}
 		// Make sure we've got an array of data
-		else if (is_array($obj))
+		elseif (is_array($obj))
 		{
 			// Process the filtering options and render the feed
 			$twitter->tweet = self::processFiltering($obj, $params);
@@ -226,9 +226,9 @@ class ModTweetDisplayBackHelper
 		$feed	= $params->get('twitterFeedType', 'user');
 
 		// Initialize new object containers
-		$twitter			= new stdClass();
-		$twitter->header	= new stdClass();
-		$twitter->footer	= new stdClass();
+		$twitter			= new stdClass;
+		$twitter->header	= new stdClass;
+		$twitter->footer	= new stdClass;
 
 		// Convert the list name to a useable string for the URL
 		if ($list)
@@ -248,7 +248,7 @@ class ModTweetDisplayBackHelper
 			$twitter->hits = '';
 		}
 		// Check that we have the JSON and it's a proper array, otherwise set an error
-		else if (!$obj && !is_array($obj))
+		elseif (!$obj && !is_array($obj))
 		{
 			$twitter->error	= '';
 			return $twitter;
@@ -515,7 +515,7 @@ class ModTweetDisplayBackHelper
 		$tweetRTCount	= $params->get('tweetRetweetCount', 1);
 
 		// Initialize a new object
-		$twitter[$i]->tweet	= new stdClass();
+		$twitter[$i]->tweet	= new stdClass;
 
 		// Check if the item is a retweet, and if so gather data from the retweeted_status datapoint
 		if (isset($o['retweeted_status']))

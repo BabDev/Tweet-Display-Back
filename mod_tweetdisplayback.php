@@ -1,12 +1,12 @@
 <?php
 /**
-* Tweet Display Back Module for Joomla!
-*
-* @package    TweetDisplayBack
-*
-* @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
-* @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
-*/
+ * Tweet Display Back Module for Joomla!
+ *
+ * @package	  TweetDisplayBack
+ *
+ * @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
+ * @license	   GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ */
 
 defined('_JEXEC') or die;
 
@@ -82,7 +82,7 @@ if ($params->get('twitterFeedType') != 'widget')
 		return;
 	}
 	// No data object and no other error was set
-	else if ((!$twitter) || (isset($twitter->error)))
+	elseif ((!$twitter) || (isset($twitter->error)))
 	{
 		echo '<div class="TDB-tweet'.$tweetClassSfx.$tweetAvatar.'"><div class="TDB-tweet-container TDB-tweet-align-'.$tweetAlign.' TDB-error"><div class="TDB-tweet-text">'.JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD').'</div></div></div>';
 		return;
