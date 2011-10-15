@@ -31,6 +31,11 @@ class JElementVersion extends JElement
 	/**
 	 * Method to get the element.
 	 *
+	 * @param   string  $name          Name attribute of the element
+	 * @param   string  $value         Value attribute of the element
+	 * @param   object  &$node         Element object
+	 * @param   string  $control_name  Control name of the element
+
 	 * @return  string  A message containing the installed version and,
 	 *                  if necessary, information on a new version.
 	 *

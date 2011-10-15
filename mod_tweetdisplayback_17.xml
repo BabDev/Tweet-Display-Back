@@ -674,7 +674,7 @@
 					type="hidden"
 					default="static">
 					<option
-						value="static"></option>
+						value="static" />
 				</field>
 			</fieldset>
 		</fields>
