@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="1.6" client="site" method="upgrade">
 	<name>mod_tweetdisplayback</name>
-	<creationDate>January 2011</creationDate>
+	<creationDate>##DATE##</creationDate>
 	<author>Michael Babker</author>
 	<copyright>(C) 2010-2011 Michael Babker</copyright>
 	<authorEmail>mbabker@flbab.com</authorEmail>
 	<authorUrl>http://www.flbab.com</authorUrl>
-	<version>2.1.1</version>
+	<version>##VERSION##</version>
 	<license>GNU/GPL</license>
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
 	<files>
@@ -55,7 +55,7 @@
 				<field
 					type="version"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_LABEL" />
-			</fieldset>	
+			</fieldset>
 			<fieldset name="twitter">
 				<field
 					name="twitterFeedType"
@@ -90,7 +90,7 @@
 					required="true" />
 			</fieldset>
 			<fieldset name="template">
-				<field 
+				<field
 					name="templateLayout"
 					type="filelist"
 					default="default"

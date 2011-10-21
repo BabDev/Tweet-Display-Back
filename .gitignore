@@ -15,3 +15,6 @@ TDB_version
 .settings
 .DS_Store
 .idea
+
+# Build script #
+build.properties

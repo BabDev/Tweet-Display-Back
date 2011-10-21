@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <install type="module" version="1.5" method="upgrade">
 	<name>Tweet Display Back</name>
-	<creationDate>January 2011</creationDate>
+	<creationDate>##DATE##</creationDate>
 	<author>Michael Babker</author>
 	<copyright>(C) 2010-2011 Michael Babker</copyright>
 	<authorEmail>mbabker@flbab.com</authorEmail>
 	<authorUrl>http://www.flbab.com</authorUrl>
-	<version>2.1.1</version>
+	<version>##VERSION##</version>
 	<license>GNU/GPL</license>
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
 	<params addpath="/modules/mod_tweetdisplayback/elements">
@@ -54,7 +54,7 @@
 			default=""
 			label=""
 			description="" />
-		<param 
+		<param
 			name="templateLayout"
 			type="filelist"
 			default="default"
@@ -494,7 +494,7 @@
 		<param
 			name="@spacer"
 			type="spacer"
-			default="" 
+			default=""
 			label=""
 			description="" />
 		<param
