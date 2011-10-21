@@ -329,7 +329,7 @@ class ModTweetDisplayBackHelper
 			}
 			else
 			{
-				$twitter->footer->follow_me = '<hr /><div class="TDB-footer-follow-link">';
+				$twitter->footer->follow_me = '<div class="TDB-footer-follow-link">';
 				// Determine whether a list or user feed is being generated
 				if ($feed == 'list')
 				{
