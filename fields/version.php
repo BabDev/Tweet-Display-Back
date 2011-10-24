@@ -66,7 +66,7 @@ class JFormFieldVersion extends JFormField
 			$version = $data['version'];
 
 			// The target to check against
-			$target = 'http://www.flbab.com/updates/TDB_version';
+			$target = 'http://www.babdev.com/updates/TDB_version';
 
 			// Get the JSON data
 			$update = ModTweetDisplayBackHelper::getJSON($target);
