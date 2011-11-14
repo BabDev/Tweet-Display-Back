@@ -39,7 +39,7 @@ class ModTweetDisplayBackHelper
 			$hits = self::getLimit($params);
 			if ($hits == 0)
 			{
-				$twitter->hits	= '';
+				$twitter['hits'] = '';
 				return $twitter;
 			}
 		}
@@ -60,7 +60,7 @@ class ModTweetDisplayBackHelper
 		$twitter = self::prepareUser($params);
 
 		// Check to see if we have an error
-		if (isset ($twitter->error))
+		if (isset ($twitter['error']))
 		{
 			return $twitter;
 		}
@@ -132,7 +132,7 @@ class ModTweetDisplayBackHelper
 		// Check if we've exceeded the rate limit
 		if (isset($obj['error']) && $obj['error'] == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
 		{
-			$twitter->hits = '';
+			$twitter['hits'] = '';
 		}
 		// Make sure we've got an array of data
 		elseif (is_array($obj))
@@ -142,7 +142,7 @@ class ModTweetDisplayBackHelper
 		}
 		else
 		{
-			$twitter->error	= '';
+			$twitter['error'] = '';
 		}
 
 		return $twitter;
@@ -245,12 +245,12 @@ class ModTweetDisplayBackHelper
 		// Check if we've exceeded the rate limit
 		if (isset($obj['error']) && $obj['error'] == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
 		{
-			$twitter->hits = '';
+			$twitter['hits'] = '';
 		}
 		// Check that we have the JSON and it's a proper array, otherwise set an error
 		elseif (!$obj && !is_array($obj))
 		{
-			$twitter->error	= '';
+			$twitter['error'] = '';
 			return $twitter;
 		}
 
