@@ -592,7 +592,7 @@ class ModTweetDisplayBackHelper
 			$twitter[$i]->tweet->created .= JText::_('MOD_TWEETDISPLAYBACK_FROM').'<a href="http://maps.google.com/maps?q='.$o['place']['full_name'].'" target="_blank" rel="nofollow">'.$o['place']['full_name'].'</a>';
 		}
 		// If the tweet is a reply, display a link to the tweet it's in reply to
-		if (($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str']))
+		if ((($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) && $params->get('tweetReplyLink', 1) == 1)
 		{
 			$twitter[$i]->tweet->created .= JText::_('MOD_TWEETDISPLAYBACK_IN_REPLY_TO').'<a href="http://twitter.com/'.$o['in_reply_to_screen_name'].'/status/'.$o['in_reply_to_status_id_str'].'" rel="nofollow">'.$o['in_reply_to_screen_name'].'</a>';
 		}

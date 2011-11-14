@@ -437,6 +437,17 @@
 				value="1">Yes</option>
 		</param>
 		<param
+			name="tweetReplyLink"
+			type="radio"
+			default="1"
+			label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_REPLYLINK_LABEL"
+			description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_REPLYLINK_DESCRIPTION" >
+			<option
+				value="0">No</option>
+			<option
+				value="1">Yes</option>
+		</param>
+		<param
 			name="tweetRetweetCount"
 			type="radio"
 			default="1"
