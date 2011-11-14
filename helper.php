@@ -570,7 +570,7 @@ class ModTweetDisplayBackHelper
 		// Display the time the tweet was created
 		if ($params->get('tweetCreated', 1) == 1)
 		{
-			$twitter[$i]->tweet->created .= '<a href="http://twitter.com/'.$o['user']['screen_name'].'/status/'.$o['id_str'].'" rel="nofollow">';
+			$twitter[$i]->tweet->created .= '<a href="http://twitter.com/'.$o['user']['screen_name'].'/status/'.$o['id_str'].'" rel="nofollow" target="_blank">';
 			// Determine whether to display the time as a relative or static time
 			if ($params->get('tweetRelativeTime', 1) == 1)
 			{
