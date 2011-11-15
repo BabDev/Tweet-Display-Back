@@ -20,6 +20,7 @@ $ - Language fix or change
 ^ Add margin to nostyle .TDB-footer-follow-img
 ^$ Update nl-** translations
 ^$ Update es-ES translation
+^ Verify that URLs have the HTTP protocol
 
 13-October-2011 Michael Babker
 ^$ Update id-ID translation

@@ -563,6 +563,13 @@ class ModTweetDisplayBackHelper
 			{
 				$d_url = $url['url'];
 			}
+
+			// We need to check to verify that the URL has the protocol, just in case
+			if (!strpos($url['url'], 'http://'))
+			{
+				$url['url'] = 'http://' . $url['url'];
+			}
+
 			$twitter[$i]->tweet->text = str_replace($url['url'], '<a href="' . $url['url'] . '" target="_blank" rel="nofollow">' . $d_url . '</a>', $twitter[$i]->tweet->text);
 		}
 
