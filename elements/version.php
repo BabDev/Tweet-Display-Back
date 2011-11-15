@@ -52,7 +52,7 @@ class JElementVersion extends JElement
 		else
 		{
 			// Get the module's XML
-			$xmlfile = JPATH_SITE.'/modules/mod_tweetdisplayback/mod_tweetdisplayback.xml';
+			$xmlfile = JPATH_SITE . '/modules/mod_tweetdisplayback/mod_tweetdisplayback.xml';
 			$data = JApplicationHelper::parseXMLInstallFile($xmlfile);
 
 			// The module's version
@@ -65,16 +65,16 @@ class JElementVersion extends JElement
 			$update = ModTweetDisplayBackHelper::getJSON($target);
 
 			// Message containing the version
-			$message = '<label style="max-width:100%">'.JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
+			$message = '<label style="max-width:100%">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
 
 			// If an update is available, notify the user
 			if (version_compare($update['version'], $version, 'gt'))
 			{
-				$message .= '  <a href="'.$update['notice'].'" target="_blank">'.JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update['version']).'</a></label>';
+				$message .= '  <a href="' . $update['notice'] . '" target="_blank">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update['version']) . '</a></label>';
 			}
 			else
 			{
-				$message .= '  '.JText::_('MOD_TWEETDISPLAYBACK_VERSION_CURRENT').'</label>';
+				$message .= '  ' . JText::_('MOD_TWEETDISPLAYBACK_VERSION_CURRENT') . '</label>';
 			}
 			return $message;
 		}

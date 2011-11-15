@@ -21,14 +21,14 @@ class jUpgradeModuleTDB extends jUpgrade
 	/**
 	 * Check if extension migration is supported.
 	 *
-	 * @return  boolean
+	 * @return  boolean  True if extension exists
 	 *
 	 * @since   2.0
 	 */
 	protected function detectExtension()
 	{
 		// For whatever reason, the module's dispatcher isn't there; proceed no further
-		if (!file_exists(JPATH_ROOT.'/modules/mod_tweetdisplayback/mod_tweetdisplayback.php'))
+		if (!file_exists(JPATH_ROOT . '/modules/mod_tweetdisplayback/mod_tweetdisplayback.php'))
 		{
 			return false;
 		}

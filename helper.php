@@ -45,10 +45,10 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Load the parameters
-		$uname		= $params->get('twitterName', '');
-		$list		= $params->get('twitterList', '');
-		$count		= $params->get('twitterCount', 3);
-		$retweet	= $params->get('tweetRetweets', 1);
+		$uname = $params->get('twitterName', '');
+		$list = $params->get('twitterList', '');
+		$count = $params->get('twitterCount', 3);
+		$retweet = $params->get('tweetRetweets', 1);
 
 		// Convert the list name to a usable string for the JSON
 		if ($list)
@@ -66,7 +66,7 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Set the include RT's string
-		$incRT	= '';
+		$incRT = '';
 		if ($retweet == 1)
 		{
 			$incRT = '&include_rts=1';
@@ -94,7 +94,7 @@ class ModTweetDisplayBackHelper
 		if ($params->get('twitterFeedType', 'user') == 'list')
 		{
 			// Get the list feed
-			$req = 'http://api.twitter.com/1/lists/statuses.json?slug='.$flist.'&owner_screen_name='.$uname.$incRT.'&include_entities=1';
+			$req = 'http://api.twitter.com/1/lists/statuses.json?slug=' . $flist . '&owner_screen_name=' . $uname . $incRT . '&include_entities=1';
 		}
 		else
 		{
@@ -123,7 +123,7 @@ class ModTweetDisplayBackHelper
 			{
 				$count = $params->get('tweetsToScan', 3);
 			}
-			$req = 'http://api.twitter.com/1/statuses/user_timeline.json?count='.$count.'&screen_name='.$uname.$incRT.'&include_entities=1';
+			$req = 'http://api.twitter.com/1/statuses/user_timeline.json?count=' . $count . '&screen_name=' . $uname . $incRT . '&include_entities=1';
 		}
 
 		// Fetch the decoded JSON
@@ -191,7 +191,7 @@ class ModTweetDisplayBackHelper
 	{
 		// Load the parameters
 		$uname = $params->get('twitterName', '');
-		$req = 'http://api.twitter.com/1/account/rate_limit_status.json?screen_name='.$uname;
+		$req = 'http://api.twitter.com/1/account/rate_limit_status.json?screen_name=' . $uname;
 
 		// Fetch the decoded JSON
 		$obj = self::getJSON($req);
@@ -221,14 +221,14 @@ class ModTweetDisplayBackHelper
 	static protected function prepareUser($params)
 	{
 		// Load the parameters
-		$uname	= $params->get('twitterName', '');
-		$list	= $params->get('twitterList', '');
-		$feed	= $params->get('twitterFeedType', 'user');
+		$uname = $params->get('twitterName', '');
+		$list = $params->get('twitterList', '');
+		$feed = $params->get('twitterFeedType', 'user');
 
 		// Initialize new object containers
-		$twitter			= new stdClass;
-		$twitter->header	= new stdClass;
-		$twitter->footer	= new stdClass;
+		$twitter = new stdClass;
+		$twitter->header = new stdClass;
+		$twitter->footer = new stdClass;
 
 		// Convert the list name to a useable string for the URL
 		if ($list)
@@ -237,7 +237,7 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Get the user JSON
-		$req = 'http://api.twitter.com/1/users/show.json?screen_name='.$uname;
+		$req = 'http://api.twitter.com/1/users/show.json?screen_name=' . $uname;
 
 		// Decode the fetched JSON
 		$obj = self::getJSON($req);
@@ -260,26 +260,26 @@ class ModTweetDisplayBackHelper
 			// Check if the Intents action is bypassed
 			if ($params->get('bypassIntent', '0') == 1)
 			{
-				$twitter->header->user = '<a href="http://twitter.com/'.$uname.'" rel="nofollow">';
+				$twitter->header->user = '<a href="http://twitter.com/' . $uname . '" rel="nofollow">';
 			}
 			else
 			{
-				$twitter->header->user = '<a href="http://twitter.com/intent/user?screen_name='.$uname.'" rel="nofollow">';
+				$twitter->header->user = '<a href="http://twitter.com/intent/user?screen_name=' . $uname . '" rel="nofollow">';
 			}
 
 			// Show the real name or the username
 			if ($params->get('headerName', 1) == 1)
 			{
-				$twitter->header->user .= $obj['name'].'</a>';
+				$twitter->header->user .= $obj['name'] . '</a>';
 			}
 			else
 			{
-				$twitter->header->user .= $uname.'</a>';
+				$twitter->header->user .= $uname . '</a>';
 			}
 			// Append the list name if being pulled
 			if ($feed == 'list')
 			{
-				$twitter->header->user .= ' - <a href="http://twitter.com/'.$uname.'/'.$flist.'" rel="nofollow">'.$list.' list</a>';
+				$twitter->header->user .= ' - <a href="http://twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">' . $list . ' list</a>';
 			}
 		}
 		// Show the bio
@@ -295,16 +295,16 @@ class ModTweetDisplayBackHelper
 		// Show the user's URL
 		if ($params->get('headerWeb', 1) == 1)
 		{
-			$twitter->header->web = '<a href="'.$obj['url'].'" rel="nofollow">'.$obj['url'].'</a>';
+			$twitter->header->web = '<a href="' . $obj['url'] . '" rel="nofollow">' . $obj['url'] . '</a>';
 		}
 
 		// Get the profile image URL from the object
-		$avatar	= $obj['profile_image_url'];
+		$avatar = $obj['profile_image_url'];
 
 		// Switch from the normal size avatar (48px) to the large one (73px)
-		$avatar	= str_replace('normal.jpg', 'bigger.jpg', $avatar);
+		$avatar = str_replace('normal.jpg', 'bigger.jpg', $avatar);
 
-		$twitter->header->avatar = '<img src="'.$avatar.'" alt="'.$uname.'" />';
+		$twitter->header->avatar = '<img src="' . $avatar . '" alt="' . $uname . '" />';
 
 		// Footer info
 
@@ -317,15 +317,15 @@ class ModTweetDisplayBackHelper
 				// Determine whether a list or user feed is being generated
 				if ($feed == 'list')
 				{
-					$twitter->footer->follow_me .= '<a href="http://twitter.com/'.$uname.'/'.$flist.'" rel="nofollow">';
-					$alt = 'Follow '.$uname.'&#39;s '.$list.' list on Twitter';
+					$twitter->footer->follow_me .= '<a href="http://twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">';
+					$alt = 'Follow ' . $uname . '&#39;s ' . $list . ' list on Twitter';
 				}
 				else
 				{
-					$twitter->footer->follow_me .= '<a href="http://twitter.com/intent/user?screen_name='.$uname.'" rel="nofollow">';
-					$alt = 'Follow '.$uname.' on Twitter';
+					$twitter->footer->follow_me .= '<a href="http://twitter.com/intent/user?screen_name=' . $uname . '" rel="nofollow">';
+					$alt = 'Follow ' . $uname . ' on Twitter';
 				}
-				$twitter->footer->follow_me .= '<img src="http://twitter-badges.s3.amazonaws.com/'.$params->get('footerFollowImgMeUs').'-'.$params->get('footerFollowImg').'.png" alt="'.$alt.'" align="middle" /></a></div>';
+				$twitter->footer->follow_me .= '<img src="http://twitter-badges.s3.amazonaws.com/' . $params->get('footerFollowImgMeUs') . '-' . $params->get('footerFollowImg') . '.png" alt="' . $alt . '" align="middle" /></a></div>';
 			}
 			else
 			{
@@ -333,13 +333,13 @@ class ModTweetDisplayBackHelper
 				// Determine whether a list or user feed is being generated
 				if ($feed == 'list')
 				{
-					$twitter->footer->follow_me .= '<a href="http://twitter.com/'.$uname.'/'.$flist.'" rel="nofollow">';
+					$twitter->footer->follow_me .= '<a href="http://twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">';
 				}
 				else
 				{
-					$twitter->footer->follow_me .= '<a href="http://twitter.com/intent/user?screen_name='.$uname.'" rel="nofollow">';
+					$twitter->footer->follow_me .= '<a href="http://twitter.com/intent/user?screen_name=' . $uname . '" rel="nofollow">';
 				}
-				$twitter->footer->follow_me .= $params->get('footerFollowText', 'Follow me on Twitter').'</a></div>';
+				$twitter->footer->follow_me .= $params->get('footerFollowText', 'Follow me on Twitter') . '</a></div>';
 			}
 		}
 		if ($params->get('footerPoweredBy', 1) == 1)
@@ -353,8 +353,8 @@ class ModTweetDisplayBackHelper
 			{
 				$twitter->footer->powered_by = '<hr /><div class="TDB-footer-powered-text">';
 			}
-			$site = '<a href="http://www.babdev.com/extensions/tweet-display-back" rel="nofollow">'.JText::_('MOD_TWEETDISPLAYBACK').'</a>';
-			$twitter->footer->powered_by .= JText::sprintf('MOD_TWEETDISPLAYBACK_POWERED_BY', $site).'</div>';
+			$site = '<a href="http://www.babdev.com/extensions/tweet-display-back" rel="nofollow">' . JText::_('MOD_TWEETDISPLAYBACK') . '</a>';
+			$twitter->footer->powered_by .= JText::sprintf('MOD_TWEETDISPLAYBACK_POWERED_BY', $site) . '</div>';
 		}
 
 		return $twitter;
@@ -373,12 +373,12 @@ class ModTweetDisplayBackHelper
 	static protected function processFiltering($obj, $params)
 	{
 		// Initialize
-		$count			= $params->get('twitterCount', 3);
-		$showMentions	= $params->get('showMentions', 0);
-		$showReplies	= $params->get('showReplies', 0);
-		$numberOfTweets	= $params->get('twitterCount', 3);
-		$twitter		= array();
-		$i				= 0;
+		$count = $params->get('twitterCount', 3);
+		$showMentions = $params->get('showMentions', 0);
+		$showReplies = $params->get('showReplies', 0);
+		$numberOfTweets = $params->get('twitterCount', 3);
+		$twitter = array();
+		$i = 0;
 
 		// Check if $obj has data; if not, return an error
 		if (is_null($obj) || !is_array($obj))
@@ -509,33 +509,33 @@ class ModTweetDisplayBackHelper
 	static protected function processItem(&$twitter, $o, $i, $params)
 	{
 		// Set variables
-		$tweetName		= $params->get('tweetName', 1);
-		$tweetAlignment	= $params->get('tweetAlignment', 'left');
-		$tweetReply		= $params->get('tweetReply', 1);
-		$tweetRTCount	= $params->get('tweetRetweetCount', 1);
+		$tweetName = $params->get('tweetName', 1);
+		$tweetAlignment = $params->get('tweetAlignment', 'left');
+		$tweetReply = $params->get('tweetReply', 1);
+		$tweetRTCount = $params->get('tweetRetweetCount', 1);
 
 		// Initialize a new object
-		$twitter[$i]->tweet	= new stdClass;
+		$twitter[$i]->tweet = new stdClass;
 
 		// Check if the item is a retweet, and if so gather data from the retweeted_status datapoint
 		if (isset($o['retweeted_status']))
 		{
 			// Retweeted user
-			$tweetedBy	= $o['retweeted_status']['user']['screen_name'];
-			$avatar		= $o['retweeted_status']['user']['profile_image_url'];
-			$text		= $o['retweeted_status']['text'];
-			$urls		= $o['retweeted_status']['entities']['urls'];
-			$RTs		= $o['retweeted_status']['retweet_count'];
+			$tweetedBy = $o['retweeted_status']['user']['screen_name'];
+			$avatar = $o['retweeted_status']['user']['profile_image_url'];
+			$text = $o['retweeted_status']['text'];
+			$urls = $o['retweeted_status']['entities']['urls'];
+			$RTs = $o['retweeted_status']['retweet_count'];
 			$twitter[$i]->tweet->created = JText::_('MOD_TWEETDISPLAYBACK_RETWEETED');
 		}
 		else
 		{
 			// User
-			$tweetedBy	= $o['user']['screen_name'];
-			$avatar		= $o['user']['profile_image_url'];
-			$text		= $o['text'];
-			$urls		= $o['entities']['urls'];
-			$RTs		= $o['retweet_count'];
+			$tweetedBy = $o['user']['screen_name'];
+			$avatar = $o['user']['profile_image_url'];
+			$text = $o['text'];
+			$urls = $o['entities']['urls'];
+			$RTs = $o['retweet_count'];
 		}
 		// Generate the object with the user data
 		if ($tweetName == 1)
@@ -543,15 +543,15 @@ class ModTweetDisplayBackHelper
 			// Check if the Intents action is bypassed
 			if ($params->get('bypassIntent', '0') == 1)
 			{
-				$userURL = 'http://twitter.com/'.$tweetedBy;
+				$userURL = 'http://twitter.com/' . $tweetedBy;
 			}
 			else
 			{
-				$userURL = 'http://twitter.com/intent/user?screen_name='.$tweetedBy;
+				$userURL = 'http://twitter.com/intent/user?screen_name=' . $tweetedBy;
 			}
-			$twitter[$i]->tweet->user = '<b><a href="'.$userURL.'" rel="nofollow">'.$tweetedBy.'</a>'.$params->get('tweetUserSeparator').'</b>';
+			$twitter[$i]->tweet->user = '<b><a href="' . $userURL . '" rel="nofollow">' . $tweetedBy . '</a>' . $params->get('tweetUserSeparator') . '</b>';
 		}
-		$twitter[$i]->tweet->avatar = '<img align="'.$tweetAlignment.'" alt="'.$tweetedBy.'" src="'.$avatar.'" width="32px"/>';
+		$twitter[$i]->tweet->avatar = '<img align="' . $tweetAlignment . '" alt="' . $tweetedBy . '" src="' . $avatar . '" width="32px"/>';
 		$twitter[$i]->tweet->text = $text;
 		foreach ($urls as $url)
 		{
@@ -563,22 +563,22 @@ class ModTweetDisplayBackHelper
 			{
 				$d_url = $url['url'];
 			}
-			$twitter[$i]->tweet->text = str_replace($url['url'], '<a href="'.$url['url'].'" target="_blank" rel="nofollow">'.$d_url.'</a>', $twitter[$i]->tweet->text);
+			$twitter[$i]->tweet->text = str_replace($url['url'], '<a href="' . $url['url'] . '" target="_blank" rel="nofollow">' . $d_url . '</a>', $twitter[$i]->tweet->text);
 		}
 
 		// Info below is specific to each tweet, so it isn't checked against a retweet
 		// Display the time the tweet was created
 		if ($params->get('tweetCreated', 1) == 1)
 		{
-			$twitter[$i]->tweet->created .= '<a href="http://twitter.com/'.$o['user']['screen_name'].'/status/'.$o['id_str'].'" rel="nofollow" target="_blank">';
+			$twitter[$i]->tweet->created .= '<a href="http://twitter.com/' . $o['user']['screen_name'] . '/status/' . $o['id_str'] . '" rel="nofollow" target="_blank">';
 			// Determine whether to display the time as a relative or static time
 			if ($params->get('tweetRelativeTime', 1) == 1)
 			{
-				$twitter[$i]->tweet->created .= self::renderRelativeTime($o['created_at']).'</a>';
+				$twitter[$i]->tweet->created .= self::renderRelativeTime($o['created_at']) . '</a>';
 			}
 			else
 			{
-				$twitter[$i]->tweet->created .= JHTML::date($o['created_at']).'</a>';
+				$twitter[$i]->tweet->created .= JHTML::date($o['created_at']) . '</a>';
 			}
 		}
 		// Display the tweet source
@@ -589,24 +589,24 @@ class ModTweetDisplayBackHelper
 		// Display the location the tweet was made from if set
 		if (($params->get('tweetLocation', 1) == 1) && ($o['place']['full_name']))
 		{
-			$twitter[$i]->tweet->created .= JText::_('MOD_TWEETDISPLAYBACK_FROM').'<a href="http://maps.google.com/maps?q='.$o['place']['full_name'].'" target="_blank" rel="nofollow">'.$o['place']['full_name'].'</a>';
+			$twitter[$i]->tweet->created .= JText::_('MOD_TWEETDISPLAYBACK_FROM') . '<a href="http://maps.google.com/maps?q=' . $o['place']['full_name'] . '" target="_blank" rel="nofollow">' . $o['place']['full_name'] . '</a>';
 		}
 		// If the tweet is a reply, display a link to the tweet it's in reply to
 		if ((($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) && $params->get('tweetReplyLink', 1) == 1)
 		{
-			$twitter[$i]->tweet->created .= JText::_('MOD_TWEETDISPLAYBACK_IN_REPLY_TO').'<a href="http://twitter.com/'.$o['in_reply_to_screen_name'].'/status/'.$o['in_reply_to_status_id_str'].'" rel="nofollow">'.$o['in_reply_to_screen_name'].'</a>';
+			$twitter[$i]->tweet->created .= JText::_('MOD_TWEETDISPLAYBACK_IN_REPLY_TO') . '<a href="http://twitter.com/' . $o['in_reply_to_screen_name'] . '/status/' . $o['in_reply_to_status_id_str'] . '" rel="nofollow">' . $o['in_reply_to_screen_name'] . '</a>';
 		}
 		// Display the number of times the tweet has been retweeted
 		if ((($tweetRTCount == 1) && ($RTs >= 1)))
 		{
-			$twitter[$i]->tweet->created .= ' &bull; '.self::renderRetweetCount($RTs);
+			$twitter[$i]->tweet->created .= ' &bull; ' . self::renderRetweetCount($RTs);
 		}
 		// Display Twitter Actions
 		if ($tweetReply == 1)
 		{
-			$twitter[$i]->tweet->actions = '<span class="TDB-action TDB-reply"><a href="http://twitter.com/intent/tweet?in_reply_to='.$o['id_str'].'" title="Reply" rel="nofollow"></a></span>';
-			$twitter[$i]->tweet->actions .= '<span class="TDB-action TDB-retweet"><a href="http://twitter.com/intent/retweet?tweet_id='.$o['id_str'].'" title="Retweet" rel="nofollow"></a></span>';
-			$twitter[$i]->tweet->actions .= '<span class="TDB-action TDB-favorite"><a href="http://twitter.com/intent/favorite?tweet_id='.$o['id_str'].'" title="Favorite" rel="nofollow"></a></span>';
+			$twitter[$i]->tweet->actions = '<span class="TDB-action TDB-reply"><a href="http://twitter.com/intent/tweet?in_reply_to=' . $o['id_str'] . '" title="Reply" rel="nofollow"></a></span>';
+			$twitter[$i]->tweet->actions .= '<span class="TDB-action TDB-retweet"><a href="http://twitter.com/intent/retweet?tweet_id=' . $o['id_str'] . '" title="Retweet" rel="nofollow"></a></span>';
+			$twitter[$i]->tweet->actions .= '<span class="TDB-action TDB-favorite"><a href="http://twitter.com/intent/favorite?tweet_id=' . $o['id_str'] . '" title="Favorite" rel="nofollow"></a></span>';
 		}
 		// If set, convert user and hash tags into links
 		if ($params->get('tweetLinks', 1) == 1)
@@ -616,17 +616,17 @@ class ModTweetDisplayBackHelper
 				// Check if the Intents action is bypassed
 				if ($params->get('bypassIntent', '0') == 1)
 				{
-					$mentionURL = 'http://twitter.com/'.$mention['screen_name'];
+					$mentionURL = 'http://twitter.com/' . $mention['screen_name'];
 				}
 				else
 				{
-					$mentionURL = 'http://twitter.com/intent/user?screen_name='.$mention['screen_name'];
+					$mentionURL = 'http://twitter.com/intent/user?screen_name=' . $mention['screen_name'];
 				}
-				$twitter[$i]->tweet->text = str_ireplace('@'.$mention['screen_name'], '@<a class="userlink" href="'.$mentionURL.'" rel="nofollow">'.$mention['screen_name'].'</a>', $twitter[$i]->tweet->text);
+				$twitter[$i]->tweet->text = str_ireplace('@' . $mention['screen_name'], '@<a class="userlink" href="' . $mentionURL . '" rel="nofollow">' . $mention['screen_name'] . '</a>', $twitter[$i]->tweet->text);
 			}
 			foreach ($o['entities']['hashtags'] as $hashtag)
 			{
-				$twitter[$i]->tweet->text = str_ireplace('#'.$hashtag['text'], '#<a class="hashlink" href="http://twitter.com/search?q='.$hashtag['text'].'" target="_blank" rel="nofollow">'.$hashtag['text'].'</a>', $twitter[$i]->tweet->text);
+				$twitter[$i]->tweet->text = str_ireplace('#' . $hashtag['text'], '#<a class="hashlink" href="http://twitter.com/search?q=' . $hashtag['text'] . '" target="_blank" rel="nofollow">' . $hashtag['text'] . '</a>', $twitter[$i]->tweet->text);
 			}
 		}
 	}
