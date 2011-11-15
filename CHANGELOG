@@ -18,6 +18,8 @@ $ - Language fix or change
 # [#26] link 'tweet-time' does not open in new window
 + Option to hide the "in reply to" text
 ^ Add margin to nostyle .TDB-footer-follow-img
+^$ Update nl-** translations
+^$ Update es-ES translation
 
 13-October-2011 Michael Babker
 ^$ Update id-ID translation
