@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+16-November-2011 Michael Babker
+^ Improved URL protocol check
+
 15-November-2011 Michael Babker
 # [#26] link 'tweet-time' does not open in new window
 + Option to hide the "in reply to" text

@@ -565,12 +565,16 @@ class ModTweetDisplayBackHelper
 			}
 
 			// We need to check to verify that the URL has the protocol, just in case
-			if (!strpos($url['url'], 'http://'))
+			if (strpos($url['url'], 'http://') !== 0)
 			{
-				$url['url'] = 'http://' . $url['url'];
+				$link = 'http://' . $url['url'];
+			}
+			else
+			{
+				$link = $url['url'];
 			}
 
-			$twitter[$i]->tweet->text = str_replace($url['url'], '<a href="' . $url['url'] . '" target="_blank" rel="nofollow">' . $d_url . '</a>', $twitter[$i]->tweet->text);
+			$twitter[$i]->tweet->text = str_replace($url['url'], '<a href="' . $link . '" target="_blank" rel="nofollow">' . $d_url . '</a>', $twitter[$i]->tweet->text);
 		}
 
 		// Info below is specific to each tweet, so it isn't checked against a retweet
