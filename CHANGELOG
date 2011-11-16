@@ -16,6 +16,7 @@ $ - Language fix or change
 
 16-November-2011 Michael Babker
 ^ Improved URL protocol check
++ Add link support for media entity URLs
 
 15-November-2011 Michael Babker
 # [#26] link 'tweet-time' does not open in new window

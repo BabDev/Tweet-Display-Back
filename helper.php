@@ -527,6 +527,10 @@ class ModTweetDisplayBackHelper
 			$urls = $o['retweeted_status']['entities']['urls'];
 			$RTs = $o['retweeted_status']['retweet_count'];
 			$twitter[$i]->tweet->created = JText::_('MOD_TWEETDISPLAYBACK_RETWEETED');
+			if (isset($o['retweeted_status']['entities']['media']))
+			{
+				$media = $o['retweeted_status']['entities']['media'];
+			}
 		}
 		else
 		{
@@ -536,6 +540,10 @@ class ModTweetDisplayBackHelper
 			$text = $o['text'];
 			$urls = $o['entities']['urls'];
 			$RTs = $o['retweet_count'];
+			if (isset($o['entities']['media']))
+			{
+				$media = $o['entities']['media'];
+			}
 		}
 		// Generate the object with the user data
 		if ($tweetName == 1)
@@ -553,6 +561,8 @@ class ModTweetDisplayBackHelper
 		}
 		$twitter[$i]->tweet->avatar = '<img align="' . $tweetAlignment . '" alt="' . $tweetedBy . '" src="' . $avatar . '" width="32px"/>';
 		$twitter[$i]->tweet->text = $text;
+
+		// Make regular URLs in tweets a link
 		foreach ($urls as $url)
 		{
 			if (isset($url['display_url']))
@@ -575,6 +585,24 @@ class ModTweetDisplayBackHelper
 			}
 
 			$twitter[$i]->tweet->text = str_replace($url['url'], '<a href="' . $link . '" target="_blank" rel="nofollow">' . $d_url . '</a>', $twitter[$i]->tweet->text);
+		}
+
+		// Make media URLS in tweets a link
+		if (isset($media))
+		{
+			foreach ($media as $image)
+			{
+				if (isset($image['display_url']))
+				{
+					$i_url = $image['display_url'];
+				}
+				else
+				{
+					$i_url = $image['url'];
+				}
+
+				$twitter[$i]->tweet->text = str_replace($image['url'], '<a href="' . $image['url'] . '" target="_blank" rel="nofollow">' . $i_url . '</a>', $twitter[$i]->tweet->text);
+			}
 		}
 
 		// Info below is specific to each tweet, so it isn't checked against a retweet
