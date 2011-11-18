@@ -43,7 +43,7 @@ if ($params->get('twitterFeedType') != 'widget')
 // Check if cURL is loaded; if not, proceed no further
 if (!extension_loaded('curl'))
 {
-	echo '<div class="TDB-tweet' . $tweetClassSfx . $tweetAvatar . '">'
+	echo '<div class="TDB-tweet' . $tweetClassSfx . '">'
 		 .'<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
 		 .'<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL') . '</div>'
 		 .'</div></div>';
@@ -80,7 +80,7 @@ if ($params->get('twitterFeedType') != 'widget')
 	// No hits remaining
 	if (isset($twitter->hits))
 	{
-		echo '<div class="TDB-tweet' . $tweetClassSfx . $tweetAvatar . '">'
+		echo '<div class="TDB-tweet' . $tweetClassSfx . '">'
 			 .'<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
 			 .'<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS') . '</div>'
 			 .'</div></div>';
@@ -89,7 +89,7 @@ if ($params->get('twitterFeedType') != 'widget')
 	// No data object and no other error was set
 	elseif ((!$twitter) || (isset($twitter->error)))
 	{
-		echo '<div class="TDB-tweet' . $tweetClassSfx . $tweetAvatar . '">'
+		echo '<div class="TDB-tweet' . $tweetClassSfx . '">'
 			 .'<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
 			 .'<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD') . '</div>'
 			 .'</div></div>';

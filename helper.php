@@ -21,16 +21,16 @@ class ModTweetDisplayBackHelper
 	/**
 	 * Function to compile the data to render a formatted object displaying a Twitter feed
 	 *
-	 * @param   object  $params  The module parameters
+	 * @param   JRegistry  $params  The module parameters
 	 *
-	 * @return  array  An array with the formatted tweets
+	 * @return  object  An object with the formatted tweets
 	 *
 	 * @since   1.5
 	 */
 	static public function compileData($params)
 	{
-		// Initialize the array
-		$twitter = array();
+		// Initialize the object
+		$twitter = new stdClass;
 
 		// Check if we're bypassing the limit check
 		if ($params->get('bypassLimit', '0') == '0')
@@ -181,7 +181,7 @@ class ModTweetDisplayBackHelper
 	/**
 	 * Function to get the rate limit of a Twitter user
 	 *
-	 * @param   object  $params  The module parameters
+	 * @param   JRegistry  $params  The module parameters
 	 *
 	 * @return  string  The number of remaining hits on a user's rate limit
 	 *
@@ -212,7 +212,7 @@ class ModTweetDisplayBackHelper
 	/**
 	 * Function to fetch the user JSON and render it
 	 *
-	 * @param   object  $params  The module parameters
+	 * @param   JRegistry  $params  The module parameters
 	 *
 	 * @return  array  The formatted object for display
 	 *
@@ -363,8 +363,8 @@ class ModTweetDisplayBackHelper
 	/**
 	 * Function to render the Twitter feed into a formatted object
 	 *
-	 * @param   array   $obj     The decoded JSON feed
-	 * @param   object  $params  The module parameters
+	 * @param   array      $obj     The decoded JSON feed
+	 * @param   JRegistry  $params  The module parameters
 	 *
 	 * @return	object  The formatted object for display
 	 *
@@ -497,10 +497,10 @@ class ModTweetDisplayBackHelper
 	/**
 	 * Function to process the Twitter feed into a formatted object
 	 *
-	 * @param   array    &$twitter  The output array
-	 * @param   array    $o         The item within the JSON feed
-	 * @param   integer  $i         Iteration of processFiltering
-	 * @param   object   $params    The module parameters
+	 * @param   array      &$twitter  The output array
+	 * @param   array      $o         The item within the JSON feed
+	 * @param   integer    $i         Iteration of processFiltering
+	 * @param   JRegistry  $params    The module parameters
 	 *
 	 * @return  void
 	 *
