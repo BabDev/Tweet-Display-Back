@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+24-November-2011 Michael Babker
+^ Modified version check to support developer packages
+
 16-November-2011 Michael Babker
 ^ Improved URL protocol check
 + Add link support for media entity URLs

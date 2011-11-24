@@ -63,7 +63,7 @@ class JFormFieldVersion extends JFormField
 			$data = JApplicationHelper::parseXMLInstallFile($xmlfile);
 
 			// The module's version
-			$version = $data['version'];
+			$version = substr($data['version'], 0, 5);
 
 			// The target to check against
 			$target = 'http://www.babdev.com/updates/TDB_version';
