@@ -11,6 +11,7 @@ jimport('joomla.form.formfield');
 /**
  * Form Field class for the Joomla Framework.
  *
+ * @deprecated  Will be removed when J! <2.5 support is dropped in favor of JHtmlBehavior::colorpicker
  */
 class JFormFieldColorpicker extends JFormField
 {
@@ -23,11 +24,11 @@ class JFormFieldColorpicker extends JFormField
 	 */
 	protected function getInput()
 	{
-		
+
         $baseurl = JURI::base();
-		$baseurl = str_replace('administrator/','',$baseurl);	
-		
-		
+		$baseurl = str_replace('administrator/','',$baseurl);
+
+
 		// Initialize some field attributes.
 		$size		= $this->element['size'] ? ' size="'.(int) $this->element['size'].'"' : '';
 		$maxLength	= $this->element['maxlength'] ? ' maxlength="'.(int) $this->element['maxlength'].'"' : '';
@@ -36,7 +37,7 @@ class JFormFieldColorpicker extends JFormField
 		$disabled	= ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
 		$scriptname	 = $this->element['scriptpath'] ?(string) $this->element['scriptpath'] : $baseurl.'media/colorpicker/js/color-picker.js';
 
-		
+
 		//try to find the script
 		if($scriptname == 'self')
 		{
@@ -44,17 +45,17 @@ class JFormFieldColorpicker extends JFormField
     	   $filedir = str_replace('\\','/',$filedir);
            $scriptname = $baseurl . $filedir . '/color-picker.js';
 		}
-				
-		
+
+
 		$doc =& JFactory::getDocument();
 		$doc->addScript($scriptname);
-		
+
 		$options = array();
 		if( $this->element['cellwidth']){ $options[] = "cellWidth:". (int) $this->element['cellwidth'];}
 		if( $this->element['cellheight']){ $options[] = "cellHeight:".(int) $this->element['cellheight'];}
 		if( $this->element['top']){ $options[] = "top:". (int) $this->element['top'];}
 		if( $this->element['left']){ $options[] = "left:". (int) $this->element['left'];}
-																			  
+
         $optionString = implode(',',$options);
 
 		$js = 'window.addEvent(\'domready\', function(){
@@ -64,8 +65,8 @@ class JFormFieldColorpicker extends JFormField
 ';
 
         $doc->addScriptDeclaration($js);
-		
-		
+
+
 
 		// Initialize JavaScript field attributes.
 		$onchange	= $this->element['onchange'] ? ' onchange="'.(string) $this->element['onchange'].'"' : '';

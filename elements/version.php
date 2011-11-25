@@ -17,6 +17,7 @@ require_once JPATH_SITE.'/modules/mod_tweetdisplayback/helper.php';
  *
  * @package  TweetDisplayBack
  * @since    2.1
+ * @deprecated  Will be removed when J! 1.5 support is dropped
  */
 class JElementVersion extends JElement
 {

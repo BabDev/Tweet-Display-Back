@@ -7,7 +7,11 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-
+/**
+ * Field type to display a color selection field.
+ *
+ * @deprecated  Will be removed when J! 1.5 support is dropped
+ */
 class JElementColorpicker extends JElement
 {
 	/**
@@ -16,31 +20,31 @@ class JElementColorpicker extends JElement
 	var	$_name = 'colorpicker';
 
 	function fetchElement($name, $value, &$node, $control_name){
-		
+
 		//try to find script
         $baseurl = JURI::base();
 		$baseurl = str_replace('administrator/','',$baseurl);
-				
+
 		$size = $node->attributes('size') ? 'size="'.$node->attributes('size').'"' : '';
 		$class = $node->attributes('class') ? 'class="'.$node->attributes('class').'"' : 'class="text_area"';
-		$scriptname = $node->attributes('scriptpath') ? $node->attributes('scriptpath') : $baseurl.'media/colorpicker/js/color-picker.js';	
-		
+		$scriptname = $node->attributes('scriptpath') ? $node->attributes('scriptpath') : $baseurl.'media/colorpicker/js/color-picker.js';
+
 		if($scriptname == 'self')
 		{
            $filedir = str_replace(JPATH_SITE . '/','',dirname(__FILE__));
     	   $filedir = str_replace('\\','/',$filedir);
            $scriptname = $baseurl . $filedir . '/color-picker.js';
 		}
-		
+
 		$doc =& JFactory::getDocument();
 		$doc->addScript($scriptname);
-		
+
 		$options = array();
 		if( $node->attributes('cellwidth')){ $options[] = "cellWidth:". (int)$node->attributes('cellwidth');}
 		if( $node->attributes('cellheight')){ $options[] = "cellHeight:".(int)$node->attributes('cellheight');}
 		if( $node->attributes('top')){ $options[] = "top:". (int)$node->attributes('top');}
 		if( $node->attributes('left')){ $options[] = "left:". (int)$node->attributes('left');}
-																			  
+
         $optionString = implode(',',$options);
 
 		$js = 'window.addEvent(\'domready\', function(){
@@ -51,7 +55,7 @@ class JElementColorpicker extends JElement
 
         $doc->addScriptDeclaration($js);
 
-		
+
         /*
          * Required to avoid a cycle of encoding &
          * html_entity_decode was used in place of htmlspecialchars_decode because
@@ -60,7 +64,7 @@ class JElementColorpicker extends JElement
         $value = htmlspecialchars(html_entity_decode($value, ENT_QUOTES), ENT_QUOTES);
 
 		$output = '<input type="text" name="'.$control_name.'['.$name.']" id="'.$control_name.$name.'" value="'.$value.'" '.$class.' '.$size.' />';
-		
+
 		return $output;
 	}
 }

@@ -260,7 +260,7 @@ class ModTweetDisplayBackHelper
 			// Check if the Intents action is bypassed
 			if ($params->get('bypassIntent', '0') == 1)
 			{
-				$twitter->header->user = '<a href="http://twitter.com/' . $uname . '" rel="nofollow">';
+				$twitter->header->user = '<a href="http://twitter.com/' . $uname . '" rel="nofollow" target="_blank">';
 			}
 			else
 			{
@@ -295,7 +295,7 @@ class ModTweetDisplayBackHelper
 		// Show the user's URL
 		if ($params->get('headerWeb', 1) == 1)
 		{
-			$twitter->header->web = '<a href="' . $obj['url'] . '" rel="nofollow">' . $obj['url'] . '</a>';
+			$twitter->header->web = '<a href="' . $obj['url'] . '" rel="nofollow" target="_blank">' . $obj['url'] . '</a>';
 		}
 
 		// Get the profile image URL from the object
@@ -317,7 +317,7 @@ class ModTweetDisplayBackHelper
 				// Determine whether a list or user feed is being generated
 				if ($feed == 'list')
 				{
-					$twitter->footer->follow_me .= '<a href="http://twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">';
+					$twitter->footer->follow_me .= '<a href="http://twitter.com/' . $uname . '/' . $flist . '" rel="nofollow" target="_blank">';
 					$alt = 'Follow ' . $uname . '&#39;s ' . $list . ' list on Twitter';
 				}
 				else
@@ -333,7 +333,7 @@ class ModTweetDisplayBackHelper
 				// Determine whether a list or user feed is being generated
 				if ($feed == 'list')
 				{
-					$twitter->footer->follow_me .= '<a href="http://twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">';
+					$twitter->footer->follow_me .= '<a href="http://twitter.com/' . $uname . '/' . $flist . '" rel="nofollow" target="_blank">';
 				}
 				else
 				{
@@ -353,7 +353,7 @@ class ModTweetDisplayBackHelper
 			{
 				$twitter->footer->powered_by = '<hr /><div class="TDB-footer-powered-text">';
 			}
-			$site = '<a href="http://www.babdev.com/extensions/tweet-display-back" rel="nofollow">' . JText::_('MOD_TWEETDISPLAYBACK') . '</a>';
+			$site = '<a href="http://www.babdev.com/extensions/tweet-display-back" rel="nofollow" target="_blank">' . JText::_('MOD_TWEETDISPLAYBACK') . '</a>';
 			$twitter->footer->powered_by .= JText::sprintf('MOD_TWEETDISPLAYBACK_POWERED_BY', $site) . '</div>';
 		}
 
@@ -614,6 +614,8 @@ class ModTweetDisplayBackHelper
 			if ($params->get('tweetRelativeTime', 1) == 1)
 			{
 				$twitter[$i]->tweet->created .= self::renderRelativeTime($o['created_at']) . '</a>';
+				// Dependent upon Platform 11.3, J! 2.5
+				//$twitter[$i]->tweet->created .= JHtml::_('date.relative', $o['created_at']) . '</a>';
 			}
 			else
 			{
@@ -639,6 +641,8 @@ class ModTweetDisplayBackHelper
 		if ((($tweetRTCount == 1) && ($RTs >= 1)))
 		{
 			$twitter[$i]->tweet->created .= ' &bull; ' . self::renderRetweetCount($RTs);
+			// J! 1.6+ compatibility
+			//JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $RTs);
 		}
 		// Display Twitter Actions
 		if ($tweetReply == 1)
@@ -678,6 +682,7 @@ class ModTweetDisplayBackHelper
 	 * @return  string  The converted date string
 	 *
 	 * @since   1.0
+	 * @deprecated  Will be removed when J! <2.5 support is dropped in favor of JHtmlDate::relative
 	 */
 	static protected function renderRelativeTime($date)
 	{
@@ -748,6 +753,7 @@ class ModTweetDisplayBackHelper
 	 * @return  string  A text string of the number of retweets
 	 *
 	 * @since   1.6
+	 * @deprecated  Will be removed when J! 1.5 support is dropped in favor of JText::plural
 	 */
 	static protected function renderRetweetCount($count)
 	{
