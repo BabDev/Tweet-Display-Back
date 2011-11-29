@@ -1,10 +1,10 @@
 Tweet Display Back
 ===============
-*Tweet Display Back* is a module for Joomla! 1.5+ sites which allows users to display a user or list feed on their site.
+*Tweet Display Back* is a module for Joomla! sites which allows users to display a user or list feed on their site.
 
 Compatibility
 ===============
-*Tweet Display Back* is compatible with Joomla! 1.5, 1.6, and 1.7 utilizing a common code base with native language files and manifests to each version.
+The current release of *Tweet Display Back* is compatible with Joomla! 2.5 and newer.  Older versions of the module are available for download at http://www.babdev.com/extensions/releases/tweet-display-back
 
 Requirements
 ===============
@@ -17,7 +17,6 @@ Support
 
 Installation Package
 ===============
-* Installation packages for *Tweet Display Back* are available from the downloads section of this repository.
 * If you have made a checkout of the repository, you can build installation packages using Phing by running 'phing dev_head' from your interface.
 
 Stable Master Policy

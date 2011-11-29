@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="1.6" client="site" method="upgrade">
+<extension type="module" version="1.7" client="site" method="upgrade">
 	<name>mod_tweetdisplayback</name>
 	<creationDate>##DATE##</creationDate>
 	<author>Michael Babker</author>
@@ -9,8 +9,10 @@
 	<version>##VERSION##</version>
 	<license>GNU/GPL</license>
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
+	<scriptfile>script.php</scriptfile>
 	<files>
 		<folder>fields</folder>
+		<folder>language</folder>
 		<folder>media</folder>
 		<folder>tmpl</folder>
 		<filename module="mod_tweetdisplayback">mod_tweetdisplayback.php</filename>
@@ -18,34 +20,6 @@
 		<filename>index.html</filename>
 		<filename>mod_tweetdisplayback.xml</filename>
 	</files>
-	<languages>
-		<language tag="en-GB">language/en-GB/en-GB.mod_tweetdisplayback.ini</language>
-		<language tag="en-GB">language/en-GB/en-GB.mod_tweetdisplayback.sys.ini</language>
-		<language tag="es-ES">language/es-ES/es-ES.mod_tweetdisplayback.ini</language>
-		<language tag="es-ES">language/es-ES/es-ES.mod_tweetdisplayback.sys.ini</language>
-		<language tag="fr-FR">language/fr-FR/fr-FR.mod_tweetdisplayback.ini</language>
-		<language tag="fr-FR">language/fr-FR/fr-FR.mod_tweetdisplayback.sys.ini</language>
-		<language tag="id-ID">language/id-ID/id-ID.mod_tweetdisplayback.ini</language>
-		<language tag="id-ID">language/id-ID/id-ID.mod_tweetdisplayback.sys.ini</language>
-		<language tag="it-IT">language/it-IT/it-IT.mod_tweetdisplayback.ini</language>
-		<language tag="it-IT">language/it-IT/it-IT.mod_tweetdisplayback.sys.ini</language>
-		<language tag="nl-BE">language/nl-BE/nl-BE.mod_tweetdisplayback.ini</language>
-		<language tag="nl-BE">language/nl-BE/nl-BE.mod_tweetdisplayback.sys.ini</language>
-		<language tag="nl-NL">language/nl-NL/nl-NL.mod_tweetdisplayback.ini</language>
-		<language tag="nl-NL">language/nl-NL/nl-NL.mod_tweetdisplayback.sys.ini</language>
-		<language tag="pt-BR">language/pt-BR/pt-BR.mod_tweetdisplayback.ini</language>
-		<language tag="pt-BR">language/pt-BR/pt-BR.mod_tweetdisplayback.sys.ini</language>
-		<language tag="pt-PT">language/pt-PT/pt-PT.mod_tweetdisplayback.ini</language>
-		<language tag="pt-PT">language/pt-PT/pt-PT.mod_tweetdisplayback.sys.ini</language>
-		<language tag="sl-SI">language/sl-SI/sl-SI.mod_tweetdisplayback.ini</language>
-		<language tag="sl-SI">language/sl-SI/sl-SI.mod_tweetdisplayback.sys.ini</language>
-		<language tag="sv-SE">language/sv-SE/sv-SE.mod_tweetdisplayback.ini</language>
-		<language tag="sv-SE">language/sv-SE/sv-SE.mod_tweetdisplayback.sys.ini</language>
-	</languages>
-	<media destination="colorpicker">
-		<folder>js</folder>
-		<filename>index.html</filename>
-	</media>
 	<updateservers>
 		<server type="extension" name="Tweet Display Back Updates" priority="2">http://www.babdev.com/updates/TDB.xml</server>
 	</updateservers>
@@ -242,31 +216,31 @@
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SUBJECT_DESCRIPTION" />
 				<field
 					name="widgetShellBackground"
-					type="colorpicker"
+					type="color"
 					default="#8ec1da"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLBACKGROUND_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLBACKGROUND_DESCRIPTION" />
 				<field
 					name="widgetShellText"
-					type="colorpicker"
+					type="color"
 					default="#ffffff"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLTEXT_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLTEXT_DESCRIPTION" />
 				<field
 					name="widgetTweetBackground"
-					type="colorpicker"
+					type="color"
 					default="#ffffff"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETBACKGROUND_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETBACKGROUND_DESCRIPTION" />
 				<field
 					name="widgetTweetText"
-					type="colorpicker"
+					type="color"
 					default="#444444"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETTEXT_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETTEXT_DESCRIPTION" />
 				<field
 					name="widgetTweetLinks"
-					type="colorpicker"
+					type="color"
 					default="#1985b5"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETLINKS_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETLINKS_DESCRIPTION" />
@@ -650,7 +624,7 @@
 				<field
 					name="cache_time"
 					type="text"
-					default="900"
+					default="15"
 					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
 					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
 				<field

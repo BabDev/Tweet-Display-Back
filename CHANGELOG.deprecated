@@ -1,0 +1,19 @@
+1. Changelog
+============
+This is a non-exhaustive (but still near complete) changelog for Tweet Display Back,
+including beta and release candidate versions.
+Our thanks to all those people who've contributed bug reports and code fixes.
+
+Legend:
+
+* - Security Fix
+# - Bug Fix
+$ - Language fix or change
++ - Addition
+^ - Change
+- - Removed
+! - Note
+
+29-November-2011 Michael Babker
+- Begin removal of deprecated code
++ Add scriptfile to check for PHP cURL and J! version

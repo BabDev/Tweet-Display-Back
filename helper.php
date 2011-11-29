@@ -27,7 +27,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   1.5
 	 */
-	static public function compileData($params)
+	public static function compileData($params)
 	{
 		// Initialize the object
 		$twitter = new stdClass;
@@ -53,7 +53,9 @@ class ModTweetDisplayBackHelper
 		// Convert the list name to a usable string for the JSON
 		if ($list)
 		{
-			$flist = self::toAscii($list);
+			//$flist = self::toAscii($list);
+			// Testing only
+			$flist = JApplication::stringURLSafe($list);
 		}
 
 		// Get the user info
@@ -157,7 +159,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   1.0
 	 */
-	static public function getJSON($req)
+	public static function getJSON($req)
 	{
 		// Create a new cURL resource
 		$ch = curl_init($req);
@@ -187,7 +189,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   1.0
 	 */
-	static protected function getLimit($params)
+	protected static function getLimit($params)
 	{
 		// Load the parameters
 		$uname = $params->get('twitterName', '');
@@ -218,7 +220,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   1.5
 	 */
-	static protected function prepareUser($params)
+	protected static function prepareUser($params)
 	{
 		// Load the parameters
 		$uname = $params->get('twitterName', '');
@@ -230,10 +232,12 @@ class ModTweetDisplayBackHelper
 		$twitter->header = new stdClass;
 		$twitter->footer = new stdClass;
 
-		// Convert the list name to a useable string for the URL
+		// Convert the list name to a usable string for the URL
 		if ($list)
 		{
-			$flist = self::toAscii($list);
+			//$flist = self::toAscii($list);
+			// Testing only
+			$flist = JApplication::stringURLSafe($list);
 		}
 
 		// Get the user JSON
@@ -370,7 +374,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   2.0
 	 */
-	static protected function processFiltering($obj, $params)
+	protected static function processFiltering($obj, $params)
 	{
 		// Initialize
 		$count = $params->get('twitterCount', 3);
@@ -506,7 +510,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since	2.0
 	 */
-	static protected function processItem(&$twitter, $o, $i, $params)
+	protected static function processItem(&$twitter, $o, $i, $params)
 	{
 		// Set variables
 		$tweetName = $params->get('tweetName', 1);
@@ -613,9 +617,7 @@ class ModTweetDisplayBackHelper
 			// Determine whether to display the time as a relative or static time
 			if ($params->get('tweetRelativeTime', 1) == 1)
 			{
-				$twitter[$i]->tweet->created .= self::renderRelativeTime($o['created_at']) . '</a>';
-				// Dependent upon Platform 11.3, J! 2.5
-				//$twitter[$i]->tweet->created .= JHtml::_('date.relative', $o['created_at']) . '</a>';
+				$twitter[$i]->tweet->created .= JHtml::_('date.relative', $o['created_at']) . '</a>';
 			}
 			else
 			{
@@ -640,9 +642,7 @@ class ModTweetDisplayBackHelper
 		// Display the number of times the tweet has been retweeted
 		if ((($tweetRTCount == 1) && ($RTs >= 1)))
 		{
-			$twitter[$i]->tweet->created .= ' &bull; ' . self::renderRetweetCount($RTs);
-			// J! 1.6+ compatibility
-			//JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $RTs);
+			$twitter[$i]->tweet->created .= ' &bull; ' . JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $RTs);
 		}
 		// Display Twitter Actions
 		if ($tweetReply == 1)
@@ -675,102 +675,7 @@ class ModTweetDisplayBackHelper
 	}
 
 	/**
-	 * Function to convert a static time into a relative measurement
-	 *
-	 * @param   string  $date  The date to convert
-	 *
-	 * @return  string  The converted date string
-	 *
-	 * @since   1.0
-	 * @deprecated  Will be removed when J! <2.5 support is dropped in favor of JHtmlDate::relative
-	 */
-	static protected function renderRelativeTime($date)
-	{
-		// Get the difference in seconds between now and the tweet time
-		$diff = time() - strtotime($date);
-		// Less than a minute
-		if ($diff < 60)
-		{
-			return JText::_('MOD_TWEETDISPLAYBACK_CREATE_LESSTHANAMINUTE');
-		}
-		// Round to minutes
-		$diff = round($diff / 60);
-		// 60 to 119 seconds
-		if ($diff < 2)
-		{
-			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_MINUTE', $diff);
-		}
-		// 2 to 59 minutes
-		if ($diff < 60)
-		{
-			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_MINUTES', $diff);
-		}
-		// Round to hours
-		$diff = round($diff / 60);
-		// 1 hour
-		if ($diff < 2)
-		{
-			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_HOUR', $diff);
-		}
-		// 2 to 23 hours
-		if ($diff < 24)
-		{
-			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_HOURS', $diff);
-		}
-		// Round to days
-		$diff = round($diff / 24);
-		// 1 day
-		if ($diff < 2)
-		{
-			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_DAY', $diff);
-		}
-		// 2 to 6 days
-		if ($diff < 7)
-		{
-			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_DAYS', $diff);
-		}
-		// Round to weeks
-		$diff = round($diff / 7);
-		// 1 week
-		if ($diff < 2)
-		{
-			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_WEEK', $diff);
-		}
-		// 2 or 3 weeks
-		if ($diff < 4)
-		{
-			return JText::sprintf('MOD_TWEETDISPLAYBACK_CREATE_WEEKS', $diff);
-		}
-		// Over a month, return the absolute time
-		return JHTML::date($date);
-	}
-
-	/**
-	 * Function to count the number of retweets and return the appropriate string
-	 *
-	 * @param   string  $count  The number of retweets
-	 *
-	 * @return  string  A text string of the number of retweets
-	 *
-	 * @since   1.6
-	 * @deprecated  Will be removed when J! 1.5 support is dropped in favor of JText::plural
-	 */
-	static protected function renderRetweetCount($count)
-	{
-		// 1 retweet
-		if ($count == '1')
-		{
-			return JText::sprintf('MOD_TWEETDISPLAYBACK_RETWEET', $count);
-		}
-		// 0 (shouldn't even be here!) or 2+ retweets
-		else
-		{
-			return JText::sprintf('MOD_TWEETDISPLAYBACK_RETWEETS', $count);
-		}
-	}
-
-	/**
-	 * Function to convert a formatted list name into it's URL equivilent
+	 * Function to convert a formatted list name into it's URL equivalent
 	 *
 	 * @param   string  $list  The user inputted list name
 	 *
@@ -778,7 +683,7 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @since   1.6
 	 */
-	static public function toAscii($list)
+	public static function toAscii($list)
 	{
 		$clean = preg_replace("/[^a-z'A-Z0-9\/_|+ -]/", '', $list);
 		$clean = strtolower(trim($clean, '-'));
