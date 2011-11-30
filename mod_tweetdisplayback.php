@@ -2,10 +2,10 @@
 /**
  * Tweet Display Back Module for Joomla!
  *
- * @package	  TweetDisplayBack
+ * @package    TweetDisplayBack
  *
  * @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
- * @license	   GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
 defined('_JEXEC') or die;
@@ -44,9 +44,9 @@ if ($params->get('twitterFeedType') != 'widget')
 if (!extension_loaded('curl'))
 {
 	echo '<div class="TDB-tweet' . $tweetClassSfx . '">'
-		 .'<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
-		 .'<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL') . '</div>'
-		 .'</div></div>';
+		.'<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
+		.'<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL') . '</div>'
+		.'</div></div>';
 	return;
 }
 
@@ -82,18 +82,18 @@ if ($params->get('twitterFeedType') != 'widget')
 	if (isset($twitter->hits))
 	{
 		echo '<div class="TDB-tweet' . $tweetClassSfx . '">'
-			 .'<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
-			 .'<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS') . '</div>'
-			 .'</div></div>';
+			.'<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
+			.'<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS') . '</div>'
+			.'</div></div>';
 		return;
 	}
 	// No data object and no other error was set
 	elseif ((!$twitter) || (isset($twitter->error)))
 	{
 		echo '<div class="TDB-tweet' . $tweetClassSfx . '">'
-			 .'<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
-			 .'<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD') . '</div>'
-			 .'</div></div>';
+			.'<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
+			.'<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD') . '</div>'
+			.'</div></div>';
 		return;
 	}
 }

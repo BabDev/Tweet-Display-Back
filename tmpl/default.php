@@ -2,10 +2,10 @@
 /**
  * Tweet Display Back Module for Joomla!
  *
- * @package	  TweetDisplayBack
+ * @package    TweetDisplayBack
  *
  * @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
- * @license	   GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
 defined('_JEXEC') or die;
@@ -22,7 +22,7 @@ $i = 0;
 
 // Check to see if the header is set to display
 if ($params->get('headerDisplay', 1) == 1) { ?>
-	<div class="TDB-header<?php echo $headerClassSfx.$headerAvatar; ?>">
+	<div class="TDB-header<?php echo $headerClassSfx . $headerAvatar; ?>">
 	<?php if (!empty($twitter->header->user)) { ?>
 		<div class="TDB-header-user">
 			<?php echo $twitter->header->user; ?><br />
@@ -54,9 +54,9 @@ if ($params->get('headerDisplay', 1) == 1) { ?>
 
 foreach ($twitter->tweet as $o) {
 if (($params->get('tweetAvatar', 1) == 1) && (!empty($o->tweet->avatar))) {
-	$tweetAvatar	= ' TDB-tweetavatar-'.$tweetAlign;
+	$tweetAvatar	= ' TDB-tweetavatar-' . $tweetAlign;
 } ?>
-    <div class="TDB-tweet<?php echo $tweetClassSfx.$tweetAvatar; if ($i==$count) {echo ' TDB-last-tweet';} ?>">
+    <div class="TDB-tweet<?php echo $tweetClassSfx . $tweetAvatar; if ($i==$count) {echo ' TDB-last-tweet';} ?>">
 	<?php
 	// Determine if the noavatar class is used for tweets by checking the setting and whether an avatar was returned
 	if (($params->get('tweetAvatar', 1) == 1) && (!empty($o->tweet->avatar))) { ?>

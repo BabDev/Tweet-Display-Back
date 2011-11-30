@@ -17,4 +17,5 @@ TDB_version
 .idea
 
 # Build script #
+build
 build.properties

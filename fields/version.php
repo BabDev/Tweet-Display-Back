@@ -2,15 +2,15 @@
 /**
  * Tweet Display Back Module for Joomla!
  *
- * @package	  TweetDisplayBack
+ * @package    TweetDisplayBack
  *
  * @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
- * @license	   GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
 defined('_JEXEC') or die;
 
-require_once JPATH_SITE.'/modules/mod_tweetdisplayback/helper.php';
+require_once JPATH_SITE . '/modules/mod_tweetdisplayback/helper.php';
 
 /**
  * Field type to display the version and check for a newer version.
@@ -72,7 +72,7 @@ class JFormFieldVersion extends JFormField
 			$update = ModTweetDisplayBackHelper::getJSON($target);
 
 			// Message containing the version
-			$message = '<label style="max-width:100%">'.JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
+			$message = '<label style="max-width:100%">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
 
 			// If an update is available, notify the user
 			if (version_compare($update['version'], $version, 'gt'))

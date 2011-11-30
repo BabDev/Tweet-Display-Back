@@ -2,21 +2,21 @@
 /**
  * Tweet Display Back Module for Joomla!
  *
- * @package	  TweetDisplayBack
+ * @package    TweetDisplayBack
  *
  * @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
- * @license	   GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
 defined('_JEXEC') or die;
 
-require_once JPATH_SITE.'/modules/mod_tweetdisplayback/helper.php';
+require_once JPATH_SITE . '/modules/mod_tweetdisplayback/helper.php';
 
 /**
  * Field type to display the version and check for a newer version.
  *
- * @package  TweetDisplayBack
- * @since    2.1
+ * @package     TweetDisplayBack
+ * @since       2.1
  * @deprecated  Will be removed when J! 1.5 support is dropped
  */
 class JElementVersion extends JElement
@@ -36,7 +36,7 @@ class JElementVersion extends JElement
 	 * @param   string  $value         Value attribute of the element
 	 * @param   object  &$node         Element object
 	 * @param   string  $control_name  Control name of the element
-
+	 *
 	 * @return  string  A message containing the installed version and,
 	 *                  if necessary, information on a new version.
 	 *
