@@ -27,7 +27,7 @@ class JElementVersion extends JElement
 	 * @var    string
 	 * @since  2.1
 	 */
-	var $_name = 'Version';
+	protected  $_name = 'Version';
 
 	/**
 	 * Method to get the element.
@@ -42,7 +42,7 @@ class JElementVersion extends JElement
 	 *
 	 * @since   2.1
 	 */
-	function fetchElement($name, $value, &$node, $control_name)
+	public function fetchElement($name, $value, &$node, $control_name)
 	{
 		// Check if cURL is loaded; if not, proceed no further
 		if (!extension_loaded('curl'))
