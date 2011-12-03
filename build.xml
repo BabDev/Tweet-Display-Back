@@ -60,9 +60,6 @@
 		<copy todir="packages/common/tmpl">
 			<fileset dir="tmpl" />
 		</copy>
-		<copy todir="packages/common/js">
-			<fileset dir="js" />
-		</copy>
 		<copy todir="packages/common">
 			<fileset dir=".">
 				<include name="CHANGELOG" />
@@ -77,7 +74,7 @@
 		<mkdir dir="packages/2.5" />
 		<echo msg="Create 2.5 language folder" />
 		<copy todir="packages/2.5/language">
-			<fileset dir="language/2.5" />
+			<fileset dir="language/1.7" />
 	    </copy>
 		<echo msg="Create 2.5 fields folder" />
 		<copy todir="packages/2.5/fields">
