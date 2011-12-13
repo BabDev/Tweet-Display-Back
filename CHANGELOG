@@ -20,6 +20,7 @@ $ - Language fix or change
 ^$ Update it-IT translation
 ^$ Update nl-** translations
 ^$ Update pt-BR translation
+^$ Update sl-SI translation
 
 25-November-2011 Michael Babker
 ! Added deprecation notices for future J! support drops
