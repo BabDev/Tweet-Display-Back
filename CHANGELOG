@@ -18,6 +18,7 @@ $ - Language fix or change
 ^$ Update es-ES translation
 ^$ Update id-ID translation
 ^$ Update it-IT translation
+^$ Update nl-** translations
 
 25-November-2011 Michael Babker
 ! Added deprecation notices for future J! support drops
