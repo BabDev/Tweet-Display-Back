@@ -27,7 +27,7 @@ class JElementVersion extends JElement
 	 * @var    string
 	 * @since  2.1
 	 */
-	protected  $_name = 'Version';
+	var $_name = 'Version';
 
 	/**
 	 * Method to get the element.

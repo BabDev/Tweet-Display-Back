@@ -4,7 +4,7 @@
 	<property file="./build.properties" />
 	<property name="repo.dir" value="." />
 	<resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" />
-	<property name="version" value="2.1.2" />
+	<property name="version" value="2.1.2+dev" />
 	<tstamp>
 		<format property="build.date" pattern="%Y-%m-%d" />
 	</tstamp>
@@ -64,10 +64,10 @@
 			</fileset>
 		</zip>
 		<echo msg="Creating Git tag" />
-		<gittag repository="${repo.dir.resolved}" name="${version}" gitPath="/usr/local/git/bin/git" />
+		<gittag repository="${repo.dir.resolved}" name="${version}" gitPath="${localgit}" />
 		<echo msg="Pushing Version commit and tag to GitHub" />
-		<gitpush repository="${repo.dir.resolved}" gitPath="/usr/local/git/bin/git" />
-		<gitpush repository="${repo.dir.resolved}" tags="true" gitPath="/usr/local/git/bin/git" />
+		<gitpush repository="${repo.dir.resolved}" gitPath="${localgit}" />
+		<gitpush repository="${repo.dir.resolved}" tags="true" gitPath="${localgit}" />
 	</target>
 	<target name="common-files" description="Stages the common files" depends="rebuild-packages">
 		<echo msg="Create temp folder" />

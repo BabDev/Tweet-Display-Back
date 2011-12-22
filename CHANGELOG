@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+22-December-2011 Michael Babker
+# [#30] Access level for JElementVersion::$_name incorrect
+
 --------------------------------------------------
 Tweet Display Back 2.1.2 - Released 13-December-2011
 --------------------------------------------------
