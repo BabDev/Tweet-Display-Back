@@ -21,7 +21,7 @@
 			</fileset>
 		</delete>
 		<echo msg="Build 2.5 package" />
-		<zip destfile="releases/mod_tweetdisplayback_25master.zip">
+		<zip destfile="releases/mod_tweetdisplayback_master.zip">
 			<fileset dir="packages/2.5">
 				<include name="**" />
 			</fileset>

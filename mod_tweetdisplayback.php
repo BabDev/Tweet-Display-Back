@@ -20,9 +20,7 @@ $tweetAlign = $params->get('tweetAlignment');
 $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx = htmlspecialchars($params->get('tweetclasssfx'));
 $template = $params->get('templateLayout', 'default');
-//$flist = ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
-// Testing only
-$flist = JApplication::stringURLSafe($params->get('twitterList', ''));
+$flist = ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
 $count = $params->get('twitterCount', '3') - 1;
 
 // Don't load module CSS if loading a widget

@@ -53,9 +53,7 @@ class ModTweetDisplayBackHelper
 		// Convert the list name to a usable string for the JSON
 		if ($list)
 		{
-			//$flist = self::toAscii($list);
-			// Testing only
-			$flist = JApplication::stringURLSafe($list);
+			$flist = self::toAscii($list);
 		}
 
 		// Get the user info
@@ -235,9 +233,7 @@ class ModTweetDisplayBackHelper
 		// Convert the list name to a usable string for the URL
 		if ($list)
 		{
-			//$flist = self::toAscii($list);
-			// Testing only
-			$flist = JApplication::stringURLSafe($list);
+			$flist = self::toAscii($list);
 		}
 
 		// Get the user JSON
