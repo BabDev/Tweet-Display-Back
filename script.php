@@ -2,16 +2,16 @@
 /**
  * Tweet Display Back Module for Joomla!
  *
- * @package	  TweetDisplayBack
+ * @package    TweetDisplayBack
  *
  * @copyright  Copyright (C) 2010-2011 Michael Babker. All rights reserved.
- * @license	   GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
 /**
  * Class to handle additional work during installation routine
  *
- * @package  PodcastManager
+ * @package  TweetDisplayBack
  * @since    2.2
  */
 class Mod_TweetDisplayBackInstallerScript
@@ -22,11 +22,11 @@ class Mod_TweetDisplayBackInstallerScript
 	 * @param   string  $type    The action being performed
 	 * @param   string  $parent  The function calling this method
 	 *
-	 * @return  mixed  Boolean false on failure, void otherwise
+	 * @return  boolean  True on success, false on failure
 	 *
 	 * @since   2.2
 	 */
-	function preflight($type, $parent)
+	public function preflight($type, $parent)
 	{
 		// Check if the cURL extension is available
 		if (!extension_loaded('curl'))
@@ -36,9 +36,8 @@ class Mod_TweetDisplayBackInstallerScript
 		}
 
 		// Requires Joomla! 2.5
-		//@TODO: Change version check once 2.5 builds available
 		$jversion = new JVersion;
-		if (version_compare($jversion->getShortVersion(), '1.7.3', 'lt'))
+		if (version_compare($jversion->getShortVersion(), '2.5', 'lt'))
 		{
 			JError::raiseNotice(null, JText::_('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_VERSION'));
 			return false;

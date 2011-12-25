@@ -56,7 +56,7 @@ foreach ($twitter->tweet as $o) {
 if (($params->get('tweetAvatar', 1) == 1) && (!empty($o->tweet->avatar))) {
 	$tweetAvatar	= ' TDB-tweetavatar';
 } ?>
-    <div class="TDB-tweet<?php echo $tweetClassSfx . $tweetAvatar; if ($i==$count) {echo ' TDB-last-tweet';} ?>">
+    <div class="TDB-tweet<?php echo $tweetClassSfx . $tweetAvatar; if ($i == $count) {echo ' TDB-last-tweet';} ?>">
 		<div class="TDB-tweet-container TDB-tweet-align-<?php echo $tweetAlign;?>">
 		<?php if (!empty($o->tweet->user)) { ?>
 			<div class="TDB-tweet-user">
