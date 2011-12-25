@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+25-December-2011 Michael Babker
+^ Fix use of JHtmlDate::relative
+
 29-November-2011 Michael Babker
 - Begin removal of deprecated code
 + Add scriptfile to check for PHP cURL and J! version
