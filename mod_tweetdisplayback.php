@@ -108,9 +108,9 @@ if (!in_array('<script type="text/javascript" src="http://platform.twitter.com/w
 // Add the Widgets script if needed
 if ($params->get('twitterFeedType') == 'widget')
 {
-	if (!in_array('<script src="http://widgets.twimg.com/j/2/widget.js"></script>', $document->_custom))
+	if (!in_array('<script type="text/javascript" src="http://widgets.twimg.com/j/2/widget.js"></script>', $document->_custom))
 	{
-		$document->addCustomTag('<script src="http://widgets.twimg.com/j/2/widget.js"></script>');
+		$document->addCustomTag('<script type="text/javascript" src="http://widgets.twimg.com/j/2/widget.js"></script>');
 	}
 }
 

@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+13-January-2012 Michael Babker
+# [#32] HTML Validation Issue
+
 22-December-2011 Michael Babker
 # [#30] Access level for JElementVersion::$_name incorrect
 
