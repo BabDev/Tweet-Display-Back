@@ -10,7 +10,7 @@
 
 defined('_JEXEC') or die;
 ?>
-<script>
+<script type="text/javascript">
 new TWTR.Widget({
   version: 2,
   type: 'profile',
