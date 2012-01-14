@@ -30,12 +30,7 @@ if ($params->get('twitterFeedType') != 'widget')
 	$css3 = '';
 	if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle')
 	{
-		// If CSS3 is selected, load it's stylesheet except for nostyle
-		$css3 = '';
-		if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle')
-		{
-			$css3 = '-css3';
-		}
+		$css3 = '-css3';
 	}
 	JHTML::stylesheet('modules/mod_tweetdisplayback/media/css/' . $template . $css3 . '.css', false, false, false);
 }
