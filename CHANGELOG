@@ -14,6 +14,12 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 2.1.3 - Released 16-January-2011
+--------------------------------------------------
+14-January-2012 Michael Babker
+^ Remove duplicated CSS3 check
+
 13-January-2012 Michael Babker
 # [#32] HTML Validation Issue
 
