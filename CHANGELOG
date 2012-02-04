@@ -15,6 +15,19 @@ $ - Language fix or change
 ! - Note
 
 --------------------------------------------------
+Tweet Display Back 2.2 Alpha - Released 16-January-2011
+--------------------------------------------------
+14-January-2012 Michael Babker
++ Add CMS version to internal version check for compatibility
+
+25-December-2011 Michael Babker
+^ Fix use of JHtmlDate::relative
+
+29-November-2011 Michael Babker
+- Begin removal of deprecated code
++ Add scriptfile to check for PHP cURL and J! version
+
+--------------------------------------------------
 Tweet Display Back 2.1.3 - Released 16-January-2011
 --------------------------------------------------
 14-January-2012 Michael Babker
@@ -192,7 +205,6 @@ $+ Added French translation (translated by Benjamin Ach)
 ^$ Changed "Filter ..." to "Show ..." for filter settings
 
 27-June-2011 Jurian Even
-! Merge pull from mbabker
 ^ Changed some comments
 ^ Changed variable name $tweetContainsMention to $tweetContainsMentionAndOrReply
 ^ Repositioned if ($count > 0) check in foreach loop, improved loadtime
@@ -203,7 +215,6 @@ $+ Added French translation (translated by Benjamin Ach)
 ^ Made $tweetContainsMentionAndReply more generalized and reset false value
 
 26-June-2011 Jurian Even
-! Merge from mbabker
 ^ Comments improved
 ^ Fixed naming of $tweetContainsMention to $tweetContainsMentionAndOrReply
 ^ Changed naming of $mention to $mentionSet
@@ -224,7 +235,6 @@ $+ Added French translation (translated by Benjamin Ach)
 ^ Restructured $count > 0
 
 25-June-2011 Michael Babker
-! Merge remote-tracking branches 'twentronix/twentronix' and 'origin/master'
 # Corrected check for replies within the mentions conditional
 ^ Moved check for replies out of mentions conditional (this causes replies to be filtered with mentions)
 ^ Add check for RTs to count multiplier
@@ -245,18 +255,13 @@ $ Updated pt-BR translation
 
 23-June-2011 Michael Babker
 ^ Began restructuring repo for single repo version for J! 1.5 & 1.6+
-
---------------------------------------------------
-Branched from Tweet Display Back Trunk revision 212 - 23-June-2011
---------------------------------------------------
-23-June-2011 Michael Babker
 + Added TDB-last-tweet class for nostyle (thanks Jurian for the suggestion)
 
 22-June-2011 Michael Babker
 + Added rel="nofollow" to all links (thanks Jurian for the suggestion)
 
 --------------------------------------------------
-Tweet Display Back 1.6.5 - Released 17-June-2011
+Tweet Display Back 1.5.5/1.6.5 - Released 17-June-2011
 --------------------------------------------------
 10-June-2011 Michael Babker
 ^ Changed cache time to process in seconds versus minutes
@@ -271,7 +276,7 @@ $+ Added Swedish translation (translated by JOKR Solutions)
 $+ Added Portuguese (Brazilian) translation (translated by Manoel Silva)
 
 --------------------------------------------------
-Tweet Display Back 1.6.4 - Released 30-May-2011
+Tweet Display Back 1.5.4/1.6.4 - Released 30-May-2011
 --------------------------------------------------
 30-May-2011 Michael Babker
 ^ Simplified parameters check
@@ -289,7 +294,7 @@ Tweet Display Back 1.6.4 - Released 30-May-2011
 ^ Added a variable for the include_rts string
 
 --------------------------------------------------
-Tweet Display Back 1.6.3 - Released 19-May-2011
+Tweet Display Back 1.5.3/1.6.3 - Released 19-May-2011
 --------------------------------------------------
 17-May-2011 Michael Babker
 + Add moduleclass_sfx
@@ -298,7 +303,7 @@ Tweet Display Back 1.6.3 - Released 19-May-2011
 # Fixed [#24554] Avatar URL for $headerAvatar
 
 --------------------------------------------------
-Tweet Display Back 1.6.2 - Released 18-April-2011
+Tweet Display Back 1.5.2/1.6.2 - Released 18-April-2011
 --------------------------------------------------
 14-April-2011 Michael Babker
 + Added Web Intents for Retweet and Favorite
@@ -317,7 +322,7 @@ Tweet Display Back 1.6.2 - Released 18-April-2011
 # Removed Web Intent from list links
 
 --------------------------------------------------
-Tweet Display Back 1.6.1 - Released 4-April-2011
+Tweet Display Back 1.5.1/1.6.1 - Released 4-April-2011
 --------------------------------------------------
 31-March-2011 Michael Babker
 + Add a link for the Twitter Web Intents script
@@ -327,7 +332,7 @@ Tweet Display Back 1.6.1 - Released 4-April-2011
 # Closed the unclosed URL tag
 
 --------------------------------------------------
-Tweet Display Back 1.6.0 - Released 29-March-2011
+Tweet Display Back 1.5.0/1.6.0 - Released 29-March-2011
 --------------------------------------------------
 28-March-2011 Michael Babker
 ^ Re-enable updateservers
@@ -337,7 +342,7 @@ Tweet Display Back 1.6.0 - Released 29-March-2011
 ^ Modified the character separator to a single space to prevent a display bug when trying to make it blank
 
 --------------------------------------------------
-Tweet Display Back 1.6 Beta 2 - Released 12-March-2011
+Tweet Display Back 1.5 Beta & 1.6 Beta 2 - Released 12-March-2011
 --------------------------------------------------
 11-March-2011 Michael Babker
 ^ Partial fix for [#24576] PHP Strict
@@ -395,5 +400,199 @@ Tweet Display Back 1.2 Beta - Released 29-January-2011
 +$ Implemented [#24565] Follow Me/Us Option
 
 --------------------------------------------------
-Branched from Tweet Display Back 1.1.10 - 22-January-2011
+Tweet Display Back 1.0.10/1.1.10 - Released 11-January-2011
 --------------------------------------------------
+10-January-2011 Michael Babker
+^ Added name and priority attributes to server tag for updateserver
+
+9-January-2011 Michael Babker
+# [#24242] Static function calls to non-static functions break module on PHP 5.3 (Thanks to Berend for the report)
+# Strict standards: Only variables should be assigned by reference mod_tweetdisplayback.php
+
+2-January-2011 Michael Babker
++ Added CSS3 option
++ CSS3 support integrated into avatar & default templates
+
+23-December-2010 Michael Babker
+# Fixed check for location in tweets
+
+--------------------------------------------------
+Tweet Display Back 1.0.9/1.1.9 - Released 8-December-2010
+--------------------------------------------------
+8-December-2010 Michael Babker
+# Fixed [#23688] Permalinks to tweets broken in some environments
+
+5-December-2010 Michael Babker
+# Fixed [#23645] Template Header Margins
+
+4-December-2010 Michael Babker
+# Fixed [#23646] Nostyle template avatar overhang
+
+--------------------------------------------------
+Tweet Display Back 1.0.8/1.1.8 - Released 2-December-2010
+--------------------------------------------------
+27-November-2010 Michael Babker
+^ Changed name in XML
+^ Added imgpath variable to nostyle template
+
+18-November-2010 Michael Babker
+# Corrected "Follow Me" link generation
+
+15-November-2010 Michael Babker
++ Added option to display the user's real name in the header
+
+14-November-2010 Michael Babker
+^ Restructured element calls in templates (removing some redundent code)
+^ Modified CSS with template updates
+
+13-November-2010 Michael Babker
+^ Modified language installation so that language files install in site language folder
+^ Added margin between bottom tweet and "Follow me" image on right aligned default template
+
+--------------------------------------------------
+Tweet Display Back 1.0.7/1.1.7 - Released 7-November-2010
+--------------------------------------------------
+7-November-2010 Michael Babker
++ Partial addition for [#22395] Ability to display retweets as being from original tweeter
+^ Changed foreach argument in templates
++ Added updateservers info in XML
+^ Modified template generation (thanks to Amy Stephen for the help!)
+^ Changes to renderTwitter pertaining to generation of elements
+
+5-November-2010 Michael Babker
++ Added getJSON function
++ Added description of all functions
+^ Moved renderTwitter and getRelativeTime functions under tweetDisplayHelper
+^ Renamed getRelativeTime to renderRelativeTime
+^ Renamed numerous variables in helper
+^ Converted JSON pull to be an array
+^ Further defined getJSON
+
+30-October-2010 Michael Babker
+^ Added padding to the "Follow me" button on the avatar template
+
+28-October-2010 Michael Babker
++ [#23044] Add option to display "Follow me" button versus text
+
+--------------------------------------------------
+Tweet Display Back 1.0.6/1.1.6 - Released 25-October-2010
+--------------------------------------------------
+24-October-2010 Michael Babker
+# Fixed [#22872] getLimit updates
+^ [#22973] Implement cURL to replace current loading procedure
+
+21-October-2010 Michael Babker
+# Code added in work on [#22872] getLimit updates
+$ Changed "Unable to load" message to translatable string
+
+14-October-2010 Michael Babker
+# Fixed [#22875] Follow Me link is broken (Thanks for the report, John!)
+
+27-September-2010 Michael Babker
+# Swapped location and web positions in nostyle template
+
+--------------------------------------------------
+Tweet Display Back 1.0.5/1.1.5 - Released 25-September-2010
+--------------------------------------------------
+25-September-2010 Michael Babker
++ Partial completion of [#22494] New Template - Avatar Centered
++ Added ability to display the bio location in the user's header info
+
+22-September-2010 Michael Babker
+^ Changed height to min-height for bio with avatar
+
+21-September-2010 Michael Babker
+^ Modified preg_replace's for link display
+^ Added filter to style field to exclude .html
++ Added index.html to tmpl folder
+
+--------------------------------------------------
+Tweet Display Back 1.0.4/1.1.4 - Released 20-September-2010
+--------------------------------------------------
+20-September-2010 Michael Babker
+^ Corrected Powered By link
+^ Renamed many parameters for better organization
+# [#22522] Move parameter checks out of templates
+$ Language string corrections
+$ Created language strings for relative times
+
+17-September-2010 Michael Babker
++ Add down arrow image for avatar template
+$ Change description of tweet avatar alignment
+^ Refactored $t->created_html creation
+# Tweet source required time to be displayed
+
+--------------------------------------------------
+Tweet Display Back 1.0.3/1.1.3 - Released 16-September-2010
+--------------------------------------------------
+16-September-2010 Michael Babker
+# [#22480] Remove (s) from relative time stamps
+
+15-September-2010 Michael Babker
++ [#22454] Add support for location
+^ Change from to via in source text
+# [#22457] Created time & reply to line tied to "showCreated" param
+
+12-September-2010 Michael Babker
+^ [#22398] Change version in header
+# [#22397] Consistent case on Powered By link
+^ Tag symbol not included as part of link anymore
+
+--------------------------------------------------
+Tweet Display Back 1.0.2/1.1.2 - Released 10-September-2010
+--------------------------------------------------
+6-September-2010 Michael Babker
+# Fixed error in "Follow me" link for default template
+# Corrected error in getLimit JSON
+^ Changed default $layout
+# [#5] Add CSS for nostyle
+^ Created classes for "Follow Me" and "Powered By" links
+# [#4] Modify CSS for when avatar isn't displayed
++ Add class for when the header avatar is aligned left or right
+^ Remove excess conditionals and call correct classes based on parameter
+^ Renamed image classes to avatar
+$ Changed "Header Image" to "Header Avatar" in options
+# [#3] If avatar is not displayed with tweets, the tweets aren't displayed
+^ Updated nostyle to match default
+
+4-September-2010 Michael Babker
+^ Changelog formatting
+
+--------------------------------------------------
+Tweet Display Back 1.0.1/1.1.1 - Released 3-September-2010
+--------------------------------------------------
+3-September-2010 Michael Babker
+^ Changed "Powered by" link to direct page versus home page
+^ Changed tweet avatar to use info from API pull
+- Removed entities from API pull
+
+2-September-2010 Michael Babker
++ Option to display tags as links or not
+^ Changed parameter names
+- Removed unused image parameter
++ Hash tags (#) and user tags (@) are now linkable
+
+1-September-2010 Michael Babker
+# Corrected "in reply to" check to not display if not directly responding to a tweet (in_reply_to_status_id)
++ Include entities in the JSON pull for future development
+^ Changed tweet avatar source
+^ Fixed tweet avatar size, removed inline style options
+^ Removed redundant check in the helper
+
+--------------------------------------------------
+Tweet Display Back 1.0.0/1.1.0 - Released 28-August-2010
+--------------------------------------------------
+28-August-2010 Michael Babker
++ Added static text to language pack
+^ Refactored install manifest for 1.6 Compliance
+^ Refactored code for 1.6 Compliance
+# Fixed header image source
+# Fixed CSS issues in header info
++ Ability to display retweets
++ Ability to display avatar on left or right of tweet
+^ Updated nostyle template to match default
+^ getTweet URL updated
+^ Changed getLimit verification source
+^ Updated install manifest with new media locations
+^ Reorganized all media into media folder
+- Option to resize header avatar
