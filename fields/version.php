@@ -55,7 +55,8 @@ class JFormFieldVersion extends JFormField
 		{
 			return JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL');
 		}
-		//If cURL is supported, check the current version available.
+
+		// If cURL is supported, check the current version available.
 		else
 		{
 			// Get the module's XML

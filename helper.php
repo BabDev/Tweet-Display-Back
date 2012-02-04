@@ -74,16 +74,19 @@ class ModTweetDisplayBackHelper
 
 		// Count the number of active filters
 		$activeFilters = 0;
+
 		// Mentions
 		if ($params->get('showMentions', 0) == 0)
 		{
 			$activeFilters++;
 		}
+
 		// Replies
 		if ($params->get('showReplies', 0) == 0)
 		{
 			$activeFilters++;
 		}
+
 		// Retweets
 		if ($retweet == 0)
 		{
@@ -314,6 +317,7 @@ class ModTweetDisplayBackHelper
 			if ($params->get('footerFollowType', 1) == 1)
 			{
 				$twitter->footer->follow_me = '<div class="TDB-footer-follow-img">';
+
 				// Determine whether a list or user feed is being generated
 				if ($feed == 'list')
 				{
@@ -330,6 +334,7 @@ class ModTweetDisplayBackHelper
 			else
 			{
 				$twitter->footer->follow_me = '<div class="TDB-footer-follow-link">';
+
 				// Determine whether a list or user feed is being generated
 				if ($feed == 'list')
 				{
@@ -344,7 +349,7 @@ class ModTweetDisplayBackHelper
 		}
 		if ($params->get('footerPoweredBy', 1) == 1)
 		{
-			//Check the type of link to determine the appropriate opening tags
+			// Check the type of link to determine the appropriate opening tags
 			if ($params->get('footerFollowType', 1) == 1)
 			{
 				$twitter->footer->powered_by = '<div class="TDB-footer-powered-img">';
@@ -405,14 +410,17 @@ class ModTweetDisplayBackHelper
 							$count--;
 							$i++;
 						}
+
 						// We're filtering, the fun starts here
 						else
 						{
 							// Set variables
 							// Tweets which contains a @reply
 							$tweetContainsReply = $o['in_reply_to_user_id'] != null;
+
 							// Tweets which contains a @mention and/or @reply
 							$tweetContainsMentionAndOrReply = $o['entities']['user_mentions'] != null;
+
 							// Tweets which contains only @mentions
 							$tweetOnlyMention = $tweetContainsMentionAndOrReply && !$tweetContainsReply;
 
@@ -447,6 +455,7 @@ class ModTweetDisplayBackHelper
 									$i++;
 								}
 							}
+
 							// Filtering only @mentions or @replies
 							else
 							{
@@ -462,6 +471,7 @@ class ModTweetDisplayBackHelper
 										$i++;
 									}
 								}
+
 								// Filter @replies only (including @replies with @mentions) leaving retweets unchanged
 								if ($showReplies == 0)
 								{
@@ -474,6 +484,7 @@ class ModTweetDisplayBackHelper
 										$i++;
 									}
 								}
+
 								// Somehow, we got this far; process the tweet
 								if ($showMentions == 1 && $showReplies == 1)
 								{
@@ -610,6 +621,7 @@ class ModTweetDisplayBackHelper
 		if ($params->get('tweetCreated', 1) == 1)
 		{
 			$twitter[$i]->tweet->created .= '<a href="http://twitter.com/' . $o['user']['screen_name'] . '/status/' . $o['id_str'] . '" rel="nofollow" target="_blank">';
+
 			// Determine whether to display the time as a relative or static time
 			if ($params->get('tweetRelativeTime', 1) == 1)
 			{
@@ -626,21 +638,25 @@ class ModTweetDisplayBackHelper
 		{
 			$twitter[$i]->tweet->created .= JText::sprintf('MOD_TWEETDISPLAYBACK_VIA', $o['source']);
 		}
+
 		// Display the location the tweet was made from if set
 		if (($params->get('tweetLocation', 1) == 1) && ($o['place']['full_name']))
 		{
 			$twitter[$i]->tweet->created .= JText::_('MOD_TWEETDISPLAYBACK_FROM') . '<a href="http://maps.google.com/maps?q=' . $o['place']['full_name'] . '" target="_blank" rel="nofollow">' . $o['place']['full_name'] . '</a>';
 		}
+
 		// If the tweet is a reply, display a link to the tweet it's in reply to
 		if ((($o['in_reply_to_screen_name']) && ($o['in_reply_to_status_id_str'])) && $params->get('tweetReplyLink', 1) == 1)
 		{
 			$twitter[$i]->tweet->created .= JText::_('MOD_TWEETDISPLAYBACK_IN_REPLY_TO') . '<a href="http://twitter.com/' . $o['in_reply_to_screen_name'] . '/status/' . $o['in_reply_to_status_id_str'] . '" rel="nofollow">' . $o['in_reply_to_screen_name'] . '</a>';
 		}
+
 		// Display the number of times the tweet has been retweeted
 		if ((($tweetRTCount == 1) && ($RTs >= 1)))
 		{
 			$twitter[$i]->tweet->created .= ' &bull; ' . JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $RTs);
 		}
+
 		// Display Twitter Actions
 		if ($tweetReply == 1)
 		{
@@ -648,6 +664,7 @@ class ModTweetDisplayBackHelper
 			$twitter[$i]->tweet->actions .= '<span class="TDB-action TDB-retweet"><a href="http://twitter.com/intent/retweet?tweet_id=' . $o['id_str'] . '" title="Retweet" rel="nofollow"></a></span>';
 			$twitter[$i]->tweet->actions .= '<span class="TDB-action TDB-favorite"><a href="http://twitter.com/intent/favorite?tweet_id=' . $o['id_str'] . '" title="Favorite" rel="nofollow"></a></span>';
 		}
+
 		// If set, convert user and hash tags into links
 		if ($params->get('tweetLinks', 1) == 1)
 		{
