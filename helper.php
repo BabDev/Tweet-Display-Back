@@ -249,6 +249,7 @@ class ModTweetDisplayBackHelper
 		if (isset($obj['error']) && $obj['error'] == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
 		{
 			$twitter->hits = '';
+			return $twitter;
 		}
 		// Check that we have the JSON and it's a proper array, otherwise set an error
 		elseif (!$obj && !is_array($obj))
