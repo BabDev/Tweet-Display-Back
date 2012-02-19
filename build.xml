@@ -12,7 +12,7 @@
 	<target
 		name="dev_head"
 		description="Builds test packages based on the development head"
-		depends="rebuild-packages,common-files,17-package"
+		depends="phpcs,rebuild-packages,common-files,17-package"
 	>
 		<echo msg="Deleting old master build" />
 		<delete quiet="yes" includeemptydirs="true">
@@ -102,5 +102,16 @@
 		</delete>
 		<echo msg="Creating packages dir" />
 		<mkdir dir="packages" />
+	</target>
+	<target name="phpcs" description="Generate checkstyle.xml using PHP_CodeSniffer">
+		<echo msg="Running phpcs with Joomla! Platform standards" />
+		<exec executable="phpcs">
+			<arg value="--report=checkstyle" />
+			<arg value="--report-file=${repo.dir}/build/checkstyle.xml" />
+			<arg value="--standard=${platform.dir}/build/phpcs/Joomla" />
+			<!-- Ignore staging directories -->
+			<arg value="--ignore=${repo.dir}/packages,${repo.dir}/releases" />
+			<arg path="${repo.dir}" />
+		</exec>
 	</target>
 </project>
