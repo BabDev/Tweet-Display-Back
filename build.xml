@@ -103,15 +103,23 @@
 		<echo msg="Creating packages dir" />
 		<mkdir dir="packages" />
 	</target>
-	<target name="phpcs" description="Generate checkstyle.xml using PHP_CodeSniffer">
+	<target name="phpcs" description="Generate codestyle report using PHP_CodeSniffer">
+		<echo msg="Remove previous codestyle report" />
+		<delete quiet="yes" includeemptydirs="true">
+			<fileset dir=".">
+				<include name="build/codesniff.txt" />
+				<include name="build/checkstyle.xml" />
+			</fileset>
+		</delete>
 		<echo msg="Running phpcs with Joomla! Platform standards" />
-		<exec executable="phpcs">
-			<arg value="--report=checkstyle" />
-			<arg value="--report-file=${repo.dir}/build/checkstyle.xml" />
-			<arg value="--standard=${platform.dir}/build/phpcs/Joomla" />
-			<!-- Ignore staging directories -->
-			<arg value="--ignore=${repo.dir}/packages,${repo.dir}/releases" />
-			<arg path="${repo.dir}" />
-		</exec>
+		<phpcodesniffer
+			standard="${platform.dir}/build/phpcs/Joomla"
+			format="full"
+			ignorePatterns="${repo.dir}/packages,${repo.dir}/releases"
+			file="${repo.dir}"
+			allowedFileExtensions="php,css">
+			<formatter type="full" outfile="${repo.dir}/build/codesniff.txt" />
+			<formatter type="checkstyle" outfile="${repo.dir}/build/checkstyle.xml" />
+		</phpcodesniffer>
 	</target>
 </project>
