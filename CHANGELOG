@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+26-February-2012 Michael Babker
++ Added method to scriptfile to remove old language files
+
 13-February-2012 Michael Babker
 ^$ Update pt-BR translation
 
