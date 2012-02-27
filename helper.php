@@ -647,9 +647,9 @@ class ModTweetDisplayBackHelper
 		// Display Twitter Actions
 		if ($tweetReply == 1)
 		{
-			$twitter[$i]->tweet->actions = '<span class="TDB-action TDB-reply"><a href="http://twitter.com/intent/tweet?in_reply_to=' . $o['id_str'] . '" title="Reply" rel="nofollow"></a></span>';
-			$twitter[$i]->tweet->actions .= '<span class="TDB-action TDB-retweet"><a href="http://twitter.com/intent/retweet?tweet_id=' . $o['id_str'] . '" title="Retweet" rel="nofollow"></a></span>';
-			$twitter[$i]->tweet->actions .= '<span class="TDB-action TDB-favorite"><a href="http://twitter.com/intent/favorite?tweet_id=' . $o['id_str'] . '" title="Favorite" rel="nofollow"></a></span>';
+			$twitter[$i]->tweet->actions = '<span class="TDB-action TDB-reply"><a href="http://twitter.com/intent/tweet?in_reply_to=' . $o['id_str'] . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_REPLY') . '" rel="nofollow"></a></span>';
+			$twitter[$i]->tweet->actions .= '<span class="TDB-action TDB-retweet"><a href="http://twitter.com/intent/retweet?tweet_id=' . $o['id_str'] . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_RETWEET') . '" rel="nofollow"></a></span>';
+			$twitter[$i]->tweet->actions .= '<span class="TDB-action TDB-favorite"><a href="http://twitter.com/intent/favorite?tweet_id=' . $o['id_str'] . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_FAVORITE') . '" rel="nofollow"></a></span>';
 		}
 		// If set, convert user and hash tags into links
 		if ($params->get('tweetLinks', 1) == 1)
