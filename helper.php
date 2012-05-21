@@ -581,8 +581,8 @@ class ModTweetDisplayBackHelper
 			// Determine whether to display the time as a relative or static time
 			if ($params->get('tweetRelativeTime', 1) == 1)
 			{
-				$time = JFactory::getDate($o['created_at'], 'Europe/London');
-				$twitter[$i]->tweet->created .= JHtml::_('date.relative', $time, null, JFactory::getDate('now', 'Europe/London')) . '</a>';
+				$time = JFactory::getDate($o['created_at'], 'UTC');
+				$twitter[$i]->tweet->created .= JHtml::_('date.relative', $time, null, JFactory::getDate('now', 'UTC')) . '</a>';
 			}
 			else
 			{
