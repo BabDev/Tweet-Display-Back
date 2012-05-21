@@ -16,6 +16,7 @@ $ - Language fix or change
 
 21-May-2012 Michael Babker
 - Remove the damn rate limit check finally
+# Links in .TDB-tweet-time container smaller than other text
 
 27-February-2012 Michael Babker
 ^ [#35] Internationalize hover titles on Web Intent actions
