@@ -469,6 +469,7 @@ class ModTweetDisplayBackHelper
 		$tweetRTCount = $params->get('tweetRetweetCount', 1);
 
 		// Initialize a new object
+		$twitter[$i] = new stdClass;
 		$twitter[$i]->tweet = new stdClass;
 
 		// Check if the item is a retweet, and if so gather data from the retweeted_status datapoint
