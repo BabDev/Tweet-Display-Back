@@ -29,21 +29,6 @@ class ModTweetDisplayBackHelper
 	 */
 	public static function compileData($params)
 	{
-		// Initialize the object
-		$twitter = new stdClass;
-
-		// Check if we're bypassing the limit check
-		if ($params->get('bypassLimit', '0') == '0')
-		{
-			// Check the number of hits available
-			$hits = self::getLimit($params);
-			if ($hits == 0)
-			{
-				$twitter->hits	= '';
-				return $twitter;
-			}
-		}
-
 		// Load the parameters
 		$uname = $params->get('twitterName', '');
 		$list = $params->get('twitterList', '');
@@ -59,8 +44,8 @@ class ModTweetDisplayBackHelper
 		// Get the user info
 		$twitter = self::prepareUser($params);
 
-		// Check to see if we have an error
-		if (isset ($twitter->error))
+		// Check to see if we have an error or are out of hits
+		if (isset($twitter->error) || isset($twitter->hits))
 		{
 			return $twitter;
 		}
@@ -179,37 +164,6 @@ class ModTweetDisplayBackHelper
 		$obj = json_decode($json, true);
 
 		return $obj;
-	}
-
-	/**
-	 * Function to get the rate limit of a Twitter user
-	 *
-	 * @param   JRegistry  $params  The module parameters
-	 *
-	 * @return  string  The number of remaining hits on a user's rate limit
-	 *
-	 * @since   1.0
-	 */
-	protected static function getLimit($params)
-	{
-		// Load the parameters
-		$uname = $params->get('twitterName', '');
-		$req = 'http://api.twitter.com/1/account/rate_limit_status.json?screen_name=' . $uname;
-
-		// Fetch the decoded JSON
-		$obj = self::getJSON($req);
-
-		// Get the remaining hits count
-		if (isset($obj['remaining_hits']))
-		{
-			$hits = $obj['remaining_hits'];
-		}
-		else
-		{
-			$hits = '';
-		}
-
-		return $hits;
 	}
 
 	/**

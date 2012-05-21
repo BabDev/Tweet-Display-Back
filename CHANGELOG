@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+21-May-2012 Michael Babker
+- Remove the damn rate limit check finally
+
 27-February-2012 Michael Babker
 ^ [#35] Internationalize hover titles on Web Intent actions
 
