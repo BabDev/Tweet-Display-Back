@@ -86,7 +86,8 @@ class ModTweetDisplayBackHelper
 		}
 		else
 		{
-			/* Get the user feed, we have to manually filter mentions and replies,
+			/*
+			 * Get the user feed, we have to manually filter mentions and replies,
 			 * & Twitter doesn't send additional tweets when RTs are not included
 			 * So get additional tweets by multiplying $count based on the number
 			 * of active filters
@@ -103,7 +104,8 @@ class ModTweetDisplayBackHelper
 			{
 				$count = $count * 5;
 			}
-			/* Determine whether the user has overridden the count parameter with a
+			/*
+			 * Determine whether the user has overridden the count parameter with a
 			 * manual number of tweets to retrieve.  Override the $count variable
 			 * if this is the case
 			 */
@@ -379,7 +381,8 @@ class ModTweetDisplayBackHelper
 							// Tweets which contains only @mentions
 							$tweetOnlyMention = $tweetContainsMentionAndOrReply && !$tweetContainsReply;
 
-							/* Check if a reply tweet contains mentions
+							/*
+							 * Check if a reply tweet contains mentions
 							 * NOTE: Works only for tweets where there is also a reply, since reply is at
 							 * the position ['0'] and mentions begin at ['1'].
 							 */
