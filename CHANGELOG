@@ -14,6 +14,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+23-May-2012 Michael Babker
+^$ Update fr-FR, pt-PT translations
++$ Add de-DE translation
+
 21-May-2012 Michael Babker
 - Remove the damn rate limit check finally
 # Links in .TDB-tweet-time container smaller than other text
