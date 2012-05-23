@@ -5,11 +5,11 @@ minimum_perc = 85
 type = INI
 
 [tweetdisplayback.tdb-language]
-file_filter = language/1.7/<lang>/<lang>.mod_tweetdisplayback.ini
-source_file = language/1.7/en-GB/en-GB.mod_tweetdisplayback.ini
+file_filter = language/2.5/<lang>/<lang>.mod_tweetdisplayback.ini
+source_file = language/2.5/en-GB/en-GB.mod_tweetdisplayback.ini
 source_lang = en
 
 [tweetdisplayback.tdb-install]
-file_filter = language/1.7/<lang>/<lang>.mod_tweetdisplayback.sys.ini
-source_file = language/1.7/en-GB/en-GB.mod_tweetdisplayback.sys.ini
+file_filter = language/2.5/<lang>/<lang>.mod_tweetdisplayback.sys.ini
+source_file = language/2.5/en-GB/en-GB.mod_tweetdisplayback.sys.ini
 source_lang = en

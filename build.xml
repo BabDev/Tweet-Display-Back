@@ -12,7 +12,7 @@
 	<target
 		name="dev_head"
 		description="Builds test packages based on the development head"
-		depends="phpcs,rebuild-packages,common-files,17-package"
+		depends="phpcs,rebuild-packages,common-files,25-package"
 	>
 		<echo msg="Deleting old master build" />
 		<delete quiet="yes" includeemptydirs="true">
@@ -33,7 +33,7 @@
 	<target
 		name="release"
 		description="Builds release packages based on the development head"
-		depends="rebuild-packages,common-files,17-package"
+		depends="rebuild-packages,common-files,25-package"
 	>
 		<echo msg="Build 2.5 package" />
 		<zip destfile="releases/mod_tweetdisplayback_${version}.zip">
@@ -69,12 +69,12 @@
 			</fileset>
 	    </copy>
 	</target>
-	<target name="17-package" description="Builds the 2.5 package" depends="rebuild-packages">
+	<target name="25-package" description="Builds the 2.5 package" depends="rebuild-packages">
 		<echo msg="Create 2.5 temp folder" />
 		<mkdir dir="packages/2.5" />
 		<echo msg="Create 2.5 language folder" />
 		<copy todir="packages/2.5/language">
-			<fileset dir="language/1.7" />
+			<fileset dir="language/2.5" />
 	    </copy>
 		<echo msg="Create 2.5 fields folder" />
 		<copy todir="packages/2.5/fields">
