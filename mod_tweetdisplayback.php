@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 // Include the helper
-require_once dirname(__FILE__) . '/helper.php';
+JLoader::register('ModTweetDisplayBackHelper', JPATH_SITE . '/modules/mod_tweetdisplayback/helper.php');
 
 // Set the template variables
 $imgpath = JURI::root() . 'modules/mod_tweetdisplayback/media/images';

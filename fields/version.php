@@ -10,7 +10,7 @@
 
 defined('_JEXEC') or die;
 
-require_once JPATH_SITE . '/modules/mod_tweetdisplayback/helper.php';
+JLoader::register('ModTweetDisplayBackHelper', JPATH_SITE . '/modules/mod_tweetdisplayback/helper.php');
 
 /**
  * Field type to display the version and check for a newer version.
