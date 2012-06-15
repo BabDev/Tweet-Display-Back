@@ -8,7 +8,7 @@ The current release of *Tweet Display Back* is compatible with Joomla! 2.5 and n
 
 Requirements
 ===============
-*Tweet Display Back* requires the PHP cURL module be enabled in order to retrieve data from Twitter.
+*Tweet Display Back* has no external requirements; everything necessary is included in the core Joomla! distribution.
 
 Support
 ===============

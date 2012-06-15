@@ -35,16 +35,6 @@ if ($params->get('twitterFeedType') != 'widget')
 	JHtml::stylesheet('modules/mod_tweetdisplayback/media/css/' . $template . $css3 . '.css', false, false, false);
 }
 
-// Check if cURL is loaded; if not, proceed no further
-if (!extension_loaded('curl'))
-{
-	echo '<div class="TDB-tweet' . $tweetClassSfx . '">'
-		. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
-		. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL') . '</div>'
-		. '</div></div>';
-	return;
-}
-
 // If using a widget, don't need to perform custom module rendering
 if ($params->get('twitterFeedType') != 'widget')
 {

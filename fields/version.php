@@ -79,9 +79,9 @@ class JFormFieldVersion extends JFormField
 			$jversion = new JVersion;
 
 			// If an update is available, and compatible with the current Joomla! version, notify the user
-			if (version_compare($update['version'], $version, 'gt') && version_compare($jversion->getShortVersion(), $update['jversion'], 'ge'))
+			if (version_compare($update->version, $version, 'gt') && version_compare($jversion->getShortVersion(), $update->jversion, 'ge'))
 			{
-				$message .= '  <a href="' . $update['notice'] . '" target="_blank">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update['version']) . '</a></label>';
+				$message .= '  <a href="' . $update->notice . '" target="_blank">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update->version) . '</a></label>';
 			}
 			// No updates, or the Joomla! version is not compatible, so let the user know they're using the current version
 			else

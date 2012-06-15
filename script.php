@@ -28,13 +28,6 @@ class Mod_TweetDisplayBackInstallerScript
 	 */
 	public function preflight($type, $parent)
 	{
-		// Check if the cURL extension is available
-		if (!extension_loaded('curl'))
-		{
-			JError::raiseNotice(null, JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL'));
-			return false;
-		}
-
 		// Requires Joomla! 2.5
 		$jversion = new JVersion;
 		if (version_compare($jversion->getShortVersion(), '2.5', 'lt'))
