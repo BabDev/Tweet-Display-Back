@@ -168,7 +168,14 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Get the data
-		$response = $http->get($req);
+		try
+		{
+			$response = $http->get($req);
+		}
+		catch (UnexpectedValueException $e)
+		{
+			return null;
+		}
 
 		// Return the decoded response body
 		return json_decode($response->body);
