@@ -84,6 +84,10 @@ class ModTweetDisplayBackHelper
 			// Get the list feed
 			$req = 'http://api.twitter.com/1/lists/statuses.json?slug=' . $flist . '&owner_screen_name=' . $uname . $incRT . '&include_entities=1';
 		}
+		elseif ($params->get('twitterFeedType', 'user') == 'favorites')
+		{
+			$req = 'http://api.twitter.com/1/favorites.json?count=' . $count . '&id=' . $uname . $incRT . '&include_entities=1';
+		}
 		else
 		{
 			/*
