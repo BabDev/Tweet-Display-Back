@@ -542,7 +542,7 @@ class ModTweetDisplayBackHelper
 			}
 			$twitter[$i]->tweet->user = '<b><a href="' . $userURL . '" rel="nofollow">' . $tweetedBy . '</a>' . $params->get('tweetUserSeparator') . '</b>';
 		}
-		$twitter[$i]->tweet->avatar = '<img align="' . $tweetAlignment . '" alt="' . $tweetedBy . '" src="' . $avatar . '" width="32px"/>';
+		$twitter[$i]->tweet->avatar = '<img alt="' . $tweetedBy . '" src="' . $avatar . '" width="32" />';
 		$twitter[$i]->tweet->text = $text;
 
 		// Make regular URLs in tweets a link
