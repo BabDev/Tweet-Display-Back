@@ -613,7 +613,7 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Display the location the tweet was made from if set
-		if (($params->get('tweetLocation', 1) == 1) && ($o->place->full_name))
+		if (($params->get('tweetLocation', 1) == 1) && (isset($o->place->full_name)))
 		{
 			$twitter[$i]->tweet->created .= JText::_('MOD_TWEETDISPLAYBACK_FROM') . '<a href="http://maps.google.com/maps?q=' . $o->place->full_name . '" target="_blank" rel="nofollow">' . $o->place->full_name . '</a>';
 		}
