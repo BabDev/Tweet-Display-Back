@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 // Include the helper
-JLoader::register('ModTweetDisplayBackHelper', JPATH_SITE . '/modules/mod_tweetdisplayback/helper.php');
+JLoader::register('ModTweetDisplayBackHelper', __DIR__ . '/helper.php');
 
 // Set the template variables
 $imgpath = JURI::root() . 'modules/mod_tweetdisplayback/media/images';
@@ -26,9 +26,9 @@ $count = $params->get('twitterCount', '3') - 1;
 // Don't load module CSS if loading a widget
 if ($params->get('twitterFeedType') != 'widget')
 {
-	// If CSS3 is selected, load it's stylesheet except for nostyle
+	// If CSS3 is selected, load it's stylesheet except for nostyle or Bootstrap
 	$css3 = '';
-	if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle')
+	if ($params->get('templateCSS3', 1) == 1 && $template != ('nostyle' || 'bootstrap'))
 	{
 		$css3 = '-css3';
 	}
@@ -60,7 +60,7 @@ if ($params->get('twitterFeedType') != 'widget')
 	// No hits remaining
 	if (isset($twitter->hits))
 	{
-		echo '<div class="TDB-tweet' . $tweetClassSfx . '">'
+		echo '<div class="well TDB-tweet' . $tweetClassSfx . '">'
 			. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
 			. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS') . '</div>'
 			. '</div></div>';
@@ -69,7 +69,7 @@ if ($params->get('twitterFeedType') != 'widget')
 	// No data object and no other error was set
 	elseif ((!$twitter) || (isset($twitter->error)))
 	{
-		echo '<div class="TDB-tweet' . $tweetClassSfx . '">'
+		echo '<div class="well TDB-tweet' . $tweetClassSfx . '">'
 			. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
 			. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD') . '</div>'
 			. '</div></div>';

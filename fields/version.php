@@ -10,7 +10,7 @@
 
 defined('_JEXEC') or die;
 
-JLoader::register('ModTweetDisplayBackHelper', JPATH_SITE . '/modules/mod_tweetdisplayback/helper.php');
+JLoader::register('ModTweetDisplayBackHelper', dirname(__DIR__) . '/helper.php');
 
 /**
  * Field type to display the version and check for a newer version.
@@ -72,11 +72,21 @@ class JFormFieldVersion extends JFormField
 			// Get the JSON data
 			$update = ModTweetDisplayBackHelper::getJSON($target);
 
-			// Message containing the version
-			$message = '<label style="max-width:100%">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
-
 			// Get the CMS Version
 			$jversion = new JVersion;
+
+			// Message containing the version
+			if (version_compare($jversion->getShortVersion(), '3.0', 'ge'))
+			{
+				$message = '<div class="alert alert-info">';
+				$close = '</div>';
+			}
+			else
+			{
+				$message = '<label style="max-width:100%">';
+				$close = '</label>';
+			}
+			$message .= JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
 
 			// If an update is available, and compatible with the current Joomla! version, notify the user
 			if (version_compare($update->version, $version, 'gt') && version_compare($jversion->getShortVersion(), $update->jversion, 'ge'))
@@ -86,7 +96,7 @@ class JFormFieldVersion extends JFormField
 			// No updates, or the Joomla! version is not compatible, so let the user know they're using the current version
 			else
 			{
-				$message .= '  ' . JText::_('MOD_TWEETDISPLAYBACK_VERSION_CURRENT') . '</label>';
+				$message .= '  ' . JText::_('MOD_TWEETDISPLAYBACK_VERSION_CURRENT') . $close;
 			}
 			return $message;
 		}

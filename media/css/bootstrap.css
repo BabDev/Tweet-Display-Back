@@ -1,0 +1,99 @@
+/**
+ * Tweet Display Back Module for Joomla!
+ *
+ * @package    TweetDisplayBack
+ *
+ * @copyright  Copyright (C) 2010-2012 Michael Babker. All rights reserved.
+ * @license	   GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ */
+
+.TDB-headavatar {
+	min-height: 98px;
+}
+
+.TDB-header-user,
+.TDB-tweet-user {
+	text-align: center;
+}
+
+.TDB-tweet-avatar-left {
+	float: right;
+	height: 32px;
+	padding: 2px;
+}
+
+.TDB-tweet-avatar-right {
+	float: left;
+	height: 32px;
+	padding: 2px;
+}
+
+.TDB-tweet-align-left .TDB-tweet-time,
+.TDB-tweet-align-left .TDB-tweet-actions {
+	text-align: right;
+}
+
+.TDB-tweet-align-right .TDB-tweet-time,
+.TDB-tweet-align-right .TDB-tweet-actions {
+	text-align: left;
+}
+
+.TDB-action {
+	background: url("../../media/images/icon-sprite.png") no-repeat scroll 0 0 transparent;
+	display: inline-block;
+	height: 16px;
+	position: relative;
+	width: 16px;
+}
+
+.TDB-action a {
+	background: none repeat scroll 0 0 transparent !important;
+	height: 16px;
+	left: 0;
+	position: absolute;
+	text-decoration: none !important;
+	width: 16px;
+}
+
+.TDB-reply {
+	background-position: 0 0;
+}
+
+.TDB-reply:hover {
+	background-position: -16px 0;
+}
+
+.TDB-retweet {
+	background-position: -80px 0;
+}
+
+.TDB-retweet:hover {
+	background-position: -96px 0;
+}
+
+.TDB-favorite {
+	background-position: -32px 0;
+}
+
+.TDB-favorite:hover {
+	background-position: -48px 0;
+}
+
+.TDB-footer-follow-img {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.TDB-footer-follow-link {
+	font-weight: bold;
+	text-align: right;
+}
+
+.TDB-footer-powered-img {
+	font-size: 85%;
+	text-align: center;
+}
+
+.TDB-footer-powered-text {
+	font-size: 85%;
+}

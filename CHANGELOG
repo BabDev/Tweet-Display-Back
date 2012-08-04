@@ -14,6 +14,13 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+4-August-2012 Michael Babker
++ Add bootstrap template
+^ Styling improvements for version field in J! 3
+
+5-July-2012 Roberto Segura
+# [#43] W3C validation
+
 15-June-2012 Michael Babker
 ^ Replace the cURL connector with JHttp
 - Remove dependency on PHP cURL
