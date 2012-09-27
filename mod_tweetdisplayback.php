@@ -14,14 +14,14 @@ defined('_JEXEC') or die;
 JLoader::register('ModTweetDisplayBackHelper', __DIR__ . '/helper.php');
 
 // Set the template variables
-$imgpath = JURI::root() . 'modules/mod_tweetdisplayback/media/images';
-$headerAlign = $params->get('headerAvatarAlignment');
-$tweetAlign = $params->get('tweetAlignment');
+$imgpath        = JURI::root() . 'modules/mod_tweetdisplayback/media/images';
+$headerAlign    = $params->get('headerAvatarAlignment');
+$tweetAlign     = $params->get('tweetAlignment');
 $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
-$tweetClassSfx = htmlspecialchars($params->get('tweetclasssfx'));
-$template = $params->get('templateLayout', 'default');
-$flist = ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
-$count = $params->get('twitterCount', '3') - 1;
+$tweetClassSfx  = htmlspecialchars($params->get('tweetclasssfx'));
+$template       = $params->get('templateLayout', 'default');
+$flist          = ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
+$count          = $params->get('twitterCount', '3') - 1;
 
 // Don't load module CSS if loading a widget
 if ($params->get('twitterFeedType') != 'widget')
@@ -42,8 +42,8 @@ if ($params->get('twitterFeedType') != 'widget')
 	if ($params->get('cache') == 1)
 	{
 		// Set the cache parameters
-		$options = array('defaultgroup' => 'mod_tweetdisplayback');
-		$cache = JCache::getInstance('callback', $options);
+		$options   = array('defaultgroup' => 'mod_tweetdisplayback');
+		$cache     = JCache::getInstance('callback', $options);
 		$cacheTime = $params->get('cache_time');
 		$cache->setLifeTime($cacheTime);
 		$cache->setCaching(true);

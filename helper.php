@@ -30,9 +30,9 @@ class ModTweetDisplayBackHelper
 	public static function compileData($params)
 	{
 		// Load the parameters
-		$uname = $params->get('twitterName', '');
-		$list = $params->get('twitterList', '');
-		$count = $params->get('twitterCount', 3);
+		$uname   = $params->get('twitterName', '');
+		$list    = $params->get('twitterList', '');
+		$count   = $params->get('twitterCount', 3);
 		$retweet = $params->get('tweetRetweets', 1);
 
 		// Convert the list name to a usable string for the JSON
@@ -132,7 +132,7 @@ class ModTweetDisplayBackHelper
 		}
 		else
 		{
-			$twitter->error	= '';
+			$twitter->error = '';
 		}
 
 		return $twitter;
@@ -223,7 +223,7 @@ class ModTweetDisplayBackHelper
 		// Check that we have the JSON, otherwise set an error
 		elseif (!$obj)
 		{
-			$twitter->error	= '';
+			$twitter->error = '';
 			return $twitter;
 		}
 
@@ -341,18 +341,18 @@ class ModTweetDisplayBackHelper
 	 * @param   object     $obj     The decoded JSON feed
 	 * @param   JRegistry  $params  The module parameters
 	 *
-	 * @return	object  The formatted object for display
+	 * @return  object  The formatted object for display
 	 *
 	 * @since   2.0
 	 */
 	protected static function processFiltering($obj, $params)
 	{
 		// Initialize
-		$count = $params->get('twitterCount', 3);
-		$showMentions = $params->get('showMentions', 0);
-		$showReplies = $params->get('showReplies', 0);
+		$count          = $params->get('twitterCount', 3);
+		$showMentions   = $params->get('showMentions', 0);
+		$showReplies    = $params->get('showReplies', 0);
 		$numberOfTweets = $params->get('twitterCount', 3);
-		$twitter = array();
+		$twitter        = array();
 		$i = 0;
 
 		// Check if $obj has data; if not, return an error
@@ -390,9 +390,6 @@ class ModTweetDisplayBackHelper
 
 							// Tweets which contains a @mention and/or @reply
 							$tweetContainsMentionAndOrReply = $o->entities->user_mentions != null;
-
-							// Tweets which contains only @mentions
-							$tweetOnlyMention = $tweetContainsMentionAndOrReply && !$tweetContainsReply;
 
 							/*
 							 * Check if a reply tweet contains mentions
@@ -486,18 +483,17 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @return  void
 	 *
-	 * @since	2.0
+	 * @since   2.0
 	 */
 	protected static function processItem(&$twitter, $o, $i, $params)
 	{
 		// Set variables
-		$tweetName = $params->get('tweetName', 1);
-		$tweetAlignment = $params->get('tweetAlignment', 'left');
-		$tweetReply = $params->get('tweetReply', 1);
+		$tweetName    = $params->get('tweetName', 1);
+		$tweetReply   = $params->get('tweetReply', 1);
 		$tweetRTCount = $params->get('tweetRetweetCount', 1);
 
 		// Initialize a new object
-		$twitter[$i] = new stdClass;
+		$twitter[$i]        = new stdClass;
 		$twitter[$i]->tweet = new stdClass;
 
 		// Check if the item is a retweet, and if so gather data from the retweeted_status datapoint

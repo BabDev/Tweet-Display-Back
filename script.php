@@ -119,17 +119,17 @@ class Mod_TweetDisplayBackInstallerScript
 
 		$langCode = $lang->getTag();
 
-		$base = JPATH_SITE . '/language/' . $langCode . '/';
+		$base    = JPATH_SITE . '/language/' . $langCode . '/';
 		$engBase = JPATH_SITE . '/language/en-GB/';
 
 		// The language files for pre-2.2
-		$files = array($langCode . '.mod_tweetdisplayback.ini', $langCode . '.mod_tweetdisplayback.sys.ini');
+		$files    = array($langCode . '.mod_tweetdisplayback.ini', $langCode . '.mod_tweetdisplayback.sys.ini');
 		$engFiles = array('en-GB.mod_tweetdisplayback.ini', 'en-GB.mod_tweetdisplayback.sys.ini');
 
 		// Remove the files
 		foreach ($files as $file)
 		{
-			if (JFile::exists($base . $file))
+			if (is_file($base . $file))
 			{
 				JFile::delete($base . $file);
 			}
@@ -138,7 +138,7 @@ class Mod_TweetDisplayBackInstallerScript
 		// Check for and remove en-GB files
 		foreach ($engFiles as $engFile)
 		{
-			if (JFile::exists($engBase . $engFile))
+			if (is_file($engBase . $engFile))
 			{
 				JFile::delete($engBase . $engFile);
 			}

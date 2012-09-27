@@ -61,7 +61,7 @@ class JFormFieldVersion extends JFormField
 		{
 			// Get the module's XML
 			$xmlfile = JPATH_SITE . '/modules/mod_tweetdisplayback/mod_tweetdisplayback.xml';
-			$data = JApplicationHelper::parseXMLInstallFile($xmlfile);
+			$data    = JApplicationHelper::parseXMLInstallFile($xmlfile);
 
 			// The module's version
 			$version = $data['version'];
@@ -72,11 +72,8 @@ class JFormFieldVersion extends JFormField
 			// Get the JSON data
 			$update = ModTweetDisplayBackHelper::getJSON($target);
 
-			// Get the CMS Version
-			$jversion = new JVersion;
-
 			// Message containing the version
-			if (version_compare($jversion->getShortVersion(), '3.0', 'ge'))
+			if (version_compare(JVERSION, '3.0', 'ge'))
 			{
 				$message = '<div class="alert alert-info">';
 				$close = '</div>';
@@ -89,7 +86,7 @@ class JFormFieldVersion extends JFormField
 			$message .= JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
 
 			// If an update is available, and compatible with the current Joomla! version, notify the user
-			if (version_compare($update->version, $version, 'gt') && version_compare($jversion->getShortVersion(), $update->jversion, 'ge'))
+			if (version_compare($update->version, $version, 'gt') && version_compare(JVERSION, $update->jversion, 'ge'))
 			{
 				$message .= '  <a href="' . $update->notice . '" target="_blank">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update->version) . '</a></label>';
 			}
