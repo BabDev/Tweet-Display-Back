@@ -16,6 +16,20 @@
 	text-align: center;
 }
 
+span.TDB-header-avatar-left {
+	height: 73px;
+	float: left;
+	margin: 1px;
+	padding: 3px;
+}
+
+span.TDB-header-avatar-right {
+	height: 73px;
+	float: right;
+	margin: 1px;
+	padding: 3px;
+}
+
 .TDB-tweet-avatar-left {
 	float: right;
 	height: 32px;
@@ -79,21 +93,10 @@
 	background-position: -48px 0;
 }
 
-.TDB-footer-follow-img {
-	text-align: center;
-	margin-top: 20px;
-}
-
 .TDB-footer-follow-link {
-	font-weight: bold;
-	text-align: right;
-}
-
-.TDB-footer-powered-img {
-	font-size: 85%;
-	text-align: center;
 }
 
 .TDB-footer-powered-text {
 	font-size: 85%;
+	text-align: center;
 }

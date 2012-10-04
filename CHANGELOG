@@ -14,6 +14,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+4-October-2012 Michael Babker
+^ Update Follow button to use Twitter API object
+^ Field styling for J! 3
+
 4-August-2012 Michael Babker
 + Add bootstrap template
 ^ Styling improvements for version field in J! 3

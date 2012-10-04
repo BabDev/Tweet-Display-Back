@@ -130,21 +130,10 @@ span.TDB-header-avatar-right {
 .hashlink {
 }
 
-.TDB-footer-follow-img {
-	margin-top: 20px;
-	text-align: center;
-}
-
 .TDB-footer-follow-link {
-	font-weight: bold;
-	text-align: right;
-}
-
-.TDB-footer-powered-img {
-	font-size: 85%;
-	text-align: center;
 }
 
 .TDB-footer-powered-text {
 	font-size: 85%;
+	text-align: center;
 }

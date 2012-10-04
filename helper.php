@@ -281,55 +281,26 @@ class ModTweetDisplayBackHelper
 
 		// Footer info
 
-		// If a "Follow me" link is displayed, determine whether to display a button or text
+		// Display the Follow button
 		if ($params->get('footerFollowLink', 1) == 1)
 		{
-			if ($params->get('footerFollowType', 1) == 1)
+			// Only display for a user feed
+			if ($feed == 'user')
 			{
-				$twitter->footer->follow_me = '<div class="TDB-footer-follow-img">';
+				$followParams  = 'screen_name=' . $uname;
+				$followParams .= '&lang=' . substr(JFactory::getLanguage()->getTag(), 0, 2);
+				$followParams .= '&show_count=' . (bool) $params->get('footerFollowCount', 1);
+				$followParams .= '&show_screen_name=' . (bool) $params->get('footerFollowUser', 1);
 
-				// Determine whether a list or user feed is being generated
-				if ($feed == 'list')
-				{
-					$twitter->footer->follow_me .= '<a href="http://twitter.com/' . $uname . '/' . $flist . '" rel="nofollow" target="_blank">';
-					$alt = 'Follow ' . $uname . '&#39;s ' . $list . ' list on Twitter';
-				}
-				else
-				{
-					$twitter->footer->follow_me .= '<a href="http://twitter.com/intent/user?screen_name=' . $uname . '" rel="nofollow">';
-					$alt = 'Follow ' . $uname . ' on Twitter';
-				}
-				$twitter->footer->follow_me .= '<img src="http://twitter-badges.s3.amazonaws.com/' . $params->get('footerFollowImgMeUs') . '-' . $params->get('footerFollowImg') . '.png" alt="' . $alt . '" align="middle" /></a></div>';
-			}
-			else
-			{
-				$twitter->footer->follow_me = '<div class="TDB-footer-follow-link">';
+				$iframe = '<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/follow_button.html?' . $followParams . '" style="width: 300px; height: 20px;"></iframe>';
 
-				// Determine whether a list or user feed is being generated
-				if ($feed == 'list')
-				{
-					$twitter->footer->follow_me .= '<a href="http://twitter.com/' . $uname . '/' . $flist . '" rel="nofollow" target="_blank">';
-				}
-				else
-				{
-					$twitter->footer->follow_me .= '<a href="http://twitter.com/intent/user?screen_name=' . $uname . '" rel="nofollow">';
-				}
-				$twitter->footer->follow_me .= $params->get('footerFollowText', 'Follow me on Twitter') . '</a></div>';
+				$twitter->footer->follow_me = '<div class="TDB-footer-follow-link">' . $iframe . '</div>';
 			}
 		}
 		if ($params->get('footerPoweredBy', 1) == 1)
 		{
-			// Check the type of link to determine the appropriate opening tags
-			if ($params->get('footerFollowType', 1) == 1)
-			{
-				$twitter->footer->powered_by = '<div class="TDB-footer-powered-img">';
-			}
-			else
-			{
-				$twitter->footer->powered_by = '<hr /><div class="TDB-footer-powered-text">';
-			}
 			$site = '<a href="http://www.babdev.com/extensions/tweet-display-back" rel="nofollow" target="_blank">' . JText::_('MOD_TWEETDISPLAYBACK') . '</a>';
-			$twitter->footer->powered_by .= JText::sprintf('MOD_TWEETDISPLAYBACK_POWERED_BY', $site) . '</div>';
+			$twitter->footer->powered_by = '<hr /><div class="TDB-footer-powered-text">' . JText::sprintf('MOD_TWEETDISPLAYBACK_POWERED_BY', $site) . '</div>';
 		}
 
 		return $twitter;
