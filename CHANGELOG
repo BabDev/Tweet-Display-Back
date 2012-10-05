@@ -17,6 +17,10 @@ $ - Language fix or change
 4-October-2012 Michael Babker
 ^ Update Follow button to use Twitter API object
 ^ Field styling for J! 3
+^ Cleanup on favorites additions
+
+4-October-2012 Edgars Piruška
++ [#44] Possibility to display user favorites
 
 4-August-2012 Michael Babker
 + Add bootstrap template

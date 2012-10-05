@@ -34,6 +34,7 @@ class ModTweetDisplayBackHelper
 		$list    = $params->get('twitterList', '');
 		$count   = $params->get('twitterCount', 3);
 		$retweet = $params->get('tweetRetweets', 1);
+		$feed    = $params->get('twitterFeedType', 'user');
 
 		// Convert the list name to a usable string for the JSON
 		if ($list)
@@ -78,15 +79,16 @@ class ModTweetDisplayBackHelper
 			$activeFilters++;
 		}
 
-		// Determine whether the feed being returned is a user or list feed
-		if ($params->get('twitterFeedType', 'user') == 'list')
+		// Determine whether the feed being returned is a user, favorites, or list feed
+		if ($feed == 'list')
 		{
 			// Get the list feed
 			$req = 'http://api.twitter.com/1/lists/statuses.json?slug=' . $flist . '&owner_screen_name=' . $uname . $incRT . '&include_entities=1';
 		}
-		elseif ($params->get('twitterFeedType', 'user') == 'favorites')
+		elseif ($feed == 'favorites')
 		{
-			$req = 'http://api.twitter.com/1/favorites.json?count=' . $count . '&id=' . $uname . $incRT . '&include_entities=1';
+			// Get the favorites feed
+			$req = 'http://api.twitter.com/1/favorites.json?count=' . $count . '&screen_name=' . $uname . '&include_entities=1';
 		}
 		else
 		{
@@ -198,8 +200,8 @@ class ModTweetDisplayBackHelper
 	{
 		// Load the parameters
 		$uname = $params->get('twitterName', '');
-		$list = $params->get('twitterList', '');
-		$feed = $params->get('twitterFeedType', 'user');
+		$list  = $params->get('twitterList', '');
+		$feed  = $params->get('twitterFeedType', 'user');
 
 		// Initialize new object containers
 		$twitter = new stdClass;
@@ -231,7 +233,10 @@ class ModTweetDisplayBackHelper
 			return $twitter;
 		}
 
-		// Header info
+		/*
+		 * Header info
+		 */
+
 		if ($params->get('headerUser', 1) == 1)
 		{
 			// Check if the Intents action is bypassed
@@ -283,13 +288,15 @@ class ModTweetDisplayBackHelper
 
 		$twitter->header->avatar = '<img src="' . $avatar . '" alt="' . $uname . '" />';
 
-		// Footer info
+		/*
+		 * Footer info
+		 */
 
 		// Display the Follow button
 		if ($params->get('footerFollowLink', 1) == 1)
 		{
-			// Only display for a user feed
-			if ($feed == 'user')
+			// Don't display for a list feed
+			if ($feed != 'list')
 			{
 				$followParams  = 'screen_name=' . $uname;
 				$followParams .= '&lang=' . substr(JFactory::getLanguage()->getTag(), 0, 2);
@@ -327,6 +334,7 @@ class ModTweetDisplayBackHelper
 		$showMentions   = $params->get('showMentions', 0);
 		$showReplies    = $params->get('showReplies', 0);
 		$numberOfTweets = $params->get('twitterCount', 3);
+		$feedType       = $params->get('twitterFeedType', 'user');
 		$twitter        = array();
 		$i = 0;
 
@@ -347,7 +355,7 @@ class ModTweetDisplayBackHelper
 					if ($i < $numberOfTweets)
 					{
 						// If we aren't filtering, just render the item
-						if (($showMentions == 1 && $showReplies == 1) || $params->get('twitterFeedType', 'user') == 'list')
+						if (($showMentions == 1 && $showReplies == 1) || ($feedType == 'list' || $feedType == 'favorites'))
 						{
 							self::processItem($twitter, $o, $i, $params);
 
@@ -559,7 +567,9 @@ class ModTweetDisplayBackHelper
 			}
 		}
 
-		// Info below is specific to each tweet, so it isn't checked against a retweet
+		/*
+		 * Info below is specific to each tweet, so it isn't checked against a retweet
+		 */
 
 		// Display the time the tweet was created
 		if ($params->get('tweetCreated', 1) == 1)
