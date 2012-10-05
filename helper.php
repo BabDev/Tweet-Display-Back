@@ -537,8 +537,9 @@ class ModTweetDisplayBackHelper
 			}
 
 			// We need to check to verify that the URL has the protocol, just in case
-			if (strpos($url->url, 'http://') !== 0)
+			if (strpos($url->url, 'http') !== 0)
 			{
+				// Prepend http since there's no protocol
 				$link = 'http://' . $url->url;
 			}
 			else
