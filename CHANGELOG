@@ -18,6 +18,7 @@ $ - Language fix or change
 ^ Update Follow button to use Twitter API object
 ^ Field styling for J! 3
 ^ Cleanup on favorites additions
+# [#37] Unsecure https error
 
 4-October-2012 Edgars Piruška
 + [#44] Possibility to display user favorites
