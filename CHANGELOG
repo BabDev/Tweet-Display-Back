@@ -14,6 +14,18 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+7-October-2012 Michael Babker
+^$ Update de-DE translation
+^$ Update es-ES translation
+^$ Update fr-FR translation
+^$ Update id-ID translation
+^$ Update it-IT translation
+^$ Update nl-** translations
+^$ Update pt-BR translation
+^$ Update pt-PT translation
+^$ Update sl-SI translation
+^$ Update sv-SE translation
+
 4-October-2012 Michael Babker
 ^ Update Follow button to use Twitter API object
 ^ Field styling for J! 3
