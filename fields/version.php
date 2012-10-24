@@ -76,8 +76,13 @@ class JFormFieldVersion extends JFormField
 		}
 		$message .= JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
 
+		// Make sure that the $update object actually has data
+		if (!isset($update->notice))
+		{
+			$message .= '  ' . JText::_('MOD_TWEETDISPLAYBACK_VERSION_FAILED') . $close;
+		}
 		// If an update is available, and compatible with the current Joomla! version, notify the user
-		if (version_compare($update->version, $version, 'gt') && version_compare(JVERSION, $update->jversion, 'ge'))
+		elseif (version_compare($update->version, $version, 'gt') && version_compare(JVERSION, $update->jversion, 'ge'))
 		{
 			$message .= '  <a href="' . $update->notice . '" target="_blank">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update->version) . '</a></label>';
 		}
