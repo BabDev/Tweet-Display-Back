@@ -50,52 +50,42 @@ class JFormFieldVersion extends JFormField
 	 */
 	protected function getLabel()
 	{
-		// Check if cURL is loaded; if not, proceed no further
-		if (!extension_loaded('curl'))
-		{
-			return JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOCURL');
-		}
+		// Get the module's XML
+		$xmlfile = dirname(__DIR__) . '/mod_tweetdisplayback.xml';
+		$data    = JApplicationHelper::parseXMLInstallFile($xmlfile);
 
-		// If cURL is supported, check the current version available.
+		// The module's version
+		$version = $data['version'];
+
+		// The target to check against
+		$target = 'http://www.babdev.com/updates/TDB_version';
+
+		// Get the JSON data
+		$update = ModTweetDisplayBackHelper::getJSON($target);
+
+		// Message containing the version
+		if (version_compare(JVERSION, '3.0', 'ge'))
+		{
+			$message = '<div class="alert alert-info">';
+			$close = '</div>';
+		}
 		else
 		{
-			// Get the module's XML
-			$xmlfile = JPATH_SITE . '/modules/mod_tweetdisplayback/mod_tweetdisplayback.xml';
-			$data    = JApplicationHelper::parseXMLInstallFile($xmlfile);
-
-			// The module's version
-			$version = $data['version'];
-
-			// The target to check against
-			$target = 'http://www.babdev.com/updates/TDB_version';
-
-			// Get the JSON data
-			$update = ModTweetDisplayBackHelper::getJSON($target);
-
-			// Message containing the version
-			if (version_compare(JVERSION, '3.0', 'ge'))
-			{
-				$message = '<div class="alert alert-info">';
-				$close = '</div>';
-			}
-			else
-			{
-				$message = '<label style="max-width:100%">';
-				$close = '</label>';
-			}
-			$message .= JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
-
-			// If an update is available, and compatible with the current Joomla! version, notify the user
-			if (version_compare($update->version, $version, 'gt') && version_compare(JVERSION, $update->jversion, 'ge'))
-			{
-				$message .= '  <a href="' . $update->notice . '" target="_blank">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update->version) . '</a></label>';
-			}
-			// No updates, or the Joomla! version is not compatible, so let the user know they're using the current version
-			else
-			{
-				$message .= '  ' . JText::_('MOD_TWEETDISPLAYBACK_VERSION_CURRENT') . $close;
-			}
-			return $message;
+			$message = '<label style="max-width:100%">';
+			$close = '</label>';
 		}
+		$message .= JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
+
+		// If an update is available, and compatible with the current Joomla! version, notify the user
+		if (version_compare($update->version, $version, 'gt') && version_compare(JVERSION, $update->jversion, 'ge'))
+		{
+			$message .= '  <a href="' . $update->notice . '" target="_blank">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update->version) . '</a></label>';
+		}
+		// No updates, or the Joomla! version is not compatible, so let the user know they're using the current version
+		else
+		{
+			$message .= '  ' . JText::_('MOD_TWEETDISPLAYBACK_VERSION_CURRENT') . $close;
+		}
+		return $message;
 	}
 }
