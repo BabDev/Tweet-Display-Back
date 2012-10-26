@@ -30,9 +30,11 @@ class Mod_TweetDisplayBackInstallerScript
 	{
 		// Requires Joomla! 2.5
 		$jversion = new JVersion;
+
 		if (version_compare($jversion->getShortVersion(), '2.5', 'lt'))
 		{
 			JError::raiseNotice(null, JText::_('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_VERSION'));
+
 			return false;
 		}
 
@@ -57,6 +59,7 @@ class Mod_TweetDisplayBackInstallerScript
 		if ($version == 'Error')
 		{
 			JError::raiseNotice(null, JText::_('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_UPDATE'));
+
 			return;
 		}
 
@@ -83,10 +86,12 @@ class Mod_TweetDisplayBackInstallerScript
 		$query->from($db->quoteName('#__extensions'));
 		$query->where($db->quoteName('element') . ' = ' . $db->quote('mod_tweetdisplayback'));
 		$db->setQuery($query);
+
 		if (!$db->loadObject())
 		{
 			JError::raiseWarning(1, JText::sprintf('JLIB_INSTALLER_ERROR_SQL_ERROR', $db->stderr(true)));
 			$version = 'Error';
+
 			return $version;
 		}
 		else

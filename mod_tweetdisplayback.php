@@ -28,6 +28,7 @@ if ($params->get('twitterFeedType') != 'widget')
 {
 	// If CSS3 is selected, load it's stylesheet except for nostyle or Bootstrap
 	$css3 = '';
+
 	if ($params->get('templateCSS3', 1) == 1 && $template != ('nostyle' || 'bootstrap'))
 	{
 		$css3 = '-css3';
@@ -64,6 +65,7 @@ if ($params->get('twitterFeedType') != 'widget')
 			. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
 			. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS') . '</div>'
 			. '</div></div>';
+
 		return;
 	}
 	// No data object and no other error was set
@@ -73,6 +75,7 @@ if ($params->get('twitterFeedType') != 'widget')
 			. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
 			. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD') . '</div>'
 			. '</div></div>';
+
 		return;
 	}
 }
@@ -80,6 +83,7 @@ if ($params->get('twitterFeedType') != 'widget')
 // Add the Twitter Web Intents script if something else already hasn't
 $scheme = JUri::getInstance()->getScheme() . '://';
 $document = JFactory::getDocument();
+
 if (!in_array('<script type="text/javascript" src="' . $scheme . 'platform.twitter.com/widgets.js"></script>', $document->_custom))
 {
 	$document->addCustomTag('<script type="text/javascript" src="' . $scheme . 'platform.twitter.com/widgets.js"></script>');

@@ -53,6 +53,7 @@ class ModTweetDisplayBackHelper
 
 		// Set the include RT's string
 		$incRT = '';
+
 		if ($retweet == 1)
 		{
 			$incRT = '&include_rts=1';
@@ -224,12 +225,14 @@ class ModTweetDisplayBackHelper
 		if (isset($obj->error) && $obj->error == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
 		{
 			$twitter->hits = '';
+
 			return $twitter;
 		}
 		// Check that we have the JSON, otherwise set an error
 		elseif (!$obj)
 		{
 			$twitter->error = '';
+
 			return $twitter;
 		}
 
@@ -489,6 +492,7 @@ class ModTweetDisplayBackHelper
 			$urls = $o->retweeted_status->entities->urls;
 			$RTs = $o->retweeted_status->retweet_count;
 			$twitter[$i]->tweet->created = JText::_('MOD_TWEETDISPLAYBACK_RETWEETED');
+
 			if (isset($o->retweeted_status->entities->media))
 			{
 				$media = $o->retweeted_status->entities->media;
@@ -502,6 +506,7 @@ class ModTweetDisplayBackHelper
 			$text = $o->text;
 			$urls = $o->entities->urls;
 			$RTs = $o->retweet_count;
+
 			if (isset($o->entities->media))
 			{
 				$media = $o->entities->media;
