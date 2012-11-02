@@ -524,7 +524,7 @@ class ModTweetDisplayBackHelper
 			{
 				$userURL = 'http://twitter.com/intent/user?screen_name=' . $tweetedBy;
 			}
-			$twitter[$i]->tweet->user = '<b><a href="' . $userURL . '" rel="nofollow">' . $tweetedBy . '</a>' . $params->get('tweetUserSeparator') . '</b>';
+			$twitter[$i]->tweet->user = '<strong><a href="' . $userURL . '" rel="nofollow">' . $tweetedBy . '</a>' . $params->get('tweetUserSeparator') . '</strong>';
 		}
 		$twitter[$i]->tweet->avatar = '<img alt="' . $tweetedBy . '" src="' . $avatar . '" width="32" />';
 		$twitter[$i]->tweet->text = $text;
