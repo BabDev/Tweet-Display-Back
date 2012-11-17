@@ -48,9 +48,15 @@ abstract class ModTweetDisplayBackHttp
 		{
 			$class = 'JHttpTransport' . ucfirst($adapter);
 
-			if ($class::isSupported())
+			try
 			{
-				return new $class($options);
+				$transport = new $class($options);
+
+				return $transport;
+			}
+			catch (RuntimeException $e)
+			{
+				continue;
 			}
 		}
 		return false;
