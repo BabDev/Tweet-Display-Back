@@ -9,6 +9,7 @@
  */
 
 defined('_JEXEC') or die;
+/* @var JRegistry $params */
 ?>
 <script type="text/javascript">
 new TWTR.Widget({

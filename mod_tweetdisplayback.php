@@ -13,8 +13,10 @@ defined('_JEXEC') or die;
 // Include the helper
 JLoader::register('ModTweetDisplayBackHelper', __DIR__ . '/helper.php');
 
+/* @var JRegistry $params */
+
 // Set the template variables
-$imgpath        = JURI::root() . 'modules/mod_tweetdisplayback/media/images';
+$imgpath        = JUri::root() . 'modules/mod_tweetdisplayback/media/images';
 $headerAlign    = $params->get('headerAvatarAlignment');
 $tweetAlign     = $params->get('tweetAlignment');
 $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
@@ -82,6 +84,8 @@ if ($params->get('twitterFeedType') != 'widget')
 
 // Add the Twitter Web Intents script if something else already hasn't
 $scheme = JUri::getInstance()->getScheme() . '://';
+
+/* @var JDocumentHtml $document */
 $document = JFactory::getDocument();
 
 if (!in_array('<script type="text/javascript" src="' . $scheme . 'platform.twitter.com/widgets.js"></script>', $document->_custom))

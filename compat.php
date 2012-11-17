@@ -78,6 +78,7 @@ abstract class ModTweetDisplayBackHttp
 
 		foreach ($iterator as $file)
 		{
+			/* @var DirectoryIterator $file */
 			$fileName = $file->getFilename();
 
 			// Only load for php files.
