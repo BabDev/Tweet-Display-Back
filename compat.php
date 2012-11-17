@@ -39,11 +39,13 @@ abstract class ModTweetDisplayBackHttp
 			settype($default, 'array');
 			$availableAdapters = $default;
 		}
+
 		// Check if there is available http transport adapters
 		if (!count($availableAdapters))
 		{
 			return false;
 		}
+
 		foreach ($availableAdapters as $adapter)
 		{
 			$class = 'JHttpTransport' . ucfirst($adapter);
@@ -73,6 +75,7 @@ abstract class ModTweetDisplayBackHttp
 	{
 		$names = array();
 		$iterator = new DirectoryIterator(JPATH_PLATFORM . '/joomla/http/transport');
+
 		foreach ($iterator as $file)
 		{
 			$fileName = $file->getFilename();

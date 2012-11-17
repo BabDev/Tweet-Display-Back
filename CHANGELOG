@@ -16,6 +16,7 @@ $ - Language fix or change
 
 17-November-2012 Michael Babker
 + Add compatibility class for J! 2.5 to simulate JHttpFactory
++ Store the JSON responses as static objects for advanced use
 
 2-November-2012 isalcedo
 ^ Change the <b> tag to <strong> for HTML5 Validation

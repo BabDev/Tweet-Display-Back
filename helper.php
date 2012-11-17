@@ -16,8 +16,24 @@ defined('_JEXEC') or die;
  * @package  TweetDisplayBack
  * @since    1.0
  */
-class ModTweetDisplayBackHelper
+abstract class ModTweetDisplayBackHelper
 {
+	/**
+	 * Container for the tweet response object
+	 *
+	 * @var    object
+	 * @since  2.2
+	 */
+	public static $tweets;
+
+	/**
+	 * Container for the user profile response object
+	 *
+	 * @var    array
+	 * @since  2.2
+	 */
+	public static $user;
+
 	/**
 	 * Function to compile the data to render a formatted object displaying a Twitter feed
 	 *
@@ -111,6 +127,7 @@ class ModTweetDisplayBackHelper
 			{
 				$count = $count * 5;
 			}
+
 			/*
 			 * Determine whether the user has overridden the count parameter with a
 			 * manual number of tweets to retrieve.  Override the $count variable
@@ -134,6 +151,9 @@ class ModTweetDisplayBackHelper
 		// Make sure we've got an array of data
 		elseif (is_array($obj))
 		{
+			// Store the twitter stream response object so it can be accessed (for advanced use)
+			static::$tweets = $obj;
+
 			// Process the filtering options and render the feed
 			$twitter->tweet = self::processFiltering($obj, $params);
 		}
@@ -253,10 +273,12 @@ class ModTweetDisplayBackHelper
 			return $twitter;
 		}
 
+		// Store the user profile response object so it can be accessed (for advanced use)
+		static::$user = $obj;
+
 		/*
 		 * Header info
 		 */
-
 		if ($params->get('headerUser', 1) == 1)
 		{
 			// Check if the Intents action is bypassed
@@ -278,22 +300,26 @@ class ModTweetDisplayBackHelper
 			{
 				$twitter->header->user .= $uname . '</a>';
 			}
+
 			// Append the list name if being pulled
 			if ($feed == 'list')
 			{
 				$twitter->header->user .= ' - <a href="http://twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">' . $list . ' list</a>';
 			}
 		}
+
 		// Show the bio
 		if ($params->get('headerBio', 1) == 1)
 		{
 			$twitter->header->bio = $obj->description;
 		}
+
 		// Show the location
 		if ($params->get('headerLocation', 1) == 1)
 		{
 			$twitter->header->location = $obj->location;
 		}
+
 		// Show the user's URL
 		if ($params->get('headerWeb', 1) == 1)
 		{
@@ -328,6 +354,7 @@ class ModTweetDisplayBackHelper
 				$twitter->footer->follow_me = '<div class="TDB-footer-follow-link">' . $iframe . '</div>';
 			}
 		}
+
 		if ($params->get('footerPoweredBy', 1) == 1)
 		{
 			$site = '<a href="http://www.babdev.com/extensions/tweet-display-back" rel="nofollow" target="_blank">' . JText::_('MOD_TWEETDISPLAYBACK') . '</a>';
@@ -529,6 +556,7 @@ class ModTweetDisplayBackHelper
 				$media = $o->entities->media;
 			}
 		}
+
 		// Generate the object with the user data
 		if ($tweetName == 1)
 		{
@@ -543,6 +571,7 @@ class ModTweetDisplayBackHelper
 			}
 			$twitter[$i]->tweet->user = '<strong><a href="' . $userURL . '" rel="nofollow">' . $tweetedBy . '</a>' . $params->get('tweetUserSeparator') . '</strong>';
 		}
+
 		$twitter[$i]->tweet->avatar = '<img alt="' . $tweetedBy . '" src="' . $avatar . '" width="32" />';
 		$twitter[$i]->tweet->text = $text;
 
@@ -610,6 +639,7 @@ class ModTweetDisplayBackHelper
 				$twitter[$i]->tweet->created .= JHtml::date($o->created_at) . '</a>';
 			}
 		}
+
 		// Display the tweet source
 		if (($params->get('tweetSource', 1) == 1))
 		{
@@ -658,6 +688,7 @@ class ModTweetDisplayBackHelper
 				}
 				$twitter[$i]->tweet->text = str_ireplace('@' . $mention->screen_name, '@<a class="userlink" href="' . $mentionURL . '" rel="nofollow">' . $mention->screen_name . '</a>', $twitter[$i]->tweet->text);
 			}
+
 			foreach ($o->entities->hashtags as $hashtag)
 			{
 				$twitter[$i]->tweet->text = str_ireplace('#' . $hashtag->text, '#<a class="hashlink" href="http://twitter.com/search?q=' . $hashtag->text . '" target="_blank" rel="nofollow">' . $hashtag->text . '</a>', $twitter[$i]->tweet->text);
