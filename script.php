@@ -29,9 +29,7 @@ class Mod_TweetDisplayBackInstallerScript
 	public function preflight($type, $parent)
 	{
 		// Requires Joomla! 2.5
-		$jversion = new JVersion;
-
-		if (version_compare($jversion->getShortVersion(), '2.5', 'lt'))
+		if (version_compare(JVERSION, '2.5', 'lt'))
 		{
 			JError::raiseNotice(null, JText::_('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_VERSION'));
 

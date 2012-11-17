@@ -161,6 +161,8 @@ class ModTweetDisplayBackHelper
 		// Instantiate our JHttp connector if not already
 		if ($http == null)
 		{
+			$transport = null;
+
 			// Set up our JRegistry object for the HTTP connector
 			$options = new JRegistry;
 
@@ -170,8 +172,23 @@ class ModTweetDisplayBackHelper
 			// Use a 30 second timeout
 			$options->set('timeout', 30);
 
+			// If J! 2.5, we have to figure out the transport ourselves, WTF!?
+			if (version_compare(JVERSION, '3.0', 'lt'))
+			{
+				// Include the compat file
+				JLoader::register('ModTweetDisplayBackHttp', __DIR__ . '/compat.php');
+
+				// Get the transport
+				$transport = ModTweetDisplayBackHttp::getAvailableDriver($options);
+
+				if ($transport === false)
+				{
+					return null;
+				}
+			}
+
 			// Instantiate our JHttp object
-			$http = new JHttp($options);
+			$http = new JHttp($options, $transport);
 		}
 
 		// Get the data
