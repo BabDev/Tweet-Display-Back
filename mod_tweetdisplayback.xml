@@ -62,6 +62,7 @@
 					name="twitterCount"
 					type="text"
 					default="3"
+					filter="integer"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_COUNT_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_COUNT_DESCRIPTION"
 					required="true" />
@@ -574,6 +575,7 @@
 					name="tweetsToScan"
 					type="text"
 					default="3"
+					filter="integer"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_TWEETSTOSCAN_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_TWEETSTOSCAN_DESCRIPTION"
 					required="true" />
