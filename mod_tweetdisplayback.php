@@ -74,25 +74,37 @@ if ($params->get('twitterFeedType') != 'widget')
 		$twitter = $helper->compileData();
 	}
 
-	// No hits remaining
-	if (isset($twitter['hits']))
+	// Check to see if processing finished
+	if (!$helper->isProcessed)
 	{
-		echo '<div class="well TDB-tweet' . $tweetClassSfx . '">'
-			. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
-			. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS') . '</div>'
-			. '</div></div>';
+		// If we have cache files still, try to render from them
+		if (file_exists($cacheTweets) && file_exists($cacheUser))
+		{
+			// Render from the cached data
+			$helper->isCached = true;
+			$twitter = $helper->compileFromCache();
+		}
 
-		return;
-	}
-	// No data object and no other error was set
-	elseif ((!$twitter) || (isset($twitter['error'])))
-	{
-		echo '<div class="well TDB-tweet' . $tweetClassSfx . '">'
-			. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
-			. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD') . '</div>'
-			. '</div></div>';
+		// Check for error objects if processing did not finish
+		if (!$helper->isProcessed && isset($twitter['hits']))
+		{
+			echo '<div class="well TDB-tweet' . $tweetClassSfx . '">'
+				. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
+				. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS') . '</div>'
+				. '</div></div>';
 
-		return;
+			return;
+		}
+		// No data object and no other error was set
+		elseif (!$helper->isProcessed && (!$twitter) || (isset($twitter['error'])))
+		{
+			echo '<div class="well TDB-tweet' . $tweetClassSfx . '">'
+				. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
+				. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD') . '</div>'
+				. '</div></div>';
+
+			return;
+		}
 	}
 }
 

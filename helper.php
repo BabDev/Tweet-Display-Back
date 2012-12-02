@@ -19,6 +19,14 @@ defined('_JEXEC') or die;
 class ModTweetDisplayBackHelper
 {
 	/**
+	 * JHttp connector
+	 *
+	 * @var    JHttp
+	 * @since  3.0
+	 */
+	protected $http;
+
+	/**
 	 * Flag to determine whether data is cached or to load fresh
 	 *
 	 * @var    boolean
@@ -27,12 +35,12 @@ class ModTweetDisplayBackHelper
 	public $isCached = false;
 
 	/**
-	 * JHttp connector
+	 * Flag to determine whether data has been fully processed
 	 *
-	 * @var    JHttp
+	 * @var    boolean
 	 * @since  3.0
 	 */
-	protected $http;
+	public $isProcessed = false;
 
 	/**
 	 * Module parameters
@@ -244,6 +252,9 @@ class ModTweetDisplayBackHelper
 
 				// Process the filtering options and render the feed
 				$this->processFiltering();
+
+				// Flag that processing was successful
+				$this->isProcessed = true;
 			}
 		}
 		else
@@ -297,6 +308,9 @@ class ModTweetDisplayBackHelper
 			{
 				// Process the filtering options and render the feed
 				$this->processFiltering();
+
+				// Flag that processing was successful
+				$this->isProcessed = true;
 			}
 		}
 		else
