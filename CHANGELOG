@@ -14,6 +14,14 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+2-December-2012 Michael Babker
+^ Improved error checking to do everything possible to display data
+
+1-December-2012 Michael Babker
+^ Converted helper class to OOP
+^ Updated templates to work with new convention
+^ Replaced JCache mechanism with homebrew code
+
 17-November-2012 Michael Babker
 + Add compatibility class for J! 2.5 to simulate JHttpFactory
 + Store the JSON responses as static objects for advanced use
