@@ -88,7 +88,7 @@ if ($params->get('twitterFeedType') != 'widget')
 		// Check for error objects if processing did not finish
 		if (!$helper->isProcessed && isset($twitter['hits']))
 		{
-			echo '<div class="well TDB-tweet' . $tweetClassSfx . '">'
+			echo '<div class="well well-small TDB-tweet' . $tweetClassSfx . '">'
 				. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
 				. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NOHITS') . '</div>'
 				. '</div></div>';
@@ -98,7 +98,7 @@ if ($params->get('twitterFeedType') != 'widget')
 		// No data object and no other error was set
 		elseif (!$helper->isProcessed && (!$twitter) || (isset($twitter['error'])))
 		{
-			echo '<div class="well TDB-tweet' . $tweetClassSfx . '">'
+			echo '<div class="well well-small TDB-tweet' . $tweetClassSfx . '">'
 				. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
 				. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD') . '</div>'
 				. '</div></div>';
