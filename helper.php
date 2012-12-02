@@ -389,11 +389,15 @@ class ModTweetDisplayBackHelper
 		if (isset($obj->error) && $obj->error == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
 		{
 			$this->twitter['hits'] = '';
+
+			return;
 		}
 		// Check that we have the JSON, otherwise set an error
 		elseif (!$obj)
 		{
 			$this->twitter['error'] = '';
+
+			return;
 		}
 
 		// Store the user profile response object so it can be accessed (for advanced use)
