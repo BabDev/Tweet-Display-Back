@@ -61,7 +61,8 @@ class JFormFieldVersion extends JFormField
 		$target = 'http://www.babdev.com/updates/TDB_version';
 
 		// Get the JSON data
-		$update = ModTweetDisplayBackHelper::getJSON($target);
+		$helper = new ModTweetDisplayBackHelper(new JRegistry);
+		$update = $helper->getJSON($target);
 
 		// Message containing the version
 		if (version_compare(JVERSION, '3.0', 'ge'))
