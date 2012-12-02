@@ -41,9 +41,38 @@ if ($params->get('twitterFeedType') != 'widget')
 // If using a widget, don't need to perform custom module rendering
 if ($params->get('twitterFeedType') != 'widget')
 {
-	// Pull new data
+	// Instantiate the helper
 	$helper = new ModTweetDisplayBackHelper($params);
-	$twitter = $helper->compileData();
+
+	// Check if caching is enabled
+	if ($params->get('cache') == 1)
+	{
+		// Fetch cache time from module parameters and convert to seconds
+		$cacheTime = $params->get('cache_time', 15);
+		$cacheTime = $cacheTime * 60;
+
+		// The files that the data is cached to
+		$cacheTweets = JPATH_CACHE . '/tweetdisplayback_tweets.json';
+		$cacheUser   = JPATH_CACHE . '/tweetdisplayback_user.json';
+
+		// Cache files expired?
+		if ((!file_exists($cacheTweets) && !file_exists($cacheUser)) || (time() - @filemtime($cacheTweets) > $cacheTime && time() - @filemtime($cacheUser) > $cacheTime))
+		{
+			// Do a request to the Twitter API for new data
+			$twitter = $helper->compileData();
+		}
+		else
+		{
+			// Render from the cached data
+			$helper->isCached = true;
+			$twitter = $helper->compileFromCache();
+		}
+	}
+	else
+	{
+		// Do a request to the Twitter API for new data
+		$twitter = $helper->compileData();
+	}
 
 	// No hits remaining
 	if (isset($twitter['hits']))

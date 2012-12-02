@@ -19,6 +19,14 @@ defined('_JEXEC') or die;
 class ModTweetDisplayBackHelper
 {
 	/**
+	 * Flag to determine whether data is cached or to load fresh
+	 *
+	 * @var    boolean
+	 * @since  3.0
+	 */
+	public $isCached = false;
+
+	/**
 	 * JHttp connector
 	 *
 	 * @var    JHttp
@@ -227,6 +235,66 @@ class ModTweetDisplayBackHelper
 			}
 			else
 			{
+				// If caching is enabled and we aren't using cached data, json_encode the object and write it to file
+				if ($this->params->get('cache') == 1)
+				{
+					$data = json_encode($obj);
+					file_put_contents(JPATH_CACHE . '/tweetdisplayback_tweets.json', $data);
+				}
+
+				// Process the filtering options and render the feed
+				$this->processFiltering();
+			}
+		}
+		else
+		{
+			$this->twitter['error'] = '';
+		}
+
+		return $this->twitter;
+	}
+
+	/**
+	 * Function to compile the data from cache and format the object
+	 *
+	 * @return  object  An object with the formatted tweets
+	 *
+	 * @since   1.5
+	 */
+	public function compileFromCache()
+	{
+		// Get the user info
+		$this->prepareUser();
+
+		// Check to see if we have an error or are out of hits
+		if (isset($this->twitter['error']) || isset($this->twitter['hits']))
+		{
+			return $this->twitter;
+		}
+
+		// Retrieve the cached data and decode it
+		$obj = file_get_contents(JPATH_CACHE . '/tweetdisplayback_tweets.json');
+		$obj = json_decode($obj);
+
+		// Check if we've exceeded the rate limit
+		if (isset($obj['error']) && $obj['error'] == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
+		{
+			$this->twitter['hits'] = '';
+		}
+		// Make sure we've got an array of data
+		elseif (is_array($obj))
+		{
+			// Store the twitter stream response object
+			static::$tweets = $obj;
+
+			// Check if $obj has data; if not, return an error
+			if (is_null($obj))
+			{
+				// Set an error
+				$this->twitter[0]->tweet->text = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
+			}
+			else
+			{
 				// Process the filtering options and render the feed
 				$this->processFiltering();
 			}
@@ -289,11 +357,19 @@ class ModTweetDisplayBackHelper
 			$flist = self::toAscii($list);
 		}
 
-		// Get the user JSON
-		$req = 'http://api.twitter.com/1/users/show.json?screen_name=' . $uname;
-
-		// Decode the fetched JSON
-		$obj = $this->getJSON($req);
+		// Get the data
+		if ($this->isCached)
+		{
+			// Fetch from cache
+			$obj = file_get_contents(JPATH_CACHE . '/tweetdisplayback_user.json');
+			$obj = json_decode($obj);
+		}
+		else
+		{
+			// Retrieve data from Twitter
+			$req = 'http://api.twitter.com/1/users/show.json?screen_name=' . $uname;
+			$obj = $this->getJSON($req);
+		}
 
 		// Check if we've exceeded the rate limit
 		if (isset($obj->error) && $obj->error == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
@@ -308,6 +384,13 @@ class ModTweetDisplayBackHelper
 
 		// Store the user profile response object so it can be accessed (for advanced use)
 		static::$user = $obj;
+
+		// If caching is enabled and we aren't using cached data, json_encode the object and write it to file
+		if ($this->params->get('cache') == 1 && !$this->isCached)
+		{
+			$data = json_encode($obj);
+			file_put_contents(JPATH_CACHE . '/tweetdisplayback_user.json', $data);
+		}
 
 		/*
 		 * Header info
