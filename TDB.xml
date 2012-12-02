@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<updates>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.1.2</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/14-tdb-102-and-112-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/12846/55364/mod_tweetdisplayback_j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.1.3</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/16-tdb-103-and-113-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/12861/55490/mod_tweetdisplayback_113.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.1.4</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/17-tdb-104-and-114-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/12888/55600/mod_tweetdisplayback_114.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.1.5</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/22-tdb-105-and-115-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/12926/55815/mod_tweetdisplayback_115.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.1.6</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/23-tdb-106-and-116-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/13063/56819/mod_tweetdisplayback_116.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.1.7</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/25-tdb-107-and-117-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/13160/57598/mod_tweetdisplayback_117.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.1.8</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/36-tdb-108-and-118-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/13280/58483/mod_tweetdisplayback_118.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.1.9</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/38-tdb-109-and-119-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/13312/58651/mod_tweetdisplayback_119.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.1.10</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/39-tdb-1010-and-1110-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/13886/60255/mod_tweetdisplayback_1110.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.6.0</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/58-tdb-15-and-16-released-tlv-discontinued</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/14465/63192/mod_tweetdisplayback_160.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.6.1</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/59-tdb-151-and-161-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/14493/63324/mod_tweetdisplayback_161.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.6.2</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/62-tdb-152-and-162-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/14643/64050/mod_tweetdisplayback_162.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.6.3</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/65-tdb-153-and-163-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/14882/64900/mod_tweetdisplayback_163.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.6.4</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/68-tdb-154-and-164-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/14930/65105/mod_tweetdisplayback_164.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>1.6.5</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/70-tdb-155-and-165-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/15043/65592/mod_tweetdisplayback_165.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.0.0</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/80-tdb-20-stable-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/15339/66710/mod_tweetdisplayback_200-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.0.0</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/80-tdb-20-stable-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/15339/66710/mod_tweetdisplayback_200-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.7" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.0.1</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/99-tdb-201-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/15555/67464/mod_tweetdisplayback_201-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.0.1</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/99-tdb-201-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/15555/67464/mod_tweetdisplayback_201-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.7" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.1.0</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/104-tdb-210-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/15747/68242/mod_tweetdisplayback_210-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.1.0</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/104-tdb-210-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/15747/68242/mod_tweetdisplayback_210-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.7" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.1.1</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/107-tdb-211-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/15860/68708/mod_tweetdisplayback_2.1.1-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.1.1</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/107-tdb-211-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/15860/68708/mod_tweetdisplayback_2.1.1-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.7" />
+	</update>
+    <update>
+   		<name>Tweet Display Back</name>
+   		<description>Twitter display module for Joomla! websites</description>
+   		<element>mod_tweetdisplayback</element>
+   		<type>module</type>
+   		<client_id>0</client_id>
+   		<version>2.1.2</version>
+   		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/112-tdb-212-released</infourl>
+   		<downloads>
+   			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/16258/70615/mod_tweetdisplayback_2.1.2-j16.zip</downloadurl>
+   		</downloads>
+   		<maintainer>Michael Babker</maintainer>
+   		<maintainerurl>http://www.babdev.com</maintainerurl>
+   		<targetplatform name="joomla" version="1.6" />
+   	</update>
+   	<update>
+   		<name>Tweet Display Back</name>
+   		<description>Twitter display module for Joomla! websites</description>
+   		<element>mod_tweetdisplayback</element>
+   		<type>module</type>
+   		<client_id>0</client_id>
+        <version>2.1.2</version>
+        <infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/112-tdb-212-released</infourl>
+   		<downloads>
+   			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/16258/70615/mod_tweetdisplayback_2.1.2-j16.zip</downloadurl>
+   		</downloads>
+   		<maintainer>Michael Babker</maintainer>
+   		<maintainerurl>http://www.babdev.com</maintainerurl>
+   		<targetplatform name="joomla" version="1.7" />
+   	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.1.3</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/113-tdb-213-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/16355/71346/mod_tweetdisplayback_2.1.3-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.1.3</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/113-tdb-213-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/16355/71346/mod_tweetdisplayback_2.1.3-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.7" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.1.3</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/113-tdb-213-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/16355/71346/mod_tweetdisplayback_2.1.3-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="2.5" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.1.4</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/127-tdb-214-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/17082/74285/mod_tweetdisplayback_2.1.4-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.6" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.1.4</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/127-tdb-214-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/17082/74285/mod_tweetdisplayback_2.1.4-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="1.7" />
+	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.1.4</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/127-tdb-214-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/17082/74285/mod_tweetdisplayback_2.1.4-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="2.5" />
+	</update>
+</updates>

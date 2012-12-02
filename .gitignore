@@ -5,11 +5,6 @@
 packages
 releases
 
-# Update Server #
-TDB.xml
-TDB_version
-TDB_version_new
-
 # IDE #
 .buildpath
 .project
