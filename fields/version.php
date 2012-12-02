@@ -58,11 +58,18 @@ class JFormFieldVersion extends JFormField
 		$version = $data['version'];
 
 		// The target to check against
-		$target = 'http://www.babdev.com/updates/TDB_version';
+		$target = 'http://www.babdev.com/updates/TDB_version_new';
+
+		// Get the module params
+		$params = static::getModuleParams($this->form->getValue('id', null, 0));
+
+		// Get the stability level we want to show data for
+		$stability = $params->get('stability', 'stable');
 
 		// Get the JSON data
 		$helper = new ModTweetDisplayBackHelper(new JRegistry);
-		$update = $helper->getJSON($target);
+		$data   = $helper->getJSON($target);
+		$update = $data->$stability;
 
 		// Message containing the version
 		if (version_compare(JVERSION, '3.0', 'ge'))
@@ -92,6 +99,36 @@ class JFormFieldVersion extends JFormField
 		{
 			$message .= '  ' . JText::_('MOD_TWEETDISPLAYBACK_VERSION_CURRENT') . $close;
 		}
+
 		return $message;
+	}
+
+	/**
+	 * Method to get the module's params
+	 *
+	 * @param   integer  $id  The module ID
+	 *
+	 * @return  JRegistry
+	 *
+	 * @since   3.0
+	 */
+	protected static function getModuleParams($id)
+	{
+		// Get a database object
+		$db    = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		// Query the params column
+		$query->select($db->quoteName('params'));
+		$query->from($db->quoteName('#__modules'));
+		$query->where($db->quoteName('id') . ' = ' . $id);
+		$db->setQuery($query);
+		$result = $db->loadResult();
+
+		// Convert the result to a JRegistry object
+		$params = new JRegistry($result);
+
+		// Return the params
+		return $params;
 	}
 }

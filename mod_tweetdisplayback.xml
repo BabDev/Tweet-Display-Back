@@ -30,6 +30,17 @@
 				<field
 					type="version"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_LABEL" />
+				<field
+					name="stability"
+					type="list"
+					default="stable"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_DESCRIPTION" >
+					<option value="alpha">MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_ALPHA</option>
+					<option value="beta">MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_BETA</option>
+					<option value="rc">MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_RC</option>
+					<option value="stable">MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_STABLE</option>
+				</field>
 			</fieldset>
 			<fieldset name="twitter">
 				<field
