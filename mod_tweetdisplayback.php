@@ -42,10 +42,11 @@ if ($params->get('twitterFeedType') != 'widget')
 if ($params->get('twitterFeedType') != 'widget')
 {
 	// Pull new data
-	$twitter = ModTweetDisplayBackHelper::compileData($params);
+	$helper = new ModTweetDisplayBackHelper($params);
+	$twitter = $helper->compileData();
 
 	// No hits remaining
-	if (isset($twitter->hits))
+	if (isset($twitter['hits']))
 	{
 		echo '<div class="well TDB-tweet' . $tweetClassSfx . '">'
 			. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
@@ -55,7 +56,7 @@ if ($params->get('twitterFeedType') != 'widget')
 		return;
 	}
 	// No data object and no other error was set
-	elseif ((!$twitter) || (isset($twitter->error)))
+	elseif ((!$twitter) || (isset($twitter['error'])))
 	{
 		echo '<div class="well TDB-tweet' . $tweetClassSfx . '">'
 			. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
