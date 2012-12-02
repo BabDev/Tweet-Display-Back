@@ -15,8 +15,7 @@ defined('_JEXEC') or die;
 // Prechecked parameters
 $headerAvatar = '';
 $tweetAvatar  = '';
-if (($params->get('headerAvatar', 1) == 0) || (empty($twitter['header']->avatar)))
-{
+if (($params->get('headerAvatar', 1) == 0) || (empty($twitter['header']->avatar))) {
 	$headerAvatar = '-noavatar';
 }
 
