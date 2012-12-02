@@ -16,6 +16,7 @@ $ - Language fix or change
 
 2-December-2012 Michael Babker
 ^ Improved error checking to do everything possible to display data
++ Add ability to override template CSS file
 
 1-December-2012 Michael Babker
 ^ Converted helper class to OOP
