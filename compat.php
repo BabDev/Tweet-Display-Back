@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  * Class for Tweet Display Back to simulate JHttpFactory for J! 2.5
  *
  * @package  TweetDisplayBack
- * @since    2.2
+ * @since    3.0
  */
 abstract class ModTweetDisplayBackHttp
 {
@@ -26,7 +26,7 @@ abstract class ModTweetDisplayBackHttp
 	 *
 	 * @return  JHttpTransport Interface sub-class
 	 *
-	 * @since   2.2
+	 * @since   3.0
 	 */
 	public static function getAvailableDriver(JRegistry $options, $default = null)
 	{
@@ -69,7 +69,7 @@ abstract class ModTweetDisplayBackHttp
 	 *
 	 * @return  array  An array of available transport handlers
 	 *
-	 * @since   2.2
+	 * @since   3.0
 	 */
 	public static function getHttpTransports()
 	{
