@@ -24,7 +24,7 @@ $i = 0;
 
 // Check to see if the header is set to display
 if ($params->get('headerDisplay', 1) == 1) { ?>
-	<div class="well TDB-header<?php echo $headerClassSfx . $headerAvatar; ?>">
+	<div class="well well-small TDB-header<?php echo $headerClassSfx . $headerAvatar; ?>">
 	<?php if (!empty($twitter['header']->user)) { ?>
 		<h4 class="TDB-header-user">
 			<?php echo $twitter['header']->user; ?>
@@ -59,7 +59,7 @@ if (($params->get('tweetAvatar', 1) == 1) && (!empty($tweet->avatar))) {
 	$tweetAvatar = ' TDB-tweetavatar';
 }
 	?>
-    <div class="well TDB-tweet<?php echo $tweetClassSfx . $tweetAvatar; if ($i == $count) {echo ' TDB-last-tweet';} ?>">
+    <div class="well well-small TDB-tweet<?php echo $tweetClassSfx . $tweetAvatar; if ($i == $count) {echo ' TDB-last-tweet';} ?>">
 		<div class="TDB-tweet-container TDB-tweet-align-<?php echo $tweetAlign;?>">
 		<?php if (!empty($tweet->user)) { ?>
 			<h5 class="TDB-tweet-user">
