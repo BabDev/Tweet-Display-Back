@@ -41,24 +41,8 @@ if ($params->get('twitterFeedType') != 'widget')
 // If using a widget, don't need to perform custom module rendering
 if ($params->get('twitterFeedType') != 'widget')
 {
-	// Check if caching is enabled
-	if ($params->get('cache') == 1)
-	{
-		// Set the cache parameters
-		$options   = array('defaultgroup' => 'mod_tweetdisplayback');
-		$cache     = JCache::getInstance('callback', $options);
-		$cacheTime = $params->get('cache_time');
-		$cache->setLifeTime($cacheTime);
-		$cache->setCaching(true);
-
-		// Call the cache; if expired, pull new data
-		$twitter = $cache->call(array('ModTweetDisplayBackHelper', 'compileData'), $params);
-	}
-	else
-	{
-		// Pull new data
-		$twitter = ModTweetDisplayBackHelper::compileData($params);
-	}
+	// Pull new data
+	$twitter = ModTweetDisplayBackHelper::compileData($params);
 
 	// No hits remaining
 	if (isset($twitter->hits))
