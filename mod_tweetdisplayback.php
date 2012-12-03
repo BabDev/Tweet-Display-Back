@@ -36,17 +36,7 @@ if ($params->get('twitterFeedType') != 'widget')
 		$css3 = '-css3';
 	}
 
-	$app = JFactory::getApplication();
-
-	// Check if there's a CSS file override in the user's template
-	if (file_exists(JPATH_SITE . '/templates/' . $app->getTemplate() . '/css/mod_tweetdisplayback/' . $template . $css3 . '.css'))
-	{
-		JHtml::stylesheet('templates/' . $app->getTemplate() . '/css/mod_tweetdisplayback/' . $template . $css3 . '.css', false, false, false);
-	}
-	else
-	{
-		JHtml::stylesheet('modules/mod_tweetdisplayback/media/css/' . $template . $css3 . '.css', false, false, false);
-	}
+	JHtml::stylesheet('mod_tweetdisplayback/' . $template . $css3 . '.css', false, true, false);
 }
 
 // If using a widget, don't need to perform custom module rendering

@@ -13,7 +13,6 @@
 	<files>
 		<folder>fields</folder>
 		<folder>language</folder>
-		<folder>media</folder>
 		<folder>tmpl</folder>
 		<filename module="mod_tweetdisplayback">mod_tweetdisplayback.php</filename>
 		<filename>compat.php</filename>
@@ -21,6 +20,11 @@
 		<filename>index.html</filename>
 		<filename>mod_tweetdisplayback.xml</filename>
 	</files>
+	<media destination="mod_tweetdisplayback" folder="media">
+		<folder>css</folder>
+		<folder>images</folder>
+		<filename>index.html</filename>
+	</media>
 	<updateservers>
 		<server type="extension" name="Tweet Display Back Updates" priority="2">http://www.babdev.com/updates/TDB.xml</server>
 	</updateservers>
