@@ -28,6 +28,14 @@ class Mod_TweetDisplayBackInstallerScript
 	 */
 	public function preflight($type, $parent)
 	{
+		// Requires PHP 5.3
+		if (version_compare(PHP_VERSION, '5.3', 'lt'))
+		{
+			JError::raiseNotice(null, JText::_('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_PHPVERSION'));
+
+			return false;
+		}
+
 		// Requires Joomla! 2.5
 		if (version_compare(JVERSION, '2.5', 'lt'))
 		{
