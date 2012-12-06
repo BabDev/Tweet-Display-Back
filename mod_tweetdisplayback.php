@@ -31,7 +31,7 @@ if ($params->get('twitterFeedType') != 'widget')
 	// If CSS3 is selected, load it's stylesheet except for nostyle or Bootstrap
 	$css3 = '';
 
-	if ($params->get('templateCSS3', 1) == 1 && $template != ('nostyle' || 'bootstrap'))
+	if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle' && $template !=  'bootstrap')
 	{
 		$css3 = '-css3';
 	}
