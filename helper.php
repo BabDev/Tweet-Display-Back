@@ -274,6 +274,9 @@ class ModTweetDisplayBackHelper
 	 */
 	public function compileFromCache()
 	{
+		// Reset the $twitter object in case we errored out previously
+		$this->twitter = array();
+
 		// Get the user info
 		$this->prepareUser();
 
