@@ -73,6 +73,7 @@ class Mod_TweetDisplayBackInstallerScript
 		if (version_compare($version, '3.0', 'lt'))
 		{
 			$this->_removeLanguageFiles();
+			$this->_removeMediaFolder();
 		}
 	}
 
@@ -153,6 +154,25 @@ class Mod_TweetDisplayBackInstallerScript
 			{
 				JFile::delete($engBase . $engFile);
 			}
+		}
+	}
+
+
+	/**
+	 * Function to remove the module's media folder due to restructuring in 3.0
+	 *
+	 * @return  void
+	 *
+	 * @since   3.0
+	 */
+	private function _removeMediaFolder()
+	{
+		jimport('joomla.filesystem.folder');
+
+		// Remove the folder if exists
+		if (is_dir(JPATH_SITE . '/modules/mod_tweetdisplayback/media/'))
+		{
+			JFolder::delete(JPATH_SITE . '/modules/mod_tweetdisplayback/media/');
 		}
 	}
 }
