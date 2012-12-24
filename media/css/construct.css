@@ -11,7 +11,10 @@
 	background: #fff;
 	border: 1px solid #999999;
 	margin: 0 0 20px 0;
-	padding: 4px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	padding: 2px 10px;
 }
 
 .TDB-headavatar {
@@ -94,7 +97,10 @@ span.TDB-header-avatar-right {
 .TDB-tweet-container {
 	background: #fff;
 	border: 1px solid #999999;
-	padding: 4px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	padding: 2px 10px;
 	word-wrap: break-word;
 }
 

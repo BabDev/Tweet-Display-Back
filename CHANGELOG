@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+24-December-2012 Michael Babker
+^ Remove the CSS3 option; override the stylesheet to handle this
+
 5-December-2012 Michael Babker
 ^ Remove the old media folder on update
 

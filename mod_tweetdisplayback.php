@@ -28,15 +28,7 @@ $count          = $params->get('twitterCount', '3') - 1;
 // Don't load module CSS if loading a widget
 if ($params->get('twitterFeedType') != 'widget')
 {
-	// If CSS3 is selected, load it's stylesheet except for nostyle or Bootstrap
-	$css3 = '';
-
-	if ($params->get('templateCSS3', 1) == 1 && $template != 'nostyle' && $template !=  'bootstrap')
-	{
-		$css3 = '-css3';
-	}
-
-	JHtml::stylesheet('mod_tweetdisplayback/' . $template . $css3 . '.css', false, true, false);
+	JHtml::stylesheet('mod_tweetdisplayback/' . $template . '.css', false, true, false);
 }
 
 // If using a widget, don't need to perform custom module rendering

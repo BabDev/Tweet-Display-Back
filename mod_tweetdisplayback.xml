@@ -108,18 +108,6 @@
 					<option
 						value="search">MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_WIDGET_OPTION_SEARCH</option>
 				</field>
-				<field
-					name="templateCSS3"
-					type="radio"
-					class="btn-group"
-					default="0"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_CSS3_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_CSS3_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
-				</field>
 			</fieldset>
 			<fieldset name="widget_settings">
 				<field
