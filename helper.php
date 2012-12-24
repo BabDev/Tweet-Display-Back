@@ -136,7 +136,7 @@ class ModTweetDisplayBackHelper
 		// Convert the list name to a usable string for the JSON
 		if ($list)
 		{
-			$flist = self::toAscii($list);
+			$flist = static::toAscii($list);
 		}
 
 		// Get the user info
@@ -222,7 +222,7 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Fetch the decoded JSON
-		$obj = self::getJSON($req);
+		$obj = static::getJSON($req);
 
 		// Check if we've exceeded the rate limit
 		if (isset($obj['error']) && $obj['error'] == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
@@ -371,7 +371,7 @@ class ModTweetDisplayBackHelper
 		// Convert the list name to a usable string for the URL
 		if ($list)
 		{
-			$flist = self::toAscii($list);
+			$flist = static::toAscii($list);
 		}
 
 		// Get the data
