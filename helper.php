@@ -225,7 +225,7 @@ class ModTweetDisplayBackHelper
 		$obj = static::getJSON($req);
 
 		// Check if we've exceeded the rate limit
-		if (isset($obj['error']) && $obj['error'] == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
+		if (isset($obj->error) && $obj->error == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
 		{
 			$this->twitter['hits'] = '';
 		}
@@ -291,7 +291,7 @@ class ModTweetDisplayBackHelper
 		$obj = json_decode($obj);
 
 		// Check if we've exceeded the rate limit
-		if (isset($obj['error']) && $obj['error'] == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
+		if (isset($obj->error) && $obj->error == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
 		{
 			$this->twitter['hits'] = '';
 		}
