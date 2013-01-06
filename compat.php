@@ -1,23 +1,44 @@
 <?php
 /**
- * Tweet Display Back Module for Joomla!
+ * @package     Joomla.Platform
+ * @subpackage  HTTP
  *
- * @package    TweetDisplayBack
- *
- * @copyright  Copyright (C) 2010-2013 Michael Babker. All rights reserved.
- * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-defined('_JEXEC') or die;
+defined('JPATH_PLATFORM') or die;
 
 /**
- * Class for Tweet Display Back to simulate JHttpFactory for J! 2.5
+ * HTTP factory class.
+ * Provides compatibility with Joomla! 2.5
  *
- * @package  TweetDisplayBack
- * @since    3.0
+ * @package     Joomla.Platform
+ * @subpackage  HTTP
+ * @since       12.1
  */
-abstract class ModTweetDisplayBackHttp
+class JHttpFactory
 {
+	/**
+	 * Method to receive Http instance.
+	 *
+	 * @param   JRegistry  $options   Client options object.
+	 * @param   mixed      $adapters  Adapter (string) or queue of adapters (array) to use for communication.
+	 *
+	 * @return  JHttp      Joomla Http class
+	 *
+	 * @since   12.1
+	 */
+	public static function getHttp(JRegistry $options = null, $adapters = null)
+	{
+		if (empty($options))
+		{
+			$options = new JRegistry;
+		}
+
+		return new JHttp($options, self::getAvailableDriver($options, $adapters));
+	}
+
 	/**
 	 * Finds an available http transport object for communication
 	 *
@@ -26,7 +47,7 @@ abstract class ModTweetDisplayBackHttp
 	 *
 	 * @return  JHttpTransport Interface sub-class
 	 *
-	 * @since   3.0
+	 * @since   12.1
 	 */
 	public static function getAvailableDriver(JRegistry $options, $default = null)
 	{
@@ -69,7 +90,7 @@ abstract class ModTweetDisplayBackHttp
 	 *
 	 * @return  array  An array of available transport handlers
 	 *
-	 * @since   3.0
+	 * @since   12.1
 	 */
 	public static function getHttpTransports()
 	{

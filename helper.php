@@ -98,23 +98,15 @@ class ModTweetDisplayBackHelper
 		// Use a 30 second timeout
 		$options->set('timeout', 30);
 
-		// If J! 2.5, we have to figure out the transport ourselves, WTF!?
-		if (version_compare(JVERSION, '3.0', 'lt'))
+		// If JHttpFactory doesn't exist, then register it with our compatibility file
+		if (!class_exists('JHttpFactory'))
 		{
 			// Include the compat file
-			JLoader::register('ModTweetDisplayBackHttp', __DIR__ . '/compat.php');
-
-			// Get the transport
-			$transport = ModTweetDisplayBackHttp::getAvailableDriver($options);
-
-			if ($transport === false)
-			{
-				return null;
-			}
+			JLoader::register('JHttpFactory', __DIR__ . '/compat.php');
 		}
 
 		// Instantiate our JHttp object
-		$this->connector = new JHttp($options, $transport);
+		$this->connector = JHttpFactory::getHttp($options);
 	}
 
 	/**

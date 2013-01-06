@@ -157,7 +157,6 @@ class Mod_TweetDisplayBackInstallerScript
 		}
 	}
 
-
 	/**
 	 * Function to remove the module's media folder due to restructuring in 3.0
 	 *
