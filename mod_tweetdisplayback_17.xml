@@ -637,7 +637,7 @@
 			</fieldset>
 			<fieldset name="advanced">
 				<field
-					name="cache"
+					name="mymodulecache"
 					type="radio"
 					default="1"
 					label="COM_MODULES_FIELD_CACHING_LABEL"
@@ -648,7 +648,7 @@
 						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 				</field>
 				<field
-					name="cache_time"
+					name="mymodulecache_time"
 					type="text"
 					default="900"
 					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
