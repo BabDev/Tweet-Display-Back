@@ -619,7 +619,7 @@
 	</params>
 	<params group="advanced">
 		<param
-			name="cache"
+			name="mymodulecache"
 			type="radio"
 			default="1"
 			label="Cache"
@@ -630,7 +630,7 @@
 				value="0">No</option>
 		</param>
 		<param
-			name="cache_time"
+			name="mymodulecache_time"
 			type="text"
 			default="900"
 			label="Cache Time"
