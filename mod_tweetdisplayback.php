@@ -49,12 +49,12 @@ if (!extension_loaded('curl'))
 if ($params->get('twitterFeedType') != 'widget')
 {
 	// Check if caching is enabled
-	if ($params->get('cache') == 1)
+	if ($params->get('mymodulecache') == 1)
 	{
 		// Set the cache parameters
 		$options = array('defaultgroup' => 'mod_tweetdisplayback');
 		$cache = JCache::getInstance('callback', $options);
-		$cacheTime = $params->get('cache_time');
+		$cacheTime = $params->get('mymodulecache_time');
 		// J! 1.5 and 1.6 cache is set in seconds, 1.7 caches in minutes
 		//@deprecated  Remove when J! <2.5 support is dropped
 		if (version_compare(JVERSION, '1.7.0', 'ge'))
