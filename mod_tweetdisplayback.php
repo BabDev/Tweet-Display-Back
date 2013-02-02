@@ -52,7 +52,9 @@ if ($params->get('twitterFeedType') != 'widget')
 	if ($params->get('mymodulecache') == 1)
 	{
 		// Set the cache parameters
-		$options = array('defaultgroup' => 'mod_tweetdisplayback');
+		$lang = JFactory::getLanguage();
+        	$tag = $lang->getTag();
+		$options = array('defaultgroup' => 'mod_tweetdisplayback', 'language'=>$tag);
 		$cache = JCache::getInstance('callback', $options);
 		$cacheTime = $params->get('mymodulecache_time');
 		// J! 1.5 and 1.6 cache is set in seconds, 1.7 caches in minutes
