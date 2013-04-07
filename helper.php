@@ -173,12 +173,12 @@ class ModTweetDisplayBackHelper
 		if ($feed == 'list')
 		{
 			// Get the list feed
-			$req = 'http://api.twitter.com/1/lists/statuses.json?slug=' . $flist . '&owner_screen_name=' . $uname . $incRT . '&include_entities=1';
+			$req = 'https://api.twitter.com/1.1/lists/statuses.json?slug=' . $flist . '&owner_screen_name=' . $uname . $incRT . '&include_entities=1';
 		}
 		elseif ($feed == 'favorites')
 		{
 			// Get the favorites feed
-			$req = 'http://api.twitter.com/1/favorites.json?count=' . $count . '&screen_name=' . $uname . '&include_entities=1';
+			$req = 'https://api.twitter.com/1.1/favorites.json?count=' . $count . '&screen_name=' . $uname . '&include_entities=1';
 		}
 		else
 		{
@@ -210,7 +210,7 @@ class ModTweetDisplayBackHelper
 			{
 				$count = $this->params->get('tweetsToScan', 3);
 			}
-			$req = 'http://api.twitter.com/1/statuses/user_timeline.json?count=' . $count . '&screen_name=' . $uname . $incRT . '&include_entities=1';
+			$req = 'https://api.twitter.com/1.1/statuses/user_timeline.json?count=' . $count . '&screen_name=' . $uname . $incRT . '&include_entities=1';
 		}
 
 		// Fetch the decoded JSON
@@ -330,7 +330,11 @@ class ModTweetDisplayBackHelper
 		// Get the data
 		try
 		{
-			$response = $this->connector->get($req);
+			$headers = array(
+				'Authorization' => 'Bearer InsertTokenHere,BranchIsUnusable'
+			);
+
+			$response = $this->connector->get($req, $headers);
 		}
 		catch (UnexpectedValueException $e)
 		{
@@ -376,7 +380,7 @@ class ModTweetDisplayBackHelper
 		else
 		{
 			// Retrieve data from Twitter
-			$req = 'http://api.twitter.com/1/users/show.json?screen_name=' . $uname;
+			$req = 'http://api.twitter.com/1.1/users/show.json?screen_name=' . $uname;
 			$obj = $this->getJSON($req);
 		}
 
