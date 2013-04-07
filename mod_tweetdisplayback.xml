@@ -16,6 +16,7 @@
 		<folder>tmpl</folder>
 		<filename module="mod_tweetdisplayback">mod_tweetdisplayback.php</filename>
 		<filename>compat.php</filename>
+		<filename>curl.php</filename>
 		<filename>helper.php</filename>
 		<filename>index.html</filename>
 		<filename>mod_tweetdisplayback.xml</filename>
@@ -59,8 +60,6 @@
 						value="favorites">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_FAVORITES</option>
 					<option
 						value="list">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_LIST</option>
-					<option
-						value="widget">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_WIDGET</option>
 				</field>
 				<field
 					name="twitterName"
@@ -90,190 +89,10 @@
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_LABEL"
 					directory="modules/mod_tweetdisplayback/tmpl"
 					filter="\.php$"
-					exclude="w_"
 					hide_default="1"
 					hide_none="1"
 					stripext="1"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_DESCRIPTION" />
-				<field
-					name="templateWidget"
-					type="list"
-					default="profile"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_WIDGET_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_WIDGET_DESCRIPTION" >
-					<option
-						value="list">MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_WIDGET_OPTION_LIST</option>
-					<option
-						value="profile">MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_WIDGET_OPTION_PROFILE</option>
-					<option
-						value="search">MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_WIDGET_OPTION_SEARCH</option>
-				</field>
-			</fieldset>
-			<fieldset name="widget_settings">
-				<field
-					name="widgetLive"
-					type="radio"
-					class="btn-group"
-					default="true"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LIVE_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LIVE_DESCRIPTION" >
-					<option
-						value="false">JNO</option>
-					<option
-						value="true">JYES</option>
-				</field>
-				<field
-					name="widgetScroll"
-					type="radio"
-					class="btn-group"
-					default="true"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SCROLL_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SCROLL_DESCRIPTION" >
-					<option
-						value="false">JNO</option>
-					<option
-						value="true">JYES</option>
-				</field>
-				<field
-					name="widgetLoadBehavior"
-					type="radio"
-					class="btn-group"
-					default="default"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOADBEHAVIOR_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOADBEHAVIOR_DESCRIPTION" >
-					<option
-						value="default">MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOADBEHAVIOR_OPTION_TIMED</option>
-					<option
-						value="all">MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOADBEHAVIOR_OPTION_ALL</option>
-				</field>
-				<field
-					name="widgetInterval"
-					type="text"
-					default="6"
-					filter="integer"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_INTERVAL_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_INTERVAL_DESCRIPTION" />
-				<field
-					name="widgetLoop"
-					type="radio"
-					class="btn-group"
-					default="true"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOOP_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_LOOP_DESCRIPTION" >
-					<option
-						value="false">JNO</option>
-					<option
-						value="true">JYES</option>
-				</field>
-				<field
-					name="widgetAvatar"
-					type="radio"
-					class="btn-group"
-					default="true"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_AVATAR_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_AVATAR_DESCRIPTION" >
-					<option
-						value="false">JNO</option>
-					<option
-						value="true">JYES</option>
-				</field>
-				<field
-					name="widgetTimestamp"
-					type="radio"
-					class="btn-group"
-					default="true"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TIMESTAMP_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TIMESTAMP_DESCRIPTION" >
-					<option
-						value="false">JNO</option>
-					<option
-						value="true">JYES</option>
-				</field>
-				<field
-					name="widgetHashtag"
-					type="radio"
-					class="btn-group"
-					default="true"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_HASHTAG_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_HASHTAG_DESCRIPTION" >
-					<option
-						value="false">JNO</option>
-					<option
-						value="true">JYES</option>
-				</field>
-				<field
-					name="widgetTopTweet"
-					type="radio"
-					class="btn-group"
-					default="true"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TOPTWEET_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TOPTWEET_DESCRIPTION" >
-					<option
-						value="false">JNO</option>
-					<option
-						value="true">JYES</option>
-				</field>
-				<field
-					name="widgetSearch"
-					type="text"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SEARCH_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SEARCH_DESCRIPTION" />
-			</fieldset>
-			<fieldset name="widget_appearance">
-				<field
-					name="widgetTitle"
-					type="text"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TITLE_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TITLE_DESCRIPTION" />
-				<field
-					name="widgetSubject"
-					type="text"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SUBJECT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SUBJECT_DESCRIPTION" />
-				<field
-					name="widgetShellBackground"
-					type="color"
-					default="#8ec1da"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLBACKGROUND_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLBACKGROUND_DESCRIPTION" />
-				<field
-					name="widgetShellText"
-					type="color"
-					default="#ffffff"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLTEXT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_SHELLTEXT_DESCRIPTION" />
-				<field
-					name="widgetTweetBackground"
-					type="color"
-					default="#ffffff"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETBACKGROUND_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETBACKGROUND_DESCRIPTION" />
-				<field
-					name="widgetTweetText"
-					type="color"
-					default="#444444"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETTEXT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETTEXT_DESCRIPTION" />
-				<field
-					name="widgetTweetLinks"
-					type="color"
-					default="#1985b5"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETLINKS_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_TWEETLINKS_DESCRIPTION" />
-				<field
-					name="widgetWidth"
-					type="text"
-					default="250"
-					filter="integer"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_WIDTH_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_WIDTH_DESCRIPTION" />
-				<field
-					name="widgetHeight"
-					type="text"
-					default="300"
-					filter="integer"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_HEIGHT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_WIDGET_HEIGHT_DESCRIPTION" />
 			</fieldset>
 			<fieldset name="header">
 				<field
