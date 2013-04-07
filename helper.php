@@ -88,7 +88,6 @@ class ModTweetDisplayBackHelper
 	 * @param   JRegistry  $params  The module parameters
 	 *
 	 * @since   3.0
-	 * @throws  RuntimeException if OAuth token cannot be pulled
 	 */
 	public function __construct($params)
 	{
@@ -119,21 +118,6 @@ class ModTweetDisplayBackHelper
 
 		// Instantiate our JHttp object
 		$this->connector = JHttpFactory::getHttp($options);
-
-		// Get the bearer token if in the site application
-		if (JFactory::getApplication()->isSite())
-		{
-			$response = $this->connector->get('http://www.babdev.com/tokenRequest.php');
-
-			if ($response->code == 200)
-			{
-				$this->bearer = base64_decode($response->body);
-			}
-			else
-			{
-				throw new RuntimeException('Could not retrieve bearer token');
-			}
-		}
 	}
 
 	/**
@@ -241,7 +225,16 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Fetch the decoded JSON
-		$obj = static::getJSON($req);
+		try
+		{
+			$obj = $this->getJSON($req);
+		}
+		catch (RuntimeException $e)
+		{
+			$this->twitter['error'] = '';
+
+			return $this->twitter;
+		}
 
 		// Check if we've exceeded the rate limit
 		if (isset($obj->error) && $obj->error == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
@@ -351,12 +344,28 @@ class ModTweetDisplayBackHelper
 	 * @return  object  The fetched JSON query
 	 *
 	 * @since   1.0
+	 * @throws  RuntimeException
 	 */
 	public function getJSON($req)
 	{
 		// Get the data
 		try
 		{
+			// If we haven't retrieved the bearer yet, get it if in the site application
+			if (($this->bearer == null) && JFactory::getApplication()->isSite())
+			{
+				$response = $this->connector->get('http://www.babdev.com/tokenRequest.php');
+
+				if ($response->code == 200)
+				{
+					$this->bearer = base64_decode($response->body);
+				}
+				else
+				{
+					throw new RuntimeException('Could not retrieve bearer token');
+				}
+			}
+
 			$headers = array(
 				'Authorization' => $this->bearer
 			);
@@ -408,7 +417,17 @@ class ModTweetDisplayBackHelper
 		{
 			// Retrieve data from Twitter
 			$req = 'https://api.twitter.com/1.1/users/show.json?screen_name=' . $uname;
-			$obj = $this->getJSON($req);
+
+			try
+			{
+				$obj = $this->getJSON($req);
+			}
+			catch (RuntimeException $e)
+			{
+				$this->twitter['error'] = '';
+
+				return;
+			}
 		}
 
 		// Check if we've exceeded the rate limit
