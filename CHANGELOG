@@ -14,6 +14,12 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 3.0 Beta 2 - Released 8-April-2013
+--------------------------------------------------
+7-April-2013 Michael Babker
+^ Convert to Twitter API 1.1
+
 6-April-2013 Michael Babker
 - Remove the Widget templates, Twitter no longer supports these
 
@@ -24,7 +30,7 @@ $ - Language fix or change
 ^ Remove the old media folder on update
 
 --------------------------------------------------
-Tweet Display Back 3.0 Beta - Released 5-December-2011
+Tweet Display Back 3.0 Beta - Released 5-December-2012
 --------------------------------------------------
 5-December-2012 Michael Babker
 ^ Add check for PHP 5.3
