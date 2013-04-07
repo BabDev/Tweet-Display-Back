@@ -10,9 +10,6 @@
 
 defined('_JEXEC') or die;
 
-// Override JHttpTransportCurl due to a bug in the user agent check
-JLoader::register('JHttpTransportCurl', __DIR__ . '/curl.php');
-
 // Include the helper
 JLoader::register('ModTweetDisplayBackHelper', __DIR__ . '/helper.php');
 
@@ -32,7 +29,19 @@ $count          = $params->get('twitterCount', '3') - 1;
 JHtml::stylesheet('mod_tweetdisplayback/' . $template . '.css', false, true, false);
 
 // Instantiate the helper
-$helper = new ModTweetDisplayBackHelper($params);
+try
+{
+	$helper = new ModTweetDisplayBackHelper($params);
+}
+catch (RuntimeException $e)
+{
+	echo '<div class="well well-small TDB-tweet' . $tweetClassSfx . '">'
+		. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
+		. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD') . '</div>'
+		. '</div></div>';
+
+	return;
+}
 
 // Check if caching is enabled
 if ($params->get('cache') == 1)

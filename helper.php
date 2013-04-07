@@ -19,6 +19,14 @@ defined('_JEXEC') or die;
 class ModTweetDisplayBackHelper
 {
 	/**
+	 * OAuth bearer token for use in API requests
+	 *
+	 * @var    string
+	 * @since  3.0
+	 */
+	protected $bearer;
+
+	/**
 	 * JHttp connector
 	 *
 	 * @var    JHttp
@@ -79,7 +87,8 @@ class ModTweetDisplayBackHelper
 	 *
 	 * @param   JRegistry  $params  The module parameters
 	 *
-	 * @since  3.0
+	 * @since   3.0
+	 * @throws  RuntimeException if OAuth token cannot be pulled
 	 */
 	public function __construct($params)
 	{
@@ -105,8 +114,26 @@ class ModTweetDisplayBackHelper
 			JLoader::register('JHttpFactory', __DIR__ . '/compat.php');
 		}
 
+		// Override JHttpTransportCurl due to a bug in the user agent check
+		JLoader::register('JHttpTransportCurl', __DIR__ . '/curl.php');
+
 		// Instantiate our JHttp object
 		$this->connector = JHttpFactory::getHttp($options);
+
+		// Get the bearer token if in the site application
+		if (JFactory::getApplication()->isSite())
+		{
+			$response = $this->connector->get('http://www.babdev.com/tokenRequest.php');
+
+			if ($response->code == 200)
+			{
+				$this->bearer = base64_decode($response->body);
+			}
+			else
+			{
+				throw new RuntimeException('Could not retrieve bearer token');
+			}
+		}
 	}
 
 	/**
@@ -173,12 +200,12 @@ class ModTweetDisplayBackHelper
 		if ($feed == 'list')
 		{
 			// Get the list feed
-			$req = 'http://api.twitter.com/1/lists/statuses.json?slug=' . $flist . '&owner_screen_name=' . $uname . $incRT . '&include_entities=1';
+			$req = 'https://api.twitter.com/1.1/lists/statuses.json?slug=' . $flist . '&owner_screen_name=' . $uname . $incRT . '&include_entities=1';
 		}
 		elseif ($feed == 'favorites')
 		{
 			// Get the favorites feed
-			$req = 'http://api.twitter.com/1/favorites.json?count=' . $count . '&screen_name=' . $uname . '&include_entities=1';
+			$req = 'https://api.twitter.com/1.1/favorites.json?count=' . $count . '&screen_name=' . $uname . '&include_entities=1';
 		}
 		else
 		{
@@ -210,7 +237,7 @@ class ModTweetDisplayBackHelper
 			{
 				$count = $this->params->get('tweetsToScan', 3);
 			}
-			$req = 'http://api.twitter.com/1/statuses/user_timeline.json?count=' . $count . '&screen_name=' . $uname . $incRT . '&include_entities=1';
+			$req = 'https://api.twitter.com/1.1/statuses/user_timeline.json?count=' . $count . '&screen_name=' . $uname . $incRT . '&include_entities=1';
 		}
 
 		// Fetch the decoded JSON
@@ -330,7 +357,11 @@ class ModTweetDisplayBackHelper
 		// Get the data
 		try
 		{
-			$response = $this->connector->get($req);
+			$headers = array(
+				'Authorization' => $this->bearer
+			);
+
+			$response = $this->connector->get($req, $headers);
 		}
 		catch (UnexpectedValueException $e)
 		{
@@ -376,7 +407,7 @@ class ModTweetDisplayBackHelper
 		else
 		{
 			// Retrieve data from Twitter
-			$req = 'http://api.twitter.com/1/users/show.json?screen_name=' . $uname;
+			$req = 'https://api.twitter.com/1.1/users/show.json?screen_name=' . $uname;
 			$obj = $this->getJSON($req);
 		}
 

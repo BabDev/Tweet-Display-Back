@@ -69,7 +69,7 @@ class JHttpTransportCurl implements JHttpTransport
 		$options[CURLOPT_NOBODY] = ($method === 'HEAD');
 
 		// Initialize the certificate store
-		$options[CURLOPT_CAINFO] = $this->options->get('curl.certpath', __DIR__ . '/cacert.pem');
+		$options[CURLOPT_CAINFO] = $this->options->get('curl.certpath', JPATH_PLATFORM . '/joomla/http/transport/cacert.pem');
 
 		// If data exists let's encode it and make sure our Content-type header is set.
 		if (isset($data))
@@ -120,7 +120,7 @@ class JHttpTransportCurl implements JHttpTransport
 		// If an explicit user agent is given use it.
 		if (isset($userAgent))
 		{
-			$headers[CURLOPT_USERAGENT] = $userAgent;
+			$options[CURLOPT_USERAGENT] = $userAgent;
 		}
 
 		// Set the request URL.
