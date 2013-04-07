@@ -88,7 +88,6 @@
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_LABEL"
 					directory="modules/mod_tweetdisplayback/tmpl"
 					filter="\.php$"
-					exclude="w_"
 					hide_default="1"
 					hide_none="1"
 					stripext="1"

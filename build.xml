@@ -12,7 +12,7 @@
 	<target
 		name="dev_head"
 		description="Builds test packages based on the development head"
-		depends="phpcs,rebuild-packages,common-files,25-package"
+		depends="rebuild-packages,phpcs,build-packages"
 	>
 		<echo msg="Deleting old master build" />
 		<delete quiet="yes" includeemptydirs="true">
@@ -20,12 +20,9 @@
 				<include name="releases/mod_tweetdisplayback_master.zip" />
 			</fileset>
 		</delete>
-		<echo msg="Build 2.5 package" />
+		<echo msg="Build package" />
 		<zip destfile="releases/mod_tweetdisplayback_master.zip">
-			<fileset dir="packages/2.5">
-				<include name="**" />
-			</fileset>
-			<fileset dir="packages/common">
+			<fileset dir="packages">
 				<include name="**" />
 			</fileset>
 		</zip>
@@ -33,14 +30,11 @@
 	<target
 		name="release"
 		description="Builds release packages based on the development head"
-		depends="rebuild-packages,common-files,25-package"
+		depends="rebuild-packages,build-packages"
 	>
-		<echo msg="Build 2.5 package" />
+		<echo msg="Build package" />
 		<zip destfile="releases/mod_tweetdisplayback_${version}.zip">
-			<fileset dir="packages/2.5">
-				<include name="**" />
-			</fileset>
-			<fileset dir="packages/common">
+			<fileset dir="packages">
 				<include name="**" />
 			</fileset>
 		</zip>
@@ -50,41 +44,25 @@
 		<gitpush repository="${repo.dir.resolved}" gitPath="${localgit}" />
 		<gitpush repository="${repo.dir.resolved}" tags="true" gitPath="${localgit}" />
 	</target>
-	<target name="common-files" description="Stages the common files" depends="rebuild-packages">
+	<target name="build-packages" description="Stages the common files" depends="rebuild-packages">
 		<echo msg="Create temp folder" />
-		<mkdir dir="packages/common" />
+		<mkdir dir="packages" />
 		<echo msg="Copy files" />
-		<copy todir="packages/common/media">
-			<fileset dir="media" />
-		</copy>
-		<copy todir="packages/common/tmpl">
-			<fileset dir="tmpl" />
-		</copy>
-		<copy todir="packages/common">
-			<fileset dir=".">
-				<include name="CHANGELOG" />
-				<include name="compat.php" />
-				<include name="helper.php" />
-				<include name="index.html" />
-				<include name="mod_tweetdisplayback.php" />
-			</fileset>
-	    </copy>
-	</target>
-	<target name="25-package" description="Builds the 2.5 package" depends="rebuild-packages">
-		<echo msg="Create 2.5 temp folder" />
-		<mkdir dir="packages/2.5" />
-		<echo msg="Create 2.5 language folder" />
-		<copy todir="packages/2.5/language">
-			<fileset dir="language/2.5" />
-	    </copy>
-		<echo msg="Create 2.5 fields folder" />
-		<copy todir="packages/2.5/fields">
+		<copy todir="packages/fields">
 			<fileset dir="fields" />
 	    </copy>
-		<echo msg="Copy 2.5 manifest" />
+		<copy todir="packages/language">
+			<fileset dir="language" />
+	    </copy>
+		<copy todir="packages/media">
+			<fileset dir="media" />
+		</copy>
+		<copy todir="packages/tmpl">
+			<fileset dir="tmpl" />
+		</copy>
 		<copy
 			file="mod_tweetdisplayback.xml"
-			tofile="packages/2.5/mod_tweetdisplayback.xml"
+			tofile="packages/mod_tweetdisplayback.xml"
 			overwrite="true">
 			<filterchain>
 				<replacetokens begintoken="##" endtoken="##">
@@ -93,6 +71,16 @@
 				</replacetokens>
 			</filterchain>
 		</copy>
+		<copy todir="packages">
+			<fileset dir=".">
+				<include name="CHANGELOG" />
+				<include name="compat.php" />
+				<include name="helper.php" />
+				<include name="index.html" />
+				<include name="mod_tweetdisplayback.php" />
+				<include name="script.php" />
+			</fileset>
+	    </copy>
 	</target>
 	<target name="rebuild-packages" description="Delete old packages">
 		<echo msg="Deleting packages dir" />
