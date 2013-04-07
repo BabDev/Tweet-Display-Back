@@ -10,6 +10,9 @@
 
 defined('_JEXEC') or die;
 
+// Override JHttpTransportCurl due to a bug in the user agent check
+JLoader::register('JHttpTransportCurl', __DIR__ . '/curl.php');
+
 // Include the helper
 JLoader::register('ModTweetDisplayBackHelper', __DIR__ . '/helper.php');
 

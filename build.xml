@@ -75,6 +75,7 @@
 			<fileset dir=".">
 				<include name="CHANGELOG" />
 				<include name="compat.php" />
+				<include name="curl.php" />
 				<include name="helper.php" />
 				<include name="index.html" />
 				<include name="mod_tweetdisplayback.php" />
