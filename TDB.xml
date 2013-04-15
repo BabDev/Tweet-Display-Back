@@ -480,4 +480,19 @@
 		<maintainerurl>http://www.babdev.com</maintainerurl>
 		<targetplatform name="joomla" version="3.0" />
 	</update>
+	<update>
+		<name>Tweet Display Back</name>
+		<description>Twitter display module for Joomla! websites</description>
+		<element>mod_tweetdisplayback</element>
+		<type>module</type>
+		<client_id>0</client_id>
+		<version>2.1.4</version>
+		<infourl title="Tweet Display Back Updated">http://www.babdev.com/extensions/updates/127-tdb-214-released</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">http://joomlacode.org/gf/download/frsrelease/17082/74285/mod_tweetdisplayback_2.1.4-j16.zip</downloadurl>
+		</downloads>
+		<maintainer>Michael Babker</maintainer>
+		<maintainerurl>http://www.babdev.com</maintainerurl>
+		<targetplatform name="joomla" version="3.1" />
+	</update>
 </updates>
