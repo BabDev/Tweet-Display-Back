@@ -126,8 +126,17 @@ class ModTweetDisplayBackHelper
 			JLoader::register('JHttpTransportCurl', __DIR__ . '/curl.php');
 		}
 
+		// If the user has forced a specific connector, use it, otherwise allow JHttpFactory to decide
+		$connector = $this->params->get('overrideConnector', null);
+
+		// If the override is 'no', set to null
+		if ($connector == 'no')
+		{
+			$connector = null;
+		}
+
 		// Instantiate our JHttp object
-		$this->connector = JHttpFactory::getHttp($options);
+		$this->connector = JHttpFactory::getHttp($options, $connector);
 	}
 
 	/**

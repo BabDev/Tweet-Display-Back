@@ -489,6 +489,22 @@
 					<option
 						value="0">JNO</option>
 				</field>
+				<field
+					name="overrideConnector"
+					type="list"
+					class="btn-group"
+					default="no"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_DESCRIPTION" >
+					<option
+						value="no">JNO</option>
+					<option
+						value="curl">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_OPTION_CURL</option>
+					<option
+						value="socket">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_OPTION_SOCKET</option>
+					<option
+						value="stream">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_OPTION_STREAM</option>
+				</field>
 			</fieldset>
 		</fields>
 	</config>
