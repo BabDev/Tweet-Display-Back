@@ -106,7 +106,7 @@
 		<phpcodesniffer
 			standard="${platform.dir}/build/phpcs/Joomla"
 			format="full"
-			ignorePatterns="packages/*,releases/*,tmpl/*"
+			ignorePatterns="packages/*,releases/*,tmpl/*,curl.php,curl_25.php"
 			file="${repo.dir}"
 			allowedFileExtensions="php"
 			verbosity="1">
