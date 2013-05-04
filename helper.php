@@ -113,8 +113,18 @@ class ModTweetDisplayBackHelper
 			JLoader::register('JHttpFactory', __DIR__ . '/compat.php');
 		}
 
-		// Override JHttpTransportCurl due to a bug in the user agent check
-		JLoader::register('JHttpTransportCurl', __DIR__ . '/curl.php');
+		/*
+		 * Override JHttpTransportCurl due to a bug in the user agent check
+		 * Since the interface is different between 2.5 and 3.0, need to handle the classes separately
+		 */
+		if (version_compare(JVERSION, '3.0', 'lt'))
+		{
+			JLoader::register('JHttpTransportCurl', __DIR__ . '/curl_25.php');
+		}
+		else
+		{
+			JLoader::register('JHttpTransportCurl', __DIR__ . '/curl.php');
+		}
 
 		// Instantiate our JHttp object
 		$this->connector = JHttpFactory::getHttp($options);

@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+4-May-2013 Michael Babker
+# Fatal error: Declaration of JHttpTransportCurl::__construct()
+
 --------------------------------------------------
 Tweet Display Back 3.0.0 - Released 3-May-2013
 --------------------------------------------------

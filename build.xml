@@ -4,7 +4,7 @@
 	<property file="./build.properties" />
 	<property name="repo.dir" value="." />
 	<resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" />
-	<property name="version" value="3.0.0" />
+	<property name="version" value="3.0.1.dev" />
 	<tstamp>
 		<format property="build.date" pattern="%Y-%m-%d" />
 	</tstamp>
@@ -76,6 +76,7 @@
 				<include name="CHANGELOG" />
 				<include name="compat.php" />
 				<include name="curl.php" />
+				<include name="curl_25.php" />
 				<include name="helper.php" />
 				<include name="index.html" />
 				<include name="mod_tweetdisplayback.php" />
