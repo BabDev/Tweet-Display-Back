@@ -63,7 +63,12 @@ span.TDB-header-avatar-right {
 .TDB-tweet {
 }
 
-.TDB-tweet-avatar {
+.TDB-tweetavatar-left .TDB-tweet-avatar {
+	float: left;
+}
+
+.TDB-tweetavatar-right .TDB-tweet-avatar {
+	float: right;
 }
 
 .TDB-tweet-avatar img {
