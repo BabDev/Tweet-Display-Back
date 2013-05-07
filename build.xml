@@ -16,12 +16,12 @@
 	>
 		<echo msg="Deleting old master build" />
 		<delete quiet="yes" includeemptydirs="true">
-			<fileset dir="*">
-				<include name="releases/mod_tweetdisplayback_master.zip" />
+			<fileset dir=".">
+				<include name="mod_tweetdisplayback_master.zip" />
 			</fileset>
 		</delete>
 		<echo msg="Build package" />
-		<zip destfile="releases/mod_tweetdisplayback_master.zip">
+		<zip destfile="mod_tweetdisplayback_master.zip">
 			<fileset dir="packages">
 				<include name="**" />
 			</fileset>
@@ -86,11 +86,7 @@
 	</target>
 	<target name="rebuild-packages" description="Delete old packages">
 		<echo msg="Deleting packages dir" />
-		<delete quiet="yes" includeemptydirs="true">
-			<fileset dir="*">
-				<include name="packages" />
-			</fileset>
-		</delete>
+		<delete dir="${repo.dir}/packages" includeemptydirs="true" failonerror="true" />
 		<echo msg="Creating packages dir" />
 		<mkdir dir="packages" />
 	</target>
