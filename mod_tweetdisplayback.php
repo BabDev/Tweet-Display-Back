@@ -30,16 +30,16 @@ JHtml::stylesheet('mod_tweetdisplayback/' . $template . '.css', false, true, fal
 
 $helper = new ModTweetDisplayBackHelper($params);
 
+// The files that the data is cached to
+$cacheTweets = JPATH_CACHE . '/tweetdisplayback_tweets.json';
+$cacheUser   = JPATH_CACHE . '/tweetdisplayback_user.json';
+
 // Check if caching is enabled
 if ($params->get('cache') == 1)
 {
 	// Fetch cache time from module parameters and convert to seconds
 	$cacheTime = $params->get('cache_time', 15);
 	$cacheTime = $cacheTime * 60;
-
-	// The files that the data is cached to
-	$cacheTweets = JPATH_CACHE . '/tweetdisplayback_tweets.json';
-	$cacheUser   = JPATH_CACHE . '/tweetdisplayback_user.json';
 
 	// Cache files expired?
 	if ((!file_exists($cacheTweets) && !file_exists($cacheUser)) || (time() - @filemtime($cacheTweets) > $cacheTime && time() - @filemtime($cacheUser) > $cacheTime))
