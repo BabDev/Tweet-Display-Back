@@ -15,7 +15,9 @@ $ - Language fix or change
 ! - Note
 
 7-May-2013 Michael Babker
+# Move the variables for the cache file paths
 ^ Implement forked version of JHttp to provide better cross-version compatibility
+^ Ensure widget templates have been removed
 
 4-May-2013 Michael Babker
 # Fatal error: Declaration of JHttpTransportCurl::__construct()

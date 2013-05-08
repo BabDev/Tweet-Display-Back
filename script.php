@@ -69,17 +69,18 @@ class Mod_TweetDisplayBackInstallerScript
 			return;
 		}
 
-		// If coming from 2.1 or earlier, remove language files in system language folder
+		// If coming from 2.1 or earlier, remove language files in system language folder and the media folder
 		if (version_compare($version, '3.0', 'lt'))
 		{
 			$this->_removeLanguageFiles();
 			$this->_removeMediaFolder();
 		}
 
-		// If coming from 3.0.0, remove the compat files
+		// If coming from 3.0.0 or earlier, remove the compat files and widget templates (wasn't handled for 3.0.0)
 		if (version_compare($version, '3.0.1', 'lt'))
 		{
 			$this->_removeCompatFiles();
+			$this->_removeWidgets();
 		}
 
 	}
@@ -204,6 +205,31 @@ class Mod_TweetDisplayBackInstallerScript
 		if (is_dir(JPATH_SITE . '/modules/mod_tweetdisplayback/media/'))
 		{
 			JFolder::delete(JPATH_SITE . '/modules/mod_tweetdisplayback/media/');
+		}
+	}
+
+	/**
+	 * Function to remove the widget templates
+	 *
+	 * @return  void
+	 *
+	 * @since   3.0.1
+	 */
+	private function _removeWidgets()
+	{
+		jimport('joomla.filesystem.file');
+
+		// The files to remove
+		$base  = JPATH_SITE . '/modules/mod_tweetdisplayback/tmpl/';
+		$files = array('w_list.php', 'w_profile.php', 'w_search.php');
+
+		// Remove the files
+		foreach ($files as $file)
+		{
+			if (is_file($base . $file))
+			{
+				JFile::delete($base . $file);
+			}
 		}
 	}
 }
