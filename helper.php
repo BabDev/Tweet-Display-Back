@@ -27,9 +27,9 @@ class ModTweetDisplayBackHelper
 	protected $bearer;
 
 	/**
-	 * JHttp connector
+	 * BDHttp connector
 	 *
-	 * @var    JHttp
+	 * @var    BDHttp
 	 * @since  3.0
 	 */
 	protected $http;
@@ -94,10 +94,10 @@ class ModTweetDisplayBackHelper
 		// Store the module params
 		$this->params = $params;
 
-		// Start setting up the JHttp connector
+		// Start setting up the BDHttp connector
 		$transport = null;
 
-		// Set up our JRegistry object for the JHttp connector
+		// Set up our JRegistry object for the BDHttp connector
 		$options = new JRegistry;
 
 		// Set the user agent
@@ -106,27 +106,10 @@ class ModTweetDisplayBackHelper
 		// Use a 30 second timeout
 		$options->set('timeout', 30);
 
-		// If JHttpFactory doesn't exist, then register it with our compatibility file
-		if (!class_exists('JHttpFactory'))
-		{
-			// Include the compat file
-			JLoader::register('JHttpFactory', __DIR__ . '/compat.php');
-		}
+		// Include the BabDev library
+		JLoader::registerPrefix('BD', __DIR__ . '/libraries');
 
-		/*
-		 * Override JHttpTransportCurl due to a bug in the user agent check
-		 * Since the interface is different between 2.5 and 3.0, need to handle the classes separately
-		 */
-		if (version_compare(JVERSION, '3.0', 'lt'))
-		{
-			JLoader::register('JHttpTransportCurl', __DIR__ . '/curl_25.php');
-		}
-		else
-		{
-			JLoader::register('JHttpTransportCurl', __DIR__ . '/curl.php');
-		}
-
-		// If the user has forced a specific connector, use it, otherwise allow JHttpFactory to decide
+		// If the user has forced a specific connector, use it, otherwise allow BDHttpFactory to decide
 		$connector = $this->params->get('overrideConnector', null);
 
 		// If the override is 'no', set to null
@@ -135,8 +118,8 @@ class ModTweetDisplayBackHelper
 			$connector = null;
 		}
 
-		// Instantiate our JHttp object
-		$this->connector = JHttpFactory::getHttp($options, $connector);
+		// Instantiate our BDHttp object
+		$this->connector = BDHttpFactory::getHttp($options, $connector);
 	}
 
 	/**

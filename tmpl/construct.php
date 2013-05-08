@@ -10,7 +10,7 @@
 
 defined('_JEXEC') or die;
 
-/* @var JRegistry $params */
+/* @type JRegistry $params */
 
 // Prechecked parameters
 $headerAvatar = '';

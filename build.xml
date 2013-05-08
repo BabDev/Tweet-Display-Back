@@ -54,6 +54,9 @@
 		<copy todir="packages/language">
 			<fileset dir="language" />
 	    </copy>
+		<copy todir="packages/libraries">
+			<fileset dir="libraries" />
+	    </copy>
 		<copy todir="packages/media">
 			<fileset dir="media" />
 		</copy>
@@ -74,9 +77,6 @@
 		<copy todir="packages">
 			<fileset dir=".">
 				<include name="CHANGELOG" />
-				<include name="compat.php" />
-				<include name="curl.php" />
-				<include name="curl_25.php" />
 				<include name="helper.php" />
 				<include name="index.html" />
 				<include name="mod_tweetdisplayback.php" />
@@ -102,7 +102,7 @@
 		<phpcodesniffer
 			standard="${platform.dir}/build/phpcs/Joomla"
 			format="full"
-			ignorePatterns="packages/*,releases/*,tmpl/*,curl.php,curl_25.php"
+			ignorePatterns="packages/*,releases/*,tmpl/*,libraries/*"
 			file="${repo.dir}"
 			allowedFileExtensions="php"
 			verbosity="1">

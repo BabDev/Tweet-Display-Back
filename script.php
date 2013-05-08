@@ -75,6 +75,13 @@ class Mod_TweetDisplayBackInstallerScript
 			$this->_removeLanguageFiles();
 			$this->_removeMediaFolder();
 		}
+
+		// If coming from 3.0.0, remove the compat files
+		if (version_compare($version, '3.0.1', 'lt'))
+		{
+			$this->_removeCompatFiles();
+		}
+
 	}
 
 	/**
@@ -113,6 +120,31 @@ class Mod_TweetDisplayBackInstallerScript
 		$version = $record->version;
 
 		return $version;
+	}
+
+	/**
+	 * Function to remove the compatibility files introduced in 3.0.0 in favor of the BDHttp library
+	 *
+	 * @return  void
+	 *
+	 * @since   3.0.1
+	 */
+	private function _removeCompatFiles()
+	{
+		jimport('joomla.filesystem.file');
+
+		// The files to remove
+		$base  = JPATH_SITE . '/modules/mod_tweetdisplayback/';
+		$files = array('compat.php', 'curl.php', 'curl_25.php');
+
+		// Remove the files
+		foreach ($files as $file)
+		{
+			if (is_file($base . $file))
+			{
+				JFile::delete($base . $file);
+			}
+		}
 	}
 
 	/**

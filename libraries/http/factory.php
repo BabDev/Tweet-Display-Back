@@ -1,9 +1,14 @@
 <?php
 /**
- * @package     Joomla.Platform
+ * BabDev HTTP Package
+ *
+ * The BabDev HTTP package is a fork of the Joomla HTTP package as found in Joomla! CMS 3.1.1
+ * and provides selected bug fixes and a single codebase for consistent use in CMS 2.5 and newer.
+ *
+ * @package     BabDev.Library
  * @subpackage  HTTP
  *
- * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2012-2013 Michael Babker. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -11,23 +16,22 @@ defined('JPATH_PLATFORM') or die;
 
 /**
  * HTTP factory class.
- * Provides compatibility with Joomla! 2.5
  *
- * @package     Joomla.Platform
+ * @package     BabDev.Library
  * @subpackage  HTTP
- * @since       12.1
+ * @since       1.0
  */
-class JHttpFactory
+class BDHttpFactory
 {
 	/**
-	 * Method to receive Http instance.
+	 * Method to retrieve a BDHttp instance.
 	 *
 	 * @param   JRegistry  $options   Client options object.
 	 * @param   mixed      $adapters  Adapter (string) or queue of adapters (array) to use for communication.
 	 *
-	 * @return  JHttp      Joomla Http class
+	 * @return  BDHttp     Http class
 	 *
-	 * @since   12.1
+	 * @since   1.0
 	 */
 	public static function getHttp(JRegistry $options = null, $adapters = null)
 	{
@@ -36,18 +40,18 @@ class JHttpFactory
 			$options = new JRegistry;
 		}
 
-		return new JHttp($options, self::getAvailableDriver($options, $adapters));
+		return new BDHttp($options, self::getAvailableDriver($options, $adapters));
 	}
 
 	/**
-	 * Finds an available http transport object for communication
+	 * Finds an available HTTP transport object for communication
 	 *
 	 * @param   JRegistry  $options  Option for creating http transport object
 	 * @param   mixed      $default  Adapter (string) or queue of adapters (array) to use
 	 *
-	 * @return  JHttpTransport Interface sub-class
+	 * @return  BDHttpTransport  Transport object
 	 *
-	 * @since   12.1
+	 * @since   1.0
 	 */
 	public static function getAvailableDriver(JRegistry $options, $default = null)
 	{
@@ -61,7 +65,7 @@ class JHttpFactory
 			$availableAdapters = $default;
 		}
 
-		// Check if there is available http transport adapters
+		// Check if there are available HTTP transport adapters
 		if (!count($availableAdapters))
 		{
 			return false;
@@ -69,37 +73,33 @@ class JHttpFactory
 
 		foreach ($availableAdapters as $adapter)
 		{
-			$class = 'JHttpTransport' . ucfirst($adapter);
+			$class = 'BDHttpTransport' . ucfirst($adapter);
 
-			try
+			/* @type BDHttpTransport $class */
+			if ($class::isSupported())
 			{
-				$transport = new $class($options);
-
-				return $transport;
-			}
-			catch (RuntimeException $e)
-			{
-				continue;
+				return new $class($options);
 			}
 		}
+
 		return false;
 	}
 
 	/**
-	 * Get the http transport handlers
+	 * Get the HTTP transport handlers
 	 *
 	 * @return  array  An array of available transport handlers
 	 *
-	 * @since   12.1
+	 * @since   1.0
 	 */
 	public static function getHttpTransports()
 	{
 		$names = array();
-		$iterator = new DirectoryIterator(JPATH_PLATFORM . '/joomla/http/transport');
+		$iterator = new DirectoryIterator(__DIR__ . '/transport');
 
+		/* @type DirectoryIterator $file */
 		foreach ($iterator as $file)
 		{
-			/* @var DirectoryIterator $file */
 			$fileName = $file->getFilename();
 
 			// Only load for php files.

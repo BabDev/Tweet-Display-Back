@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 // Include the helper
 JLoader::register('ModTweetDisplayBackHelper', __DIR__ . '/helper.php');
 
-/* @var JRegistry $params */
+/* @type JRegistry $params */
 
 // Set the template variables
 $imgpath        = JUri::root() . 'modules/mod_tweetdisplayback/media/images';
@@ -96,7 +96,7 @@ if (!$helper->isProcessed)
 // Add the Twitter Web Intents script if something else already hasn't
 $scheme = JUri::getInstance()->getScheme() . '://';
 
-/* @var JDocumentHtml $document */
+/* @type JDocumentHtml $document */
 $document = JFactory::getDocument();
 
 if (!in_array('<script type="text/javascript" src="' . $scheme . 'platform.twitter.com/widgets.js"></script>', $document->_custom))

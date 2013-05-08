@@ -1,9 +1,14 @@
 <?php
 /**
- * @package     Joomla.Platform
+ * BabDev HTTP Package
+ *
+ * The BabDev HTTP package is a fork of the Joomla HTTP package as found in Joomla! CMS 3.1.1
+ * and provides selected bug fixes and a single codebase for consistent use in CMS 2.5 and newer.
+ *
+ * @package     BabDev.Library
  * @subpackage  HTTP
  *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2012-2013 Michael Babker. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -12,15 +17,17 @@ defined('JPATH_PLATFORM') or die;
 /**
  * HTTP transport class for using cURL.
  *
- * @package     Joomla.Platform
+ * @package     BabDev.Library
  * @subpackage  HTTP
- * @since       11.3
+ * @since       1.0
  */
-class JHttpTransportCurl implements JHttpTransport
+class BDHttpTransportCurl implements BDHttpTransport
 {
 	/**
-	 * @var    JRegistry  The client options.
-	 * @since  11.3
+	 * The client options.
+	 *
+	 * @var    JRegistry
+	 * @since  1.0
 	 */
 	protected $options;
 
@@ -30,12 +37,12 @@ class JHttpTransportCurl implements JHttpTransport
 	 * @param   JRegistry  $options  Client options object.
 	 *
 	 * @see     http://www.php.net/manual/en/function.curl-setopt.php
-	 * @since   11.3
+	 * @since   1.0
 	 * @throws  RuntimeException
 	 */
 	public function __construct(JRegistry $options)
 	{
-		if (!function_exists('curl_init') || !is_callable('curl_init'))
+		if (!self::isSupported())
 		{
 			throw new RuntimeException('Cannot use a cURL transport when curl_init() is not available.');
 		}
@@ -44,7 +51,7 @@ class JHttpTransportCurl implements JHttpTransport
 	}
 
 	/**
-	 * Send a request to the server and return a JHttpResponse object with the response.
+	 * Send a request to the server and return a BDHttpResponse object with the response.
 	 *
 	 * @param   string   $method     The HTTP method for sending the request.
 	 * @param   JUri     $uri        The URI to the resource to request.
@@ -53,9 +60,9 @@ class JHttpTransportCurl implements JHttpTransport
 	 * @param   integer  $timeout    Read timeout in seconds.
 	 * @param   string   $userAgent  The optional user agent string to send with the request.
 	 *
-	 * @return  JHttpResponse
+	 * @return  BDHttpResponse
 	 *
-	 * @since   11.3
+	 * @since   1.0
 	 */
 	public function request($method, JUri $uri, $data = null, array $headers = null, $timeout = null, $userAgent = null)
 	{
@@ -69,7 +76,7 @@ class JHttpTransportCurl implements JHttpTransport
 		$options[CURLOPT_NOBODY] = ($method === 'HEAD');
 
 		// Initialize the certificate store
-		$options[CURLOPT_CAINFO] = $this->options->get('curl.certpath', JPATH_PLATFORM . '/joomla/http/transport/cacert.pem');
+		$options[CURLOPT_CAINFO] = $this->options->get('curl.certpath', __DIR__ . '/cacert.pem');
 
 		// If data exists let's encode it and make sure our Content-type header is set.
 		if (isset($data))
@@ -99,6 +106,7 @@ class JHttpTransportCurl implements JHttpTransport
 
 		// Build the headers string for the request.
 		$headerArray = array();
+
 		if (isset($headers))
 		{
 			foreach ($headers as $key => $value)
@@ -160,15 +168,15 @@ class JHttpTransportCurl implements JHttpTransport
 	 * @param   string  $content  The complete server response, including headers.
 	 * @param   array   $info     The cURL request information.
 	 *
-	 * @return  JHttpResponse
+	 * @return  BDHttpResponse
 	 *
-	 * @since   11.3
+	 * @since   1.0
 	 * @throws  UnexpectedValueException
 	 */
 	protected function getResponse($content, $info)
 	{
 		// Create the response object.
-		$return = new JHttpResponse;
+		$return = new BDHttpResponse;
 
 		// Check if the content is actually a string.
 		if (!is_string($content))
@@ -196,6 +204,7 @@ class JHttpTransportCurl implements JHttpTransport
 		preg_match('/[0-9]{3}/', array_shift($headers), $matches);
 
 		$code = count($matches) ? $matches[0] : null;
+
 		if (is_numeric($code))
 		{
 			$return->code = (int) $code;
@@ -217,13 +226,13 @@ class JHttpTransportCurl implements JHttpTransport
 	}
 
 	/**
-	 * Method to check if HTTP transport cURL is available for use
+	 * Method to check if the HTTP transport layer is available for use
 	 *
-	 * @return boolean true if available, else false
+	 * @return  boolean  True if available else false
 	 *
-	 * @since   12.1
+	 * @since   1.0
 	 */
-	static public function isSupported()
+	public static function isSupported()
 	{
 		return function_exists('curl_version') && curl_version();
 	}
