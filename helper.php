@@ -147,8 +147,8 @@ class ModTweetDisplayBackHelper
 		// Get the user info
 		$this->prepareUser();
 
-		// Check to see if we have an error or are out of hits
-		if (isset($this->twitter['error']) || isset($this->twitter['hits']))
+		// Check to see if we have an error
+		if (isset($this->twitter['error']))
 		{
 			return $this->twitter;
 		}
@@ -238,10 +238,18 @@ class ModTweetDisplayBackHelper
 			return $this->twitter;
 		}
 
-		// Check if we've exceeded the rate limit
-		if (isset($obj->error) && $obj->error == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
+		// Check if we've reached an error
+		if (isset($obj->errors))
 		{
-			$this->twitter['hits'] = '';
+			$this->twitter['error'] = array();
+			$this->twitter['error']['messages'] = array();
+
+			foreach ($obj->errors as $error)
+			{
+				$this->twitter['error']['messages'][] = $error->message;
+			}
+
+			return $this->twitter;
 		}
 		// Make sure we've got an array of data
 		elseif (is_array($obj))
@@ -304,10 +312,16 @@ class ModTweetDisplayBackHelper
 		$obj = file_get_contents(JPATH_CACHE . '/tweetdisplayback_tweets.json');
 		$obj = json_decode($obj);
 
-		// Check if we've exceeded the rate limit
-		if (isset($obj->error) && $obj->error == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
+		// Check if we've reached an error
+		if (isset($obj->errors))
 		{
-			$this->twitter['hits'] = '';
+			$this->twitter['error'] = array();
+			$this->twitter['error']['messages'] = array();
+
+			foreach ($obj->errors as $error)
+			{
+				$this->twitter['error']['messages'][] = $error->message;
+			}
 		}
 		// Make sure we've got an array of data
 		elseif (is_array($obj))
@@ -432,10 +446,16 @@ class ModTweetDisplayBackHelper
 			}
 		}
 
-		// Check if we've exceeded the rate limit
-		if (isset($obj->error) && $obj->error == 'Rate limit exceeded. Clients may not make more than 150 requests per hour.')
+		// Check if we've reached an error
+		if (isset($obj->errors))
 		{
-			$this->twitter['hits'] = '';
+			$this->twitter['error'] = array();
+			$this->twitter['error']['messages'] = array();
+
+			foreach ($obj->errors as $error)
+			{
+				$this->twitter['error']['messages'][] = $error->message;
+			}
 
 			return;
 		}
