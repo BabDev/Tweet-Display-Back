@@ -21,7 +21,7 @@ $ - Language fix or change
 ^$ Language updates
 
 4-May-2013 Michael Babker
-# Fatal error: Declaration of JHttpTransportCurl::__construct()
+# [#57] Fatal error: Declaration of JHttpTransportCurl::__construct()
 + Add param override for PHP connector
 
 --------------------------------------------------
