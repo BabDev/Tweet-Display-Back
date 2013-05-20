@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+20-May-2013 Michael Babker
+^ Sync the Http package
+
 7-May-2013 Michael Babker
 # Move the variables for the cache file paths
 ^ Implement forked version of JHttp to provide better cross-version compatibility

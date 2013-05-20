@@ -169,6 +169,11 @@ class BDHttpTransportSocket implements BDHttpTransport
 		// Create the response object.
 		$return = new BDHttpResponse;
 
+		if (empty($content))
+		{
+			throw new UnexpectedValueException('No content in response.');
+		}
+
 		// Split the response into headers and body.
 		$response = explode("\r\n\r\n", $content, 2);
 
@@ -176,7 +181,7 @@ class BDHttpTransportSocket implements BDHttpTransport
 		$headers = explode("\r\n", $response[0]);
 
 		// Set the body for the response.
-		$return->body = $response[1];
+		$return->body = empty($response[1]) ? '' : $response[1];
 
 		// Get the response code from the first offset of the response headers.
 		preg_match('/[0-9]{3}/', array_shift($headers), $matches);
@@ -186,6 +191,7 @@ class BDHttpTransportSocket implements BDHttpTransport
 		{
 			$return->code = (int) $code;
 		}
+
 		// No valid response code was detected.
 		else
 		{
@@ -260,13 +266,31 @@ class BDHttpTransportSocket implements BDHttpTransport
 			$timeout = ini_get("default_socket_timeout");
 		}
 
-		// Attempt to connect to the server.
-		$connection = fsockopen($host, $port, $errno, $err, $timeout);
+		// Capture PHP errors
+		$php_errormsg = '';
+		$track_errors = ini_get('track_errors');
+		ini_set('track_errors', true);
+
+		// PHP sends a warning if the uri does not exists; we silence it and throw an exception instead.
+		// Attempt to connect to the server
+		$connection = @fsockopen($host, $port, $errno, $err, $timeout);
 
 		if (!$connection)
 		{
-			throw new RuntimeException($err, $errno);
+			if (!$php_errormsg)
+			{
+				// Error but nothing from php? Create our own
+				$php_errormsg = sprintf('Could not connect to resource: %s', $uri, $err, $errno);
+			}
+
+			// Restore error tracking to give control to the exception handler
+			ini_set('track_errors', $track_errors);
+
+			throw new RuntimeException($php_errormsg);
 		}
+
+		// Restore error tracking to what it was before.
+		ini_set('track_errors', $track_errors);
 
 		// Since the connection was successful let's store it in case we need to use it later.
 		$this->connections[$key] = $connection;

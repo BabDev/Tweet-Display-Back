@@ -388,7 +388,7 @@ class ModTweetDisplayBackHelper
 
 			$response = $this->connector->get($req, $headers);
 		}
-		catch (UnexpectedValueException $e)
+		catch (Exception $e)
 		{
 			return null;
 		}

@@ -63,6 +63,7 @@ class BDHttpTransportCurl implements BDHttpTransport
 	 * @return  BDHttpResponse
 	 *
 	 * @since   1.0
+	 * @throws  RuntimeException
 	 */
 	public function request($method, JUri $uri, $data = null, array $headers = null, $timeout = null, $userAgent = null)
 	{
@@ -131,6 +132,19 @@ class BDHttpTransportCurl implements BDHttpTransport
 			$options[CURLOPT_USERAGENT] = $userAgent;
 		}
 
+		// Check if we're using HTTP Authentication.  If so, check if we have authentication credentials
+		if ($this->options->get('api.authentication') == 'HTTP')
+		{
+			if ($this->options->get('api.username', false) && $this->options->get('api.password', false))
+			{
+				$options[CURLOPT_HTTPAUTH] = CURLAUTH_ANY;
+				$options[CURLOPT_USERPWD] = $this->options->get('api.username') . ':' . $this->options->get('api.password');
+
+				// We need to set this so we can forward the authentication on redirects
+				$options[CURLOPT_UNRESTRICTED_AUTH] = true;
+			}
+		}
+
 		// Set the request URL.
 		$options[CURLOPT_URL] = (string) $uri;
 
@@ -152,6 +166,20 @@ class BDHttpTransportCurl implements BDHttpTransport
 
 		// Execute the request and close the connection.
 		$content = curl_exec($ch);
+
+		// Check if the content is a string. If it is not, it must be an error.
+		if (!is_string($content))
+		{
+			$message = curl_error($ch);
+
+			if (empty($message))
+			{
+				// Error but nothing from cURL? Create our own
+				$message = 'No HTTP response received';
+			}
+
+			throw new RuntimeException($message);
+		}
 
 		// Get the request information.
 		$info = curl_getinfo($ch);
@@ -177,12 +205,6 @@ class BDHttpTransportCurl implements BDHttpTransport
 	{
 		// Create the response object.
 		$return = new BDHttpResponse;
-
-		// Check if the content is actually a string.
-		if (!is_string($content))
-		{
-			throw new UnexpectedValueException('No HTTP response received.');
-		}
 
 		// Get the number of redirects that occurred.
 		$redirects = isset($info['redirect_count']) ? $info['redirect_count'] : 0;
