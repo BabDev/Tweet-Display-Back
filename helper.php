@@ -823,7 +823,7 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Display the tweet source
-		if (($this->params->get('tweetSource', 1) == 1))
+		if ($this->params->get('tweetSource', 1) == 1)
 		{
 			$this->twitter['tweets']->$i->created .= JText::sprintf('MOD_TWEETDISPLAYBACK_VIA', $o->source);
 		}
@@ -840,10 +840,18 @@ class ModTweetDisplayBackHelper
 			$this->twitter['tweets']->$i->created .= JText::_('MOD_TWEETDISPLAYBACK_IN_REPLY_TO') . '<a href="http://twitter.com/' . $o->in_reply_to_screen_name . '/status/' . $o->in_reply_to_status_id_str . '" rel="nofollow">' . $o->in_reply_to_screen_name . '</a>';
 		}
 
+		// Display a separator bullet if there's a tweet time/source and a retweet count
+		if (($this->params->get('tweetSource', 1) == 1)
+			|| (($this->params->get('tweetLocation', 1) == 1) && (isset($o->place->full_name)))
+			|| ((($o->in_reply_to_screen_name) && ($o->in_reply_to_status_id_str)) && $this->params->get('tweetReplyLink', 1) == 1))
+		{
+			$this->twitter['tweets']->$i->created .= ' &bull; ';
+		}
+
 		// Display the number of times the tweet has been retweeted
 		if ((($tweetRTCount == 1) && ($RTs >= 1)))
 		{
-			$this->twitter['tweets']->$i->created .= ' &bull; ' . JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $RTs);
+			$this->twitter['tweets']->$i->created .= JText::plural('MOD_TWEETDISPLAYBACK_RETWEETS', $RTs);
 		}
 
 		// Display Twitter Actions
