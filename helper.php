@@ -51,6 +51,14 @@ class ModTweetDisplayBackHelper
 	public $isProcessed = false;
 
 	/**
+	 * ID of the currently active module
+	 *
+	 * @var    integer
+	 * @since  3.0
+	 */
+	public $moduleId;
+
+	/**
 	 * Module parameters
 	 *
 	 * @var    JRegistry
@@ -269,7 +277,7 @@ class ModTweetDisplayBackHelper
 				if ($this->params->get('cache') == 1)
 				{
 					$data = json_encode($obj);
-					file_put_contents(JPATH_CACHE . '/tweetdisplayback_tweets.json', $data);
+					file_put_contents(JPATH_CACHE . '/tweetdisplayback_tweets-' . $this->moduleId . '.json', $data);
 				}
 
 				// Process the filtering options and render the feed
@@ -309,7 +317,7 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Retrieve the cached data and decode it
-		$obj = file_get_contents(JPATH_CACHE . '/tweetdisplayback_tweets.json');
+		$obj = file_get_contents(JPATH_CACHE . '/tweetdisplayback_tweets-' . $this->moduleId . '.json');
 		$obj = json_decode($obj);
 
 		// Check if we've reached an error
@@ -426,7 +434,7 @@ class ModTweetDisplayBackHelper
 		if ($this->isCached)
 		{
 			// Fetch from cache
-			$obj = file_get_contents(JPATH_CACHE . '/tweetdisplayback_user.json');
+			$obj = file_get_contents(JPATH_CACHE . '/tweetdisplayback_user-' . $this->moduleId . '.json');
 			$obj = json_decode($obj);
 		}
 		else
@@ -474,7 +482,7 @@ class ModTweetDisplayBackHelper
 		if ($this->params->get('cache') == 1 && !$this->isCached)
 		{
 			$data = json_encode($obj);
-			file_put_contents(JPATH_CACHE . '/tweetdisplayback_user.json', $data);
+			file_put_contents(JPATH_CACHE . '/tweetdisplayback_user-' . $this->moduleId . '.json', $data);
 		}
 
 		/*

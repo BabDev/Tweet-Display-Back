@@ -14,6 +14,7 @@ defined('_JEXEC') or die;
 JLoader::register('ModTweetDisplayBackHelper', __DIR__ . '/helper.php');
 
 /* @type JRegistry $params */
+/* @type object $module */
 
 // Set the template variables
 $imgpath        = JUri::root() . 'modules/mod_tweetdisplayback/media/images';
@@ -29,10 +30,11 @@ $count          = $params->get('twitterCount', '3') - 1;
 JHtml::stylesheet('mod_tweetdisplayback/' . $template . '.css', false, true, false);
 
 $helper = new ModTweetDisplayBackHelper($params);
+$helper->moduleId = $module->id;
 
 // The files that the data is cached to
-$cacheTweets = JPATH_CACHE . '/tweetdisplayback_tweets.json';
-$cacheUser   = JPATH_CACHE . '/tweetdisplayback_user.json';
+$cacheTweets = JPATH_CACHE . '/tweetdisplayback_tweets-' . $helper->moduleId . '.json';
+$cacheUser   = JPATH_CACHE . '/tweetdisplayback_user-' . $helper->moduleId . '.json';
 
 // Check if caching is enabled
 if ($params->get('cache') == 1)
