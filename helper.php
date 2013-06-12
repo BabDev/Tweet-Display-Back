@@ -414,6 +414,8 @@ class ModTweetDisplayBackHelper
 	 */
 	protected function prepareUser()
 	{
+		$scheme = JUri::getInstance()->getScheme() . '://';
+
 		// Load the parameters
 		$uname = $this->params->get('twitterName', '');
 		$list  = $this->params->get('twitterList', '');
@@ -493,11 +495,11 @@ class ModTweetDisplayBackHelper
 			// Check if the Intents action is bypassed
 			if ($this->params->get('bypassIntent', '0') == 1)
 			{
-				$this->twitter['header']->user = '<a href="http://twitter.com/' . $uname . '" rel="nofollow" target="_blank">';
+				$this->twitter['header']->user = '<a href="' . $scheme . 'twitter.com/' . $uname . '" rel="nofollow" target="_blank">';
 			}
 			else
 			{
-				$this->twitter['header']->user = '<a href="http://twitter.com/intent/user?screen_name=' . $uname . '" rel="nofollow">';
+				$this->twitter['header']->user = '<a href="' . $scheme . 'twitter.com/intent/user?screen_name=' . $uname . '" rel="nofollow">';
 			}
 
 			// Show the real name or the username
@@ -513,7 +515,7 @@ class ModTweetDisplayBackHelper
 			// Append the list name if being pulled
 			if ($feed == 'list')
 			{
-				$this->twitter['header']->user .= ' - <a href="http://twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">' . $list . ' list</a>';
+				$this->twitter['header']->user .= ' - <a href="' . $scheme .'twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">' . $list . ' list</a>';
 			}
 		}
 
@@ -558,7 +560,7 @@ class ModTweetDisplayBackHelper
 				$followParams .= '&show_count=' . (bool) $this->params->get('footerFollowCount', 1);
 				$followParams .= '&show_screen_name=' . (bool) $this->params->get('footerFollowUser', 1);
 
-				$iframe = '<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/follow_button.html?' . $followParams . '" style="width: 300px; height: 20px;"></iframe>';
+				$iframe = '<iframe allowtransparency="true" frameborder="0" scrolling="no" src="' . $scheme . 'platform.twitter.com/widgets/follow_button.html?' . $followParams . '" style="width: 300px; height: 20px;"></iframe>';
 
 				$this->twitter['footer']->follow_me = '<div class="TDB-footer-follow-link">' . $iframe . '</div>';
 			}
@@ -708,6 +710,8 @@ class ModTweetDisplayBackHelper
 	 */
 	protected function processItem($o, $i)
 	{
+		$scheme = JUri::getInstance()->getScheme() . '://';
+
 		// Set variables
 		$tweetName    = $this->params->get('tweetName', 1);
 		$tweetReply   = $this->params->get('tweetReply', 1);
@@ -753,11 +757,11 @@ class ModTweetDisplayBackHelper
 			// Check if the Intents action is bypassed
 			if ($this->params->get('bypassIntent', '0') == 1)
 			{
-				$userURL = 'http://twitter.com/' . $tweetedBy;
+				$userURL = $scheme . 'twitter.com/' . $tweetedBy;
 			}
 			else
 			{
-				$userURL = 'http://twitter.com/intent/user?screen_name=' . $tweetedBy;
+				$userURL = $scheme . 'twitter.com/intent/user?screen_name=' . $tweetedBy;
 			}
 			$this->twitter['tweets']->$i->user = '<strong><a href="' . $userURL . '" rel="nofollow">' . $tweetedBy . '</a>' . $this->params->get('tweetUserSeparator') . '</strong>';
 		}
@@ -816,7 +820,7 @@ class ModTweetDisplayBackHelper
 		// Display the time the tweet was created
 		if ($this->params->get('tweetCreated', 1) == 1)
 		{
-			$this->twitter['tweets']->$i->created .= '<a href="http://twitter.com/' . $o->user->screen_name . '/status/' . $o->id_str . '" rel="nofollow" target="_blank">';
+			$this->twitter['tweets']->$i->created .= '<a href="' . $scheme . 'twitter.com/' . $o->user->screen_name . '/status/' . $o->id_str . '" rel="nofollow" target="_blank">';
 
 			// Determine whether to display the time as a relative or static time
 			if ($this->params->get('tweetRelativeTime', 1) == 1)
@@ -839,13 +843,13 @@ class ModTweetDisplayBackHelper
 		// Display the location the tweet was made from if set
 		if (($this->params->get('tweetLocation', 1) == 1) && (isset($o->place->full_name)))
 		{
-			$this->twitter['tweets']->$i->created .= JText::_('MOD_TWEETDISPLAYBACK_FROM') . '<a href="http://maps.google.com/maps?q=' . $o->place->full_name . '" target="_blank" rel="nofollow">' . $o->place->full_name . '</a>';
+			$this->twitter['tweets']->$i->created .= JText::_('MOD_TWEETDISPLAYBACK_FROM') . '<a href="' . $scheme . 'maps.google.com/maps?q=' . $o->place->full_name . '" target="_blank" rel="nofollow">' . $o->place->full_name . '</a>';
 		}
 
 		// If the tweet is a reply, display a link to the tweet it's in reply to
 		if ((($o->in_reply_to_screen_name) && ($o->in_reply_to_status_id_str)) && $this->params->get('tweetReplyLink', 1) == 1)
 		{
-			$this->twitter['tweets']->$i->created .= JText::_('MOD_TWEETDISPLAYBACK_IN_REPLY_TO') . '<a href="http://twitter.com/' . $o->in_reply_to_screen_name . '/status/' . $o->in_reply_to_status_id_str . '" rel="nofollow">' . $o->in_reply_to_screen_name . '</a>';
+			$this->twitter['tweets']->$i->created .= JText::_('MOD_TWEETDISPLAYBACK_IN_REPLY_TO') . '<a href="' . $scheme . 'twitter.com/' . $o->in_reply_to_screen_name . '/status/' . $o->in_reply_to_status_id_str . '" rel="nofollow">' . $o->in_reply_to_screen_name . '</a>';
 		}
 
 		// Display a separator bullet if there's a tweet time/source and a retweet count
@@ -865,9 +869,9 @@ class ModTweetDisplayBackHelper
 		// Display Twitter Actions
 		if ($tweetReply == 1)
 		{
-			$this->twitter['tweets']->$i->actions = '<span class="TDB-action TDB-reply"><a href="http://twitter.com/intent/tweet?in_reply_to=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_REPLY') . '" rel="nofollow"></a></span>';
-			$this->twitter['tweets']->$i->actions .= '<span class="TDB-action TDB-retweet"><a href="http://twitter.com/intent/retweet?tweet_id=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_RETWEET') . '" rel="nofollow"></a></span>';
-			$this->twitter['tweets']->$i->actions .= '<span class="TDB-action TDB-favorite"><a href="http://twitter.com/intent/favorite?tweet_id=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_FAVORITE') . '" rel="nofollow"></a></span>';
+			$this->twitter['tweets']->$i->actions = '<span class="TDB-action TDB-reply"><a href="' . $scheme . 'twitter.com/intent/tweet?in_reply_to=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_REPLY') . '" rel="nofollow"></a></span>';
+			$this->twitter['tweets']->$i->actions .= '<span class="TDB-action TDB-retweet"><a href="' . $scheme . 'twitter.com/intent/retweet?tweet_id=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_RETWEET') . '" rel="nofollow"></a></span>';
+			$this->twitter['tweets']->$i->actions .= '<span class="TDB-action TDB-favorite"><a href="' . $scheme . 'twitter.com/intent/favorite?tweet_id=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_FAVORITE') . '" rel="nofollow"></a></span>';
 		}
 
 		// If set, convert user and hash tags into links
@@ -878,18 +882,18 @@ class ModTweetDisplayBackHelper
 				// Check if the Intents action is bypassed
 				if ($this->params->get('bypassIntent', '0') == 1)
 				{
-					$mentionURL = 'http://twitter.com/' . $mention->screen_name;
+					$mentionURL = $scheme . 'twitter.com/' . $mention->screen_name;
 				}
 				else
 				{
-					$mentionURL = 'http://twitter.com/intent/user?screen_name=' . $mention->screen_name;
+					$mentionURL = $scheme . 'twitter.com/intent/user?screen_name=' . $mention->screen_name;
 				}
 				$this->twitter['tweets']->$i->text = str_ireplace('@' . $mention->screen_name, '@<a class="userlink" href="' . $mentionURL . '" rel="nofollow">' . $mention->screen_name . '</a>', $this->twitter['tweets']->$i->text);
 			}
 
 			foreach ($o->entities->hashtags as $hashtag)
 			{
-				$this->twitter['tweets']->$i->text = str_ireplace('#' . $hashtag->text, '#<a class="hashlink" href="http://twitter.com/search?q=' . $hashtag->text . '" target="_blank" rel="nofollow">' . $hashtag->text . '</a>', $this->twitter['tweets']->$i->text);
+				$this->twitter['tweets']->$i->text = str_ireplace('#' . $hashtag->text, '#<a class="hashlink" href="' . $scheme . 'twitter.com/search?q=' . $hashtag->text . '" target="_blank" rel="nofollow">' . $hashtag->text . '</a>', $this->twitter['tweets']->$i->text);
 			}
 		}
 	}
