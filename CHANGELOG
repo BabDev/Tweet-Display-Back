@@ -17,6 +17,9 @@ $ - Language fix or change
 14-June-2013 Michael Babker
 ! [#64] Raise minimum supported version to 2.5.6 due to lack of autoload support
 
+13-June-2013 Jurian Even
+^ [#63] Add scheme to helper.php to support https://
+
 10-June-2013 Michael Babker
 # [#60] Two Twitter feed modules with cache on - both modules erroneously display the same content
 
