@@ -204,9 +204,8 @@ class ModTweetDisplayBackHelper
 		else
 		{
 			/*
-			 * Get the user feed, we have to manually filter mentions and replies,
-			 * & Twitter doesn't send additional tweets when RTs are not included
-			 * So get additional tweets by multiplying $count based on the number
+			 * Get the user feed, we have to manually filter mentions, RTs and replies,
+			 * so get additional tweets by multiplying $count based on the number
 			 * of active filters
 			 */
 			if ($activeFilters == 1)
@@ -231,7 +230,8 @@ class ModTweetDisplayBackHelper
 			{
 				$count = $this->params->get('tweetsToScan', 3);
 			}
-			$req = 'https://api.twitter.com/1.1/statuses/user_timeline.json?count=' . $count . '&screen_name=' . $uname . $incRT . '&include_entities=1';
+
+			$req = 'https://api.twitter.com/1.1/statuses/user_timeline.json?count=' . $count . '&screen_name=' . $uname . '&include_entities=1';
 		}
 
 		// Fetch the decoded JSON
@@ -586,6 +586,7 @@ class ModTweetDisplayBackHelper
 		$count          = $this->params->get('twitterCount', 3);
 		$showMentions   = $this->params->get('showMentions', 0);
 		$showReplies    = $this->params->get('showReplies', 0);
+		$showRetweets   = $this->params->get('tweetRetweets', 1);
 		$numberOfTweets = $this->params->get('twitterCount', 3);
 		$feedType       = $this->params->get('twitterFeedType', 'user');
 		$obj            = static::$tweets;
@@ -600,7 +601,7 @@ class ModTweetDisplayBackHelper
 				if ($i < $numberOfTweets)
 				{
 					// If we aren't filtering, just render the item
-					if (($showMentions == 1 && $showReplies == 1) || ($feedType == 'list' || $feedType == 'favorites'))
+					if (($showMentions == 1 && $showReplies == 1 && $showRetweets == 1) || ($feedType == 'list' || $feedType == 'favorites'))
 					{
 						$this->processItem($o, $i);
 
@@ -618,6 +619,9 @@ class ModTweetDisplayBackHelper
 
 						// Tweets which contains a @mention and/or @reply
 						$tweetContainsMentionAndOrReply = $o->entities->user_mentions != null;
+
+						// Tweets which are a retweet
+						$tweetIsRetweet = isset($o->retweeted_status);
 
 						/*
 						 * Check if a reply tweet contains mentions
@@ -638,6 +642,19 @@ class ModTweetDisplayBackHelper
 
 						// Tweets which contains @mentions or @mentions+@reply
 						$tweetContainsMention = $tweetContainsMentionAndOrReply && !$tweetOnlyReply;
+
+						// Filter retweets
+						if ($showRetweets == 0)
+						{
+							if (!$tweetIsRetweet)
+							{
+								$this->processItem($o, $i);
+
+								// Modify counts
+								$count--;
+								$i++;
+							}
+						}
 
 						// Filter @mentions and @replies, leaving retweets unchanged
 						if ($showMentions == 0 && $showReplies == 0)
@@ -682,7 +699,7 @@ class ModTweetDisplayBackHelper
 							}
 
 							// Somehow, we got this far; process the tweet
-							if ($showMentions == 1 && $showReplies == 1)
+							if ($showMentions == 1 && $showReplies == 1 && $showRetweets == 1)
 							{
 								// No filtering required
 								$this->processItem($o, $i);

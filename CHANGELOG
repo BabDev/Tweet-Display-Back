@@ -16,6 +16,7 @@ $ - Language fix or change
 
 14-June-2013 Michael Babker
 ! [#64] Raise minimum supported version to 2.5.6 due to lack of autoload support
+^ [#59] Manually filter retweets due to apparent API discontinuation
 
 13-June-2013 Jurian Even
 ^ [#63] Add scheme to helper.php to support https://
