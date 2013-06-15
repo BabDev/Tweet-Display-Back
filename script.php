@@ -36,8 +36,8 @@ class Mod_TweetDisplayBackInstallerScript
 			return false;
 		}
 
-		// Requires Joomla! 2.5
-		if (version_compare(JVERSION, '2.5', 'lt'))
+		// Requires Joomla! 2.5.6
+		if (version_compare(JVERSION, '2.5.6', 'lt'))
 		{
 			JError::raiseNotice(null, JText::_('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_VERSION'));
 
