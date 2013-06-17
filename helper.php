@@ -199,7 +199,7 @@ class ModTweetDisplayBackHelper
 		elseif ($feed == 'favorites')
 		{
 			// Get the favorites feed
-			$req = 'https://api.twitter.com/1.1/favorites.json?count=' . $count . '&screen_name=' . $uname . '&include_entities=1';
+			$req = 'https://api.twitter.com/1.1/favorites/list.json?count=' . $count . '&screen_name=' . $uname . '&include_entities=1';
 		}
 		else
 		{
