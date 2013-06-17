@@ -331,18 +331,6 @@
 						value="1">JYES</option>
 				</field>
 				<field
-					name="tweetRetweets"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RETWEET_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RETWEET_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
-				</field>
-				<field
 					name="tweetLinks"
 					type="radio"
 					class="btn-group"
@@ -375,6 +363,18 @@
 					default="1"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_DESCRIPTION" >
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+				</field>
+				<field
+					name="tweetRetweets"
+					type="radio"
+					class="btn-group"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RETWEET_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RETWEET_DESCRIPTION" >
 					<option
 						value="0">JNO</option>
 					<option
