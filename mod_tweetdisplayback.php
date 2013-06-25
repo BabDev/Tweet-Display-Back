@@ -17,7 +17,6 @@ JLoader::register('ModTweetDisplayBackHelper', __DIR__ . '/helper.php');
 /* @type object $module */
 
 // Set the template variables
-$imgpath        = JUri::root() . 'modules/mod_tweetdisplayback/media/images';
 $headerAlign    = $params->get('headerAvatarAlignment');
 $tweetAlign     = $params->get('tweetAlignment');
 $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
