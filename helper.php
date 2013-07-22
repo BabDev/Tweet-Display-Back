@@ -919,7 +919,7 @@ class ModTweetDisplayBackHelper
 
 			foreach ($o->entities->hashtags as $hashtag)
 			{
-				$this->twitter['tweets']->$i->text = str_ireplace('#' . $hashtag->text, '#<a class="hashlink" href="' . $scheme . 'twitter.com/search?q=' . $hashtag->text . '" target="_blank" rel="nofollow">' . $hashtag->text . '</a>', $this->twitter['tweets']->$i->text);
+				$this->twitter['tweets']->$i->text = str_ireplace('#' . $hashtag->text, '#<a class="hashlink" href="' . $scheme . 'twitter.com/search?q=%23' . $hashtag->text . '" target="_blank" rel="nofollow">' . $hashtag->text . '</a>', $this->twitter['tweets']->$i->text);
 			}
 		}
 	}
