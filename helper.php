@@ -557,7 +557,16 @@ class ModTweetDisplayBackHelper
 			{
 				$followParams  = 'screen_name=' . $uname;
 				$followParams .= '&lang=' . substr(JFactory::getLanguage()->getTag(), 0, 2);
-				$followParams .= '&show_count=' . (bool) $this->params->get('footerFollowCount', 1);
+
+				if ($this->params->get('footerFollowCount', '1') == '1')
+				{
+					$followParams .= '&show_count=true';
+				}
+				else
+				{
+					$followParams .= '&show_count=false';
+				}
+
 				$followParams .= '&show_screen_name=' . (bool) $this->params->get('footerFollowUser', 1);
 
 				$iframe = '<iframe allowtransparency="true" frameborder="0" scrolling="no" src="' . $scheme . 'platform.twitter.com/widgets/follow_button.html?' . $followParams . '" style="width: 300px; height: 20px;"></iframe>';
