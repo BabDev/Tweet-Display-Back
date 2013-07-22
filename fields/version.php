@@ -51,8 +51,9 @@ class JFormFieldVersion extends JFormField
 	protected function getLabel()
 	{
 		// Get the module's XML
-		$xmlfile = dirname(__DIR__) . '/mod_tweetdisplayback.xml';
-		$data    = JApplicationHelper::parseXMLInstallFile($xmlfile);
+		$xmlfile   = dirname(__DIR__) . '/mod_tweetdisplayback.xml';
+		$data      = JApplicationHelper::parseXMLInstallFile($xmlfile);
+		$cacheFile = JPATH_CACHE . '/tweetdisplayback_update.json';
 
 		// The module's version
 		$version = $data['version'];
@@ -66,10 +67,28 @@ class JFormFieldVersion extends JFormField
 		// Get the stability level we want to show data for
 		$stability = $params->get('stability', 'stable');
 
-		// Get the JSON data
-		$helper = new ModTweetDisplayBackHelper(new JRegistry);
-		$data   = $helper->getJSON($target);
-		$update = $data->$stability;
+		// Check if we have cached data and use it if unexpired
+		if (!file_exists($cacheFile) || (time() - @filemtime($cacheFile) > 86400))
+		{
+			// Get the data from remote
+			$helper = new ModTweetDisplayBackHelper(new JRegistry);
+			$data   = $helper->getJSON($target);
+			$update = $data->$stability;
+
+			// Write the cache if data exists
+			if (isset($update->notice))
+			{
+				$cache = json_encode($data);
+				file_put_contents($cacheFile, $cache);
+			}
+		}
+		else
+		{
+			// Render from the cached data
+			$data   = json_decode(file_get_contents($cacheFile));
+			$update = $data->$stability;
+		}
+
 
 		// Message containing the version
 		if (version_compare(JVERSION, '3.0', 'ge'))
@@ -82,6 +101,7 @@ class JFormFieldVersion extends JFormField
 			$message = '<label style="max-width:100%">';
 			$close = '</label>';
 		}
+
 		$message .= JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
 
 		// Make sure that the $update object actually has data
