@@ -432,17 +432,22 @@ class ModTweetDisplayBackHelper
 			$flist = static::toAscii($list);
 		}
 
-		// Get the data
-		if ($this->isCached)
+		// Retrieve data from Twitter if the header is enabled
+		if ($this->params->get('headerDisplay', 1) == 1)
 		{
-			// Fetch from cache
-			$obj = file_get_contents(JPATH_CACHE . '/tweetdisplayback_user-' . $this->moduleId . '.json');
-			$obj = json_decode($obj);
-		}
-		else
-		{
-			// Retrieve data from Twitter if the header is enabled
-			if ($this->params->get('headerDisplay', 1) == 1)
+			// Sanity check on user file cache
+			$cacheFile = JPATH_CACHE . '/tweetdisplayback_user-' . $this->moduleId . '.json';
+			$cacheTime = $params->get('cache_time', 15);
+			$cacheTime = $cacheTime * 60;
+
+			// Get the data
+			if ($this->isCached && (!file_exists($cacheFile) || time() - @filemtime($cacheFile) > $cacheTime))
+			{
+				// Fetch from cache
+				$obj = file_get_contents(JPATH_CACHE . '/tweetdisplayback_user-' . $this->moduleId . '.json');
+				$obj = json_decode($obj);
+			}
+			else
 			{
 				$req = 'https://api.twitter.com/1.1/users/show.json?screen_name=' . $uname;
 
@@ -456,38 +461,38 @@ class ModTweetDisplayBackHelper
 
 					return;
 				}
+
+				// Check if we've reached an error
+				if (isset($obj->errors))
+				{
+					$this->twitter['error'] = array();
+					$this->twitter['error']['messages'] = array();
+
+					foreach ($obj->errors as $error)
+					{
+						$this->twitter['error']['messages'][] = $error->message;
+					}
+
+					return;
+				}
+				// Check that we have the JSON, otherwise set an error
+				elseif (!$obj)
+				{
+					$this->twitter['error'] = '';
+
+					return;
+				}
+
+				// Store the user profile response object so it can be accessed (for advanced use)
+				static::$user = $obj;
+
+				// If caching is enabled and we aren't using cached data, json_encode the object and write it to file
+				if ($this->params->get('cache') == 1 && !$this->isCached)
+				{
+					$data = json_encode($obj);
+					file_put_contents(JPATH_CACHE . '/tweetdisplayback_user-' . $this->moduleId . '.json', $data);
+				}
 			}
-		}
-
-		// Check if we've reached an error
-		if (isset($obj->errors))
-		{
-			$this->twitter['error'] = array();
-			$this->twitter['error']['messages'] = array();
-
-			foreach ($obj->errors as $error)
-			{
-				$this->twitter['error']['messages'][] = $error->message;
-			}
-
-			return;
-		}
-		// Check that we have the JSON, otherwise set an error
-		elseif (!$obj)
-		{
-			$this->twitter['error'] = '';
-
-			return;
-		}
-
-		// Store the user profile response object so it can be accessed (for advanced use)
-		static::$user = $obj;
-
-		// If caching is enabled and we aren't using cached data, json_encode the object and write it to file
-		if ($this->params->get('cache') == 1 && !$this->isCached)
-		{
-			$data = json_encode($obj);
-			file_put_contents(JPATH_CACHE . '/tweetdisplayback_user-' . $this->moduleId . '.json', $data);
 		}
 
 		/*

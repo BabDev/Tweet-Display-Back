@@ -43,14 +43,16 @@ if ($params->get('cache') == 1)
 	$cacheTime = $cacheTime * 60;
 
 	// Cache files expired?
-	if ((!file_exists($cacheTweets) && !file_exists($cacheUser)) || (time() - @filemtime($cacheTweets) > $cacheTime && time() - @filemtime($cacheUser) > $cacheTime))
+	if (!file_exists($cacheTweets) || time() - @filemtime($cacheTweets) > $cacheTime)
 	{
 		// Do a request to the Twitter API for new data
+		echo 'new';
 		$twitter = $helper->compileData();
 	}
 	else
 	{
 		// Render from the cached data
+		echo 'cache';
 		$helper->isCached = true;
 		$twitter = $helper->compileFromCache();
 	}
