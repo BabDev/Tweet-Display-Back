@@ -441,18 +441,21 @@ class ModTweetDisplayBackHelper
 		}
 		else
 		{
-			// Retrieve data from Twitter
-			$req = 'https://api.twitter.com/1.1/users/show.json?screen_name=' . $uname;
-
-			try
+			// Retrieve data from Twitter if the header is enabled
+			if ($this->params->get('headerDisplay', 1) == 1)
 			{
-				$obj = $this->getJSON($req);
-			}
-			catch (RuntimeException $e)
-			{
-				$this->twitter['error'] = '';
+				$req = 'https://api.twitter.com/1.1/users/show.json?screen_name=' . $uname;
 
-				return;
+				try
+				{
+					$obj = $this->getJSON($req);
+				}
+				catch (RuntimeException $e)
+				{
+					$this->twitter['error'] = '';
+
+					return;
+				}
 			}
 		}
 
@@ -490,60 +493,63 @@ class ModTweetDisplayBackHelper
 		/*
 		 * Header info
 		 */
-		if ($this->params->get('headerUser', 1) == 1)
+		if ($this->params->get('headerDisplay', 1) == 1)
 		{
-			// Check if the Intents action is bypassed
-			if ($this->params->get('bypassIntent', '0') == 1)
+			if ($this->params->get('headerUser', 1) == 1)
 			{
-				$this->twitter['header']->user = '<a href="' . $scheme . 'twitter.com/' . $uname . '" rel="nofollow" target="_blank">';
-			}
-			else
-			{
-				$this->twitter['header']->user = '<a href="' . $scheme . 'twitter.com/intent/user?screen_name=' . $uname . '" rel="nofollow">';
+				// Check if the Intents action is bypassed
+				if ($this->params->get('bypassIntent', '0') == 1)
+				{
+					$this->twitter['header']->user = '<a href="' . $scheme . 'twitter.com/' . $uname . '" rel="nofollow" target="_blank">';
+				}
+				else
+				{
+					$this->twitter['header']->user = '<a href="' . $scheme . 'twitter.com/intent/user?screen_name=' . $uname . '" rel="nofollow">';
+				}
+
+				// Show the real name or the username
+				if ($this->params->get('headerName', 1) == 1)
+				{
+					$this->twitter['header']->user .= $obj->name . '</a>';
+				}
+				else
+				{
+					$this->twitter['header']->user .= $uname . '</a>';
+				}
+
+				// Append the list name if being pulled
+				if ($feed == 'list')
+				{
+					$this->twitter['header']->user .= ' - <a href="' . $scheme .'twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">' . $list . ' list</a>';
+				}
 			}
 
-			// Show the real name or the username
-			if ($this->params->get('headerName', 1) == 1)
+			// Show the bio
+			if ($this->params->get('headerBio', 1) == 1)
 			{
-				$this->twitter['header']->user .= $obj->name . '</a>';
-			}
-			else
-			{
-				$this->twitter['header']->user .= $uname . '</a>';
+				$this->twitter['header']->bio = $obj->description;
 			}
 
-			// Append the list name if being pulled
-			if ($feed == 'list')
+			// Show the location
+			if ($this->params->get('headerLocation', 1) == 1)
 			{
-				$this->twitter['header']->user .= ' - <a href="' . $scheme .'twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">' . $list . ' list</a>';
+				$this->twitter['header']->location = $obj->location;
 			}
+
+			// Show the user's URL
+			if ($this->params->get('headerWeb', 1) == 1)
+			{
+				$this->twitter['header']->web = '<a href="' . $obj->url . '" rel="nofollow" target="_blank">' . $obj->url . '</a>';
+			}
+
+			// Get the profile image URL from the object
+			$avatar = $obj->profile_image_url;
+
+			// Switch from the normal size avatar (48px) to the large one (73px)
+			$avatar = str_replace('normal.jpg', 'bigger.jpg', $avatar);
+
+			$this->twitter['header']->avatar = '<img src="' . $avatar . '" alt="' . $uname . '" />';
 		}
-
-		// Show the bio
-		if ($this->params->get('headerBio', 1) == 1)
-		{
-			$this->twitter['header']->bio = $obj->description;
-		}
-
-		// Show the location
-		if ($this->params->get('headerLocation', 1) == 1)
-		{
-			$this->twitter['header']->location = $obj->location;
-		}
-
-		// Show the user's URL
-		if ($this->params->get('headerWeb', 1) == 1)
-		{
-			$this->twitter['header']->web = '<a href="' . $obj->url . '" rel="nofollow" target="_blank">' . $obj->url . '</a>';
-		}
-
-		// Get the profile image URL from the object
-		$avatar = $obj->profile_image_url;
-
-		// Switch from the normal size avatar (48px) to the large one (73px)
-		$avatar = str_replace('normal.jpg', 'bigger.jpg', $avatar);
-
-		$this->twitter['header']->avatar = '<img src="' . $avatar . '" alt="' . $uname . '" />';
 
 		/*
 		 * Footer info
