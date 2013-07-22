@@ -378,7 +378,7 @@ class ModTweetDisplayBackHelper
 			// If we haven't retrieved the bearer yet, get it if in the site application
 			if (($this->bearer == null) && JFactory::getApplication()->isSite())
 			{
-				$response = $this->connector->get('http://www.babdev.com/tokenRequest.php');
+				$response = $this->connector->get('http://tdbtoken.gopagoda.com/tokenRequest.php');
 
 				if ($response->code == 200)
 				{
