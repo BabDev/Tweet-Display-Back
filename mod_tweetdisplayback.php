@@ -46,13 +46,11 @@ if ($params->get('cache') == 1)
 	if (!file_exists($cacheTweets) || time() - @filemtime($cacheTweets) > $cacheTime)
 	{
 		// Do a request to the Twitter API for new data
-		echo 'new';
 		$twitter = $helper->compileData();
 	}
 	else
 	{
 		// Render from the cached data
-		echo 'cache';
 		$helper->isCached = true;
 		$twitter = $helper->compileFromCache();
 	}
