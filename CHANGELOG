@@ -14,6 +14,10 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+22-July-2013 Michael Babker
+# [#76] Don't display the follower count when the option is disabled
+^ Cache the local update file
+
 14-June-2013 Michael Babker
 ! [#64] Raise minimum supported version to 2.5.6 due to lack of autoload support
 ^ [#59] Manually filter retweets due to apparent API discontinuation
