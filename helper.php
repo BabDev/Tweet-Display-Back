@@ -378,16 +378,31 @@ class ModTweetDisplayBackHelper
 			// If we haven't retrieved the bearer yet, get it if in the site application
 			if (($this->bearer == null) && JFactory::getApplication()->isSite())
 			{
-				$response = $this->connector->get('http://tdbtoken.gopagoda.com/tokenRequest.php');
+				$cacheFile = JPATH_CACHE . '/tweetdisplayback_bearer.json';
 
-				if ($response->code == 200)
+				// Check if we have cached data and use it if unexpired
+				if (!file_exists($cacheFile) || (time() - @filemtime($cacheFile) > 86400))
 				{
-					$this->bearer = base64_decode($response->body);
+					$response = $this->connector->get('http://tdbtoken.gopagoda.com/tokenRequest.php');
+	
+					if ($response->code == 200)
+					{
+						$this->bearer = base64_decode($response->body);
+					}
+					else
+					{
+						throw new RuntimeException('Could not retrieve bearer token');
+					}
+
+					// Write the cache
+					file_put_contents($cacheFile, $this->bearer);
 				}
 				else
 				{
-					throw new RuntimeException('Could not retrieve bearer token');
+					// Render from the cached data
+					$this->bearer = file_get_contents($cacheFile);
 				}
+
 			}
 
 			$headers = array(
