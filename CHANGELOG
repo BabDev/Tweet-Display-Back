@@ -14,6 +14,9 @@ $ - Language fix or change
 - - Removed
 ! - Note
 
+--------------------------------------------------
+Tweet Display Back 3.0.2 - Released 25-July-2013
+--------------------------------------------------
 22-July-2013 Michael Babker
 # [#76] Don't display the follower count when the option is disabled
 ^ Cache the local update file
