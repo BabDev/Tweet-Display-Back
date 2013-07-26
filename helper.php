@@ -384,7 +384,7 @@ class ModTweetDisplayBackHelper
 				if (!file_exists($cacheFile) || (time() - @filemtime($cacheFile) > 86400))
 				{
 					$response = $this->connector->get('http://tdbtoken.gopagoda.com/tokenRequest.php');
-	
+
 					if ($response->code == 200)
 					{
 						$this->bearer = base64_decode($response->body);
@@ -452,7 +452,7 @@ class ModTweetDisplayBackHelper
 		{
 			// Sanity check on user file cache
 			$cacheFile = JPATH_CACHE . '/tweetdisplayback_user-' . $this->moduleId . '.json';
-			$cacheTime = $params->get('cache_time', 15);
+			$cacheTime = $this->params->get('cache_time', 15);
 			$cacheTime = $cacheTime * 60;
 
 			// Get the data
