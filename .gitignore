@@ -13,5 +13,4 @@ releases
 .idea
 
 # Build script #
-build
 build.properties
