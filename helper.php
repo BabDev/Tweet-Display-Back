@@ -259,6 +259,7 @@ class ModTweetDisplayBackHelper
 
 			return $this->twitter;
 		}
+
 		// Make sure we've got an array of data
 		elseif (is_array($obj))
 		{
@@ -331,6 +332,7 @@ class ModTweetDisplayBackHelper
 				$this->twitter['error']['messages'][] = $error->message;
 			}
 		}
+
 		// Make sure we've got an array of data
 		elseif (is_array($obj))
 		{
@@ -402,7 +404,6 @@ class ModTweetDisplayBackHelper
 					// Render from the cached data
 					$this->bearer = file_get_contents($cacheFile);
 				}
-
 			}
 
 			$headers = array(
@@ -490,6 +491,7 @@ class ModTweetDisplayBackHelper
 
 					return;
 				}
+
 				// Check that we have the JSON, otherwise set an error
 				elseif (!$obj)
 				{
@@ -540,7 +542,7 @@ class ModTweetDisplayBackHelper
 				// Append the list name if being pulled
 				if ($feed == 'list')
 				{
-					$this->twitter['header']->user .= ' - <a href="' . $scheme .'twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">' . $list . ' list</a>';
+					$this->twitter['header']->user .= ' - <a href="' . $scheme . 'twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">' . $list . ' list</a>';
 				}
 			}
 
@@ -815,6 +817,7 @@ class ModTweetDisplayBackHelper
 			{
 				$userURL = $scheme . 'twitter.com/intent/user?screen_name=' . $tweetedBy;
 			}
+
 			$this->twitter['tweets']->$i->user = '<strong><a href="' . $userURL . '" rel="nofollow">' . $tweetedBy . '</a>' . $this->params->get('tweetUserSeparator') . '</strong>';
 		}
 
@@ -941,6 +944,7 @@ class ModTweetDisplayBackHelper
 				{
 					$mentionURL = $scheme . 'twitter.com/intent/user?screen_name=' . $mention->screen_name;
 				}
+
 				$this->twitter['tweets']->$i->text = str_ireplace('@' . $mention->screen_name, '@<a class="userlink" href="' . $mentionURL . '" rel="nofollow">' . $mention->screen_name . '</a>', $this->twitter['tweets']->$i->text);
 			}
 

@@ -89,7 +89,6 @@ class JFormFieldVersion extends JFormField
 			$update = $data->$stability;
 		}
 
-
 		// Message containing the version
 		if (version_compare(JVERSION, '3.0', 'ge'))
 		{
@@ -109,11 +108,13 @@ class JFormFieldVersion extends JFormField
 		{
 			$message .= '  ' . JText::_('MOD_TWEETDISPLAYBACK_VERSION_FAILED') . $close;
 		}
+
 		// If an update is available, and compatible with the current Joomla! version, notify the user
 		elseif (version_compare($update->version, $version, 'gt') && version_compare(JVERSION, $update->jversion, 'ge'))
 		{
 			$message .= '  <a href="' . $update->notice . '" target="_blank">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update->version) . '</a></label>';
 		}
+
 		// No updates, or the Joomla! version is not compatible, so let the user know they're using the current version
 		else
 		{
