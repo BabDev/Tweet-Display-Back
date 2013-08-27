@@ -680,23 +680,10 @@ class ModTweetDisplayBackHelper
 						// Tweets which contains @mentions or @mentions+@reply
 						$tweetContainsMention = $tweetContainsMentionAndOrReply && !$tweetOnlyReply;
 
-						// Filter retweets
-						if ($showRetweets == 0)
-						{
-							if (!$tweetIsRetweet)
-							{
-								$this->processItem($o, $i);
-
-								// Modify counts
-								$count--;
-								$i++;
-							}
-						}
-
 						// Filter @mentions and @replies, leaving retweets unchanged
 						if ($showMentions == 0 && $showReplies == 0)
 						{
-							if (!$tweetContainsMentionAndOrReply || isset($o->retweeted_status))
+							if (!$tweetContainsMentionAndOrReply || (isset($o->retweeted_status) && $showRetweets == 1))
 							{
 								$this->processItem($o, $i);
 
@@ -712,7 +699,7 @@ class ModTweetDisplayBackHelper
 							// Filter @mentions only leaving @replies and retweets unchanged
 							if ($showMentions == 0)
 							{
-								if (!$tweetContainsMention || isset($o->retweeted_status))
+								if (!$tweetContainsMention || (isset($o->retweeted_status) && $showRetweets == 1))
 								{
 									$this->processItem($o, $i);
 
@@ -726,6 +713,19 @@ class ModTweetDisplayBackHelper
 							if ($showReplies == 0)
 							{
 								if (!$tweetContainsReply)
+								{
+									$this->processItem($o, $i);
+
+									// Modify counts
+									$count--;
+									$i++;
+								}
+							}
+
+							// Filter retweets
+							if ($showRetweets == 0)
+							{
+								if (!$tweetIsRetweet)
 								{
 									$this->processItem($o, $i);
 
