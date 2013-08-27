@@ -96,6 +96,12 @@ span.TDB-header-avatar-right {
 .TDB-footer-follow-link {
 }
 
+.TDB-footer-follow-link iframe {
+	border: 0;
+	background-color: transparent;
+	overflow: hidden;
+}
+
 .TDB-footer-powered-text {
 	font-size: 85%;
 	text-align: center;
