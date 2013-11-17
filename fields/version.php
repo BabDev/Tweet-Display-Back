@@ -21,11 +21,11 @@ JLoader::register('ModTweetDisplayBackHelper', dirname(__DIR__) . '/helper.php')
 class JFormFieldVersion extends JFormField
 {
 	/**
-	* The form field type.
-	*
-	* @var    string
-	* @since  2.1
-	*/
+	 * The form field type.
+	 *
+	 * @var    string
+	 * @since  2.1
+	 */
 	protected $type = 'Version';
 
 	/**
