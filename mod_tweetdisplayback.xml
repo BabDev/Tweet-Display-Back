@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="2.5" client="site" method="upgrade">
 	<name>mod_tweetdisplayback</name>
-	<creationDate>##DATE##</creationDate>
+	<creationDate>2013-07-26</creationDate>
 	<author>Michael Babker</author>
 	<copyright>(C) 2010-2013 Michael Babker</copyright>
 	<authorEmail>mbabker@flbab.com</authorEmail>
 	<authorUrl>http://www.babdev.com</authorUrl>
-	<version>##VERSION##</version>
+	<version>3.0.3</version>
 	<license>GNU/GPL</license>
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
@@ -451,6 +451,37 @@
 						value="1">JYES</option>
 				</field>
 			</fieldset>
+			<fieldset name="authentication">
+			  <field
+			    name="token_source"
+			    type="list"
+			    default="consumer"
+			    label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_LABEL"
+			    description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_DESC" >
+			    <option
+			      value="consumer">Consumer Key</option>
+			    <option
+			      value="remote">Remote URL</option>
+			  </field>
+			  <field
+			    name="consumer_key"
+			    type="text"
+			    default=""
+			    label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_KEY_LABEL"
+			    description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_KEY_DESC" />
+			  <field
+			    name="consumer_secret"
+			    type="text"
+			    default=""
+			    label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_SECRET_LABEL"
+			    description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_SECRET_DESC" />
+			  <field
+			    name="remote_url"
+			    type="text"
+			    default="http://tdbtoken.gopagoda.com/tokenRequest.php"
+			    label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_REMOTE_URL_LABEL"
+			    description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_REMOTE_URL_DESC" />
+			</fieldset>
 			<fieldset name="advanced">
 				<field
 					name="cache"
@@ -470,6 +501,29 @@
 					default="15"
 					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
 					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+				<field
+					name="bearer_cache_time_qty"
+					type="text"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_QTY_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_QTY_DESC" />
+				<field
+					name="bearer_cache_time_unit"
+					type="list"
+					default="day"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_DESC" >
+					<option
+					  value="noexp">Do not expire token</option>
+					<option
+					  value="min">Minutes</option>
+					<option
+					  value="hour">Hours</option>
+					<option
+					  value="day">Days</option>
+					<option
+					  value="week">Weeks</option>
+			  </field>
 				<field
 					name="moduleclass_sfx"
 					type="text"

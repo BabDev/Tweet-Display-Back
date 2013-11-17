@@ -90,9 +90,9 @@ $scheme = JUri::getInstance()->getScheme() . '://';
 /* @type JDocumentHtml $document */
 $document = JFactory::getDocument();
 
-if (!in_array('<script type="text/javascript" src="' . $scheme . 'platform.twitter.com/widgets.js" async></script>', $document->_custom))
+if (!in_array('<script type="text/javascript" src="' . $scheme . 'platform.twitter.com/widgets.js" async="true"></script>', $document->_custom))
 {
-	$document->addCustomTag('<script type="text/javascript" src="' . $scheme . 'platform.twitter.com/widgets.js" async></script>');
+	$document->addCustomTag('<script type="text/javascript" src="' . $scheme . 'platform.twitter.com/widgets.js" async="true"></script>');
 }
 
 // Build the output
