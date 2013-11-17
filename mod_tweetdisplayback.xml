@@ -451,6 +451,37 @@
 						value="1">JYES</option>
 				</field>
 			</fieldset>
+			<fieldset name="authentication">
+				<field
+					name="token_source"
+					type="list"
+					default="consumer"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_DESC">
+					<option
+						value="consumer">MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_OPTION_CONSUMER</option>
+					<option
+						value="remote">MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_OPTION_REMOTE</option>
+				</field>
+				<field
+					name="consumer_key"
+					type="text"
+					default=""
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_KEY_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_KEY_DESC" />
+				<field
+					name="consumer_secret"
+					type="text"
+					default=""
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_SECRET_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_SECRET_DESC" />
+				<field
+					name="remote_url"
+					type="text"
+					default="http://tdbtoken.gopagoda.com/tokenRequest.php"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_REMOTE_URL_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_REMOTE_URL_DESC" />
+			</fieldset>
 			<fieldset name="advanced">
 				<field
 					name="cache"
@@ -470,6 +501,29 @@
 					default="15"
 					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
 					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+				<field
+					name="bearer_cache_time_qty"
+					type="text"
+					default="1"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_QTY_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_QTY_DESCRIPTION" />
+				<field
+					name="bearer_cache_time_unit"
+					type="list"
+					default="day"
+					label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_LABEL"
+					description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_DESCRIPTION" >
+					<option
+					  value="noexp">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_NOEXP</option>
+					<option
+					  value="min">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_MIN</option>
+					<option
+					  value="hour">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_HOUR</option>
+					<option
+					  value="day">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_DAY</option>
+					<option
+					  value="week">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_WEEK</option>
+				</field>
 				<field
 					name="moduleclass_sfx"
 					type="text"
