@@ -799,6 +799,7 @@ class ModTweetDisplayBackHelper
 			{
 				$userURL = $scheme . 'twitter.com/intent/user?screen_name=' . $tweetedBy;
 			}
+
 			$this->twitter['tweets']->$i->user = '<strong><a href="' . $userURL . '" rel="nofollow">' . $tweetedBy . '</a>' . $this->params->get('tweetUserSeparator') . '</strong>';
 		}
 
@@ -925,6 +926,7 @@ class ModTweetDisplayBackHelper
 				{
 					$mentionURL = $scheme . 'twitter.com/intent/user?screen_name=' . $mention->screen_name;
 				}
+
 				$this->twitter['tweets']->$i->text = str_ireplace('@' . $mention->screen_name, '@<a class="userlink" href="' . $mentionURL . '" rel="nofollow">' . $mention->screen_name . '</a>', $this->twitter['tweets']->$i->text);
 			}
 
