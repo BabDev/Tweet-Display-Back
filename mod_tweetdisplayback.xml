@@ -452,6 +452,7 @@
 				</field>
 			</fieldset>
 			<fieldset name="authentication">
+				<field type="authenticationinfo" />
 				<field
 					name="token_source"
 					type="list"
