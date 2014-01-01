@@ -97,7 +97,7 @@
 				<include name="build/logs/checkstyle.xml" />
 			</fileset>
 		</delete>
-		<echo msg="Running phpcs with Joomla! Platform standards" />
+		<echo msg="Running phpcs with Joomla! Coding Standards" />
 		<phpcodesniffer
 			standard="${repo.dir}/build/phpcs/Joomla"
 			format="full"

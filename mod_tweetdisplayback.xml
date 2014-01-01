@@ -3,11 +3,11 @@
 	<name>mod_tweetdisplayback</name>
 	<creationDate>##DATE##</creationDate>
 	<author>Michael Babker</author>
-	<copyright>(C) 2010-2013 Michael Babker</copyright>
+	<copyright>(C) 2010-2014 Michael Babker</copyright>
 	<authorEmail>mbabker@flbab.com</authorEmail>
 	<authorUrl>http://www.babdev.com</authorUrl>
 	<version>##VERSION##</version>
-	<license>GNU/GPL</license>
+	<license>GNU/GPL Version 2 or later</license>
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
 	<scriptfile>script.php</scriptfile>
 	<files>
