@@ -2,10 +2,8 @@
 /**
  * Tweet Display Back Module for Joomla!
  *
- * @package    TweetDisplayBack
- *
  * @copyright  Copyright (C) 2010-2014 Michael Babker. All rights reserved.
- * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
 defined('_JEXEC') or die;
@@ -15,8 +13,7 @@ JLoader::register('ModTweetDisplayBackHelper', dirname(__DIR__) . '/helper.php')
 /**
  * Field type to display the version and check for a newer version.
  *
- * @package  TweetDisplayBack
- * @since    2.1
+ * @since  2.1
  */
 class JFormFieldVersion extends JFormField
 {

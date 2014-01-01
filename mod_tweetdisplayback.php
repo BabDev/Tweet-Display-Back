@@ -2,10 +2,8 @@
 /**
  * Tweet Display Back Module for Joomla!
  *
- * @package    TweetDisplayBack
- *
  * @copyright  Copyright (C) 2010-2014 Michael Babker. All rights reserved.
- * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
 defined('_JEXEC') or die;
@@ -13,8 +11,8 @@ defined('_JEXEC') or die;
 // Include the helper
 JLoader::register('ModTweetDisplayBackHelper', __DIR__ . '/helper.php');
 
-/* @type JRegistry $params */
-/* @type object $module */
+/* @type  JRegistry  $params */
+/* @type  object     $module */
 
 // Set the template variables
 $headerAlign    = $params->get('headerAvatarAlignment');

@@ -2,10 +2,8 @@
 /**
  * Tweet Display Back Module for Joomla!
  *
- * @package    TweetDisplayBack
- *
  * @copyright  Copyright (C) 2010-2014 Michael Babker. All rights reserved.
- * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
 defined('_JEXEC') or die;
@@ -13,8 +11,7 @@ defined('_JEXEC') or die;
 /**
  * Helper class for Tweet Display Back
  *
- * @package  TweetDisplayBack
- * @since    1.0
+ * @since  1.0
  */
 class ModTweetDisplayBackHelper
 {

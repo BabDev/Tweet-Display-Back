@@ -2,17 +2,14 @@
 /**
  * Tweet Display Back Module for Joomla!
  *
- * @package    TweetDisplayBack
- *
  * @copyright  Copyright (C) 2010-2014 Michael Babker. All rights reserved.
- * @license    GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
 /**
  * Class to handle additional work during installation routine
  *
- * @package  TweetDisplayBack
- * @since    3.0
+ * @since  3.0
  */
 class Mod_TweetDisplayBackInstallerScript
 {
