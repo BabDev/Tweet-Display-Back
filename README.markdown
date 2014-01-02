@@ -1,4 +1,4 @@
-Tweet Display Back
+Tweet Display Back [![Analytics](https://ga-beacon.appspot.com/UA-42602973-2/tweet-display-back/readme)](https://github.com/igrigorik/ga-beacon)
 ===============
 *Tweet Display Back* is a module for Joomla! sites which allows users to display a user or list feed on their site.
 
