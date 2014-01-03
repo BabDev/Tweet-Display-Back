@@ -13,7 +13,7 @@ Requirements
 Support
 ===============
 * Documentation for *Tweet Display Back* is available on my website at http://www.babdev.com/extensions/tweet-display-back.
-* If you've found a bug, please report it to the Issue Tracker at https://github.com/mbabker/Tweet-Display-Back/issues.
+* If you've found a bug, please report it to the Issue Tracker at https://github.com/BabDev/Tweet-Display-Back/issues.
 
 Installation Package
 ===============
