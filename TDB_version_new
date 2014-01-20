@@ -1,12 +1,12 @@
 {
 	"alpha": {
-		"version":"3.0.3",
-		"notice":"http://www.babdev.com/extensions/updates/150-tdb-303-released",
+		"version":"3.1.0.beta",
+		"notice":"http://www.babdev.com/extensions/releases/tweet-display-back-developer-release/ver31_BETA",
 		"jversion":"2.5.6"
 	},
 	"beta": {
-		"version":"3.0.3",
-		"notice":"http://www.babdev.com/extensions/updates/150-tdb-303-released",
+		"version":"3.1.0.beta",
+		"notice":"http://www.babdev.com/extensions/releases/tweet-display-back-developer-release/ver31_BETA",
 		"jversion":"2.5.6"
 	},
 	"rc": {
