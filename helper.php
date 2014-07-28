@@ -701,19 +701,6 @@ class ModTweetDisplayBackHelper
 								}
 							}
 
-							// Filter retweets
-							if ($showRetweets == 0)
-							{
-								if (!$tweetIsRetweet)
-								{
-									$this->processItem($o, $i);
-
-									// Modify counts
-									$count--;
-									$i++;
-								}
-							}
-
 							// Somehow, we got this far; process the tweet
 							if ($showMentions == 1 && $showReplies == 1 && $showRetweets == 1)
 							{
