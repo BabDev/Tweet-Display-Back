@@ -3,24 +3,35 @@
 	<!-- Project properties -->
 	<property file="./build.properties" />
 	<property name="repo.dir" value="." />
-	<resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" />
-	<property name="version" value="3.1.0.beta" />
+	<property name="version" value="3.1.0.beta2.dev" />
 	<tstamp>
-		<format property="build.date" pattern="%Y-%m-%d" />
+		<format property="build.date" pattern="yyyy-MM-dd" />
 	</tstamp>
+
+	<macrodef name="git">
+		<attribute name="command" />
+		<attribute name="dir" default="" />
+		<element name="args" optional="true" />
+		<sequential>
+			<exec executable="git" dir="@{dir}">
+				<arg value="@{command}" />
+				<args/>
+			</exec>
+		</sequential>
+	</macrodef>
 
 	<target
 		name="dev_head"
 		description="Builds test packages based on the development head"
-		depends="rebuild-packages,phpcs,build-packages"
+		depends="phpcs,rebuild-packages,build-packages"
 	>
-		<echo msg="Deleting old master build" />
-		<delete quiet="yes" includeemptydirs="true">
+		<echo message="Deleting old master build" />
+		<delete quiet="true">
 			<fileset dir=".">
 				<include name="mod_tweetdisplayback_master.zip" />
 			</fileset>
 		</delete>
-		<echo msg="Build package" />
+		<echo message="Build package" />
 		<zip destfile="mod_tweetdisplayback_master.zip">
 			<fileset dir="packages">
 				<include name="**" />
@@ -32,81 +43,93 @@
 		description="Builds release packages based on the development head"
 		depends="rebuild-packages,build-packages"
 	>
-		<echo msg="Build package" />
+		<echo message="Build package" />
 		<zip destfile="releases/mod_tweetdisplayback_${version}.zip">
 			<fileset dir="packages">
 				<include name="**" />
 			</fileset>
 		</zip>
-		<echo msg="Creating Git tag" />
-		<gittag repository="${repo.dir.resolved}" name="${version}" gitPath="${localgit}" />
-		<echo msg="Pushing Version commit and tag to GitHub" />
-		<gitpush repository="${repo.dir.resolved}" gitPath="${localgit}" />
-		<gitpush repository="${repo.dir.resolved}" tags="true" gitPath="${localgit}" />
+		<echo message="Committing version" />
+		<git command="commit">
+			<args>
+				<arg value="-am 'Prepare ${version} release'" />
+			</args>
+		</git>
+		<echo message="Creating Git tag" />
+		<git command="tag">
+			<args>
+				<arg value="${version}" />
+			</args>
+		</git>
+		<echo message="Pushing Version commit and tag to GitHub" />
+		<git command="push">
+		</git>
+		<git command="push">
+			<args>
+				<arg value="--tags" />
+			</args>
+		</git>
+	</target>
+	<target name="tag">
+		<git command="tag">
+			<args>
+				<arg value="${version}" />
+			</args>
+		</git>
 	</target>
 	<target name="build-packages" description="Stages the common files" depends="rebuild-packages">
-		<echo msg="Create temp folder" />
+		<echo message="Create temp folder" />
 		<mkdir dir="packages" />
-		<echo msg="Copy files" />
+		<echo message="Copy files" />
 		<copy todir="packages/fields">
 			<fileset dir="fields" />
-	    </copy>
+		</copy>
 		<copy todir="packages/language">
 			<fileset dir="language" />
-	    </copy>
+		</copy>
 		<copy todir="packages/libraries">
 			<fileset dir="libraries" />
-	    </copy>
+		</copy>
 		<copy todir="packages/media">
 			<fileset dir="media" />
 		</copy>
 		<copy todir="packages/tmpl">
 			<fileset dir="tmpl" />
 		</copy>
-		<copy
-			file="mod_tweetdisplayback.xml"
-			tofile="packages/mod_tweetdisplayback.xml"
-			overwrite="true">
-			<filterchain>
-				<replacetokens begintoken="##" endtoken="##">
-					<token key="DATE" value="${build.date}" />
-					<token key="VERSION" value="${version}" />
-				</replacetokens>
-			</filterchain>
-		</copy>
 		<copy todir="packages">
 			<fileset dir=".">
 				<include name="helper.php" />
 				<include name="index.html" />
 				<include name="mod_tweetdisplayback.php" />
+				<include name="mod_tweetdisplayback.xml" />
 				<include name="script.php" />
 			</fileset>
-	    </copy>
+		</copy>
+		<replace file="packages/mod_tweetdisplayback.xml" token="##DATE##" value="${build.date}" />
+		<replace file="packages/mod_tweetdisplayback.xml" token="##VERSION##" value="${version}" />
 	</target>
 	<target name="rebuild-packages" description="Delete old packages">
-		<echo msg="Deleting packages dir" />
+		<echo message="Deleting packages dir" />
 		<delete dir="${repo.dir}/packages" includeemptydirs="true" failonerror="true" />
-		<echo msg="Creating packages dir" />
+		<echo message="Creating packages dir" />
 		<mkdir dir="packages" />
 	</target>
 	<target name="phpcs" description="Generate codestyle report using PHP_CodeSniffer">
-		<echo msg="Remove previous codestyle report" />
-		<delete quiet="yes" includeemptydirs="true">
+		<echo message="Remove previous codestyle report" />
+		<delete quiet="true">
 			<fileset dir=".">
-				<include name="build/logs/codesniff.txt" />
 				<include name="build/logs/checkstyle.xml" />
 			</fileset>
 		</delete>
-		<echo msg="Running phpcs with Joomla! Coding Standards" />
-		<phpcodesniffer
-			standard="${repo.dir}/build/phpcs/Joomla"
-			format="full"
-			ignorePatterns="packages/*,releases/*,tmpl/*,libraries/*,build/*"
-			file="${repo.dir}"
-			allowedFileExtensions="php"
-			verbosity="1">
-			<formatter type="full" outfile="${repo.dir}/build/logs/codesniff.txt" />
-			<formatter type="checkstyle" outfile="${repo.dir}/build/logs/checkstyle.xml" />
-		</phpcodesniffer>
+		<echo message="Running phpcs with Joomla! Coding Standards" />
+		<exec executable="phpcs">
+			<arg value="--report=checkstyle" />
+			<arg value="--extensions=php" />
+			<arg value="-p" />
+			<arg value="--report-file=${repo.dir}/build/logs/checkstyle.xml" />
+			<arg value="--standard=${repo.dir}/build/phpcs/Joomla" />
+			<arg value="--ignore=${repo.dir}/packages/*,${repo.dir}/releases/*,${repo.dir}/tmpl/*,${repo.dir}/libraries/*,${repo.dir}/build/*" />
+			<arg path="${repo.dir}" />
+		</exec>
 	</target>
 </project>
