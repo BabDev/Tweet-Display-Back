@@ -456,7 +456,7 @@
 				<field
 					name="token_source"
 					type="list"
-					default="consumer"
+					default="remote"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_DESC">
 					<option
