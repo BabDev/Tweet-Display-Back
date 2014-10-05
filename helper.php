@@ -762,7 +762,7 @@ class ModTweetDisplayBackHelper
 			$text      = $o->retweeted_status->text;
 			$urls      = $o->retweeted_status->entities->urls;
 			$RTs       = $o->retweeted_status->retweet_count;
-			$this->twitter['tweets']->$i->created = JText::_('MOD_TWEETDISPLAYBACK_RETWEETED');
+			$created   = JText::_('MOD_TWEETDISPLAYBACK_RETWEETED');
 
 			if (isset($o->retweeted_status->entities->media))
 			{
@@ -777,12 +777,15 @@ class ModTweetDisplayBackHelper
 			$text      = $o->text;
 			$urls      = $o->entities->urls;
 			$RTs       = $o->retweet_count;
+			$created   = '';
 
 			if (isset($o->entities->media))
 			{
 				$media = $o->entities->media;
 			}
 		}
+
+		$this->twitter['tweets']->$i->created = $created;
 
 		// Generate the object with the user data
 		if ($tweetName == 1)
