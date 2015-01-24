@@ -64,6 +64,14 @@ class ModTweetDisplayBackHelper
 	protected $params;
 
 	/**
+	 * URL scheme for the request
+	 *
+	 * @var    string
+	 * @since  3.1
+	 */
+	public $scheme;
+
+	/**
 	 * Container for the tweet response object
 	 *
 	 * @var    object
@@ -128,6 +136,9 @@ class ModTweetDisplayBackHelper
 
 		// Instantiate the bearer token
 		$this->bearer = new BDBearer($this->params, $this->connector);
+
+		// Store the requested URL scheme
+		$this->scheme = JUri::getInstance()->getScheme();
 	}
 
 	/**
@@ -399,7 +410,7 @@ class ModTweetDisplayBackHelper
 	 */
 	protected function prepareUser()
 	{
-		$scheme = JUri::getInstance()->getScheme() . '://';
+		$scheme = $this->scheme . '://';
 
 		// Load the parameters
 		$uname = $this->params->get('twitterName', '');
@@ -531,7 +542,7 @@ class ModTweetDisplayBackHelper
 			}
 
 			// Get the profile image URL from the object
-			$avatar = $obj->profile_image_url;
+			$avatar = $this->scheme == 'https' ? $obj->profile_image_url_https : $obj->profile_image_url;
 
 			// Switch from the normal size avatar (48px) to the large one (73px)
 			$avatar = str_replace('normal.jpg', 'bigger.jpg', $avatar);
@@ -730,7 +741,7 @@ class ModTweetDisplayBackHelper
 	 */
 	protected function processItem($o, $i)
 	{
-		$scheme = JUri::getInstance()->getScheme() . '://';
+		$scheme = $this->scheme . '://';
 
 		// Set variables
 		$tweetName    = $this->params->get('tweetName', 1);
@@ -745,7 +756,7 @@ class ModTweetDisplayBackHelper
 		{
 			// Retweeted user
 			$tweetedBy = $o->retweeted_status->user->screen_name;
-			$avatar    = $o->retweeted_status->user->profile_image_url;
+			$avatar    = $this->scheme == 'https' ? $o->retweeted_status->user->profile_image_url_https : $o->retweeted_status->user->profile_image_url;
 			$text      = $o->retweeted_status->text;
 			$urls      = $o->retweeted_status->entities->urls;
 			$RTs       = $o->retweeted_status->retweet_count;
@@ -760,7 +771,7 @@ class ModTweetDisplayBackHelper
 		{
 			// User
 			$tweetedBy = $o->user->screen_name;
-			$avatar    = $o->user->profile_image_url;
+			$avatar    = $this->scheme == 'https' ? $o->user->profile_image_url_https : $o->user->profile_image_url;
 			$text      = $o->text;
 			$urls      = $o->entities->urls;
 			$RTs       = $o->retweet_count;
