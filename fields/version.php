@@ -56,7 +56,7 @@ class JFormFieldVersion extends JFormField
 		$version = $data['version'];
 
 		// The target to check against
-		$target = 'http://www.babdev.com/updates/TDB_version_new';
+		$target = 'https://www.babdev.com/updates/TDB_version_new';
 
 		// Get the module params
 		$params = static::getModuleParams($this->form->getValue('id', null, 0));

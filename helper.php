@@ -582,7 +582,7 @@ class ModTweetDisplayBackHelper
 
 		if ($this->params->get('footerPoweredBy', 1) == 1)
 		{
-			$site = '<a href="http://www.babdev.com/extensions/tweet-display-back" rel="nofollow" target="_blank">' . JText::_('MOD_TWEETDISPLAYBACK') . '</a>';
+			$site = '<a href="https://www.babdev.com/extensions/tweet-display-back" rel="nofollow" target="_blank">' . JText::_('MOD_TWEETDISPLAYBACK') . '</a>';
 			$this->twitter['footer']->powered_by = '<hr /><div class="TDB-footer-powered-text">' . JText::sprintf('MOD_TWEETDISPLAYBACK_POWERED_BY', $site) . '</div>';
 		}
 	}

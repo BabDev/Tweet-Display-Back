@@ -5,7 +5,7 @@
 	<author>Michael Babker</author>
 	<copyright>(C) 2010-2015 Michael Babker</copyright>
 	<authorEmail>mbabker@flbab.com</authorEmail>
-	<authorUrl>http://www.babdev.com</authorUrl>
+	<authorUrl>https://www.babdev.com</authorUrl>
 	<version>##VERSION##</version>
 	<license>GNU/GPL Version 2 or later</license>
 	<description>MOD_TWEETDISPLAYBACK_XML_DESCRIPTION</description>
@@ -26,7 +26,7 @@
 		<filename>index.html</filename>
 	</media>
 	<updateservers>
-		<server type="extension" name="Tweet Display Back Updates" priority="2">http://www.babdev.com/updates/TDB.xml</server>
+		<server type="extension" name="Tweet Display Back Updates" priority="2">https://www.babdev.com/updates/TDB.xml</server>
 	</updateservers>
 	<config>
 		<fields name="params" addfieldpath="/modules/mod_tweetdisplayback/fields">

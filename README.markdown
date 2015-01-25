@@ -4,7 +4,7 @@ Tweet Display Back [![Analytics](https://ga-beacon.appspot.com/UA-42602973-2/twe
 
 Compatibility
 ===============
-The current release of *Tweet Display Back* is compatible with Joomla! 2.5 and newer.  Older versions of the module are available for download at http://www.babdev.com/extensions/releases/tweet-display-back
+The current release of *Tweet Display Back* is compatible with Joomla! 2.5 and newer.  Older versions of the module are available for download at https://www.babdev.com/extensions/releases/tweet-display-back
 
 Requirements
 ===============
@@ -12,7 +12,7 @@ Requirements
 
 Support
 ===============
-* Documentation for *Tweet Display Back* is available on my website at http://www.babdev.com/extensions/tweet-display-back.
+* Documentation for *Tweet Display Back* is available on my website at https://www.babdev.com/extensions/tweet-display-back.
 * If you've found a bug, please report it to the Issue Tracker at https://github.com/BabDev/Tweet-Display-Back/issues.
 
 Installation Package
