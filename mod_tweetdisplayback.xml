@@ -479,7 +479,7 @@
 				<field
 					name="remote_url"
 					type="text"
-					default="http://tdbtoken.gopagoda.com/tokenRequest.php"
+					default="http://tdbtoken-v2.gopagoda.io/tokenRequest.php"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_REMOTE_URL_LABEL"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_REMOTE_URL_DESC" />
 			</fieldset>

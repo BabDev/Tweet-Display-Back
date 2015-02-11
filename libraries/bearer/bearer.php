@@ -148,7 +148,7 @@ class BDBearer
 	 */
 	protected function callRemoteUrl()
 	{
-		$url = $this->params->get('remote_url', 'http://tdbtoken.gopagoda.com/tokenRequest.php');
+		$url = $this->params->get('remote_url', 'http://tdbtoken-v2.gopagoda.io/tokenRequest.php');
 
 		// Call consumer or RemoteURL
 		$response = $this->connector->get($url);
