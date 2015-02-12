@@ -2,7 +2,7 @@
 <project name="tweetdisplayback" default="dev_head" basedir=".">
 	<!-- Project properties -->
 	<property name="repo.dir" value="." />
-	<property name="version" value="3.1.0.beta2.dev" />
+	<property name="version" value="3.1.0" />
 	<tstamp>
 		<format property="build.date" pattern="yyyy-MM-dd" />
 	</tstamp>
