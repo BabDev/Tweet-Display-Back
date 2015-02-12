@@ -7,10 +7,10 @@
 		<type>module</type>
 		<client>site</client>
 		<client_id>0</client_id>
-		<version>3.0.3</version>
-		<infourl title="Tweet Display Back Updated">https://www.babdev.com/extensions/updates/150-tdb-303-released</infourl>
+		<version>3.1.0</version>
+		<infourl title="Tweet Display Back Updated">https://www.babdev.com/extensions/updates/166-tdb-310-released</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://www.babdev.com/extensions/releases/tweet-display-back/tweet-display-back-3-0-3/modtweetdisplayback3-0-3-zip?format=raw&amp;jcompat=my.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://www.babdev.com/extensions/releases/tweet-display-back/tweet-display-back-3-1-0/modtweetdisplayback3-1-0-zip?format=raw&amp;jcompat=my.zip</downloadurl>
 		</downloads>
 		<maintainer>Michael Babker</maintainer>
 		<maintainerurl>https://www.babdev.com</maintainerurl>
@@ -23,45 +23,13 @@
 		<type>module</type>
 		<client>site</client>
 		<client_id>0</client_id>
-		<version>3.0.3</version>
-		<infourl title="Tweet Display Back Updated">https://www.babdev.com/extensions/updates/150-tdb-303-released</infourl>
+		<version>3.1.0</version>
+		<infourl title="Tweet Display Back Updated">https://www.babdev.com/extensions/updates/166-tdb-310-released</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://www.babdev.com/extensions/releases/tweet-display-back/tweet-display-back-3-0-3/modtweetdisplayback3-0-3-zip?format=raw&amp;jcompat=my.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://www.babdev.com/extensions/releases/tweet-display-back/tweet-display-back-3-1-0/modtweetdisplayback3-1-0-zip?format=raw&amp;jcompat=my.zip</downloadurl>
 		</downloads>
 		<maintainer>Michael Babker</maintainer>
 		<maintainerurl>https://www.babdev.com</maintainerurl>
-		<targetplatform name="joomla" version="3.0" />
-	</update>
-	<update>
-		<name>Tweet Display Back</name>
-		<description>Twitter display module for Joomla! websites</description>
-		<element>mod_tweetdisplayback</element>
-		<type>module</type>
-		<client>site</client>
-		<client_id>0</client_id>
-		<version>3.0.3</version>
-		<infourl title="Tweet Display Back Updated">https://www.babdev.com/extensions/updates/150-tdb-303-released</infourl>
-		<downloads>
-			<downloadurl type="full" format="zip">https://www.babdev.com/extensions/releases/tweet-display-back/tweet-display-back-3-0-3/modtweetdisplayback3-0-3-zip?format=raw&amp;jcompat=my.zip</downloadurl>
-		</downloads>
-		<maintainer>Michael Babker</maintainer>
-		<maintainerurl>https://www.babdev.com</maintainerurl>
-		<targetplatform name="joomla" version="3.1" />
-	</update>
-	<update>
-		<name>Tweet Display Back</name>
-		<description>Twitter display module for Joomla! websites</description>
-		<element>mod_tweetdisplayback</element>
-		<type>module</type>
-		<client>site</client>
-		<client_id>0</client_id>
-		<version>3.0.3</version>
-		<infourl title="Tweet Display Back Updated">https://www.babdev.com/extensions/updates/150-tdb-303-released</infourl>
-		<downloads>
-			<downloadurl type="full" format="zip">https://www.babdev.com/extensions/releases/tweet-display-back/tweet-display-back-3-0-3/modtweetdisplayback3-0-3-zip?format=raw&amp;jcompat=my.zip</downloadurl>
-		</downloads>
-		<maintainer>Michael Babker</maintainer>
-		<maintainerurl>https://www.babdev.com</maintainerurl>
-		<targetplatform name="joomla" version="3.2" />
+		<targetplatform name="joomla" version="3.[01234]" />
 	</update>
 </updates>

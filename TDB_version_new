@@ -1,22 +1,22 @@
 {
 	"alpha": {
-		"version":"3.1.0.beta",
-		"notice":"https://www.babdev.com/extensions/releases/tweet-display-back-developer-release/ver31_BETA",
+		"version":"3.1.0",
+		"notice":"https://www.babdev.com/extensions/updates/166-tdb-310-released",
 		"jversion":"2.5.6"
 	},
 	"beta": {
-		"version":"3.1.0.beta",
-		"notice":"https://www.babdev.com/extensions/releases/tweet-display-back-developer-release/ver31_BETA",
+		"version":"3.1.0",
+		"notice":"https://www.babdev.com/extensions/updates/166-tdb-310-released",
 		"jversion":"2.5.6"
 	},
 	"rc": {
-		"version":"3.0.3",
-		"notice":"https://www.babdev.com/extensions/updates/150-tdb-303-released",
+		"version":"3.1.0",
+		"notice":"https://www.babdev.com/extensions/updates/166-tdb-310-released",
 		"jversion":"2.5.6"
 	},
 	"stable": {
-		"version":"3.0.3",
-		"notice":"https://www.babdev.com/extensions/updates/150-tdb-303-released",
+		"version":"3.1.0",
+		"notice":"https://www.babdev.com/extensions/updates/166-tdb-310-released",
 		"jversion":"2.5.6"
 	}
 }

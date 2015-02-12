@@ -4,7 +4,7 @@ Tweet Display Back [![Analytics](https://ga-beacon.appspot.com/UA-42602973-2/twe
 
 Compatibility
 ===============
-The current release of *Tweet Display Back* is compatible with Joomla! 2.5 and newer.  Older versions of the module are available for download at https://www.babdev.com/extensions/releases/tweet-display-back
+The current release of *Tweet Display Back* is compatible with Joomla! 2.5.6 and newer.  Older versions of the module are available for download at https://www.babdev.com/extensions/releases/tweet-display-back
 
 Requirements
 ===============
@@ -17,7 +17,7 @@ Support
 
 Installation Package
 ===============
-* If you have made a checkout of the repository, you can build installation packages using Phing by running 'phing dev_head' from your interface.
+* If you have made a checkout of the repository, you can build installation packages using Ant by running 'ant dev_head' from your interface.
 
 Stable Master Policy
 ===============
