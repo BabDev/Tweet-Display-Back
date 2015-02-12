@@ -8,7 +8,7 @@
 
 defined('_JEXEC') or die;
 
-/* @type  JRegistry  $params */
+/* @type  \Joomla\Registry\Registry  $params */
 
 // Prechecked parameters
 $headerAvatar = '';

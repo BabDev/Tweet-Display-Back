@@ -11,8 +11,8 @@ defined('_JEXEC') or die;
 // Include the helper
 JLoader::register('ModTweetDisplayBackHelper', __DIR__ . '/helper.php');
 
-/* @type  JRegistry  $params */
-/* @type  object     $module */
+/* @type  \Joomla\Registry\Registry  $params */
+/* @type  object                     $module */
 
 // Set the template variables
 $headerAlign    = $params->get('headerAvatarAlignment');

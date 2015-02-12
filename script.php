@@ -130,5 +130,11 @@ class Mod_TweetDisplayBackInstallerScript
 				JFile::delete($base . $file);
 			}
 		}
+
+		// Remove the HTTP connector fork if it exists
+		if (is_dir(JPATH_SITE . '/modules/mod_tweetdisplayback/libraries/http/'))
+		{
+			JFolder::delete(JPATH_SITE . '/modules/mod_tweetdisplayback/librarie/http/');
+		}
 	}
 }

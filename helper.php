@@ -8,6 +8,8 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\Registry\Registry;
+
 /**
  * Helper class for Tweet Display Back
  *
@@ -24,9 +26,9 @@ class ModTweetDisplayBackHelper
 	protected $bearer;
 
 	/**
-	 * BDHttp connector
+	 * JHttp connector
 	 *
-	 * @var    BDHttp
+	 * @var    JHttp
 	 * @since  3.1
 	 */
 	protected $connector;
@@ -58,7 +60,7 @@ class ModTweetDisplayBackHelper
 	/**
 	 * Module parameters
 	 *
-	 * @var    JRegistry
+	 * @var    Registry
 	 * @since  3.0
 	 */
 	protected $params;
@@ -98,7 +100,7 @@ class ModTweetDisplayBackHelper
 	/**
 	 * Constructor
 	 *
-	 * @param   JRegistry  $params  The module parameters
+	 * @param   Registry  $params  The module parameters
 	 *
 	 * @since   3.0
 	 */
@@ -107,14 +109,14 @@ class ModTweetDisplayBackHelper
 		// Store the module params
 		$this->params = $params;
 
-		// Start setting up the BDHttp connector
+		// Start setting up the JHttp connector
 		$transport = null;
 
-		// Set up our JRegistry object for the BDHttp connector
-		$options = new JRegistry;
+		// Set up our Registry object for the JHttp connector
+		$options = new Registry;
 
 		// Set the user agent
-		$options->set('userAgent', 'TweetDisplayBack/3.0');
+		$options->set('userAgent', 'TweetDisplayBack/4.0');
 
 		// Use a 30 second timeout
 		$options->set('timeout', 30);
@@ -122,7 +124,7 @@ class ModTweetDisplayBackHelper
 		// Include the BabDev library
 		JLoader::registerPrefix('BD', __DIR__ . '/libraries');
 
-		// If the user has forced a specific connector, use it, otherwise allow BDHttpFactory to decide
+		// If the user has forced a specific connector, use it, otherwise allow JHttpFactory to decide
 		$connector = $this->params->get('overrideConnector', null);
 
 		// If the override is 'no', set to null
@@ -131,8 +133,8 @@ class ModTweetDisplayBackHelper
 			$connector = null;
 		}
 
-		// Instantiate our BDHttp object
-		$this->connector = BDHttpFactory::getHttp($options, $connector);
+		// Instantiate our JHttp object
+		$this->connector = JHttpFactory::getHttp($options, $connector);
 
 		// Instantiate the bearer token
 		$this->bearer = new BDBearer($this->params, $this->connector);
@@ -936,7 +938,7 @@ class ModTweetDisplayBackHelper
 	}
 
 	/**
-	 * Function to convert a formatted list name into it's URL equivalent
+	 * Function to convert a formatted list name into its URL equivalent
 	 *
 	 * @param   string  $list  The user inputted list name
 	 *

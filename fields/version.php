@@ -8,6 +8,8 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\Registry\Registry;
+
 JLoader::register('ModTweetDisplayBackHelper', dirname(__DIR__) . '/helper.php');
 
 /**
@@ -49,7 +51,7 @@ class JFormFieldVersion extends JFormField
 	{
 		// Get the module's XML
 		$xmlfile   = dirname(__DIR__) . '/mod_tweetdisplayback.xml';
-		$data      = JApplicationHelper::parseXMLInstallFile($xmlfile);
+		$data      = JInstaller::parseXMLInstallFile($xmlfile);
 		$cacheFile = JPATH_CACHE . '/tweetdisplayback_update.json';
 
 		// The module's version
@@ -68,7 +70,7 @@ class JFormFieldVersion extends JFormField
 		if (!file_exists($cacheFile) || (time() - @filemtime($cacheFile) > 86400))
 		{
 			// Get the data from remote
-			$helper = new ModTweetDisplayBackHelper(new JRegistry);
+			$helper = new ModTweetDisplayBackHelper(new Registry);
 			$data   = $helper->getJSON($target);
 			$update = $data->$stability;
 
@@ -86,37 +88,28 @@ class JFormFieldVersion extends JFormField
 			$update = $data->$stability;
 		}
 
-		// Message containing the version
-		if (version_compare(JVERSION, '3.0', 'ge'))
-		{
-			$message = '<div class="alert alert-info">';
-			$close = '</div>';
-		}
-		else
-		{
-			$message = '<label style="max-width:100%">';
-			$close = '</label>';
-		}
-
-		$message .= JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
+		$message = '<div class="alert alert-info">';
+		$message .= JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version) . '  ';
 
 		// Make sure that the $update object actually has data
 		if (!isset($update->notice))
 		{
-			$message .= '  ' . JText::_('MOD_TWEETDISPLAYBACK_VERSION_FAILED') . $close;
+			$message .= JText::_('MOD_TWEETDISPLAYBACK_VERSION_FAILED');
 		}
 
 		// If an update is available, and compatible with the current Joomla! version, notify the user
 		elseif (version_compare($update->version, $version, 'gt') && version_compare(JVERSION, $update->jversion, 'ge'))
 		{
-			$message .= '  <a href="' . $update->notice . '" target="_blank">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update->version) . '</a></label>';
+			$message .= '<a href="' . $update->notice . '" target="_blank">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update->version) . '</a>';
 		}
 
 		// No updates, or the Joomla! version is not compatible, so let the user know they're using the current version
 		else
 		{
-			$message .= '  ' . JText::_('MOD_TWEETDISPLAYBACK_VERSION_CURRENT') . $close;
+			$message .= JText::_('MOD_TWEETDISPLAYBACK_VERSION_CURRENT');
 		}
+
+		$message .= '</div>';
 
 		return $message;
 	}
@@ -126,7 +119,7 @@ class JFormFieldVersion extends JFormField
 	 *
 	 * @param   integer  $id  The module ID
 	 *
-	 * @return  JRegistry
+	 * @return  Registry
 	 *
 	 * @since   3.0
 	 */
@@ -134,19 +127,15 @@ class JFormFieldVersion extends JFormField
 	{
 		// Get a database object
 		$db    = JFactory::getDbo();
-		$query = $db->getQuery(true);
 
-		// Query the params column
-		$query->select($db->quoteName('params'));
-		$query->from($db->quoteName('#__modules'));
-		$query->where($db->quoteName('id') . ' = ' . $id);
-		$db->setQuery($query);
-		$result = $db->loadResult();
+		$result = $db->setQuery(
+			$db->getQuery(true)
+				->select($db->quoteName('params'))
+				->from($db->quoteName('#__modules'))
+				->where($db->quoteName('id') . ' = ' . $id)
+		)->$db->loadResult();
 
-		// Convert the result to a JRegistry object
-		$params = new JRegistry($result);
-
-		// Return the params
-		return $params;
+		// Convert the result to a Registry object
+		return new Registry($result);
 	}
 }

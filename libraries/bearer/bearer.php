@@ -8,6 +8,8 @@
 
 defined('JPATH_PLATFORM') or die;
 
+use Joomla\Registry\Registry;
+
 /**
  * Bearer class for Tweet Display Back
  *
@@ -32,12 +34,20 @@ class BDBearer
 	private $cache_time = -1;
 
 	/**
-	 * BDHttp connector
+	 * JHttp connector
 	 *
-	 * @var    BDHttp
+	 * @var    JHttp
 	 * @since  3.1
 	 */
 	protected $connector = null;
+
+	/**
+	 * Module params
+	 *
+	 * @var    Registry
+	 * @since  3.1
+	 */
+	protected $params;
 
 	/**
 	 * The bearer token
@@ -50,12 +60,12 @@ class BDBearer
 	/**
 	 * Constructor
 	 *
-	 * @param   JRegistry  $params     The module parameters
-	 * @param   BDHttp     $connector  BDHttp connector
+	 * @param   Registry  $params     The module parameters
+	 * @param   JHttp     $connector  JHttp connector
 	 *
 	 * @since   3.1
 	 */
-	public function __construct($params, BDHttp $connector)
+	public function __construct(Registry $params, JHttp $connector)
 	{
 		// Store the module params
 		$this->params = $params;
@@ -111,31 +121,27 @@ class BDBearer
 	{
 		$auth = $this->prepareBearerAuth();
 
-		if ($auth)
-		{
-			$url      = "https://api.twitter.com/oauth2/token";
-			$headers  = array(
-				'Authorization' => "Basic {$auth}",
-			);
-
-			$data     = "grant_type=client_credentials";
-			$response = $this->connector->post($url, $data, $headers);
-
-			if ($response->code == 200)
-			{
-				$this->token = json_decode($response->body)->access_token;
-			}
-			else
-			{
-				throw new RuntimeException('Could not retrieve bearer token (consumer)');
-			}
-
-			$this->writeCache();
-		}
-		else
+		if (!$auth)
 		{
 			throw new RuntimeException('Invalid consumer key/secret in configuration');
 		}
+
+		$url      = 'https://api.twitter.com/oauth2/token';
+		$headers  = array(
+			'Authorization' => "Basic {$auth}",
+		);
+
+		$data     = 'grant_type=client_credentials';
+		$response = $this->connector->post($url, $data, $headers);
+
+		if ($response->code != 200)
+		{
+			throw new RuntimeException('Could not retrieve bearer token (consumer)');
+		}
+
+		$this->token = json_decode($response->body)->access_token;
+
+		$this->writeCache();
 	}
 
 	/**
@@ -153,14 +159,12 @@ class BDBearer
 		// Call consumer or RemoteURL
 		$response = $this->connector->get($url);
 
-		if ($response->code == 200)
-		{
-			$this->token = str_replace('Bearer ', '', base64_decode($response->body));
-		}
-		else
+		if ($response->code != 200)
 		{
 			throw new RuntimeException('Could not retrieve bearer token (remote)');
 		}
+
+		$this->token = str_replace('Bearer ', '', base64_decode($response->body));
 
 		$this->writeCache();
 	}
