@@ -624,6 +624,8 @@ class ModTweetDisplayBackHelper
 						// Modify counts
 						$count--;
 						$i++;
+
+						continue;
 					}
 
 					// We're filtering, the fun starts here
@@ -669,6 +671,8 @@ class ModTweetDisplayBackHelper
 								// Modify counts
 								$count--;
 								$i++;
+
+								continue;
 							}
 						}
 
@@ -682,6 +686,8 @@ class ModTweetDisplayBackHelper
 								// Modify counts
 								$count--;
 								$i++;
+
+								continue;
 							}
 						}
 
@@ -698,6 +704,8 @@ class ModTweetDisplayBackHelper
 									// Modify counts
 									$count--;
 									$i++;
+
+									continue;
 								}
 							}
 
@@ -711,6 +719,8 @@ class ModTweetDisplayBackHelper
 									// Modify counts
 									$count--;
 									$i++;
+
+									continue;
 								}
 							}
 
@@ -723,6 +733,8 @@ class ModTweetDisplayBackHelper
 								// Modify counts
 								$count--;
 								$i++;
+
+								continue;
 							}
 						}
 					}
