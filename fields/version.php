@@ -42,8 +42,7 @@ class JFormFieldVersion extends JFormField
 	/**
 	 * Method to get the field label.
 	 *
-	 * @return  string  A message containing the installed version and,
-	 *                  if necessary, information on a new version.
+	 * @return  string  A message containing the installed version and, if necessary, information on a new version.
 	 *
 	 * @since   2.1
 	 */
@@ -61,7 +60,7 @@ class JFormFieldVersion extends JFormField
 		$target = 'https://www.babdev.com/updates/TDB_version_new';
 
 		// Get the module params
-		$params = static::getModuleParams($this->form->getValue('id', null, 0));
+		$params = $this->getModuleParams($this->form->getValue('id', null, 0));
 
 		// Get the stability level we want to show data for
 		$stability = $params->get('stability', 'stable');
@@ -70,8 +69,7 @@ class JFormFieldVersion extends JFormField
 		if (!file_exists($cacheFile) || (time() - @filemtime($cacheFile) > 86400))
 		{
 			// Get the data from remote
-			$helper = new ModTweetDisplayBackHelper(new Registry);
-			$data   = $helper->getJSON($target);
+			$data   = (new ModTweetDisplayBackHelper(new Registry))->getJSON($target);
 			$update = $data->$stability;
 
 			// Write the cache if data exists
@@ -123,7 +121,7 @@ class JFormFieldVersion extends JFormField
 	 *
 	 * @since   3.0
 	 */
-	protected static function getModuleParams($id)
+	protected function getModuleParams($id)
 	{
 		// Get a database object
 		$db    = JFactory::getDbo();

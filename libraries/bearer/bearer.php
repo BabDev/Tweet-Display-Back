@@ -127,10 +127,7 @@ class BDBearer
 		}
 
 		$url      = 'https://api.twitter.com/oauth2/token';
-		$headers  = array(
-			'Authorization' => "Basic {$auth}",
-		);
-
+		$headers  = ['Authorization' => "Basic {$auth}"];
 		$data     = 'grant_type=client_credentials';
 		$response = $this->connector->post($url, $data, $headers);
 
@@ -227,7 +224,7 @@ class BDBearer
 		if (($this->token == null) && JFactory::getApplication()->isSite())
 		{
 			$cacheTime = $this->cacheTime();
-			$cacheFile = JPATH_CACHE . DIRECTORY_SEPARATOR . $this->cache_file;
+			$cacheFile = JPATH_CACHE . '/' . $this->cache_file;
 
 			// Check if we have cached data and use it if unexpired
 			if (!file_exists($cacheFile) || ($cacheTime && (time() - @filemtime($cacheFile) > $cacheTime)))
@@ -287,7 +284,7 @@ class BDBearer
 	 */
 	protected function writeCache()
 	{
-		$cacheFile = JPATH_CACHE . DIRECTORY_SEPARATOR . $this->cache_file;
+		$cacheFile = JPATH_CACHE . '/' . $this->cache_file;
 
 		// Write the cache
 		file_put_contents($cacheFile, $this->token);

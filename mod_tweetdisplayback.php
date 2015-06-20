@@ -73,24 +73,31 @@ if (!$helper->isProcessed)
 	// Check for error objects if processing did not finish
 	if (!$helper->isProcessed && (!$twitter) || (isset($twitter['error'])))
 	{
-		echo '<div class="well well-small TDB-tweet' . $tweetClassSfx . '">'
-			. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
-			. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD') . '</div>'
-			. '</div></div>';
+		$message = '<div class="well well-small TDB-tweet' . $tweetClassSfx . '"><div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
+			. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
+
+		if (isset($twitter['error']['messages']) && count($twitter['error']['messages']))
+		{
+			foreach ($twitter['error']['messages'] as $message)
+			{
+				$message .= "<br />$message";
+			}
+		}
+
+		$message .= '</div></div></div>';
+
+		echo $message;
 
 		return;
 	}
 }
 
-// Add the Twitter Web Intents script if something else already hasn't
-$scheme = JUri::getInstance()->getScheme() . '://';
-
 /* @type JDocumentHtml $document */
 $document = JFactory::getDocument();
 
-if (!in_array('<script type="text/javascript" src="' . $scheme . 'platform.twitter.com/widgets.js" async></script>', $document->_custom))
+if (!in_array('<script type="text/javascript" src="https://platform.twitter.com/widgets.js" async></script>', $document->_custom))
 {
-	$document->addCustomTag('<script type="text/javascript" src="' . $scheme . 'platform.twitter.com/widgets.js" async></script>');
+	$document->addCustomTag('<script type="text/javascript" src="https://platform.twitter.com/widgets.js" async></script>');
 }
 
 // Build the output

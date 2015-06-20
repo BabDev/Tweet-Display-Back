@@ -93,7 +93,7 @@ class Mod_TweetDisplayBackInstallerScript
 
 		// Remove the connector compatibility files
 		$base  = JPATH_SITE . '/modules/mod_tweetdisplayback/';
-		$files = array('compat.php', 'curl.php', 'curl_25.php');
+		$files = ['compat.php', 'curl.php', 'curl_25.php'];
 
 		// Remove the files
 		foreach ($files as $file)
@@ -111,8 +111,8 @@ class Mod_TweetDisplayBackInstallerScript
 		$engBase = JPATH_SITE . '/language/en-GB/';
 
 		// The language files for pre-3.0
-		$files    = array($langTag . '.mod_tweetdisplayback.ini', $langTag . '.mod_tweetdisplayback.sys.ini');
-		$engFiles = array('en-GB.mod_tweetdisplayback.ini', 'en-GB.mod_tweetdisplayback.sys.ini');
+		$files    = [$langTag . '.mod_tweetdisplayback.ini', $langTag . '.mod_tweetdisplayback.sys.ini'];
+		$engFiles = ['en-GB.mod_tweetdisplayback.ini', 'en-GB.mod_tweetdisplayback.sys.ini'];
 
 		// Remove the files
 		foreach ($files as $file)
@@ -140,7 +140,7 @@ class Mod_TweetDisplayBackInstallerScript
 
 		// The widget template files to remove
 		$base  = JPATH_SITE . '/modules/mod_tweetdisplayback/tmpl/';
-		$files = array('w_list.php', 'w_profile.php', 'w_search.php');
+		$files = ['w_list.php', 'w_profile.php', 'w_search.php'];
 
 		// Remove the files
 		foreach ($files as $file)
