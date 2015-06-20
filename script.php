@@ -14,6 +14,22 @@
 class Mod_TweetDisplayBackInstallerScript
 {
 	/**
+	 * Minimum supported Joomla! version
+	 *
+	 * @var    string
+	 * @since  4.0
+	 */
+	protected $minimumJoomlaVersion = '3.4';
+
+	/**
+	 * Minimum supported PHP version
+	 *
+	 * @var    string
+	 * @since  4.0
+	 */
+	protected $minimumPHPVersion = '5.4';
+
+	/**
 	 * Function to act prior to installation process begins
 	 *
 	 * @param   string            $type    The action being performed
@@ -25,18 +41,22 @@ class Mod_TweetDisplayBackInstallerScript
 	 */
 	public function preflight($type, $parent)
 	{
-		// Requires PHP 5.3
-		if (version_compare(PHP_VERSION, '5.3', 'lt'))
+		// PHP Version Check
+		if (version_compare(PHP_VERSION, $this->minimumPHPVersion, 'lt'))
 		{
-			JError::raiseNotice(null, JText::_('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_PHPVERSION'));
+			JError::raiseNotice(
+				null, JText::sprintf('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_PHPVERSION', $this->minimumPHPVersion)
+			);
 
 			return false;
 		}
 
-		// Requires Joomla! 3.4.0
-		if (version_compare(JVERSION, '3.4.0', 'lt'))
+		// Joomla! Version Check
+		if (version_compare(JVERSION, $this->minimumJoomlaVersion, 'lt'))
 		{
-			JError::raiseNotice(null, JText::_('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_VERSION'));
+			JError::raiseNotice(
+				null, JText::sprintf('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_VERSION', $this->minimumJoomlaVersion)
+			);
 
 			return false;
 		}
@@ -56,7 +76,7 @@ class Mod_TweetDisplayBackInstallerScript
 	public function update($parent)
 	{
 		// Remove files deleted between versions
-		$this->_removeFiles();
+		$this->removeFiles();
 	}
 
 	/**
@@ -66,7 +86,7 @@ class Mod_TweetDisplayBackInstallerScript
 	 *
 	 * @since   3.0
 	 */
-	private function _removeFiles()
+	private function removeFiles()
 	{
 		jimport('joomla.filesystem.file');
 		jimport('joomla.filesystem.folder');
