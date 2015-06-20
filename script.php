@@ -154,7 +154,7 @@ class Mod_TweetDisplayBackInstallerScript
 		// Remove the HTTP connector fork if it exists
 		if (is_dir(JPATH_SITE . '/modules/mod_tweetdisplayback/libraries/http/'))
 		{
-			JFolder::delete(JPATH_SITE . '/modules/mod_tweetdisplayback/librarie/http/');
+			JFolder::delete(JPATH_SITE . '/modules/mod_tweetdisplayback/libraries/http/');
 		}
 	}
 }
