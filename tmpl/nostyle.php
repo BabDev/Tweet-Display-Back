@@ -84,6 +84,3 @@ if (($params->get('tweetAvatar', 1) == 1) && (!empty($tweet->avatar))) {
 if (!empty($twitter['footer']->follow_me)) {
 	echo $twitter['footer']->follow_me;
 }
-if (!empty($twitter['footer']->powered_by)) {
-	echo $twitter['footer']->powered_by;
-}
