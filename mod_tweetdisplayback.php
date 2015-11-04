@@ -19,12 +19,12 @@ $headerAlign    = $params->get('headerAvatarAlignment');
 $tweetAlign     = $params->get('tweetAlignment');
 $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx  = htmlspecialchars($params->get('tweetclasssfx'));
-$template       = $params->get('templateLayout', 'default');
+$templateLayout = $params->get('templateLayout', 'default');
 $flist          = ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
 $count          = $params->get('twitterCount', '3') - 1;
 
 // Load module CSS
-JHtml::stylesheet('mod_tweetdisplayback/' . $template . '.css', false, true, false);
+JHtml::stylesheet('mod_tweetdisplayback/' . $templateLayout. '.css', false, true, false);
 
 $helper = new ModTweetDisplayBackHelper($params);
 $helper->moduleId = $module->id;
@@ -94,4 +94,4 @@ if (!in_array('<script type="text/javascript" src="' . $scheme . 'platform.twitt
 }
 
 // Build the output
-require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $template);
+require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $templateLayout);
