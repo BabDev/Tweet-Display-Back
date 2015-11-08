@@ -19,14 +19,28 @@ $headerAlign    = $params->get('headerAvatarAlignment');
 $tweetAlign     = $params->get('tweetAlignment');
 $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx  = htmlspecialchars($params->get('tweetclasssfx'));
-$template       = $params->get('templateLayout', 'default');
+$templateLayout = $params->get('templateLayout', 'default');
 $flist          = ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
 $count          = $params->get('twitterCount', '3') - 1;
 
 // Load module CSS
-JHtml::stylesheet('mod_tweetdisplayback/' . $template . '.css', false, true, false);
+JHtml::stylesheet('mod_tweetdisplayback/' . $templateLayout. '.css', false, true, false);
 
-$helper = new ModTweetDisplayBackHelper($params);
+try
+{
+	$helper = new ModTweetDisplayBackHelper($params);
+}
+catch (RuntimeException $e)
+{
+	// No HTTP adapters are available on this system
+	echo '<div class="well well-small TDB-tweet' . $tweetClassSfx . '">'
+		. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
+		. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NO_CONNECTORS') . '</div>'
+		. '</div></div>';
+
+	return;
+}
+
 $helper->moduleId = $module->id;
 
 // The files that the data is cached to
@@ -101,4 +115,4 @@ if (!in_array('<script type="text/javascript" src="https://platform.twitter.com/
 }
 
 // Build the output
-require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $template);
+require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $templateLayout);
