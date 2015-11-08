@@ -26,7 +26,21 @@ $count          = $params->get('twitterCount', '3') - 1;
 // Load module CSS
 JHtml::stylesheet('mod_tweetdisplayback/' . $templateLayout. '.css', false, true, false);
 
-$helper = new ModTweetDisplayBackHelper($params);
+try
+{
+	$helper = new ModTweetDisplayBackHelper($params);
+}
+catch (RuntimeException $e)
+{
+	// No HTTP adapters are available on this system
+	echo '<div class="well well-small TDB-tweet' . $tweetClassSfx . '">'
+		. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
+		. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NO_CONNECTORS') . '</div>'
+		. '</div></div>';
+
+	return;
+}
+
 $helper->moduleId = $module->id;
 
 // The files that the data is cached to

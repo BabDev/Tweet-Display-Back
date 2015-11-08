@@ -40,7 +40,12 @@ class BDHttpFactory
 			$options = new JRegistry;
 		}
 
-		return new BDHttp($options, self::getAvailableDriver($options, $adapters));
+		if (!$driver = self::getAvailableDriver($options, $adapters))
+		{
+			throw new RuntimeException('No transport driver available.');
+		}
+
+		return new BDHttp($options, $driver);
 	}
 
 	/**
