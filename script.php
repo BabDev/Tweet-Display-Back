@@ -19,7 +19,7 @@ class Mod_TweetDisplayBackInstallerScript
 	 * @var    string
 	 * @since  4.0
 	 */
-	protected $minimumJoomlaVersion = '3.4';
+	protected $minimumJoomlaVersion = '3.5';
 
 	/**
 	 * Minimum supported PHP version
@@ -32,8 +32,8 @@ class Mod_TweetDisplayBackInstallerScript
 	/**
 	 * Function to act prior to installation process begins
 	 *
-	 * @param   string            $type    The action being performed
-	 * @param   JInstallerModule  $parent  The function calling this method
+	 * @param   string                   $type    The action being performed
+	 * @param   JInstallerAdapterModule  $parent  The function calling this method
 	 *
 	 * @return  boolean  True on success, false on failure
 	 *
@@ -67,7 +67,7 @@ class Mod_TweetDisplayBackInstallerScript
 	/**
 	 * Function to perform changes during update
 	 *
-	 * @param   JInstallerModule  $parent  The class calling this method
+	 * @param   JInstallerAdapterModule  $parent  The class calling this method
 	 *
 	 * @return  void
 	 *

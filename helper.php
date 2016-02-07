@@ -247,8 +247,7 @@ class ModTweetDisplayBackHelper
 		// Check if we've reached an error
 		if (isset($obj->errors))
 		{
-			$this->twitter['error'] = [];
-			$this->twitter['error']['messages'] = [];
+			$this->twitter['error'] = ['messages' => []];
 
 			foreach ($obj->errors as $error)
 			{
@@ -303,7 +302,7 @@ class ModTweetDisplayBackHelper
 	public function compileFromCache()
 	{
 		// Reset the $twitter object in case we errored out previously
-		$this->twitter = array();
+		$this->twitter = [];
 
 		// Get the user info
 		$this->prepareUser();
@@ -320,8 +319,7 @@ class ModTweetDisplayBackHelper
 		// Check if we've reached an error
 		if (isset($obj->errors))
 		{
-			$this->twitter['error'] = [];
-			$this->twitter['error']['messages'] = [];
+			$this->twitter['error'] = ['messages' => []];
 
 			foreach ($obj->errors as $error)
 			{
@@ -444,8 +442,7 @@ class ModTweetDisplayBackHelper
 				// Check if we've reached an error
 				if (isset($obj->errors))
 				{
-					$this->twitter['error'] = [];
-					$this->twitter['error']['messages'] = [];
+					$this->twitter['error'] = ['messages' => []];
 
 					foreach ($obj->errors as $error)
 					{
@@ -783,7 +780,7 @@ class ModTweetDisplayBackHelper
 		}
 
 		$this->twitter['tweets']->$i->avatar = '<img alt="' . $tweetedBy . '" src="' . $avatar . '" width="32" />';
-		$this->twitter['tweets']->$i->text = $text;
+		$this->twitter['tweets']->$i->text   = $text;
 
 		// Make regular URLs in tweets a link
 		foreach ($urls as $url)

@@ -24,7 +24,7 @@ $flist          = ModTweetDisplayBackHelper::toAscii($params->get('twitterList',
 $count          = $params->get('twitterCount', '3') - 1;
 
 // Load module CSS
-JHtml::stylesheet('mod_tweetdisplayback/' . $templateLayout. '.css', false, true, false);
+JHtml::_('stylesheet', 'mod_tweetdisplayback/' . $templateLayout. '.css', false, true, false);
 
 try
 {
@@ -107,12 +107,7 @@ if (!$helper->isProcessed)
 }
 
 /* @type JDocumentHtml $document */
-$document = JFactory::getDocument();
-
-if (!in_array('<script type="text/javascript" src="https://platform.twitter.com/widgets.js" async></script>', $document->_custom))
-{
-	$document->addCustomTag('<script type="text/javascript" src="https://platform.twitter.com/widgets.js" async></script>');
-}
+JFactory::getDocument()->addScript('https://platform.twitter.com/widgets.js', 'text/javascript', false, true);
 
 // Build the output
 require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $templateLayout);
