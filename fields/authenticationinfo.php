@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
  *
  * @since  3.1
  */
-class JFormFieldAuthenticationinfo extends JFormField
+class TweetDisplayBackFormFieldAuthenticationinfo extends JFormField
 {
 	/**
 	 * The form field type.

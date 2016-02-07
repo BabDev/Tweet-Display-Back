@@ -32,7 +32,7 @@
 		<fields name="params" addfieldpath="/modules/mod_tweetdisplayback/fields">
 			<fieldset name="version">
 				<field
-					type="version"
+					type="tweetdisplayback.version"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_LABEL" />
 				<field
 					name="stability"
@@ -440,7 +440,7 @@
 				</field>
 			</fieldset>
 			<fieldset name="authentication">
-				<field type="authenticationinfo" />
+				<field type="tweetdisplayback.authenticationinfo" />
 				<field
 					name="token_source"
 					type="list"

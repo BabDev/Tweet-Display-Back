@@ -17,7 +17,7 @@ JLoader::register('ModTweetDisplayBackHelper', dirname(__DIR__) . '/helper.php')
  *
  * @since  2.1
  */
-class JFormFieldVersion extends JFormField
+class TweetDisplayBackFormFieldVersion extends JFormField
 {
 	/**
 	 * The form field type.
