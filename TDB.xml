@@ -30,6 +30,6 @@
 		</downloads>
 		<maintainer>Michael Babker</maintainer>
 		<maintainerurl>https://www.babdev.com</maintainerurl>
-		<targetplatform name="joomla" version="3.[01234]" />
+		<targetplatform name="joomla" version="3.[012345]" />
 	</update>
 </updates>
