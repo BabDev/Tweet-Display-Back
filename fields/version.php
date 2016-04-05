@@ -131,7 +131,7 @@ class TweetDisplayBackFormFieldVersion extends JFormField
 				->select($db->quoteName('params'))
 				->from($db->quoteName('#__modules'))
 				->where($db->quoteName('id') . ' = ' . $id)
-		)->$db->loadResult();
+		)->loadResult();
 
 		// Convert the result to a Registry object
 		return new Registry($result);

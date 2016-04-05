@@ -17,13 +17,11 @@
 		<folder>tmpl</folder>
 		<filename module="mod_tweetdisplayback">mod_tweetdisplayback.php</filename>
 		<filename>helper.php</filename>
-		<filename>index.html</filename>
 		<filename>mod_tweetdisplayback.xml</filename>
 	</files>
 	<media destination="mod_tweetdisplayback" folder="media">
 		<folder>css</folder>
 		<folder>images</folder>
-		<filename>index.html</filename>
 	</media>
 	<updateservers>
 		<server type="extension" name="Tweet Display Back Updates" priority="2">https://www.babdev.com/updates/TDB.xml</server>
@@ -82,15 +80,9 @@
 			</fieldset>
 			<fieldset name="template">
 				<field
-					name="templateLayout"
-					type="filelist"
-					default="default"
+					name="layout"
+					type="modulelayout"
 					label="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_LABEL"
-					directory="modules/mod_tweetdisplayback/tmpl"
-					filter="\.php$"
-					hide_default="1"
-					hide_none="1"
-					stripext="1"
 					description="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_DESCRIPTION" />
 			</fieldset>
 			<fieldset name="header">
