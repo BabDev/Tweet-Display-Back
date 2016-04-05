@@ -39,7 +39,7 @@ if (isset($twitter) && !empty($twitter['error']['messages']))
 {
 	foreach ($twitter['error']['messages'] as $message)
 	{
-		$message .= "<br />$message";
+		$errorMsg .= "<br />$message";
 	}
 }
 
