@@ -31,12 +31,8 @@ $headerAlign    = $params->get('headerAvatarAlignment');
 $tweetAlign     = $params->get('tweetAlignment');
 $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx  = htmlspecialchars($params->get('tweetclasssfx'));
-$templateLayout = $params->get('layout', 'default');
 $flist          = ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
 $count          = $params->get('twitterCount', '3') - 1;
-
-// Load module CSS
-JHtml::_('stylesheet', 'mod_tweetdisplayback/' . $templateLayout . '.css', false, true, false);
 
 try
 {
@@ -106,8 +102,5 @@ if (!$helper->isProcessed)
 	}
 }
 
-/** @var JDocumentHtml $document */
-JFactory::getDocument()->addScript('https://platform.twitter.com/widgets.js', 'text/javascript', false, true);
-
 // Build the output
-require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $templateLayout);
+require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $params->get('layout', 'default'));

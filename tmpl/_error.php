@@ -26,7 +26,6 @@ defined('_JEXEC') or die;
  * @var   string  $tweetAlign      The tweet section alignment
  * @var   string  $headerClassSfx  The class suffix for the header section
  * @var   string  $tweetClassSfx   The class suffix for the tweet section
- * @var   string  $templateLayout  The template layout defined in the parameters
  * @var   string  $flist           The filtered list name if defined
  * @var   string  $count           The number of tweets to display as defined in the parameters
  * @var   string  $errorMsg        The error message generated during the module's processing

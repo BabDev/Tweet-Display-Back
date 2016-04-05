@@ -10,6 +10,12 @@ defined('_JEXEC') or die;
 
 /* @type  \Joomla\Registry\Registry  $params */
 
+// Load module CSS
+JHtml::_('stylesheet', 'mod_tweetdisplayback/nostyle.css', [], true);
+
+/** @var JDocumentHtml $document */
+JFactory::getDocument()->addScript('https://platform.twitter.com/widgets.js', 'text/javascript', false, true);
+
 // Prechecked parameters
 $headerAvatar = '';
 $tweetAvatar  = '';
