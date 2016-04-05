@@ -11,8 +11,20 @@ defined('_JEXEC') or die;
 // Include the helper
 JLoader::register('ModTweetDisplayBackHelper', __DIR__ . '/helper.php');
 
-/* @type  \Joomla\Registry\Registry  $params */
-/* @type  object                     $module */
+/**
+ * Module variables
+ * -----------------
+ * @var   object                     $module    A module object
+ * @var   array                      $attribs   An array of attributes for the module (probably from the XML)
+ * @var   array                      $chrome    The loaded module chrome files
+ * @var   JApplicationCms            $app       The active application singleton
+ * @var   string                     $scope     The application scope before the module was included
+ * @var   \Joomla\Registry\Registry  $params    Module parameters
+ * @var   string                     $template  The active template
+ * @var   string                     $path      The path to this module file
+ * @var   JLanguage                  $lang      The active JLanguage singleton
+ * @var   string                     $content   Module output content
+ */
 
 // Set the template variables
 $headerAlign    = $params->get('headerAvatarAlignment');
@@ -33,10 +45,9 @@ try
 catch (RuntimeException $e)
 {
 	// No HTTP adapters are available on this system
-	echo '<div class="well well-small TDB-tweet' . $tweetClassSfx . '">'
-		. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
-		. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NO_CONNECTORS') . '</div>'
-		. '</div></div>';
+	$errorMsg = JText::_('MOD_TWEETDISPLAYBACK_ERROR_NO_CONNECTORS');
+
+	require JModuleHelper::getLayoutPath('mod_tweetdisplayback', '_error');
 
 	return;
 }
@@ -87,26 +98,15 @@ if (!$helper->isProcessed)
 	// Check for error objects if processing did not finish
 	if (!$helper->isProcessed && (!$twitter) || (isset($twitter['error'])))
 	{
-		$message = '<div class="well well-small TDB-tweet' . $tweetClassSfx . '"><div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
-			. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
+		$errorMsg = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
 
-		if (isset($twitter['error']['messages']) && count($twitter['error']['messages']))
-		{
-			foreach ($twitter['error']['messages'] as $message)
-			{
-				$message .= "<br />$message";
-			}
-		}
-
-		$message .= '</div></div></div>';
-
-		echo $message;
+		require JModuleHelper::getLayoutPath('mod_tweetdisplayback', '_error');
 
 		return;
 	}
 }
 
-/* @type JDocumentHtml $document */
+/** @var JDocumentHtml $document */
 JFactory::getDocument()->addScript('https://platform.twitter.com/widgets.js', 'text/javascript', false, true);
 
 // Build the output
