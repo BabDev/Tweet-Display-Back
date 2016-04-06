@@ -722,8 +722,6 @@ class ModTweetDisplayBackHelper
 	protected function processItem($o, $i)
 	{
 		// Set variables
-		$tweetName    = $this->params->get('tweetName', 1);
-		$tweetReply   = $this->params->get('tweetReply', 1);
 		$tweetRTCount = $this->params->get('tweetRetweetCount', 1);
 
 		// Initialize a new object
@@ -764,7 +762,7 @@ class ModTweetDisplayBackHelper
 		$this->twitter['tweets']->$i->created = $created;
 
 		// Generate the object with the user data
-		if ($tweetName == 1)
+		if ($this->params->get('tweetName', 1) == 1)
 		{
 			// Check if the Intents action is bypassed
 			if ($this->params->get('bypassIntent', '0') == 1)
@@ -881,7 +879,7 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Display Twitter Actions
-		if ($tweetReply == 1)
+		if ($this->params->get('tweetReply', 1) == 1)
 		{
 			$this->twitter['tweets']->$i->actions = '<span class="TDB-action TDB-reply"><a href="https://twitter.com/intent/tweet?in_reply_to=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_REPLY') . '" rel="nofollow"></a></span>';
 			$this->twitter['tweets']->$i->actions .= '<span class="TDB-action TDB-retweet"><a href="https://twitter.com/intent/retweet?tweet_id=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_RETWEET') . '" rel="nofollow"></a></span>';

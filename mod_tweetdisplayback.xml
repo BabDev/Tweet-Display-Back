@@ -29,15 +29,8 @@
 	<config>
 		<fields name="params" addfieldpath="/modules/mod_tweetdisplayback/fields">
 			<fieldset name="version">
-				<field
-					type="tweetdisplayback.version"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_LABEL" />
-				<field
-					name="stability"
-					type="list"
-					default="stable"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_DESCRIPTION" >
+				<field type="tweetdisplayback.version" label="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_LABEL" />
+				<field name="stability" type="list" default="stable" validate="options" label="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_DESCRIPTION">
 					<option value="alpha">MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_ALPHA</option>
 					<option value="beta">MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_BETA</option>
 					<option value="rc">MOD_TWEETDISPLAYBACK_FIELDSET_VERSION_STABILITY_RC</option>
@@ -45,498 +38,168 @@
 				</field>
 			</fieldset>
 			<fieldset name="twitter">
-				<field
-					name="twitterFeedType"
-					type="list"
-					default="user"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_DESCRIPTION" >
-					<option
-						value="user">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_USER</option>
-					<option
-						value="favorites">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_FAVORITES</option>
-					<option
-						value="list">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_LIST</option>
+				<field name="twitterFeedType" type="list" default="user" validate="options" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_DESCRIPTION">
+					<option value="user">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_USER</option>
+					<option value="favorites">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_FAVORITES</option>
+					<option value="list">MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_FEEDTYPE_OPTION_LIST</option>
 				</field>
-				<field
-					name="twitterName"
-					type="text"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_USERNAME_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_USERNAME_DESCRIPTION"
-					required="true" />
-				<field
-					name="twitterList"
-					type="text"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LISTNAME_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LISTNAME_DESCRIPTION" />
-				<field
-					name="twitterCount"
-					type="text"
-					default="3"
-					filter="integer"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_COUNT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_COUNT_DESCRIPTION"
-					required="true" />
+				<field name="twitterName" type="text" required="true" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_USERNAME_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_USERNAME_DESCRIPTION" />
+				<field name="twitterList" type="text" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LISTNAME_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LISTNAME_DESCRIPTION" showon="twitterFeedType:list" />
+				<field name="twitterCount" type="number" default="3" filter="integer" required="true" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_COUNT_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_COUNT_DESCRIPTION" />
 			</fieldset>
 			<fieldset name="template">
-				<field
-					name="layout"
-					type="modulelayout"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_DESCRIPTION" />
+				<field name="layout" type="modulelayout" label="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TEMPLATE_LAYOUT_DESCRIPTION" />
 			</fieldset>
 			<fieldset name="header">
-				<field
-					name="headerDisplay"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_DISPLAY_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_DISPLAY_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="headerDisplay" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_DISPLAY_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_DISPLAY_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="headerclasssfx"
-					type="text"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_HEADERCLASSSFX_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_HEADERCLASSSFX_DESCRIPTION" />
-				<field
-					name="headerUser"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_USER_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_USER_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="headerclasssfx" type="text" label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_HEADERCLASSSFX_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_HEADERCLASSSFX_DESCRIPTION" showon="headerDisplay:1" />
+				<field name="headerUser" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_USER_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_USER_DESCRIPTION" showon="headerDisplay:1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="headerName"
-					type="radio"
-					class="btn-group"
-					default="0"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_NAME_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_NAME_DESCRIPTION" >
-					<option
-						value="0">MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_NAME_OPTION_USER</option>
-					<option
-						value="1">MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_NAME_OPTION_NAME</option>
+				<field name="headerName" type="radio" default="0" class="btn-group" label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_NAME_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_NAME_DESCRIPTION" showon="headerDisplay:1">
+					<option value="0">MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_NAME_OPTION_USER</option>
+					<option value="1">MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_NAME_OPTION_NAME</option>
 				</field>
-				<field
-					name="headerAvatar"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="headerAvatar" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_DESCRIPTION" showon="headerDisplay:1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="headerAvatarAlignment"
-					type="radio"
-					class="btn-group"
-					default="left"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_ALIGNMENT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_ALIGNMENT_DESCRIPTION" >
-					<option
-						value="left">JGLOBAL_LEFT</option>
-					<option
-						value="right">JGLOBAL_RIGHT</option>
+				<field name="headerAvatarAlignment" type="radio" default="left" class="btn-group" label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_ALIGNMENT_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_AVATAR_ALIGNMENT_DESCRIPTION" showon="headerDisplay:1">
+					<option value="left">JGLOBAL_LEFT</option>
+					<option value="right">JGLOBAL_RIGHT</option>
 				</field>
-				<field
-					name="headerBio"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_BIO_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_BIO_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="headerBio" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_BIO_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_BIO_DESCRIPTION" showon="headerDisplay:1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="headerWeb"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_URL_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_URL_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="headerWeb" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_URL_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_URL_DESCRIPTION" showon="headerDisplay:1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="headerLocation"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_LOCATION_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_LOCATION_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="headerLocation" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_LOCATION_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_HEADER_LOCATION_DESCRIPTION" showon="headerDisplay:1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
 			</fieldset>
 			<fieldset name="tweet">
-				<field
-					name="tweetclasssfx"
-					type="text"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_TWEETCLASSSFX_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_TWEETCLASSSFX_DESCRIPTION" />
-				<field
-					name="tweetAvatar"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_AVATAR_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_AVATAR_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="tweetclasssfx" type="text" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_TWEETCLASSSFX_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_TWEETCLASSSFX_DESCRIPTION" />
+				<field name="tweetAvatar" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_AVATAR_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_AVATAR_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="tweetAlignment"
-					type="radio"
-					class="btn-group"
-					default="left"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ALIGNMENT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ALIGNMENT_DESCRIPTION" >
-					<option
-						value="left">JGLOBAL_LEFT</option>
-					<option
-						value="right">JGLOBAL_RIGHT</option>
+				<field name="tweetAlignment" type="radio" default="left" class="btn-group" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ALIGNMENT_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ALIGNMENT_DESCRIPTION">
+					<option value="left">JGLOBAL_LEFT</option>
+					<option value="right">JGLOBAL_RIGHT</option>
 				</field>
-				<field
-					name="tweetName"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USER_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USER_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="tweetName" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USER_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USER_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="tweetUserSeparator"
-					type="text"
-					length="5"
-					filter="safehtml"
-					default=" "
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USERSEPARATOR_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USERSEPARATOR_DESCRIPTION" />
-				<field
-					name="tweetCreated"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_CREATEDATE_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_CREATEDATE_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="tweetUserSeparator" type="text" default=" " filter="safehtml" length="5" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USERSEPARATOR_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_USERSEPARATOR_DESCRIPTION" showon="tweetName:1" />
+				<field name="tweetCreated" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_CREATEDATE_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_CREATEDATE_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="tweetRelativeTime"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RELATIVEDATE_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RELATIVEDATE_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="tweetRelativeTime" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RELATIVEDATE_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RELATIVEDATE_DESCRIPTION" showon="tweetCreated:1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="tweetReply"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ACTION_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ACTION_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="tweetReply" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ACTION_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_ACTION_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="tweetReplyLink"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_REPLYLINK_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_REPLYLINK_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="tweetReplyLink" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_REPLYLINK_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_REPLYLINK_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="tweetRetweetCount"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RTCOUNT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RTCOUNT_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="tweetRetweetCount" type="radio" default="1"  class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RTCOUNT_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RTCOUNT_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="tweetSource"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_SOURCE_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_SOURCE_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="tweetSource" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_SOURCE_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_SOURCE_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="tweetLocation"
-					type="radio"
-					class="btn-group"
-					default="0"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_LOCATION_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_LOCATION_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="tweetLocation" type="radio" default="0" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_LOCATION_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_LOCATION_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="tweetLinks"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LINK_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LINK_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="tweetLinks" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LINK_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWITTER_LINK_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
 			</fieldset>
 			<fieldset name="filter">
-				<field
-					name="showMentions"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="showMentions" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_MENTIONS_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="showReplies"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="showReplies" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_REPLIES_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="tweetRetweets"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RETWEET_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RETWEET_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="tweetRetweets" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RETWEET_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_TWEET_RETWEET_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="overrideCount"
-					type="radio"
-					class="btn-group"
-					default="0"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_OVERRIDECOUNT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_OVERRIDECOUNT_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="overrideCount" type="radio" default="0" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_OVERRIDECOUNT_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_OVERRIDECOUNT_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="tweetsToScan"
-					type="text"
-					default="3"
-					filter="integer"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_TWEETSTOSCAN_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_TWEETSTOSCAN_DESCRIPTION"
-					required="true" />
+				<field name="tweetsToScan" type="number" default="3" filter="integer" label="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_TWEETSTOSCAN_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_FILTER_TWEETSTOSCAN_DESCRIPTION" showon="overrideCount:1" />
 			</fieldset>
 			<fieldset name="footer">
-				<field
-					name="footerFollowLink"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_LINK_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_LINK_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="footerFollowLink" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_LINK_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_LINK_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="footerFollowCount"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_COUNT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_COUNT_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="footerFollowCount" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_COUNT_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_COUNT_DESCRIPTION" showon="footerFollowLink:1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="footerFollowUser"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_USER_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_USER_DESCRIPTION" >
-					<option
-						value="0">JNO</option>
-					<option
-						value="1">JYES</option>
+				<field name="footerFollowUser" type="radio" default="1" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_USER_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_FOOTER_FOLLOW_USER_DESCRIPTION" showon="footerFollowLink:1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
 			</fieldset>
 			<fieldset name="authentication">
 				<field type="tweetdisplayback.authenticationinfo" />
-				<field
-					name="token_source"
-					type="list"
-					default="remote"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_DESC">
-					<option
-						value="consumer">MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_OPTION_CONSUMER</option>
-					<option
-						value="remote">MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_OPTION_REMOTE</option>
+				<field name="token_source" type="list" default="remote" validate="options" label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_DESC">
+					<option value="consumer">MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_OPTION_CONSUMER</option>
+					<option value="remote">MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_TOKEN_SOURCE_OPTION_REMOTE</option>
 				</field>
-				<field
-					name="consumer_key"
-					type="text"
-					default=""
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_KEY_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_KEY_DESC" />
-				<field
-					name="consumer_secret"
-					type="text"
-					default=""
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_SECRET_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_SECRET_DESC" />
-				<field
-					name="remote_url"
-					type="text"
-					default="http://tdbtoken-v2.gopagoda.io/tokenRequest.php"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_REMOTE_URL_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_REMOTE_URL_DESC" />
+				<field name="consumer_key" type="text" label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_KEY_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_KEY_DESC" showon="token_source:consumer" />
+				<field name="consumer_secret" type="text" default="" label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_SECRET_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_CONSUMER_SECRET_DESC" showon="token_source:consumer" />
+				<field name="remote_url" type="url" default="http://tdbtoken-v2.gopagoda.io/tokenRequest.php" filter="url" validate="url" label="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_REMOTE_URL_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_AUTHENTICATION_REMOTE_URL_DESC" showon="token_source:remote" />
 			</fieldset>
 			<fieldset name="advanced">
-				<field
-					name="cache"
-					type="radio"
-					class="btn-group"
-					default="1"
-					label="COM_MODULES_FIELD_CACHING_LABEL"
-					description="COM_MODULES_FIELD_CACHING_DESC" >
-					<option
-						value="1">JYES</option>
-					<option
-						value="0">JNO</option>
+				<field name="cache" type="radio" default="1" class="btn-group btn-group-yesno" label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="cache_time"
-					type="text"
-					default="15"
-					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
-					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
-				<field
-					name="bearer_cache_time_qty"
-					type="text"
-					default="1"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_QTY_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_QTY_DESCRIPTION" />
-				<field
-					name="bearer_cache_time_unit"
-					type="list"
-					default="day"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_DESCRIPTION" >
-					<option
-					  value="noexp">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_NOEXP</option>
-					<option
-					  value="min">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_MIN</option>
-					<option
-					  value="hour">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_HOUR</option>
-					<option
-					  value="day">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_DAY</option>
-					<option
-					  value="week">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_WEEK</option>
+				<field name="cache_time" type="number" default="15" filter="integer" label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" showon="cache:1" />
+				<field name="bearer_cache_time_qty" type="number" default="1" filter="integer" label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_QTY_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_QTY_DESCRIPTION" />
+				<field name="bearer_cache_time_unit" type="list" default="day" validate="options" label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_DESCRIPTION">
+					<option value="noexp">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_NOEXP</option>
+					<option value="min">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_MIN</option>
+					<option value="hour">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_HOUR</option>
+					<option value="day">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_DAY</option>
+					<option value="week">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_WEEK</option>
 				</field>
-				<field
-					name="moduleclass_sfx"
-					type="text"
-					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
-					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
-				<field
-					name="bypassIntent"
-					type="radio"
-					class="btn-group"
-					default="0"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BYPASSINTENT_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BYPASSINTENT_DESCRIPTION" >
-					<option
-						value="1">JYES</option>
-					<option
-						value="0">JNO</option>
+				<field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+				<field name="bypassIntent" type="radio" default="0" class="btn-group btn-group-yesno" label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BYPASSINTENT_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BYPASSINTENT_DESCRIPTION">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				<field
-					name="overrideConnector"
-					type="list"
-					class="btn-group"
-					default="no"
-					label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_LABEL"
-					description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_DESCRIPTION" >
-					<option
-						value="no">JNO</option>
-					<option
-						value="curl">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_OPTION_CURL</option>
-					<option
-						value="socket">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_OPTION_SOCKET</option>
-					<option
-						value="stream">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_OPTION_STREAM</option>
+				<field name="overrideConnector" type="list" default="no" validate="options" label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_DESCRIPTION">
+					<option value="no">JNO</option>
+					<option value="curl">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_OPTION_CURL</option>
+					<option value="socket">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_OPTION_SOCKET</option>
+					<option value="stream">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_OVERRIDECONNECTOR_OPTION_STREAM</option>
 				</field>
 			</fieldset>
 		</fields>
