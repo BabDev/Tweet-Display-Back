@@ -35,30 +35,23 @@ class Mod_TweetDisplayBackInstallerScript
 	 * @param   string                   $type    The action being performed
 	 * @param   JInstallerAdapterModule  $parent  The function calling this method
 	 *
-	 * @return  boolean  True on success, false on failure
+	 * @return  boolean
 	 *
 	 * @since   3.0
+	 * @throws  RuntimeException
 	 */
 	public function preflight($type, $parent)
 	{
 		// PHP Version Check
 		if (version_compare(PHP_VERSION, $this->minimumPHPVersion, 'lt'))
 		{
-			JError::raiseNotice(
-				null, JText::sprintf('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_PHPVERSION', $this->minimumPHPVersion)
-			);
-
-			return false;
+			throw new RuntimeException(JText::sprintf('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_PHPVERSION', $this->minimumPHPVersion));
 		}
 
 		// Joomla! Version Check
 		if (version_compare(JVERSION, $this->minimumJoomlaVersion, 'lt'))
 		{
-			JError::raiseNotice(
-				null, JText::sprintf('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_VERSION', $this->minimumJoomlaVersion)
-			);
-
-			return false;
+			throw new RuntimeException(JText::sprintf('MOD_TWEETDISPLAYBACK_ERROR_INSTALL_VERSION', $this->minimumJoomlaVersion));
 		}
 
 		return true;
