@@ -35,14 +35,6 @@ defined('_JEXEC') or die;
 // Load module CSS
 JHtml::_('stylesheet', 'mod_tweetdisplayback/bootstrap.css', [], true);
 
-if (isset($twitter) && !empty($twitter['error']['messages']))
-{
-	foreach ($twitter['error']['messages'] as $message)
-	{
-		$errorMsg .= "<br />$message";
-	}
-}
-
 ?>
 
 <div class="well well-small TDB-tweet<?php echo $tweetClassSfx; ?>">
