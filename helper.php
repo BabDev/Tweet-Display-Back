@@ -189,15 +189,15 @@ class ModTweetDisplayBackHelper
 			$activeFilters++;
 		}
 
-		// Determine whether the feed being returned is a user, favorites, or list feed
+		// Determine whether the feed being returned is a user, likes, or list feed
 		if ($feed == 'list')
 		{
 			// Get the list feed
 			$req = 'https://api.twitter.com/1.1/lists/statuses.json?slug=' . $flist . '&owner_screen_name=' . $uname . $incRT . '&include_entities=1';
 		}
-		elseif ($feed == 'favorites')
+		elseif ($feed == 'likes')
 		{
-			// Get the favorites feed
+			// Get the likes feed (previously favorites)
 			$req = 'https://api.twitter.com/1.1/favorites/list.json?count=' . $count . '&screen_name=' . $uname . '&include_entities=1';
 		}
 		else
@@ -583,7 +583,7 @@ class ModTweetDisplayBackHelper
 				if ($i < $numberOfTweets)
 				{
 					// If we aren't filtering, just render the item
-					if (($showMentions == 1 && $showReplies == 1 && $showRetweets == 1) || ($feedType == 'list' || $feedType == 'favorites'))
+					if (($showMentions == 1 && $showReplies == 1 && $showRetweets == 1) || ($feedType == 'list' || $feedType == 'likes'))
 					{
 						$this->processItem($o, $i);
 
@@ -883,7 +883,7 @@ class ModTweetDisplayBackHelper
 		{
 			$this->twitter['tweets']->$i->actions = '<span class="TDB-action TDB-reply"><a href="https://twitter.com/intent/tweet?in_reply_to=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_REPLY') . '" rel="nofollow"></a></span>';
 			$this->twitter['tweets']->$i->actions .= '<span class="TDB-action TDB-retweet"><a href="https://twitter.com/intent/retweet?tweet_id=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_RETWEET') . '" rel="nofollow"></a></span>';
-			$this->twitter['tweets']->$i->actions .= '<span class="TDB-action TDB-favorite"><a href="https://twitter.com/intent/favorite?tweet_id=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_FAVORITE') . '" rel="nofollow"></a></span>';
+			$this->twitter['tweets']->$i->actions .= '<span class="TDB-action TDB-favorite"><a href="https://twitter.com/intent/like?tweet_id=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_LIKE') . '" rel="nofollow"></a></span>';
 		}
 
 		// If set, convert user and hash tags into links
