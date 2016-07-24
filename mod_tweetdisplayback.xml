@@ -181,7 +181,12 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="cache_time" type="number" default="15" filter="integer" label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" showon="cache:1" />
+				<field name="cache_time" type="number" default="900" filter="integer" label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" showon="cache:1" />
+				<field name="tweet_cache" type="radio" default="1" class="btn-group btn-group-yesno" label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="tweet_cache_time" type="number" default="15" filter="integer" label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" showon="cache:1" />
 				<field name="bearer_cache_time_qty" type="number" default="1" filter="integer" label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_QTY_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_QTY_DESCRIPTION" />
 				<field name="bearer_cache_time_unit" type="list" default="day" validate="options" label="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_LABEL" description="MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_DESCRIPTION">
 					<option value="noexp">MOD_TWEETDISPLAYBACK_FIELDSET_ADVANCED_BEARER_CACHE_TIME_UNIT_OPTION_NOEXP</option>
