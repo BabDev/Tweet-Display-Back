@@ -5,255 +5,102 @@
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
-.TDB-header {
-	background: #fff;
-	border: 1px solid #999999;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-	margin: 0 0 20px 0;
-	padding: 2px 10px;
-}
-
 .TDB-headavatar {
-	min-height: 98px;
+    min-height: 98px;
 }
 
-.TDB-header-user {
-	text-align: center;
-}
-
-.TDB-header-user a {
-	font-size: 120%;
-	font-weight: bold;
-	margin-bottom: 5px;
+.TDB-header-user,
+.TDB-tweet-user {
+    text-align: center;
 }
 
 span.TDB-header-avatar-left {
-	height: 73px;
-	float: left;
-	padding-right: 4px;
+    min-height: 48px;
+    float: left;
+    margin: 1px;
+    padding: 3px;
 }
 
 span.TDB-header-avatar-right {
-	height: 73px;
-	float: right;
-	padding-left: 4px;
+    min-height: 48px;
+    float: right;
+    margin: 1px;
+    padding: 3px;
 }
 
-.TDB-header-bio {
-	text-align: left;
+.TDB-tweet-avatar-left {
+    float: right;
+    height: 32px;
+    padding: 2px;
 }
 
-.TDB-header-location {
-	text-align: left;
+.TDB-tweet-avatar-right {
+    float: left;
+    height: 32px;
+    padding: 2px;
 }
 
-.TDB-header-web {
-	padding-top: 5px;
-	font-size: 90%;
+.TDB-tweet-align-left .TDB-tweet-time,
+.TDB-tweet-align-left .TDB-tweet-actions {
+    text-align: right;
 }
 
-.TDB-headavatar .TDB-header-web {
-	text-align: center;
-}
-
-.TDB-tweet {
-}
-
-.TDB-tweetavatar-left .TDB-tweet-avatar {
-	float: left;
-}
-
-.TDB-tweetavatar-right .TDB-tweet-avatar {
-	float: right;
-}
-
-.TDB-tweet-avatar img {
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
-}
-
-.TDB-tweet-text {
-}
-
-.TDB-last-tweet {
-}
-
-.TDB-tweet-container {
-	background: #fff;
-	border: 1px solid #999999;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-	position: relative;
-	padding: 2px 10px;
-	word-wrap: break-word;
-}
-
-.TDB-tweet-align-left {
-	margin: 0 0 20px 0;
-	text-align: left;
-}
-
-.TDB-tweetavatar-left .TDB-tweet-align-left {
-	margin: 0 0 20px 50px;
-}
-
-.TDB-tweet-align-right {
-	margin: 20px 0 0 0;
-	text-align: right;
-}
-
-.TDB-tweetavatar-right .TDB-tweet-align-right {
-	margin: 20px 50px 0 0;
-}
-
-.TDB-error {
-}
-
-.TDB-tweet-time {
-	font-size: 85%;
-	margin-left: 0;
-	margin-bottom: 0;
-}
-
-.TDB-tweet-time a {
-}
-
-.TDB-tweet-align-left .TDB-tweet-time, .TDB-tweet-align-left .TDB-tweet-actions {
-	text-align: right;
-}
-
-.TDB-tweet-align-right .TDB-tweet-time, .TDB-tweet-align-right .TDB-tweet-actions {
-	text-align: left;
-}
-
-.TDB-tweetavatar-left .TDB-tweet-align-left:before {
-	content: "";
-	display: block; /* reduce the damage in FF3.0 */
-	position: absolute;
-	bottom: auto;
-	left: -20px; /* value = - border-left-width - border-right-width */
-	width: 0;
-	height: 0;
-	border: 20px solid transparent;
-	border-top-color: #999999;
-	top: 10px; /* controls vertical position */
-	border-width: 10px 20px 10px 0;
-	border-style: solid;
-	border-color: transparent #999999;
-}
-
-.TDB-tweetavatar-left .TDB-tweet-align-left:after {
-	content: "";
-	display: block; /* reduce the damage in FF3.0 */
-	position: absolute;
-	bottom: auto;
-	left: -18px; /* value = - border-left-width - border-right-width */
-	width: 0;
-	height: 0;
-	border: 13px solid transparent;
-	border-top-color: #fff;
-	top: 11px; /* value = (:before top) + (:before border-top) - (:after border-top) */
-	border-width: 9px 18px 9px 0;
-	border-style: solid;
-	border-color: transparent #fff;
-}
-
-.TDB-tweetavatar-right .TDB-tweet-align-right:before {
-	content: "";
-	display: block; /* reduce the damage in FF3.0 */
-	position: absolute;
-	bottom: auto;
-	right: -20px; /* value = - border-left-width - border-right-width */
-	width: 0;
-	height: 0;
-	border: 20px solid transparent;
-	border-top-color: #999999;
-	top: 10px; /* controls vertical position */
-	border-width: 10px 0 10px 20px;
-	border-style: solid;
-	border-color: transparent #999999;
-}
-
-.TDB-tweetavatar-right .TDB-tweet-align-right:after {
-	content: "";
-	display: block; /* reduce the damage in FF3.0 */
-	position: absolute;
-	bottom: auto;
-	right: -18px; /* value = - border-left-width - border-right-width */
-	width: 0;
-	height: 0;
-	border: 13px solid transparent;
-	border-top-color: #fff;
-	top: 11px; /* value = (:before top) + (:before border-top) - (:after border-top) */
-	border-width: 9px 0 9px 18px;
-	border-style: solid;
-	border-color: transparent #fff;
+.TDB-tweet-align-right .TDB-tweet-time,
+.TDB-tweet-align-right .TDB-tweet-actions {
+    text-align: left;
 }
 
 .TDB-action {
-	background: url("../images/icon-sprite.png") no-repeat scroll 0 0 transparent;
-	display: inline-block;
-	height: 16px;
-	position: relative;
-	width: 16px;
+    background: url("../images/icon-sprite.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 16px;
+    position: relative;
+    width: 16px;
 }
 
 .TDB-action a {
-	background: none repeat scroll 0 0 transparent !important;
-	height: 16px;
-	left: 0;
-	position: absolute;
-	text-decoration: none !important;
-	width: 16px;
+    background: none repeat scroll 0 0 transparent !important;
+    height: 16px;
+    left: 0;
+    position: absolute;
+    text-decoration: none !important;
+    width: 16px;
 }
 
 .TDB-reply {
-	background-position: 0 0;
+    background-position: 0 0;
 }
 
 .TDB-reply:hover {
-	background-position: -16px 0;
+    background-position: -16px 0;
 }
 
 .TDB-retweet {
-	background-position: -80px 0;
+    background-position: -80px 0;
 }
 
 .TDB-retweet:hover {
-	background-position: -96px 0;
+    background-position: -96px 0;
 }
 
 .TDB-favorite {
-	background-position: -32px 0;
+    background-position: -32px 0;
 }
 
 .TDB-favorite:hover {
-	background-position: -48px 0;
-}
-
-.userlink {
-}
-
-.hashlink {
-}
-
-.clr {
-	clear: both;
+    background-position: -48px 0;
 }
 
 .TDB-footer-follow-link {
 }
 
 .TDB-footer-follow-link iframe {
-	border: 0;
-	background-color: transparent;
-	overflow: hidden;
+    border: 0;
+    background-color: transparent;
+    overflow: hidden;
 }
 
 .TDB-footer-powered-text {
-	font-size: 85%;
-	text-align: center;
+    font-size: 85%;
+    text-align: center;
 }
