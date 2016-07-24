@@ -45,6 +45,16 @@ class TweetDisplayBackFormFieldAuthenticationinfo extends JFormField
 	 */
 	protected function getLabel()
 	{
-		return '<p>' . JText::_('MOD_TWEETDISPLAYBACK_AUTHENTICATION_SETUP_INSTRUCTIONS') . '</p>';
+		$string = JText::sprintf(
+			'MOD_TWEETDISPLAYBACK_AUTHENTICATION_SETUP_INSTRUCTIONS',
+			JHtml::_(
+				'link',
+				'https://www.babdev.com/extensions/tweet-display-back/22-tutorials/158-3-1-set-up-user-authentication',
+				'https://www.babdev.com/extensions/tweet-display-back/22-tutorials/158-3-1-set-up-user-authentication',
+				['target' => '_blank']
+			)
+		);
+
+		return '<p>' . $string . '</p>';
 	}
 }
