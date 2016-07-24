@@ -26,6 +26,22 @@ class ModTweetDisplayBackHelper
 	protected $bearer;
 
 	/**
+	 * Cache adapter
+	 *
+	 * @var    JCacheController
+	 * @since  4.0
+	 */
+	protected $cache;
+
+	/**
+	 * Container for cache IDs
+	 *
+	 * @var    array
+	 * @since  4.0
+	 */
+	protected $cacheIds = ['tweet' => '', 'user' => ''];
+
+	/**
 	 * JHttp connector
 	 *
 	 * @var    JHttp
@@ -34,12 +50,12 @@ class ModTweetDisplayBackHelper
 	protected $connector;
 
 	/**
-	 * Flag to determine whether data is cached or to load fresh
+	 * Flag to determine whether caching is supported
 	 *
 	 * @var    boolean
 	 * @since  3.0
 	 */
-	public $isCached = false;
+	public $hasCaching = false;
 
 	/**
 	 * Flag to determine whether data has been fully processed
@@ -127,12 +143,22 @@ class ModTweetDisplayBackHelper
 
 		// Instantiate the bearer token
 		$this->bearer = new BDBearer($this->params, $this->connector);
+
+		// Get the cache controller
+		$this->cache = JFactory::getCache('mod_tweetdisplayback', '');
+
+		// Set the lifetime to match the module params
+		$this->cache->setLifeTime($params->get('tweet_cache_time', 900));
+
+		// Set whether caching is enabled
+		$this->hasCaching = (bool) $params->get('tweet_cache', '1');
+		$this->cache->setCaching($this->hasCaching);
 	}
 
 	/**
 	 * Function to compile the data to render a formatted object displaying a Twitter feed
 	 *
-	 * @return  object  An object with the formatted tweets
+	 * @return  object[]  An array with the formatted tweets as objects
 	 *
 	 * @since   1.5
 	 */
@@ -266,15 +292,14 @@ class ModTweetDisplayBackHelper
 			if (is_null($obj))
 			{
 				// Set an error
-				$this->twitter[0]->tweet->text = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
+				$this->twitter['error'] = ['messages' => [JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD')]];
 			}
 			else
 			{
-				// If caching is enabled and we aren't using cached data, json_encode the object and write it to file
-				if ($this->params->get('cache') == 1)
+				// If caching is enabled, json_encode the object and store it
+				if ($this->hasCaching)
 				{
-					$data = json_encode($obj);
-					file_put_contents(JPATH_CACHE . '/tweetdisplayback_tweets-' . $this->moduleId . '.json', $data);
+					$this->getCache()->store(json_encode($obj), $this->getCacheId('tweet'), 'mod_tweetdisplayback');
 				}
 
 				// Process the filtering options and render the feed
@@ -286,7 +311,7 @@ class ModTweetDisplayBackHelper
 		}
 		else
 		{
-			$this->twitter['error'] = '';
+			$this->twitter['error'] = [];
 		}
 
 		return $this->twitter;
@@ -295,7 +320,7 @@ class ModTweetDisplayBackHelper
 	/**
 	 * Function to compile the data from cache and format the object
 	 *
-	 * @return  object  An object with the formatted tweets
+	 * @return  object[]  An array with the formatted tweets as objects
 	 *
 	 * @since   1.5
 	 */
@@ -314,7 +339,7 @@ class ModTweetDisplayBackHelper
 		}
 
 		// Retrieve the cached data and decode it
-		$obj = json_decode(file_get_contents(JPATH_CACHE . '/tweetdisplayback_tweets-' . $this->moduleId . '.json'));
+		$obj = json_decode($this->getCache()->get($this->getCacheId('tweet'), 'mod_tweetdisplayback'));
 
 		// Check if we've reached an error
 		if (isset($obj->errors))
@@ -336,7 +361,7 @@ class ModTweetDisplayBackHelper
 			if (is_null($obj))
 			{
 				// Set an error
-				$this->twitter[0]->tweet->text = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
+				$this->twitter['error'] = ['messages' => [JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD')]];
 			}
 			else
 			{
@@ -349,10 +374,46 @@ class ModTweetDisplayBackHelper
 		}
 		else
 		{
-			$this->twitter['error'] = '';
+			$this->twitter['error'] = [];
 		}
 
 		return $this->twitter;
+	}
+
+	/**
+	 * Get the cache adapter
+	 *
+	 * @return  JCacheController
+	 *
+	 * @since   4.0
+	 */
+	public function getCache()
+	{
+		return $this->cache;
+	}
+
+	/**
+	 * Get the cache ID for a cache type, generating it if it doesn't exist
+	 *
+	 * @return  string
+	 *
+	 * @since   4.0
+	 * @throws  InvalidArgumentException
+	 */
+	public function getCacheId($type)
+	{
+		if (!in_array($type, ['tweet', 'user']))
+		{
+			throw new InvalidArgumentException('Invalid cache ID type');
+		}
+
+		// Generate the cache ID if needed - simply set the data type and the module ID to allow unique caching per module
+		if (empty($this->cacheIds[$type]))
+		{
+			$this->cacheIds[$type] = "mod_tweetdisplayback_$type-" . $this->moduleId;
+		}
+
+		return $this->cacheIds[$type];
 	}
 
 	/**
@@ -413,18 +474,7 @@ class ModTweetDisplayBackHelper
 		// Retrieve data from Twitter if the header is enabled
 		if ($this->params->get('headerDisplay', 1) == 1)
 		{
-			// Sanity check on user file cache
-			$cacheFile = JPATH_CACHE . '/tweetdisplayback_user-' . $this->moduleId . '.json';
-			$cacheTime = $this->params->get('cache_time', 15);
-			$cacheTime = $cacheTime * 60;
-
-			// Get the data
-			if ($this->isCached && (!file_exists($cacheFile) || time() - @filemtime($cacheFile) > $cacheTime))
-			{
-				// Fetch from cache
-				$obj = json_decode(file_get_contents(JPATH_CACHE . '/tweetdisplayback_user-' . $this->moduleId . '.json'));
-			}
-			else
+			$fetchData = function () use ($uname)
 			{
 				$req = 'https://api.twitter.com/1.1/users/show.json?screen_name=' . $uname;
 
@@ -454,7 +504,7 @@ class ModTweetDisplayBackHelper
 				// Check that we have the JSON, otherwise set an error
 				elseif (!$obj)
 				{
-					$this->twitter['error'] = '';
+					$this->twitter['error'] = [];
 
 					return;
 				}
@@ -462,11 +512,39 @@ class ModTweetDisplayBackHelper
 				// Store the user profile response object so it can be accessed (for advanced use)
 				static::$user = $obj;
 
-				// If caching is enabled and we aren't using cached data, json_encode the object and write it to file
-				if ($this->params->get('cache') == 1 && !$this->isCached)
+				// If caching is enabled, json_encode the object and store it
+				if ($this->hasCaching)
 				{
-					$data = json_encode($obj);
-					file_put_contents(JPATH_CACHE . '/tweetdisplayback_user-' . $this->moduleId . '.json', $data);
+					$this->getCache()->store(json_encode($obj), $this->getCacheId('user'), 'mod_tweetdisplayback');
+				}
+
+				return $obj;
+			};
+
+			if ($this->hasCaching)
+			{
+				$obj = json_decode($this->getCache()->get($this->getCacheId('user'), 'mod_tweetdisplayback'));
+
+				// Check if cache has expired; if so we need to re-compile
+				if ($obj === null)
+				{
+					$obj = $fetchData();
+
+					// If we have a null return from here we've hit a fatal error, the message is set in the Closure so we can just return here
+					if ($obj === null)
+					{
+						return;
+					}
+				}
+			}
+			else
+			{
+				$obj = $fetchData();
+
+				// If we have a null return from here we've hit a fatal error, the message is set in the Closure so we can just return here
+				if ($obj === null)
+				{
+					return;
 				}
 			}
 

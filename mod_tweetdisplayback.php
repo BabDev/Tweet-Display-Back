@@ -55,22 +55,18 @@ $cacheTweets = JPATH_CACHE . '/tweetdisplayback_tweets-' . $helper->moduleId . '
 $cacheUser   = JPATH_CACHE . '/tweetdisplayback_user-' . $helper->moduleId . '.json';
 
 // Check if caching is enabled
-if ($params->get('tweet_cache') == 1)
+if ($helper->hasCaching)
 {
-	// Fetch cache time from module parameters
-	$cacheTime = $params->get('tweet_cache_time', 900);
-
-	// Cache files expired?
-	if (!file_exists($cacheTweets) || time() - @filemtime($cacheTweets) > $cacheTime)
+	// Check if cache data exists for the tweets to determine our path
+	if ($helper->getCache()->get($helper->getCacheId('tweet'), 'mod_tweetdisplayback'))
 	{
-		// Do a request to the Twitter API for new data
-		$twitter = $helper->compileData();
+		// Render from the cached data
+		$twitter = $helper->compileFromCache();
 	}
 	else
 	{
-		// Render from the cached data
-		$helper->isCached = true;
-		$twitter = $helper->compileFromCache();
+		// Do a request to the Twitter API for new data
+		$twitter = $helper->compileData();
 	}
 }
 else
