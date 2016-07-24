@@ -219,12 +219,12 @@ class ModTweetDisplayBackHelper
 		if ($feed == 'list')
 		{
 			// Get the list feed
-			$req = 'https://api.twitter.com/1.1/lists/statuses.json?slug=' . $flist . '&owner_screen_name=' . $uname . $incRT . '&include_entities=1';
+			$req = "https://api.twitter.com/1.1/lists/statuses.json?slug=$flist&owner_screen_name=$uname&include_entities=1$incRT";
 		}
 		elseif ($feed == 'likes')
 		{
 			// Get the likes feed (previously favorites)
-			$req = 'https://api.twitter.com/1.1/favorites/list.json?count=' . $count . '&screen_name=' . $uname . '&include_entities=1';
+			$req = "https://api.twitter.com/1.1/favorites/list.json?count=$count&screen_name=$uname&include_entities=1";
 		}
 		else
 		{
@@ -255,7 +255,7 @@ class ModTweetDisplayBackHelper
 				$count = $this->params->get('tweetsToScan', 3);
 			}
 
-			$req = 'https://api.twitter.com/1.1/statuses/user_timeline.json?count=' . $count . '&screen_name=' . $uname . '&include_entities=1';
+			$req = "https://api.twitter.com/1.1/statuses/user_timeline.json?count=$count&screen_name=$uname&include_entities=1";
 		}
 
 		// Fetch the decoded JSON
@@ -476,7 +476,7 @@ class ModTweetDisplayBackHelper
 		{
 			$fetchData = function () use ($uname)
 			{
-				$req = 'https://api.twitter.com/1.1/users/show.json?screen_name=' . $uname;
+				$req = "https://api.twitter.com/1.1/users/show.json?screen_name=$uname";
 
 				try
 				{
@@ -554,30 +554,37 @@ class ModTweetDisplayBackHelper
 
 			if ($this->params->get('headerUser', 1) == 1)
 			{
-				// Check if the Intents action is bypassed
-				if ($this->params->get('bypassIntent', '0') == 1)
+				// Show the real name or the username
+				$displayName = $this->params->get('headerName', 1) == 1 ? $obj->name : $uname;
+
+				$linkAttribs = ['rel' => 'nofollow', 'target' => '_blank'];
+
+				$intent = '';
+
+				if ($this->params->get('bypassIntent', '0') == 0)
 				{
-					$this->twitter['header']->user = '<a href="https://twitter.com/' . $uname . '" rel="nofollow" target="_blank">';
-				}
-				else
-				{
-					$this->twitter['header']->user = '<a href="https://twitter.com/intent/user?screen_name=' . $uname . '" rel="nofollow">';
+					$intent = 'intent/user?screen_name=';
+					unset($linkAttribs['target']);
 				}
 
-				// Show the real name or the username
-				if ($this->params->get('headerName', 1) == 1)
+				$userURL = "https://twitter.com/$intent" . $uname;
+
+				$this->twitter['header']->user = JHtml::_('link', $userURL, $displayName, ['rel' => 'nofollow']);
+
+				if ($this->params->get('tweetUserSeparator', ' '))
 				{
-					$this->twitter['header']->user .= $obj->name . '</a>';
-				}
-				else
-				{
-					$this->twitter['header']->user .= $uname . '</a>';
+					$this->twitter['header']->user .= $this->params->get('tweetUserSeparator', ' ');
 				}
 
 				// Append the list name if being pulled
 				if ($feed == 'list')
 				{
-					$this->twitter['header']->user .= ' - <a href="https://twitter.com/' . $uname . '/' . $flist . '" rel="nofollow">' . $list . ' list</a>';
+					$this->twitter['header']->user .= JHtml::_(
+						'link',
+						"https://twitter.com/$uname/$flist",
+						JText::sprintf('MOD_TWEETDISPLAYBACK_HEADER_LIST_LINK', $list),
+						['rel' => 'nofollow']
+					);
 				}
 			}
 
@@ -596,7 +603,7 @@ class ModTweetDisplayBackHelper
 			// Show the user's URL
 			if ($this->params->get('headerWeb', 1) == 1)
 			{
-				$this->twitter['header']->web = '<a href="' . $obj->url . '" rel="nofollow" target="_blank">' . $obj->url . '</a>';
+				$this->twitter['header']->web = JHtml::_('link', $obj->url, $obj->url, ['rel' => 'nofollow', 'target' => '_blank']);
 			}
 
 			// Get the profile image URL from the object
@@ -605,7 +612,7 @@ class ModTweetDisplayBackHelper
 			// Switch from the normal size avatar (48px) to the large one (73px)
 			$avatar = str_replace('normal.jpg', 'bigger.jpg', $avatar);
 
-			$this->twitter['header']->avatar = '<img src="' . $avatar . '" alt="' . $uname . '" />';
+			$this->twitter['header']->avatar = JHtml::_('image', $avatar, $uname);
 		}
 
 		/*
@@ -625,8 +632,12 @@ class ModTweetDisplayBackHelper
 					'show_count'       => (bool) $this->params->get('footerFollowCount', '1')
 				];
 
-				$iframe = '<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/follow_button.html?'
-					. http_build_query($followParams, null, '&amp;') . '" style="width: 300px; height: 20px;"></iframe>';
+				$iframe = JHtml::_(
+					'iframe',
+					'https://platform.twitter.com/widgets/follow_button.html?' . http_build_query($followParams, null, '&amp;'),
+					'follow-user-' . $this->moduleId,
+					['allowtransparency' => true, 'frameborder' => 0, 'scrolling' => 'no', 'style' => 'width: 300px; height: 20px;']
+				);
 
 				$this->twitter['footer']->follow_me = '<div class="TDB-footer-follow-link">' . $iframe . '</div>';
 			}
@@ -842,46 +853,34 @@ class ModTweetDisplayBackHelper
 		// Generate the object with the user data
 		if ($this->params->get('tweetName', 1) == 1)
 		{
-			// Check if the Intents action is bypassed
-			if ($this->params->get('bypassIntent', '0') == 1)
-			{
-				$userURL = 'https://twitter.com/' . $tweetedBy;
-			}
-			else
-			{
-				$userURL = 'https://twitter.com/intent/user?screen_name=' . $tweetedBy;
-			}
+			$intent = $this->params->get('bypassIntent', '0') == 1 ? '' : 'intent/user?screen_name=';
 
-			$this->twitter['tweets']->$i->user = '<strong><a href="' . $userURL . '" rel="nofollow">' . $tweetedBy . '</a>' . $this->params->get('tweetUserSeparator') . '</strong>';
+			$userURL = "https://twitter.com/$intent" . $tweetedBy;
+
+			$this->twitter['tweets']->$i->user = JHtml::_('link', $userURL, $tweetedBy, ['rel' => 'nofollow']);
+
+			if ($this->params->get('tweetUserSeparator', ' '))
+			{
+				$this->twitter['tweets']->$i->user .= $this->params->get('tweetUserSeparator', ' ');
+			}
 		}
 
-		$this->twitter['tweets']->$i->avatar = '<img alt="' . $tweetedBy . '" src="' . $avatar . '" width="32" />';
+		$this->twitter['tweets']->$i->avatar = JHtml::_('image', $avatar, $tweetedBy, ['width' => 32]);
 		$this->twitter['tweets']->$i->text   = $text;
 
 		// Make regular URLs in tweets a link
 		foreach ($urls as $url)
 		{
-			if (isset($url->display_url))
-			{
-				$d_url = $url->display_url;
-			}
-			else
-			{
-				$d_url = $url->url;
-			}
+			$displayUrl = isset($url->display_url) ? $url->display_url : $url->url;
 
 			// We need to check to verify that the URL has the protocol, just in case
-			if (strpos($url->url, 'http') !== 0)
-			{
-				// Prepend http since there's no protocol
-				$link = 'http://' . $url->url;
-			}
-			else
-			{
-				$link = $url->url;
-			}
+			$link = (strpos($url->url, 'http') !== 0 ? 'http://' : '') . $url->url;
 
-			$this->twitter['tweets']->$i->text = str_replace($url->url, '<a href="' . $link . '" target="_blank" rel="nofollow">' . $d_url . '</a>', $this->twitter['tweets']->$i->text);
+			$this->twitter['tweets']->$i->text = str_replace(
+				$url->url,
+				JHtml::_('link', $link, $displayUrl, ['target' => '_blank', 'rel' => 'nofollow']),
+				$this->twitter['tweets']->$i->text
+			);
 		}
 
 		// Make media URLs in tweets a link
@@ -889,16 +888,13 @@ class ModTweetDisplayBackHelper
 		{
 			foreach ($media as $image)
 			{
-				if (isset($image->display_url))
-				{
-					$i_url = $image->display_url;
-				}
-				else
-				{
-					$i_url = $image->url;
-				}
+				$imageUrl = isset($image->display_url) ? $image->display_url : $image->url;
 
-				$this->twitter['tweets']->$i->text = str_replace($image->url, '<a href="' . $image->url . '" target="_blank" rel="nofollow">' . $i_url . '</a>', $this->twitter['tweets']->$i->text);
+				$this->twitter['tweets']->$i->text = str_replace(
+					$image->url,
+					JHtml::_('link', $image->url, $imageUrl, ['target' => '_blank', 'rel' => 'nofollow']),
+					$this->twitter['tweets']->$i->text
+				);
 			}
 		}
 
@@ -909,18 +905,22 @@ class ModTweetDisplayBackHelper
 		// Display the time the tweet was created
 		if ($this->params->get('tweetCreated', 1) == 1)
 		{
-			$this->twitter['tweets']->$i->created .= '<a href="https://twitter.com/' . $o->user->screen_name . '/status/' . $o->id_str . '" rel="nofollow" target="_blank">';
-
 			// Determine whether to display the time as a relative or static time
 			if ($this->params->get('tweetRelativeTime', 1) == 1)
 			{
-				$time = JFactory::getDate($o->created_at, 'UTC');
-				$this->twitter['tweets']->$i->created .= JHtml::_('date.relative', $time, null, JFactory::getDate('now', 'UTC')) . '</a>';
+				$displayTime= JHtml::_('date.relative', JFactory::getDate($o->created_at, 'UTC'), null, JFactory::getDate('now', 'UTC'));
 			}
 			else
 			{
-				$this->twitter['tweets']->$i->created .= JHtml::date($o->created_at) . '</a>';
+				$displayTime = JHtml::_('date', $o->created_at);
 			}
+
+			$this->twitter['tweets']->$i->created .= JHtml::_(
+				'link',
+				"https://twitter.com/{$o->user->screen_name}/status/{$o->id_str}",
+				$displayTime,
+				['target' => '_blank', 'rel' => 'nofollow']
+			);
 		}
 
 		// Display the tweet source
@@ -932,13 +932,29 @@ class ModTweetDisplayBackHelper
 		// Display the location the tweet was made from if set
 		if (($this->params->get('tweetLocation', 1) == 1) && (isset($o->place->full_name)))
 		{
-			$this->twitter['tweets']->$i->created .= JText::_('MOD_TWEETDISPLAYBACK_FROM') . '<a href="https://maps.google.com/maps?q=' . $o->place->full_name . '" target="_blank" rel="nofollow">' . $o->place->full_name . '</a>';
+			$this->twitter['tweets']->$i->created .= JText::sprintf(
+				'MOD_TWEETDISPLAYBACK_FROM',
+				JHtml::_(
+					'link',
+					"https://maps.google.com/maps?q={$o->place->full_name}",
+					$o->in_reply_to_screen_name,
+					['target' => '_blank', 'rel' => 'nofollow']
+				)
+			);
 		}
 
 		// If the tweet is a reply, display a link to the tweet it's in reply to
 		if ((($o->in_reply_to_screen_name) && ($o->in_reply_to_status_id_str)) && $this->params->get('tweetReplyLink', 1) == 1)
 		{
-			$this->twitter['tweets']->$i->created .= JText::_('MOD_TWEETDISPLAYBACK_IN_REPLY_TO') . '<a href="https://twitter.com/' . $o->in_reply_to_screen_name . '/status/' . $o->in_reply_to_status_id_str . '" rel="nofollow">' . $o->in_reply_to_screen_name . '</a>';
+			$this->twitter['tweets']->$i->created .= JText::sprintf(
+				'MOD_TWEETDISPLAYBACK_IN_REPLY_TO',
+				JHtml::_(
+					'link',
+					"https://twitter.com/{$o->in_reply_to_screen_name}/status/{$o->in_reply_to_status_id_str}",
+					$o->in_reply_to_screen_name,
+					['rel' => 'nofollow']
+				)
+			);
 		}
 
 		// Display a separator bullet if there's a tweet time/source and a retweet count
@@ -959,9 +975,30 @@ class ModTweetDisplayBackHelper
 		// Display Twitter Actions
 		if ($this->params->get('tweetReply', 1) == 1)
 		{
-			$this->twitter['tweets']->$i->actions = '<span class="TDB-action TDB-reply"><a href="https://twitter.com/intent/tweet?in_reply_to=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_REPLY') . '" rel="nofollow"></a></span>';
-			$this->twitter['tweets']->$i->actions .= '<span class="TDB-action TDB-retweet"><a href="https://twitter.com/intent/retweet?tweet_id=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_RETWEET') . '" rel="nofollow"></a></span>';
-			$this->twitter['tweets']->$i->actions .= '<span class="TDB-action TDB-favorite"><a href="https://twitter.com/intent/like?tweet_id=' . $o->id_str . '" title="' . JText::_('MOD_TWEETDISPLAYBACK_INTENT_LIKE') . '" rel="nofollow"></a></span>';
+			$replyAction = JHtml::_(
+				'link',
+				"https://twitter.com/intent/tweet?in_reply_to={$o->id_str}",
+				'',
+				['title' => JText::_('MOD_TWEETDISPLAYBACK_INTENT_REPLY'), 'rel' => 'nofollow']
+			);
+
+			$retweetAction = JHtml::_(
+				'link',
+				"https://twitter.com/intent/tweet?retweet={$o->id_str}",
+				'',
+				['title' => JText::_('MOD_TWEETDISPLAYBACK_INTENT_RETWEET'), 'rel' => 'nofollow']
+			);
+
+			$likeAction = JHtml::_(
+				'link',
+				"https://twitter.com/intent/tweet?like={$o->id_str}",
+				'',
+				['title' => JText::_('MOD_TWEETDISPLAYBACK_INTENT_LIKE'), 'rel' => 'nofollow']
+			);
+
+			$this->twitter['tweets']->$i->actions = "<span class=\"TDB-action TDB-reply\">$replyAction</span>";
+			$this->twitter['tweets']->$i->actions .= "<span class=\"TDB-action TDB-retweet\">$retweetAction</span>";
+			$this->twitter['tweets']->$i->actions .= "<span class=\"TDB-action TDB-like\">$likeAction</span>";
 		}
 
 		// If set, convert user and hash tags into links
@@ -969,22 +1006,29 @@ class ModTweetDisplayBackHelper
 		{
 			foreach ($o->entities->user_mentions as $mention)
 			{
-				// Check if the Intents action is bypassed
-				if ($this->params->get('bypassIntent', '0') == 1)
-				{
-					$mentionURL = 'https://twitter.com/' . $mention->screen_name;
-				}
-				else
-				{
-					$mentionURL = 'https://twitter.com/intent/user?screen_name=' . $mention->screen_name;
-				}
+				$intent = $this->params->get('bypassIntent', '0') == 1 ? '' : 'intent/user?screen_name=';
 
-				$this->twitter['tweets']->$i->text = str_ireplace('@' . $mention->screen_name, '@<a class="userlink" href="' . $mentionURL . '" rel="nofollow">' . $mention->screen_name . '</a>', $this->twitter['tweets']->$i->text);
+				$mentionURL = "https://twitter.com/$intent" . $mention->screen_name;
+
+				$this->twitter['tweets']->$i->text = str_ireplace(
+					'@' . $mention->screen_name,
+					JHtml::_('link', $mentionURL, '@' . $mention->screen_name, ['class' => 'userlink', 'rel' => 'nofollow']),
+					$this->twitter['tweets']->$i->text
+				);
 			}
 
 			foreach ($o->entities->hashtags as $hashtag)
 			{
-				$this->twitter['tweets']->$i->text = str_ireplace('#' . $hashtag->text, '#<a class="hashlink" href="https://twitter.com/search?q=%23' . $hashtag->text . '" target="_blank" rel="nofollow">' . $hashtag->text . '</a>', $this->twitter['tweets']->$i->text);
+				$this->twitter['tweets']->$i->text = str_ireplace(
+					'#' . $hashtag->text,
+					JHtml::_(
+						'link',
+						'https://twitter.com/search?q=%23' . $hashtag->text,
+						'#' . $hashtag->text,
+						['class' => 'hashlink', 'rel' => 'nofollow', 'target' => '_blank']
+					),
+					$this->twitter['tweets']->$i->text
+				);
 			}
 		}
 	}

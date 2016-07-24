@@ -83,11 +83,11 @@ span.TDB-header-avatar-right {
     background-position: -96px 0;
 }
 
-.TDB-favorite {
+.TDB-like {
     background-position: -32px 0;
 }
 
-.TDB-favorite:hover {
+.TDB-like:hover {
     background-position: -48px 0;
 }
 
