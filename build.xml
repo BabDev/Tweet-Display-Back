@@ -22,7 +22,7 @@
 	<target
 		name="dev_head"
 		description="Builds test packages based on the development head"
-		depends="phpcs,rebuild-packages,build-packages"
+		depends="rebuild-packages,build-packages"
 	>
 		<echo message="Deleting old master build" />
 		<delete quiet="true">

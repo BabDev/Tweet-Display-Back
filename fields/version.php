@@ -28,6 +28,18 @@ class TweetDisplayBackFormFieldVersion extends JFormField
 	protected $type = 'Version';
 
 	/**
+	 * Callback to fetch the version compatibility data
+	 *
+	 * @return  object
+	 *
+	 * @since   4.0
+	 */
+	public function checkVersion()
+	{
+		return (new ModTweetDisplayBackHelper(new Registry))->getJSON('https://www.babdev.com/updates/TDB_version_new');
+	}
+
+	/**
 	 * Method to get the field input.
 	 *
 	 * @return  string
@@ -49,15 +61,11 @@ class TweetDisplayBackFormFieldVersion extends JFormField
 	protected function getLabel()
 	{
 		// Get the module's XML
-		$xmlfile   = dirname(__DIR__) . '/mod_tweetdisplayback.xml';
-		$data      = JInstaller::parseXMLInstallFile($xmlfile);
-		$cacheFile = JPATH_CACHE . '/tweetdisplayback_update.json';
+		$xmlfile      = dirname(__DIR__) . '/mod_tweetdisplayback.xml';
+		$manifestData = JInstaller::parseXMLInstallFile($xmlfile);
 
 		// The module's version
-		$version = $data['version'];
-
-		// The target to check against
-		$target = 'https://www.babdev.com/updates/TDB_version_new';
+		$version = $manifestData['version'];
 
 		// Get the module params
 		$params = $this->getModuleParams($this->form->getValue('id', null, 0));
@@ -65,26 +73,18 @@ class TweetDisplayBackFormFieldVersion extends JFormField
 		// Get the stability level we want to show data for
 		$stability = $params->get('stability', 'stable');
 
-		// Check if we have cached data and use it if unexpired
-		if (!file_exists($cacheFile) || (time() - @filemtime($cacheFile) > 86400))
-		{
-			// Get the data from remote
-			$data   = (new ModTweetDisplayBackHelper(new Registry))->getJSON($target);
-			$update = $data->$stability;
+		// Get the cache controller
+		/** @var JCacheControllerCallback $cache */
+		$cache = JFactory::getCache('mod_tweetdisplayback', 'callback');
 
-			// Write the cache if data exists
-			if (isset($update->notice))
-			{
-				$cache = json_encode($data);
-				file_put_contents($cacheFile, $cache);
-			}
-		}
-		else
-		{
-			// Render from the cached data
-			$data   = json_decode(file_get_contents($cacheFile));
-			$update = $data->$stability;
-		}
+		// Generate a cache ID that we can reuse for all modules
+		$cacheId = md5("mod_tweetdisplayback_version_$version");
+
+		// As of 3.6 the callback controller doesn't accept Closures so we have to direct it to a public method here in the class
+		$upstreamData = $cache->get([$this, 'checkVersion'], [], $cacheId);
+
+		// Get the update data based on our selected stability
+		$update = $upstreamData->$stability;
 
 		$message = '<div class="alert alert-info">';
 		$message .= JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version) . '  ';
@@ -124,13 +124,13 @@ class TweetDisplayBackFormFieldVersion extends JFormField
 	protected function getModuleParams($id)
 	{
 		// Get a database object
-		$db    = JFactory::getDbo();
+		$db = JFactory::getDbo();
 
 		$result = $db->setQuery(
 			$db->getQuery(true)
 				->select($db->quoteName('params'))
 				->from($db->quoteName('#__modules'))
-				->where($db->quoteName('id') . ' = ' . $id)
+				->where($db->quoteName('id') . ' = ' . (int) $id)
 		)->loadResult();
 
 		// Convert the result to a Registry object
