@@ -80,8 +80,16 @@ class TweetDisplayBackFormFieldVersion extends JFormField
 		// Generate a cache ID that we can reuse for all modules
 		$cacheId = md5("mod_tweetdisplayback_version_$version");
 
-		// As of 3.6 the callback controller doesn't accept Closures so we have to direct it to a public method here in the class
-		$upstreamData = $cache->get([$this, 'checkVersion'], [], $cacheId);
+		// If cache API throws a fatal error, let's work around it to enable update data to always be displayed
+		try
+		{
+			// As of 3.6 the callback controller doesn't accept Closures so we have to direct it to a public method here in the class
+			$upstreamData = $cache->get([$this, 'checkVersion'], [], $cacheId);
+		}
+		catch (RuntimeException $e)
+		{
+			$upstreamData = $this->checkVersion();
+		}
 
 		// Get the update data based on our selected stability
 		$update = $upstreamData->$stability;
