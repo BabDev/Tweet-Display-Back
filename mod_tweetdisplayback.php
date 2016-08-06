@@ -2,7 +2,7 @@
 /**
  * Tweet Display Back Module for Joomla!
  *
- * @copyright  Copyright (C) 2010-2015 Michael Babker. All rights reserved.
+ * @copyright  Copyright (C) 2010-2016 Michael Babker. All rights reserved.
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
@@ -11,20 +11,28 @@ defined('_JEXEC') or die;
 // Include the helper
 JLoader::register('ModTweetDisplayBackHelper', __DIR__ . '/helper.php');
 
-/* @type  JRegistry  $params */
-/* @type  object     $module */
+/**
+ * Module variables
+ * -----------------
+ * @var   object                     $module    A module object
+ * @var   array                      $attribs   An array of attributes for the module (probably from the XML)
+ * @var   array                      $chrome    The loaded module chrome files
+ * @var   JApplicationCms            $app       The active application singleton
+ * @var   string                     $scope     The application scope before the module was included
+ * @var   \Joomla\Registry\Registry  $params    Module parameters
+ * @var   string                     $template  The active template
+ * @var   string                     $path      The path to this module file
+ * @var   JLanguage                  $lang      The active JLanguage singleton
+ * @var   string                     $content   Module output content
+ */
 
 // Set the template variables
 $headerAlign    = $params->get('headerAvatarAlignment');
 $tweetAlign     = $params->get('tweetAlignment');
 $headerClassSfx = htmlspecialchars($params->get('headerclasssfx'));
 $tweetClassSfx  = htmlspecialchars($params->get('tweetclasssfx'));
-$templateLayout = $params->get('templateLayout', 'default');
 $flist          = ModTweetDisplayBackHelper::toAscii($params->get('twitterList', ''));
 $count          = $params->get('twitterCount', '3') - 1;
-
-// Load module CSS
-JHtml::stylesheet('mod_tweetdisplayback/' . $templateLayout. '.css', false, true, false);
 
 try
 {
@@ -33,38 +41,28 @@ try
 catch (RuntimeException $e)
 {
 	// No HTTP adapters are available on this system
-	echo '<div class="well well-small TDB-tweet' . $tweetClassSfx . '">'
-		. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
-		. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_NO_CONNECTORS') . '</div>'
-		. '</div></div>';
+	$errorMsg = JText::_('MOD_TWEETDISPLAYBACK_ERROR_NO_CONNECTORS');
+
+	require JModuleHelper::getLayoutPath('mod_tweetdisplayback', '_error');
 
 	return;
 }
 
 $helper->moduleId = $module->id;
 
-// The files that the data is cached to
-$cacheTweets = JPATH_CACHE . '/tweetdisplayback_tweets-' . $helper->moduleId . '.json';
-$cacheUser   = JPATH_CACHE . '/tweetdisplayback_user-' . $helper->moduleId . '.json';
-
 // Check if caching is enabled
-if ($params->get('cache') == 1)
+if ($helper->hasCaching)
 {
-	// Fetch cache time from module parameters and convert to seconds
-	$cacheTime = $params->get('cache_time', 15);
-	$cacheTime = $cacheTime * 60;
-
-	// Cache files expired?
-	if (!file_exists($cacheTweets) || time() - @filemtime($cacheTweets) > $cacheTime)
+	// Check if cache data exists for the tweets to determine our path
+	if ($helper->getCache()->get($helper->getCacheId('tweet'), 'mod_tweetdisplayback'))
 	{
-		// Do a request to the Twitter API for new data
-		$twitter = $helper->compileData();
+		// Render from the cached data
+		$twitter = $helper->compileFromCache();
 	}
 	else
 	{
-		// Render from the cached data
-		$helper->isCached = true;
-		$twitter = $helper->compileFromCache();
+		// Do a request to the Twitter API for new data
+		$twitter = $helper->compileData();
 	}
 }
 else
@@ -76,36 +74,23 @@ else
 // Check to see if processing finished
 if (!$helper->isProcessed)
 {
-	// If we have cache files still, try to render from them
-	if (file_exists($cacheTweets) && file_exists($cacheUser))
+	// If we have cache data still, try to render from that
+	if ($helper->getCache()->get($helper->getCacheId('tweet'), 'mod_tweetdisplayback'))
 	{
 		// Render from the cached data
-		$helper->isCached = true;
 		$twitter = $helper->compileFromCache();
 	}
 
 	// Check for error objects if processing did not finish
 	if (!$helper->isProcessed && (!$twitter) || (isset($twitter['error'])))
 	{
-		echo '<div class="well well-small TDB-tweet' . $tweetClassSfx . '">'
-			. '<div class="TDB-tweet-container TDB-tweet-align-' . $tweetAlign . ' TDB-error">'
-			. '<div class="TDB-tweet-text">' . JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD') . '</div>'
-			. '</div></div>';
+		$errorMsg = JText::_('MOD_TWEETDISPLAYBACK_ERROR_UNABLETOLOAD');
+
+		require JModuleHelper::getLayoutPath('mod_tweetdisplayback', '_error');
 
 		return;
 	}
 }
 
-// Add the Twitter Web Intents script if something else already hasn't
-$scheme = JUri::getInstance()->getScheme() . '://';
-
-/* @type JDocumentHtml $document */
-$document = JFactory::getDocument();
-
-if (!in_array('<script type="text/javascript" src="' . $scheme . 'platform.twitter.com/widgets.js" async></script>', $document->_custom))
-{
-	$document->addCustomTag('<script type="text/javascript" src="' . $scheme . 'platform.twitter.com/widgets.js" async></script>');
-}
-
 // Build the output
-require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $templateLayout);
+require JModuleHelper::getLayoutPath('mod_tweetdisplayback', $params->get('layout', 'default'));

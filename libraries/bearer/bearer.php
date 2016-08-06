@@ -2,11 +2,13 @@
 /**
  * Tweet Display Back Module for Joomla!
  *
- * @copyright  Copyright (C) 2010-2015 Michael Babker. All rights reserved.
+ * @copyright  Copyright (C) 2010-2016 Michael Babker. All rights reserved.
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
 defined('JPATH_PLATFORM') or die;
+
+use Joomla\Registry\Registry;
 
 /**
  * Bearer class for Tweet Display Back
@@ -16,14 +18,6 @@ defined('JPATH_PLATFORM') or die;
 class BDBearer
 {
 	/**
-	 * The name of the cache file to use to store the bearer token
-	 *
-	 * @var    string
-	 * @since  3.1
-	 */
-	private $cache_file = 'tweetdisplayback_bearer.json';
-
-	/**
 	 * The time in seconds to cache the bearer token
 	 *
 	 * @var    integer
@@ -32,12 +26,20 @@ class BDBearer
 	private $cache_time = -1;
 
 	/**
-	 * BDHttp connector
+	 * JHttp connector
 	 *
-	 * @var    BDHttp
+	 * @var    JHttp
 	 * @since  3.1
 	 */
-	protected $connector = null;
+	protected $connector;
+
+	/**
+	 * Module params
+	 *
+	 * @var    Registry
+	 * @since  3.1
+	 */
+	protected $params;
 
 	/**
 	 * The bearer token
@@ -45,17 +47,17 @@ class BDBearer
 	 * @var    string
 	 * @since  3.1
 	 */
-	public $token = null;
+	public $token;
 
 	/**
 	 * Constructor
 	 *
-	 * @param   JRegistry  $params     The module parameters
-	 * @param   BDHttp     $connector  BDHttp connector
+	 * @param   Registry  $params     The module parameters
+	 * @param   JHttp     $connector  JHttp connector
 	 *
 	 * @since   3.1
 	 */
-	public function __construct($params, BDHttp $connector)
+	public function __construct(Registry $params, JHttp $connector)
 	{
 		// Store the module params
 		$this->params = $params;
@@ -65,6 +67,27 @@ class BDBearer
 
 		// Prepare the token
 		$this->prepareToken();
+	}
+
+	/**
+	 * Callback to fetch the bearer token
+	 *
+	 * @return  string
+	 *
+	 * @since   4.0
+	 * @internal
+	 */
+	public function getToken()
+	{
+		switch ($this->params->get('token_source', 'consumer'))
+		{
+			case 'remote':
+				return $this->callRemoteUrl();
+
+			case 'consumer':
+			default:
+				return $this->callConsumer();
+		}
 	}
 
 	/**
@@ -102,7 +125,7 @@ class BDBearer
 	/**
 	 * Function to retrieve a bearer token from Twitter's API using a consumer key
 	 *
-	 * @return  void
+	 * @return  string
 	 *
 	 * @since   3.1
 	 * @throws  RuntimeException
@@ -111,37 +134,28 @@ class BDBearer
 	{
 		$auth = $this->prepareBearerAuth();
 
-		if ($auth)
-		{
-			$url      = "https://api.twitter.com/oauth2/token";
-			$headers  = array(
-				'Authorization' => "Basic {$auth}",
-			);
-
-			$data     = "grant_type=client_credentials";
-			$response = $this->connector->post($url, $data, $headers);
-
-			if ($response->code == 200)
-			{
-				$this->token = json_decode($response->body)->access_token;
-			}
-			else
-			{
-				throw new RuntimeException('Could not retrieve bearer token (consumer)');
-			}
-
-			$this->writeCache();
-		}
-		else
+		if (!$auth)
 		{
 			throw new RuntimeException('Invalid consumer key/secret in configuration');
 		}
+
+		$url      = 'https://api.twitter.com/oauth2/token';
+		$headers  = ['Authorization' => "Basic {$auth}"];
+		$data     = 'grant_type=client_credentials';
+		$response = $this->connector->post($url, $data, $headers);
+
+		if ($response->code != 200)
+		{
+			throw new RuntimeException('Could not retrieve bearer token (consumer)');
+		}
+
+		return json_decode($response->body)->access_token;
 	}
 
 	/**
 	 * Function to retrieve a bearer token from a remote URL
 	 *
-	 * @return  void
+	 * @return  string
 	 *
 	 * @since   3.1
 	 * @throws  RuntimeException
@@ -153,16 +167,12 @@ class BDBearer
 		// Call consumer or RemoteURL
 		$response = $this->connector->get($url);
 
-		if ($response->code == 200)
-		{
-			$this->token = str_replace('Bearer ', '', base64_decode($response->body));
-		}
-		else
+		if ($response->code != 200)
 		{
 			throw new RuntimeException('Could not retrieve bearer token (remote)');
 		}
 
-		$this->writeCache();
+		return str_replace('Bearer ', '', base64_decode($response->body));
 	}
 
 	/**
@@ -197,10 +207,6 @@ class BDBearer
 				$cacheTime *= 86400 * 7;
 				break;
 
-			case 'noexp':
-				$cacheTime = 0;
-				break;
-
 			case 'day':
 			default:
 				$cacheTime *= 86400;
@@ -222,70 +228,34 @@ class BDBearer
 		// If we haven't retrieved the bearer yet, get it if in the site application
 		if (($this->token == null) && JFactory::getApplication()->isSite())
 		{
-			$cacheTime = $this->cacheTime();
-			$cacheFile = JPATH_CACHE . DIRECTORY_SEPARATOR . $this->cache_file;
+			// Get the cache controller
+			/** @var JCacheControllerCallback $cache */
+			$cache = JFactory::getCache('mod_tweetdisplayback', 'callback');
 
-			// Check if we have cached data and use it if unexpired
-			if (!file_exists($cacheFile) || ($cacheTime && (time() - @filemtime($cacheFile) > $cacheTime)))
+			// Bearer tokens are ALWAYS cached
+			$cache->setCaching(true);
+
+			// Set the lifetime to match the module params
+			$cache->setLifeTime($this->cacheTime());
+
+			// Generate a cache ID that we can reuse for all modules sharing this token source
+			$source = $this->params->get('token_source', 'consumer');
+			$url    = $this->params->get('remote_url', 'http://tdbtoken-v2.gopagoda.io/tokenRequest.php');
+
+			$cacheId = md5("mod_tweetdisplayback_bearer_$source" . ($source == 'remote' ? "_$url" : ''));
+
+			// If cache API throws a fatal error, let's work around it to try and keep the module functioning
+			try
 			{
-				// call consumer or RemoteURL
-				switch ($this->params->get('token_source', 'consumer'))
-				{
-					case 'remote':
-						$this->callRemoteUrl();
-						break;
-
-					case 'consumer':
-					default:
-						$this->callConsumer();
-						break;
-				}
-
-				// Write the cache
-				$this->writeCache();
+				// As of 3.6 the callback controller doesn't accept Closures so we have to direct it to a public method here in the class
+				$this->token = $cache->get([$this, 'getToken'], [], $cacheId);
 			}
-			else
+			catch (RuntimeException $e)
 			{
-				// Render from the cached data
-				$this->token = $this->readCache();
+				$this->token = $this->getToken();
 			}
 		}
 
 		return !empty($this->token);
-	}
-
-	/**
-	 * Function to read the bearer token from cache
-	 *
-	 * @return  string
-	 *
-	 * @since   3.1
-	 */
-	protected function readCache()
-	{
-		$cacheFile = JPATH_CACHE . '/' . $this->cache_file;
-		$ret       = '';
-
-		if (file_exists($cacheFile))
-		{
-			$ret = file_get_contents($cacheFile);
-		}
-
-		return $ret;
-	}
-
-	/**
-	 * Function to cache the bearer token
-	 *
-	 * @return  void
-	 *
-	 * @since   3.1
-	 */
-	protected function writeCache()
-	{
-		$cacheFile = JPATH_CACHE . DIRECTORY_SEPARATOR . $this->cache_file;
-
-		// Write the cache
-		file_put_contents($cacheFile, $this->token);
 	}
 }

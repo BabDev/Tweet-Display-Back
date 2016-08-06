@@ -2,11 +2,13 @@
 /**
  * Tweet Display Back Module for Joomla!
  *
- * @copyright  Copyright (C) 2010-2015 Michael Babker. All rights reserved.
+ * @copyright  Copyright (C) 2010-2016 Michael Babker. All rights reserved.
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\Registry\Registry;
 
 JLoader::register('ModTweetDisplayBackHelper', dirname(__DIR__) . '/helper.php');
 
@@ -15,7 +17,7 @@ JLoader::register('ModTweetDisplayBackHelper', dirname(__DIR__) . '/helper.php')
  *
  * @since  2.1
  */
-class JFormFieldVersion extends JFormField
+class TweetDisplayBackFormFieldVersion extends JFormField
 {
 	/**
 	 * The form field type.
@@ -24,6 +26,19 @@ class JFormFieldVersion extends JFormField
 	 * @since  2.1
 	 */
 	protected $type = 'Version';
+
+	/**
+	 * Callback to fetch the version compatibility data
+	 *
+	 * @return  object
+	 *
+	 * @since   4.0
+	 * @internal
+	 */
+	public function checkVersion()
+	{
+		return (new ModTweetDisplayBackHelper(new Registry))->getJSON('https://www.babdev.com/updates/TDB_version_new');
+	}
 
 	/**
 	 * Method to get the field input.
@@ -40,83 +55,68 @@ class JFormFieldVersion extends JFormField
 	/**
 	 * Method to get the field label.
 	 *
-	 * @return  string  A message containing the installed version and,
-	 *                  if necessary, information on a new version.
+	 * @return  string  A message containing the installed version and, if necessary, information on a new version.
 	 *
 	 * @since   2.1
 	 */
 	protected function getLabel()
 	{
 		// Get the module's XML
-		$xmlfile   = dirname(__DIR__) . '/mod_tweetdisplayback.xml';
-		$data      = JApplicationHelper::parseXMLInstallFile($xmlfile);
-		$cacheFile = JPATH_CACHE . '/tweetdisplayback_update.json';
+		$xmlfile      = dirname(__DIR__) . '/mod_tweetdisplayback.xml';
+		$manifestData = JInstaller::parseXMLInstallFile($xmlfile);
 
 		// The module's version
-		$version = $data['version'];
-
-		// The target to check against
-		$target = 'https://www.babdev.com/updates/TDB_version_new';
+		$version = $manifestData['version'];
 
 		// Get the module params
-		$params = static::getModuleParams($this->form->getValue('id', null, 0));
+		$params = $this->getModuleParams($this->form->getValue('id', null, 0));
 
 		// Get the stability level we want to show data for
 		$stability = $params->get('stability', 'stable');
 
-		// Check if we have cached data and use it if unexpired
-		if (!file_exists($cacheFile) || (time() - @filemtime($cacheFile) > 86400))
-		{
-			// Get the data from remote
-			$helper = new ModTweetDisplayBackHelper(new JRegistry);
-			$data   = $helper->getJSON($target);
-			$update = $data->$stability;
+		// Get the cache controller
+		/** @var JCacheControllerCallback $cache */
+		$cache = JFactory::getCache('mod_tweetdisplayback', 'callback');
 
-			// Write the cache if data exists
-			if (isset($update->notice))
-			{
-				$cache = json_encode($data);
-				file_put_contents($cacheFile, $cache);
-			}
-		}
-		else
+		// Generate a cache ID that we can reuse for all modules
+		$cacheId = md5("mod_tweetdisplayback_version_$version");
+
+		// If cache API throws a fatal error, let's work around it to enable update data to always be displayed
+		try
 		{
-			// Render from the cached data
-			$data   = json_decode(file_get_contents($cacheFile));
-			$update = $data->$stability;
+			// As of 3.6 the callback controller doesn't accept Closures so we have to direct it to a public method here in the class
+			$upstreamData = $cache->get([$this, 'checkVersion'], [], $cacheId);
+		}
+		catch (RuntimeException $e)
+		{
+			$upstreamData = $this->checkVersion();
 		}
 
-		// Message containing the version
-		if (version_compare(JVERSION, '3.0', 'ge'))
-		{
-			$message = '<div class="alert alert-info">';
-			$close = '</div>';
-		}
-		else
-		{
-			$message = '<label style="max-width:100%">';
-			$close = '</label>';
-		}
+		// Get the update data based on our selected stability
+		$update = $upstreamData->$stability;
 
-		$message .= JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version);
+		$message = '<div class="alert alert-info">';
+		$message .= JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_INSTALLED', $version) . '  ';
 
 		// Make sure that the $update object actually has data
 		if (!isset($update->notice))
 		{
-			$message .= '  ' . JText::_('MOD_TWEETDISPLAYBACK_VERSION_FAILED') . $close;
+			$message .= JText::_('MOD_TWEETDISPLAYBACK_VERSION_FAILED');
 		}
 
 		// If an update is available, and compatible with the current Joomla! version, notify the user
 		elseif (version_compare($update->version, $version, 'gt') && version_compare(JVERSION, $update->jversion, 'ge'))
 		{
-			$message .= '  <a href="' . $update->notice . '" target="_blank">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update->version) . '</a></label>';
+			$message .= '<a href="' . $update->notice . '" target="_blank">' . JText::sprintf('MOD_TWEETDISPLAYBACK_VERSION_UPDATE', $update->version) . '</a>';
 		}
 
 		// No updates, or the Joomla! version is not compatible, so let the user know they're using the current version
 		else
 		{
-			$message .= '  ' . JText::_('MOD_TWEETDISPLAYBACK_VERSION_CURRENT') . $close;
+			$message .= JText::_('MOD_TWEETDISPLAYBACK_VERSION_CURRENT');
 		}
+
+		$message .= '</div>';
 
 		return $message;
 	}
@@ -126,27 +126,23 @@ class JFormFieldVersion extends JFormField
 	 *
 	 * @param   integer  $id  The module ID
 	 *
-	 * @return  JRegistry
+	 * @return  Registry
 	 *
 	 * @since   3.0
 	 */
-	protected static function getModuleParams($id)
+	protected function getModuleParams($id)
 	{
 		// Get a database object
-		$db    = JFactory::getDbo();
-		$query = $db->getQuery(true);
+		$db = JFactory::getDbo();
 
-		// Query the params column
-		$query->select($db->quoteName('params'));
-		$query->from($db->quoteName('#__modules'));
-		$query->where($db->quoteName('id') . ' = ' . $id);
-		$db->setQuery($query);
-		$result = $db->loadResult();
+		$result = $db->setQuery(
+			$db->getQuery(true)
+				->select($db->quoteName('params'))
+				->from($db->quoteName('#__modules'))
+				->where($db->quoteName('id') . ' = ' . (int) $id)
+		)->loadResult();
 
-		// Convert the result to a JRegistry object
-		$params = new JRegistry($result);
-
-		// Return the params
-		return $params;
+		// Convert the result to a Registry object
+		return new Registry($result);
 	}
 }
