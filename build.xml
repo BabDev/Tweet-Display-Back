@@ -51,13 +51,17 @@
 		<echo message="Committing version" />
 		<git command="commit">
 			<args>
-				<arg value="-am 'Prepare ${version} release'" />
+				<arg value="-S" />
+				<arg value="-a" />
+				<arg value="-m 'Prepare ${version} release'" />
 			</args>
 		</git>
 		<echo message="Creating Git tag" />
 		<git command="tag">
 			<args>
+				<arg value="-s" />
 				<arg value="${version}" />
+				<arg value="-m 'Tagged ${version} release'" />
 			</args>
 		</git>
 		<echo message="Pushing Version commit and tag to GitHub" />
