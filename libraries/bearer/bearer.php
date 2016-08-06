@@ -75,6 +75,7 @@ class BDBearer
 	 * @return  string
 	 *
 	 * @since   4.0
+	 * @internal
 	 */
 	public function getToken()
 	{

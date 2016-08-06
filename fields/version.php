@@ -33,6 +33,7 @@ class TweetDisplayBackFormFieldVersion extends JFormField
 	 * @return  object
 	 *
 	 * @since   4.0
+	 * @internal
 	 */
 	public function checkVersion()
 	{
