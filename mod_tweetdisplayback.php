@@ -74,11 +74,10 @@ else
 // Check to see if processing finished
 if (!$helper->isProcessed)
 {
-	// If we have cache files still, try to render from them
-	if (file_exists($cacheTweets) && file_exists($cacheUser))
+	// If we have cache data still, try to render from that
+	if ($helper->getCache()->get($helper->getCacheId('tweet'), 'mod_tweetdisplayback'))
 	{
 		// Render from the cached data
-		$helper->isCached = true;
 		$twitter = $helper->compileFromCache();
 	}
 
