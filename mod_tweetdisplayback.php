@@ -50,10 +50,6 @@ catch (RuntimeException $e)
 
 $helper->moduleId = $module->id;
 
-// The files that the data is cached to
-$cacheTweets = JPATH_CACHE . '/tweetdisplayback_tweets-' . $helper->moduleId . '.json';
-$cacheUser   = JPATH_CACHE . '/tweetdisplayback_user-' . $helper->moduleId . '.json';
-
 // Check if caching is enabled
 if ($helper->hasCaching)
 {
